@@ -4,7 +4,6 @@ var cnv;
 var change;
 var isOverArea;
 var myDiv;
-
 var testPolygon;
 var testPolygon2;
 var testPolygon3;
@@ -15,13 +14,10 @@ var testPolygon7;
 var testPolygon8;
 var testPolygon9;
 var testPolygon10;
-
-
 function preload() {
   img = loadImage('free-negro2.jpg');
   img2 = loadImage('original-dubois.jpg');
 }
-
 function setup() {
   cnv = createCanvas(window.innerWidth, window.innerHeight);
   testPolygon = new Polygon(color(0, 0, 0, .05),522,206,522,243,492,243,498,206, '.4% of Black people were in prison');
@@ -35,15 +31,12 @@ function setup() {
 	testPolygon9 = new Polygon(color(0, 0, 0, .05),522,507,522,542,449,542,449,507, '1.7% of Black people were in prison');
 	testPolygon10 = new Polygon(color(0, 0, 0, .05),522,545,522,582,416,582,447, 545, '2.34% of Black people were in prison');
   
-
 }
     
 function draw() {
- // background(241, 235, 233);
  background (193, 180, 180);
   image(img, 267, 125, img.width / 4, img.height / 4);
   image(img2, 757, 125, img.width / 4, img.height / 4);
-
 	testPolygon.display();
   testPolygon.checkForMouseOver(mouseX,mouseY);
   
@@ -74,9 +67,6 @@ function draw() {
   testPolygon10.display();
   testPolygon10.checkForMouseOver(mouseX,mouseY);
 }
-
-
-// Polygon class
 function Polygon(color,x1,y1,x2,y2,x3,y3,x4,y4,statement) {
   this.color = color;
   this.x1 = x1;
@@ -90,7 +80,6 @@ function Polygon(color,x1,y1,x2,y2,x3,y3,x4,y4,statement) {
   this.statement = statement;
   this.isMouseOver = false;
   this.textvisible = false;
-
   this.display = function(){
     fill(color);
     strokeWeight(0);
@@ -107,9 +96,7 @@ function Polygon(color,x1,y1,x2,y2,x3,y3,x4,y4,statement) {
     if(!this.textvisible) return;
     textSize(15);
     fill('white');
-    //fill(104, 103, 103);
     text(this.statement || "add a statement!", mouseX, mouseY);
-
   }
   
   this.checkForMouseOver = function(currentMouseX, currentMouseY){
@@ -125,7 +112,6 @@ var cnv;
 var change;
 var isOverArea;
 var myDiv;
-
 var testPolygon;
 var testPolygon2;
 var testPolygon3;
@@ -136,12 +122,9 @@ var testPolygon7;
 var testPolygon8;
 var testPolygon9;
 var testPolygon10;
-
-
 function preload() {
   img = loadImage('free-negro2.jpg');
 }
-
 function setup() {
   cnv = createCanvas(window.innerWidth, window.innerHeight);
   testPolygon = new Polygon(color(0, 0, 0, .05),522,206,522,243,492,243,498,206);
@@ -155,20 +138,10 @@ function setup() {
 	testPolygon9 = new Polygon(color(0, 0, 0, .05),522,507,522,542,449,542,449,507);
 	testPolygon10 = new Polygon(color(0, 0, 0, .05),522,545,522,582,416,582,447, 545);
   
-	// var myDiv = createDiv('I like lizards.');
-	// myDiv.style('position', 20, 20);
-	// myDiv.style('rotate', 45);
-	// // myDiv.style('display', 'none');
-	// // var div = createDiv('div');
-	// // div.style('display', 'none');
-	// // console.log(div);
 }
-
 function draw() {
   background(241, 235, 233);
-  //rect(window.innerWidth/2, window.innerHeight/4, 200, 400);
   image(img, 267, 125, img.width / 4, img.height / 4);
-
 	testPolygon.display();
   testPolygon.checkForMouseOver(mouseX,mouseY);
   
@@ -199,9 +172,6 @@ function draw() {
   testPolygon10.display();
   testPolygon10.checkForMouseOver(mouseX,mouseY);
 }
-
-
-// Polygon class
 function Polygon(color,x1,y1,x2,y2,x3,y3,x4,y4) {
   this.color = color;
   this.x1 = x1;
@@ -213,7 +183,6 @@ function Polygon(color,x1,y1,x2,y2,x3,y3,x4,y4) {
   this.x4 = x4;
   this.y4 = y4;
   this.isMouseOver = false;
-
   this.display = function(){
     fill(color);
     strokeWeight(0);
@@ -229,7 +198,6 @@ function Polygon(color,x1,y1,x2,y2,x3,y3,x4,y4) {
    	if(currentMouseX>=this.x3 && currentMouseX<=this.x1 && currentMouseY>=this.y4 && currentMouseY<=this.y2) {
   	}
   }
-
 }
 var img;
 var cnv;
@@ -238,15 +206,12 @@ var u;
 var u2;
 var count;
 var mods = [];
-
 function preload() {
   img = loadImage('free-negro2.jpg');
 }
-
 function setup() {
   cnv = createCanvas(windowWidth, windowHeight);
  
-  //U
   u = 100;
   u2 = (u/2)*sqrt(3);
   var highCount = (height/u)+3;
@@ -254,17 +219,14 @@ function setup() {
   count = int(highCount * wideCount);
   var index = 0;
   
-  //HI
   for (var xc = 0; xc < wideCount*2; xc++) {
     for (var yc = 0; yc < highCount*2; yc++) {
       mods[index++] = new Module((int(xc)*u2*2),int(yc)*u);
    }
 	}
 }
-
 function draw() {
   background(241, 235, 233);
-  //rect(window.innerWidth/2, window.innerHeight/4, 200, 400);
   image(img, width/3, height/6, img.width/4, img.height/4);
   
   noStroke();
@@ -276,16 +238,12 @@ function draw() {
     mods[i].draw3();
   }
 }
-
   
-
 function mousePressed() {
   for (var i = 0; i <= count; i++) {
     mods[i].Pressed();
   }
 }
-
-
 function Module(_x, _y) {
   this.s = 40;
   this.x1 = _x;
@@ -299,8 +257,6 @@ function Module(_x, _y) {
   this.c1 = '#545861';
   this.c3 = '#545861';
 }
-
-
 Module.prototype.draw1 = function() {
   push();
   translate(this.x1, this.y1);
@@ -324,8 +280,6 @@ Module.prototype.draw1 = function() {
   }
   pop();
 }
-
-
 Module.prototype.draw3 = function() {
   push();
   translate(this.x3, this.y3);
@@ -349,8 +303,6 @@ Module.prototype.draw3 = function() {
   }
   pop();
 }
-
-
 Module.prototype.Pressed = function() {
     if (this.isOverCircle1 === true){
       if(this.b1 === false){
@@ -371,8 +323,6 @@ Module.prototype.Pressed = function() {
       }
     }
 }
-
-
 var img;
 var cnv;
 var d2;
@@ -384,22 +334,16 @@ var d7;
 var d8;
 var d9;
 var d10;
-
-
 function preload() {
   img = loadImage('free-negro2.jpg');
 }
-
 function setup() {
   cnv = createCanvas(window.innerWidth, window.innerHeight);
 }
-
 function draw() {
   background(241, 235, 233);
-  //rect(window.innerWidth/2, window.innerHeight/4, 200, 400);
   image(img, 267, 125, img.width/4, img.height/4);
   
-  //distances
   for (var d1 = 0; d1 < 50; d1++) {
   fill(82, 305, 49, 1);
     beginShape();
@@ -501,24 +445,17 @@ function draw() {
 }
   
 }
-
-
-//VARIABLES
 var a;
 var x;
 var y;
 var timee = 0;
-
 var currentbpm = 120;
 var previousAngle = -1
-
 function setup() {
   angleMode(DEGREES);
   createCanvas(windowWidth,windowHeight);
   Tone.Transport.start()
 }
-
-//VISUALS
 function draw() {
   background(255, 240, 245);
   
@@ -526,20 +463,14 @@ function draw() {
     a = atan2(mouseY - height / 2, mouseX - width / 2);
 		Tone.Transport.bpm.value = map(a, -180, 180, 100, 260)
   }
-
   translate(width / 2, height / 2);
   ellipse(0, 0, 400, 400)
   push();
   rotate(a);
-
   fill(230, 230, 250);
   stroke(230, 230, 20);
   ellipse((cos(a) * 220), (sin(a) * 220) , 15, 15);
 }
-
-
-//SOUND
-//VARIABLES
 var a;
 var x;
 var y;
@@ -547,18 +478,13 @@ var timee = 0;
 var old_pos =0;
 var new_pos =0;
 var changee =0;
-
 var currentbpm = 120;
 var previousAngle = -1;
-
 function setup() {
   angleMode(DEGREES);
   createCanvas(windowWidth, windowHeight);
   Tone.Transport.start()
 }
-
-
-//VAR Sounds
 var synth1 = new Tone.Synth({
   oscillator: {
     modulationType: 'sawtooth'
@@ -570,7 +496,6 @@ var synth1 = new Tone.Synth({
     release: 0.8
   }
 }).toMaster()
-
 var synth2 = new Tone.MembraneSynth({
 pitchDecay  : 0.05 ,
 octaves  : 3 ,
@@ -585,8 +510,6 @@ release  : 0.4 ,
 attackCurve  : "exponential"
   }
 }).toMaster()
-
-
 var synth3 = new Tone.MembraneSynth({
 pitchDecay  : 0.5 ,
 octaves  : 3 ,
@@ -601,9 +524,7 @@ release  : 0.4 ,
 attackCurve  : "exponential"
   }
 }).toMaster()
-
 var synth4 = new Tone.MembraneSynth({
-
   pitchDecay  : 0.05 ,
 octaves  : 10 ,
 oscillator  : {
@@ -617,10 +538,6 @@ release  : 1.4 ,
 attackCurve  : "exponential"
   }
 }).toMaster()
-
-//SOUND
-// synth4.triggerAttackRelease("c2", '8n')
-
 var soundloop = new Tone.Sequence(function(time, note) {
   synth1.triggerAttackRelease(note, '16t', time)
 }, [
@@ -637,7 +554,6 @@ var soundloop = new Tone.Sequence(function(time, note) {
   [null, null, null],
   [null, null],
 ]).start(timee)
-
 var soundloop = new Tone.Sequence(function(time, note) {
   synth2.triggerAttackRelease(note, '16t', time)
 }, [
@@ -739,7 +655,6 @@ var soundloop = new Tone.Sequence(function(time, note) {
   [null, null, null],
   [null, null],
 ]).start(timee)
-
 var soundloop = new Tone.Sequence(function(time, note) {
   synth3.triggerAttackRelease(note, '16t', time)
 }, [
@@ -840,7 +755,6 @@ var soundloop = new Tone.Sequence(function(time, note) {
   [null, null, null],
   [null, null],
 ]).start(timee)
-
 var soundLoop = new Tone.Sequence(function(time, note) {
   synth4.triggerAttackRelease(note, '8n', time)
 }, [
@@ -880,11 +794,7 @@ var soundLoop = new Tone.Sequence(function(time, note) {
   [null, null, null],
   [null, null, null],
   [null, null],
-
 ]).start(timee)
-
-
-//VARIABLES
 var a;
 var x;
 var y;
@@ -892,20 +802,15 @@ var timee = 0;
 var old_pos =0;
 var new_pos =0;
 var changee =0;
-
 var currentBpm = 120;
 var previousAngle = -1;
-
 function setup() {
   angleMode(DEGREES);
   createCanvas(windowWidth, windowHeight);
   Tone.Transport.start()
 }
-
-//VISUALS
 function draw() {
   background(255, 240, 245);
-
   if (mouseIsPressed) {
     new_pos = atan2(mouseY - height / 2, mouseX - width / 2);
     a= atan2(mouseY - height / 2, mouseX - width / 2);
@@ -914,18 +819,14 @@ function draw() {
     Tone.Transport.bpm.value = map(changee, -180, 180, 6, 100);
     old_pos = new_pos;
   }
-
   translate(width / 2, height / 2);
   ellipse(0, 0, 350, 350);
   push();
   rotate(a);
-
   fill(230, 230, 250);
   stroke(230, 230, 20);
   ellipse((cos(a) * 200), (sin(a) * 200), 15, 15);
 }
-
-//VAR Sounds
 var synth1 = new Tone.Synth({
   oscillator: {
     modulationType: 'sawtooth'
@@ -937,7 +838,6 @@ var synth1 = new Tone.Synth({
     release: 0.8
   }
 }).toMaster()
-
 var synth2 = new Tone.MembraneSynth({
 pitchDecay  : 0.05 ,
 octaves  : 3 ,
@@ -952,8 +852,6 @@ release  : 0.4 ,
 attackCurve  : "exponential"
   }
 }).toMaster()
-
-
 var synth3 = new Tone.MembraneSynth({
 pitchDecay  : 0.5 ,
 octaves  : 3 ,
@@ -968,9 +866,7 @@ release  : 0.4 ,
 attackCurve  : "exponential"
   }
 }).toMaster()
-
 var synth4 = new Tone.MembraneSynth({
-
   pitchDecay  : 0.05 ,
 octaves  : 10 ,
 oscillator  : {
@@ -984,10 +880,6 @@ release  : 1.4 ,
 attackCurve  : "exponential"
   }
 }).toMaster()
-
-//SOUND
-// synth4.triggerAttackRelease("c2", '8n')
-
 var soundloop = new Tone.Sequence(function(time, note) {
   synth1.triggerAttackRelease(note, '16t', time)
 }, [
@@ -1004,7 +896,6 @@ var soundloop = new Tone.Sequence(function(time, note) {
   [null, null, null],
   [null, null],
 ]).start(timee)
-
 var soundloop = new Tone.Sequence(function(time, note) {
   synth2.triggerAttackRelease(note, '16t', time)
 }, [
@@ -1106,7 +997,6 @@ var soundloop = new Tone.Sequence(function(time, note) {
   [null, null, null],
   [null, null],
 ]).start(timee)
-
 var soundloop = new Tone.Sequence(function(time, note) {
   synth3.triggerAttackRelease(note, '16t', time)
 }, [
@@ -1207,7 +1097,6 @@ var soundloop = new Tone.Sequence(function(time, note) {
   [null, null, null],
   [null, null],
 ]).start(timee)
-
 var soundLoop = new Tone.Sequence(function(time, note) {
   synth4.triggerAttackRelease(note, '8n', time)
 }, [
@@ -1247,10 +1136,8 @@ var soundLoop = new Tone.Sequence(function(time, note) {
   [null, null, null],
   [null, null, null],
   [null, null],
-
 ]).start(timee)
 var synth4 = new Tone.MembraneSynth({
-
   pitchDecay  : 0.5 ,
 octaves  : 3 ,
 oscillator  : {
@@ -1264,25 +1151,18 @@ release  : 0.4 ,
 attackCurve  : "exponential"
   }
 }).toMaster()
-
-//SOUND
 synth4.triggerAttackRelease("F3", '8n')
-//VARIABLES
 var a;
 var x;
 var y;
 var timee = 0;
-
 var currentBpm = 120;
 var previousAngle = -1
-
 function setup() {
   angleMode(DEGREES);
   createCanvas(windowWidth, windowHeight);
   Tone.Transport.start()
 }
-
-//VISUALS
 function draw() {
   background(255, 240, 245);
   
@@ -1291,17 +1171,14 @@ function draw() {
     Tone.Transport.bpm.value = map(a, -180, 180, 600, 2600)
     console.log(Tone.Transport.bpm.value)
   }
-
   translate(width / 2, height / 2);
   ellipse(0, 0, 350, 350)
   push();
   rotate(a);
-
   fill(230, 230, 250);
   stroke(230, 230, 20);
   ellipse((cos(a) * 200), (sin(a) * 200), 15, 15);
 }
-
 var synth = new Tone.Synth({
   oscillator: {
     modulationType: 'sawtooth'
@@ -1313,7 +1190,6 @@ var synth = new Tone.Synth({
     release: 0.8
   }
 }).toMaster()
-
 var synth2 = new Tone.PolySynth({
   oscillator: {
     modulationType: 'triangle8'
@@ -1325,12 +1201,9 @@ var synth2 = new Tone.PolySynth({
     release: 0.2
   }
 }).toMaster()
-
 var synth3 = new Tone.MembraneSynth({
-
   pitchDecay: 0.05,
   octaves: 10,
-
   envelope: {
     attack: 0.001,
     decay: 0.4,
@@ -1338,15 +1211,12 @@ var synth3 = new Tone.MembraneSynth({
     release: 3.4,
   }
 }).toMaster()
-
 var synth4 = new Tone.MembraneSynth({
-
   pitchDecay: 0.05,
   octaves: 10,
   oscillator: {
     type: "square"
   },
-
   envelope: {
     attack: 0.001,
     decay: 0.4,
@@ -1354,9 +1224,6 @@ var synth4 = new Tone.MembraneSynth({
     release: 1.4,
   }
 }).toMaster()
-
-//SOUND
-//VARIABLES
 var a;
 var x;
 var y;
@@ -1364,20 +1231,15 @@ var timee = 0;
 var old_pos =0;
 var new_pos =0;
 var changee =0;
-
 var currentBpm = 120;
 var previousAngle = -1;
-
 function setup() {
   angleMode(DEGREES);
   createCanvas(windowWidth, windowHeight);
   Tone.Transport.start()
 }
-
-//VISUALS
 function draw() {
   background(255, 240, 245);
-
   if (mouseIsPressed) {
     new_pos = atan2(mouseY - height / 2, mouseX - width / 2);
     a= atan2(mouseY - height / 2, mouseX - width / 2);
@@ -1386,19 +1248,14 @@ function draw() {
     Tone.Transport.bpm.value = map(changee, -180, 180, 6, 100);
     old_pos = new_pos;
   }
-
   translate(width / 2, height / 2);
   ellipse(0, 0, 350, 350);
   push();
   rotate(a);
-
   fill(230, 230, 250);
   stroke(230, 230, 20);
   ellipse((cos(a) * 200), (sin(a) * 200), 15, 15);
 }
-
-
-//VAR Sounds
 var synth1 = new Tone.Synth({
   oscillator: {
     modulationType: 'sawtooth'
@@ -1410,7 +1267,6 @@ var synth1 = new Tone.Synth({
     release: 0.8
   }
 }).toMaster()
-
 var synth2 = new Tone.MembraneSynth({
 pitchDecay  : 0.05 ,
 octaves  : 3 ,
@@ -1425,8 +1281,6 @@ release  : 0.4 ,
 attackCurve  : "exponential"
   }
 }).toMaster()
-
-
 var synth3 = new Tone.MembraneSynth({
 pitchDecay  : 0.5 ,
 octaves  : 3 ,
@@ -1441,9 +1295,7 @@ release  : 0.4 ,
 attackCurve  : "exponential"
   }
 }).toMaster()
-
 var synth4 = new Tone.MembraneSynth({
-
   pitchDecay  : 0.05 ,
 octaves  : 10 ,
 oscillator  : {
@@ -1457,10 +1309,6 @@ release  : 1.4 ,
 attackCurve  : "exponential"
   }
 }).toMaster()
-
-//SOUND
-// synth4.triggerAttackRelease("c2", '8n')
-
 var soundloop = new Tone.Sequence(function(time, note) {
   synth1.triggerAttackRelease(note, '16t', time)
 }, [
@@ -1477,7 +1325,6 @@ var soundloop = new Tone.Sequence(function(time, note) {
   [null, null, null],
   [null, null],
 ]).start(timee)
-
 var soundloop = new Tone.Sequence(function(time, note) {
   synth2.triggerAttackRelease(note, '16t', time)
 }, [
@@ -1579,7 +1426,6 @@ var soundloop = new Tone.Sequence(function(time, note) {
   [null, null, null],
   [null, null],
 ]).start(timee)
-
 var soundloop = new Tone.Sequence(function(time, note) {
   synth3.triggerAttackRelease(note, '16t', time)
 }, [
@@ -1680,7 +1526,6 @@ var soundloop = new Tone.Sequence(function(time, note) {
   [null, null, null],
   [null, null],
 ]).start(timee)
-
 var soundLoop = new Tone.Sequence(function(time, note) {
   synth4.triggerAttackRelease(note, '8n', time)
 }, [
@@ -1720,25 +1565,18 @@ var soundLoop = new Tone.Sequence(function(time, note) {
   [null, null, null],
   [null, null, null],
   [null, null],
-
 ]).start(timee)
-
-//VARIABLES
 var a;
 var x;
 var y;
 var timee = 0;
-
 var currentBpm = 120;
 var previousAngle = -1
-
 function setup() {
   angleMode(DEGREES);
   createCanvas(windowWidth,windowHeight);
   Tone.Transport.start()
 }
-
-//VISUALS
 function draw() {
   background(255, 240, 245);
   ellipse(350, 335, 400, 400)
@@ -1747,16 +1585,13 @@ function draw() {
 		Tone.Transport.bpm.value = map(a, -180, 180, 60, 260)
 		console.log(Tone.Transport.bpm.value)
   }
-
   translate(width / 2, height / 2);
   push();
   rotate(a);
-
   fill(230, 230, 250);
   stroke(230, 230, 20);
   ellipse((cos(a) * 220), (sin(a) * 220) , 15, 15);
 }
-
 var synth = new Tone.Synth({
   oscillator: {
     modulationType: 'sawtooth'
@@ -1768,7 +1603,6 @@ var synth = new Tone.Synth({
     release: 0.8
   }
 }).toMaster()
-
 var synth2 = new Tone.PolySynth({
   oscillator: {
     modulationType: 'triangle8'
@@ -1780,7 +1614,6 @@ var synth2 = new Tone.PolySynth({
     release: 0.2
   }
 }).toMaster()
-
 var synth3 = new Tone.MembraneSynth({
   
 pitchDecay  : 0.05 ,
@@ -1793,8 +1626,6 @@ sustain  : 0.1 ,
 release  : 3.4 ,
 }
 }).toMaster()
-
-//SOUND
 var soundLoop = new Tone.Sequence(function(time, note) {
 	synth.triggerAttackRelease(note, '16t', time)
 }, [
@@ -1802,9 +1633,7 @@ var soundLoop = new Tone.Sequence(function(time, note) {
   ['C2', null, null], ['C2', null, null], ['B1', null], [null, null, null], [null, null, null], [null, null],
   ['C2', null, null], ['C2', null, null], ['B1', null], [null, null, null], [null, null, null], [null, null], 
   
-
 ]).start(timee)
-
 var soundLoop = new Tone.Sequence(function(time, note) {
 	synth2.triggerAttackRelease(note, '16t', time)
 }, [
@@ -1817,7 +1646,6 @@ var soundLoop = new Tone.Sequence(function(time, note) {
   [null, null, null], [null, null, null], ['B1', null], [null, null, null], [null, null, null], [null, null], 
   
 ]).start(timee)
-
 var soundLoop = new Tone.Sequence(function(time, note) {
 	synth3.triggerAttackRelease(note, '4n', time)
 }, [
@@ -1837,13 +1665,9 @@ var soundLoop = new Tone.Sequence(function(time, note) {
   [null, null, null], [null, null, null], [null, null], [null, 'A3', null], [null, null, null], [null, null], 
     
 ]).start(timee)
-
-
-//VARIABLES
 var a;
 var x;
 var y;
-
 var synth = new Tone.Synth({
   oscillator: {
   modulationType: 'sawtooth'
@@ -1855,44 +1679,30 @@ var synth = new Tone.Synth({
   release: 0.8
   }
   }).toMaster()
-
 function setup() {
   angleMode(DEGREES);
   createCanvas(400, 400);
 }
-
-//VISUALS
-
 function draw() {
   background(255, 240, 245);
   ellipse(200, 200, 150, 150)
   if (mouseIsPressed) {
     a = atan2(mouseY - height / 2, mouseX - width / 2);
   }
-
   translate(width / 2, height / 2);
   push();
   rotate(a);
-
   fill(230, 230, 250);
   ellipse(cos(a) * 100, sin(a) * 100, 25, 25);
-
-  //SOUND
-  //bpm slider
   document.querySelector('bpm').addEventListener('input', function(e) {
     Tone.Transport.bpm.value = parseInt(e.target.value)
   })
-
-
-
-
   function triggerSynth(time) {
     synth.triggerAttackRelease('8n', time)
   }
   Tone.Transport.schedule(triggerSynth, 0)
   Tone.Transport.loopEnd = '1m'
   Tone.Transport.loop = true
-
   document.querySelector('.playToggle').addEventListener('change', function(e) {
     if (e.target.checked) {
       Tone.Transport.start('+0.1')
@@ -1906,45 +1716,22 @@ function setup() {
   vid = createVideo("IMG_8973.MOV");
   vid.loop()
 }
-
-// Declare a "SerialPort" object
-var serial;
-var latestData = "waiting for data";  // you'll use this to write incoming data to the canvas
 var videoo;
-
-
 var number1 = 0;
 var number2 = 0;
 var number3 = 0;
 var number4 = 0;
 var number5 = 0;
 var number6 = 0;
-
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  // Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-  serial.open("/dev/cu.usbmodemMID1");
-   serial.on('data', gotData);
-  // specify multiple formats for different browsers
   videoo = createVideo(['earth.mp4', 'earth.webm']);
   videoo.hide(); 
   videoo.volume([0]);
   videoo.size(displayWidth, displayHeight);
-
-
 }
-
-// There is data available to work with from the serial port
 function gotData() {
-  var currentString = serial.readLine();  // read the incoming string
-  trim(currentString);                    // remove any trailing whitespace
-  if (!currentString) return;             // if the string is empty, do no more
-            // println the string
-  latestData = currentString;            // save it for the draw method
 }
-
 function draw() {
   image(videoo); 
   data = int(latestData);
@@ -1974,58 +1761,34 @@ function draw() {
   }
   
   
-//   var mappedVar = map(latestData, 30,50,0,255);
-//   latestData = constrain(latestData, 0, 255);
-
   text(latestData, 10, 10);
 }
-
 function mousePressed() {
-    videoo.loop(); // set the video to loop and start playing
 }
-
-
-
 let data;
 let angles = [];
-let bubbles = []; // dots on screen
-let counter = 0; // amount of dots
 let locationx = [];
 let locationy = [];
 let ranonce = false;
-
-//INDIVIDUAL BUBBLES 
 class PersonBubble {
   constructor(networth, index) {
     this.r = (networth) * 6;
-    let bubblearea = random(0, 210 - this.r); //area of circle accouting for 
-    let bubbleangle = random(0, 360); // 2PI is 360 degrees
     this.x = bubblearea * cos(bubbleangle) + 300;
     this.y = bubblearea * sin(bubbleangle) + 300;
-    this.index = index; //FINISH LATER 
   }
 }
-
-
 function preload() {
   angleMode(degrees);
   data = loadJSON("data1.json");
 }
-
-//VARIABLES
 function setup() {
   createCanvas(600, 600);
   let sum = sum + data.corporations[n].networth;
   for (let n = 0; n < 10; n++) {
     angles.push(((data.corporations[n].networth)) / sum) * 360;
   }
-
-  //DISPLAY INDIVIDUAL BUBBLES THAT DO NOT OVERLAP 
   for (let i = 0; i < 7; i++) {
     let overlapping = false;
-    let bubble1 = new PersonBubble(data.people[i].networth, i); //indexs each bubble 
-
-
     for (let j = 0; j < bubbles.length; j++) {
       let bubble2 = bubbles[j];
       let d = dist(bubble1.x, bubble1.y, bubble2.x, bubble2.y);
@@ -2042,33 +1805,24 @@ function setup() {
       break;
     }
   }
-
-
 }
-
 function draw() {
   pieChart(500, angles);
   stroke(300);
   fill(300, 300, 300);
   ellipse(width / 2, 300, 420, 420);
-
-  //BUBBLES
   for (let j = 0; j < bubbles.length; j++) {
     let bubble1 = bubbles[j];
     if (dist(bubble1.x, bubble1.y, mouseX, mouseY) < bubble1.r) {
       fill(200, 200, 300);
       noStroke();
       ellipse(bubble1.x, bubble1.y, bubble1.r * 3.5);
-
       for (let i = 0; i < data.people[bubble1.index].affiliations.length; i++) {
         for (let n = 0; n < 10; n++) {
           angles.push(data.corporations[n].networth);
-          if (data.people[bubble1.index].affiliations[i] == data.corporations[n].name) { //name = affiliation
           }
         }
-        data.people[bubble1.index].affiliations[i]; //attaches bubbles to companies 
         stroke(0);
-        line(mouseX, mouseY, locationx[n], locationy); // shares the same index as the corporations
       }
       makeThingAtBottom();
     } else {
@@ -2078,15 +1832,12 @@ function draw() {
     }
   }
 }
-
-//PIECHART
 function pieChart(diameter, data) {
   var lastAngle = 0;
   for (var i = 0; i < data.length; i++) {
     var gray = map(i, 0, data.length, 0, 255);
     fill(gray);
     arc(width / 2, height / 2, diameter, diameter, lastAngle, lastAngle + (angles[i]));
-
     if (ranonce == false) {
       let percentage = lastAngle + (1 / 2) * angles[i];
       locationx.push(cos(percentage) * 210 + 310);
@@ -2096,61 +1847,40 @@ function pieChart(diameter, data) {
   }
   ranonce = true;
 }
-
-
-//BOTTOM GRAPH
-function makeThingAtBottom() { //HOW DO I MAKE THIS RUN ONCE? 
   rect(20, 550, 200, 20);
-}//VARIABLES
 let data;
 let angles = [];
-let bubbles = []; // dots on screen
-let counter = 0; // amount of dots
 let locationx = [];
 let locationy = [];
 let ranonce = false;
 let companyDivs = [];
 let individualDivs = [];
 let pic;
-
-//INDIVIDUAL BUBBLE VARIABLE  
 class PersonBubble {
   constructor(networth, index) {
     this.r = (networth) * 6;
-    let bubblearea = random(0, 210 - this.r); //area of circle accouting for 
-    let bubbleangle = random(0, 360); // 2PI is 360 degrees
     this.x = bubblearea * cos(bubbleangle) + 300;
     this.y = bubblearea * sin(bubbleangle) + 300;
     this.index = index;
   }
 }
-
 function preload() {
   angleMode(DEGREES);
   data = loadJSON("data1.json");
   pic = loadImage("photo-1.jpg");
 }
-
 function setup() {
-  console.log(angles[0]); // THIS IS THE PROBLEM 
   createCanvas(600, 600);
-  let sum = 0; // TO FIND THE ANGLES ADD UP ALL THE ANGLES SO YOU CAN FIND PERCENTAGE LATER  
   for (let n = 0; n < data.corporations.length; n++) {
     sum = sum + data.corporations[n].networth;
   }
-
-  ///for loop that makes dom elements for company names
   for (let n = 0; n < data.corporations.length; n++) {
-    angles.push(data.corporations[n].networth / sum * 360); // THIS FINDS THE  PERCENTAGE OF EACH ANGLE
     companyDivs[n] = createDiv(data.corporations[n].name);
     companyDivs[n].hide();
   }
   console.log(angles);
-
-  //DISPLAY INDIVIDUAL BUBBLES THAT DO NOT OVERLAP 
   for (let i = 0; i < 7; i++) {
     let overlapping = false;
-    let bubble1 = new PersonBubble(data.people[i].networth, i); //indexs each bubble 
     individualDivs[i] = createDiv(data.people[i].name);
     individualDivs[i].hide();
     for (let j = 0; j < bubbles.length; j++) {
@@ -2170,7 +1900,6 @@ function setup() {
     }
   }
 }
-
 function draw() {
   pieChart(500, angles);
   stroke(300);
@@ -2178,10 +1907,7 @@ function draw() {
   ellipse(width / 2, 300, 420, 420);
   drawBubbles();
 }
-
 function drawBubbles() {
-  // hide all company names by defaukt, the
-  // later only show the ones that are hovered
   for (let n = 0; n < data.corporations.length; n++) {
       companyDivs[n].position(locationx[n], locationy[n]);
     companyDivs[n].style("font-size", "18px");
@@ -2190,43 +1916,28 @@ function drawBubbles() {
 	
       companyDivs[n].hide();
   }
-  // hide all people names by default
   for (let j = 0; j < bubbles.length; j++) {
     individualDivs[j].hide();
   }
   
   
-  //BUBBLES
   for (let j = 0; j < bubbles.length; j++) {
     let bubble1 = bubbles[j];
-    // stroke(0);
-    // line(bubble1.x, bubble1.y, locationx[0], locationy[0]);
 		
     if (dist(bubble1.x, bubble1.y, mouseX, mouseY) < bubble1.r) {
       fill(200, 200, 300);
       noStroke();
       ellipse(bubble1.x, bubble1.y, bubble1.r * 3.5);
-
       for (let i = 0; i < data.people[bubble1.index].affiliations.length; i++) {
         for (let n = 0; n < data.corporations.length; n++) {
-          //angles.push(data.corporations[n].networth);
-          if (data.people[bubble1.index].affiliations[i] == data.corporations[n].name) { //name = affiliation
             stroke(0);
             line(bubble1.x, bubble1.y, locationx[n], locationy[n]);
             
-            // show connected comapnies and names:
             companyDivs[n].show();
             individualDivs[j].show();
           }
-
         }
-
-        //data.people[bubble1.index].affiliations[i]; //attaches bubbles to companies 
-        //stroke(0);
-        //line(mouseX, mouseY, locationx[n], locationy); // shares the same index as the corporations
       }
-      // makeThingAtBottom();
-
     } else {
       fill(200, 200, 300, 100);
       noStroke();
@@ -2234,10 +1945,6 @@ function drawBubbles() {
     }
   }
 }
-
-
-
-//PIECHART
 function pieChart(diameter, data) {
   var lastAngle = 0;
   let r = 20; let g = 50;
@@ -2245,72 +1952,40 @@ function pieChart(diameter, data) {
     var gray = map(i, 0 , data.length, 90, 255);
     fill(gray, 105-gray,200);
     arc(width / 2, height / 2, diameter, diameter, lastAngle, lastAngle + angles[i]);
-
   
     if (ranonce == false) {
       let percentage = lastAngle + (1 / 2) * angles[i];
-      // locationx.push(cos(percentage) * 210 + 310);
-      // locationy.push(sin(percentage) * 210 + 310);
       
-      // dont forget to place the circle you describe below in space
-      // aka we add width/2 for the x and height/2 for the y7 position.
       locationx.push(width/2 + cos(percentage) * (diameter/2 - 40));
       locationy.push(height/2 + sin(percentage) * (diameter/2 - 40));
       
     }
-    // // red circles tpo help us understand what wea re doing:
-    // fill(255,0,0);
-    // ellipse(locationx[i], locationy[i], 10, 10);
     lastAngle += angles[i];
   }
   ranonce = true;
 }
-
-
-//BOTTOM GRAPH
-//function makeThingAtBottom() { //HOW DO I MAKE THIS RUN ONCE? 
-//rect(20, 550, 200, 20);
-//}//PRELOAD ASSETTS
 let data;
-
 function preload() {
   angleMode (degrees);
   var a = degrees(PI);
   data = loadJSON("data1.json");
-  print(data);
   img1 = image("photo-1.jpg");
 }
-
-
-//VARIABLES
 var angles = [200, 40, 506, 50, 1];
 let k = [];
-let bubbles = []; // dots on screen
-let counter = 0; // amount of dots
-
-//INDIVIDUAL BUBBLES 
 class PersonBubble {
  constructor(net_worth) {
-    //this.r = net_worth;
     this.r = random(30);
-    let bubblearea = random(0, 210 - this.r); //area of circle accouting for 
-    let bubbleangle = random(0, 2 * PI); // 2PI is 360 degrees
     this.x = bubblearea * cos(bubbleangle) + 300;
     this.y = bubblearea * sin(bubbleangle) + 300;
   }
 }
-
 function setup() {
   createCanvas(600, 600);
-
   let individuals = [];
   for (let d = 0; d< 50; d++) {
   	individuals.push(data[d].NET_WORTH);
   	}
-	print(individuals);
-
-
-  //DISPLAY INDIVIDUAL BUBBLES THAT DO NOT OVERLAP 
   for (let i =0; i< 50; i++)  {
     let overlapping = false;
     let bubble1 = new PersonBubble(data[i].NET_WORTH);
@@ -2331,20 +2006,14 @@ function setup() {
       break;
     }
   }
-
 }
-
 function draw() {
-  pieChart(500, angles); // DRAW PIE CHART 
   fill(300, 300, 300);
   ellipse(width / 2, 300, 420, 420);
   let individuals = data[1].NET_WORTH;
   
   stroke(300);
   rect(600, 380, 200, 20);
-
-
-  //BUBBLES
   for (let j = 0; j < bubbles.length; j++) {
     let bubble1 = bubbles[j];
     if (dist(bubble1.x, bubble1.y, mouseX, mouseY) < bubble1.r) {
@@ -2353,9 +2022,7 @@ function draw() {
       ellipse(bubble1.x, bubble1.y, bubble1.r * 3.5);
       stroke(0);
       line(mouseX, mouseY, 200, 150);
-      //connection(); 
       makeThingAtBottom();
-
     } else {
       fill(200, 200, 300, 100);
       noStroke();
@@ -2363,8 +2030,6 @@ function draw() {
     }
   }
 }
-
-//PIECHART
 function pieChart(diameter, data) {
   var lastAngle = 0;
   for (var i = 0; i < data.length; i++) {
@@ -2374,17 +2039,12 @@ function pieChart(diameter, data) {
     lastAngle += radians(angles[i]);
   }
 }
-
-//BOTTOM GRAPH
 function makeThingAtBottom() {
   rect(20, 550, 200, 20);
 }
-
 let song;
 let amp;
-
 let volumehistory =[];
-
 function toggleSong() {
   if (song.isPlaying()) {
     song.pause();
@@ -2392,11 +2052,9 @@ function toggleSong() {
     song.play();
   }
 }
-
 function preload() {
   song = loadSound('ocean (1).mp3');
 }
-
 function setup() { 
   createCanvas(400, 400);
   angleMode(DEGREES);
@@ -2404,7 +2062,6 @@ function setup() {
   amp = new p5.Amplitude();
 }
   
-
 function draw() { 
   background(300, 50, 100);
   translate(20, length/(.5) + 200);
@@ -2431,7 +2088,6 @@ function draw() {
 }
     endShape();
   
-  //NEW
     stroke(15, 250, 1);
   noFill();
   
@@ -2453,7 +2109,6 @@ function draw() {
 }
     endShape();
   
-    //NEW
     stroke(15, 250, 10);
   noFill();
   
@@ -2479,92 +2134,60 @@ function draw() {
   if(volumehistory.length > 360) {
     volumehistory.splice(0,1);
   }
-}//PRELOAD ASSETTS
 let data;
 function preload() {
   data = loadJSON("data1.json"); 
   img1 = image("photo-1.jpg");
 }
-
-//VARIABLES
 let individuals;
 var angles = [200, 40, 506, 50, 1];
 let d= [0, 1, 2, 3];
 let k = [];
-let bubbles = []; // dots on screen
-let counter = 0; // amount of dots
 let whitespot = {
   x: 250,
   y: 250,
 }
-
-//INDIVIDUAL BUBBLES 
 class PersonBubble {
   constructor(networth) {
-    //this.r = net_worth;
     this.r = random(30);
-    let bubblearea = random(0, 210 - this.r); //area of circle accouting for 
-    let bubbleangle = random(0, 2 * PI); // 2PI is 360 degrees
     this.x = bubblearea * cos(bubbleangle) + 300;
     this.y = bubblearea * sin(bubbleangle) + 300;
   }
 }
-
 function setup() { 
   createCanvas(400, 400);
   for (let d = 0; d< data.length; d++) {
-   // individuals = data[d].NET_WORTH;
- // individuals.push(data[d].NET_WORTH);
                    }
-  print(data[2].NET_WORTH);
 } 
-
 function draw() { 
   background(220);
-}//PRELOAD ASSETTS
 let data;
-
 function preload() {
   angleMode (degrees);
   var a = degrees(PI);
   data = loadJSON("data1.json");
-  print(data);
   img1 = image("photo-1.jpg");
 }
-
-//VARIABLES
 var angles = [200, 40, 506, 50, 1];
-let bubbles = []; // dots on screen
-let counter = 0; // amount of dots
-
-//INDIVIDUAL BUBBLES 
 class PersonBubble {
 constructor(net_worth) {
     this.r = (networth) * 4;
-    let bubblearea = random(0, 210 - this.r); //area of circle accouting for 
-    let bubbleangle = random(0, 2 * PI); // 2PI is 360 degrees
     this.x = bubblearea * cos(bubbleangle) + 300;
     this.y = bubblearea * sin(bubbleangle) + 300;
   }
 }
-
 function setup() {
   createCanvas(600, 600);
-
-  //PEOPLE FOR LOOP
   let individuals = [];
   for (let d = 0; d< 50; d++) {
   	individuals.push(data[d].people.networth);
   	}
-	print(individuals);
   
-  //CORPORATION FOR LOOP 
   let corporations = [];
   for (let i=0; i<50; i++) {
     corporations.push(data[d].corporations.networth);
   }
   
-  //DISPLAY INDIVIDUAL BUBBLES THAT DO NOT OVERLAP 
   for (let i =0; i< 50; i++)  {
     let overlapping = false;
     let bubble1 = new PersonBubble(data[i].people.networth);
@@ -2585,20 +2208,14 @@ function setup() {
       break;
     }
   }
-
 }
-
 function draw() {
-  pieChart(500, angles); // DRAW PIE CHART 
   fill(300, 300, 300);
   ellipse(width / 2, 300, 420, 420);
   let individuals = data[1].people.networth;
   
   stroke(300);
   rect(600, 380, 200, 20);
-
-
-  //BUBBLES
   for (let j = 0; j < bubbles.length; j++) {
     let bubble1 = bubbles[j];
     if (dist(bubble1.x, bubble1.y, mouseX, mouseY) < bubble1.r) {
@@ -2607,9 +2224,7 @@ function draw() {
       ellipse(bubble1.x, bubble1.y, bubble1.r * 3.5);
       stroke(0);
       line(mouseX, mouseY, 200, 150);
-      //connection(); 
       makeThingAtBottom();
-
     } else {
       fill(200, 200, 300, 100);
       noStroke();
@@ -2617,8 +2232,6 @@ function draw() {
     }
   }
 }
-
-//PIECHART
 function pieChart(diameter, data) {
   var lastAngle = 0;
   for (var i = 0; i < data.length; i++) {
@@ -2628,46 +2241,29 @@ function pieChart(diameter, data) {
     lastAngle += radians(angles[i]);
   }
 }
-
-//BOTTOM GRAPH
 function makeThingAtBottom() {
   rect(20, 550, 200, 20);
 }
-
-//MAKE EACH PIZZA SLICE OBJECT 
-//PRELOAD JSON FILE
 function preload() {
   data = loadJSON("data1.json");
 }
-
-//VARIABLES
 var angles = [30, 10, 45, 350, 60, 38, 75, 67];
 var whitecircle;
-let bubbles = []; // dots on screen
-let counter = 0; // amount of dots
 let whitespot = {
   x: 250,
   y: 250,
 }
-
-//INDIVIDUAL BUBBLES 
 class PersonBubble {
   constructor() {
     this.r = random(12, 1);
-    let bubblearea = random(0, 210 - this.r); //area of circle accouting for 
-    let bubbleangle = random(0, 2*PI); // 2PI is 360 degrees
     this.x = bubblearea*cos(bubbleangle) + 300;
     this.y = bubblearea*sin(bubbleangle) + 300;
     
   }
 }
-
 function setup() {
   createCanvas(600, 600);
   
-  whitecircle = new Block; //WHITE CIRCLE 
-
-  //DISPLAY INDIVIDUAL BUBBLES THAT DO NOT OVERLAP 
   while (bubbles.length < 1000) {
     let overlapping = false;
     let bubble1 = new PersonBubble;
@@ -2688,13 +2284,8 @@ function setup() {
     }
   }
 }
-
-
 function draw() { 
-  pieChart(500, angles); // DRAW PIE CHART 
-  whitecircle.display(); // DRAW THE WHITE CIRCLE
   
-  //BUBBLES
 for (let j = 0; j < bubbles.length; j++) {
   let bubble1 = bubbles[j];
   if (dist(bubble1.x, bubble1.y, mouseX, mouseY) < bubble1.r) {
@@ -2705,15 +2296,9 @@ for (let j = 0; j < bubbles.length; j++) {
   noStroke();
   ellipse(bubble1.x, bubble1.y, bubble1.r * 2);
   
-	//ANGLES
- //anglesSum += data.individuals[0,1, 2, 3, 4].["NET-WORTH"];
- //for (let k = 0; k < 50; k++)
-  angles.push(data.individuals[0, 1, 2, 3, 4]["NET-WORTH"]); //two different for loops
   console.log(angles);
 }
 }
-
-//PIECHART
 function pieChart(diameter, data) {
   var lastAngle = 0;
   for (var i = 0; i < data.length; i++) {
@@ -2724,7 +2309,6 @@ function pieChart(diameter, data) {
   }
   
 }
-// WHITE CIRCLE 
   function Block() {
     this.x = width / 2;
     this.y = 300;
@@ -2733,39 +2317,26 @@ function pieChart(diameter, data) {
       fill(300, 300, 300);
       ellipse(this.x, this.y, this.diameter, this.diameter);
     }
-  }//PRELOAD JSON FILE
 function preload() {
   data = loadJSON("data1.json");
 }
-
-//VARIABLES
 var angles = [30, 10, 45, 350, 60, 38, 75, 67];
 var whitecircle;
-let bubbles = []; // dots on screen
-let counter = 0; // amount of dots
 let whitespot = {
   x: 250,
   y: 250,
 }
-
-//INDIVIDUAL BUBBLES 
 class PersonBubble {
   constructor() {
     this.r = random(12, 1);
-    let bubblearea = random(0, 210 - this.r); //area of circle accouting for 
-    let bubbleangle = random(0, 2*PI); // 2PI is 360 degrees
     this.x = bubblearea*cos(bubbleangle) + 300;
     this.y = bubblearea*sin(bubbleangle) + 300;
     
   }
 }
-
 function setup() {
   createCanvas(600, 600);
   
-  whitecircle = new Block; //WHITE CIRCLE 
-
-  //DISPLAY INDIVIDUAL BUBBLES THAT DO NOT OVERLAP 
   while (bubbles.length < 1000) {
     let overlapping = false;
     let bubble1 = new PersonBubble;
@@ -2786,13 +2357,8 @@ function setup() {
     }
   }
 }
-
-
 function draw() { 
-  pieChart(500, angles); // DRAW PIE CHART 
-  whitecircle.display(); // DRAW THE WHITE CIRCLE
   
-  //BUBBLES
 for (let j = 0; j < bubbles.length; j++) {
   let bubble1 = bubbles[j];
   if (dist(bubble1.x, bubble1.y, mouseX, mouseY) < bubble1.r) {
@@ -2804,8 +2370,6 @@ for (let j = 0; j < bubbles.length; j++) {
   ellipse(bubble1.x, bubble1.y, bubble1.r * 2);
 }
 }
-
-//PIECHART
 function pieChart(diameter, data) {
   var lastAngle = 0;
   for (var i = 0; i < data.length; i++) {
@@ -2816,7 +2380,6 @@ function pieChart(diameter, data) {
   }
   
 }
-// WHITE CIRCLE 
   function Block() {
     this.x = width / 2;
     this.y = 300;
@@ -2825,40 +2388,26 @@ function pieChart(diameter, data) {
       fill(300, 300, 300);
       ellipse(this.x, this.y, this.diameter, this.diameter);
     }
-  }//PRELOAD JSON FILE
 function preload() {
   data = loadJSON("data1.json");
 }
-
-//VARIABLES
 var angles = [];
 var whitecircle;
-let bubbles = []; // dots on screen
-let counter = 0; // amount of dots
 let whitespot = {
   x: 250,
   y: 250,
 }
-
-//INDIVIDUAL BUBBLES 
 class PersonBubble {
   constructor() {
     this.x = random(100,width-100); 
-    this.y =  random(100,height-100); // pythagoreum
     this.r = random(12, 1);
   }
 }
-
 function setup() {
   createCanvas(600, 600);
-  //ANGLES
   anglesSum += data[i]["NET-WORTH"];
-  angles.push(data[i]["NET-WORTH"]); //two different for loops
   console.log(angles);
   
-  whitecircle = new Block; //WHITE CIRCLE 
-
-  //DISPLAY INDIVIDUAL BUBBLES THAT DO NOT OVERLAP 
   while (bubbles.length < 1000) {
     let overlapping = false;
     let bubble1 = new PersonBubble;
@@ -2879,12 +2428,8 @@ function setup() {
     }
   }
 }
-
 function draw() { 
-  pieChart(500, angles); // DRAW PIE CHART 
-  whitecircle.display(); // DRAW THE WHITE CIRCLE
   
-  //BUBBLES
 for (let j = 0; j < bubbles.length; j++) {
   let bubble1 = bubbles[j];
   if (dist(bubble1.x, bubble1.y, mouseX, mouseY) < bubble1.r) {
@@ -2896,8 +2441,6 @@ for (let j = 0; j < bubbles.length; j++) {
   ellipse(bubble1.x, bubble1.y, bubble1.r * 2, bubble1.r * 2);
 }
 }
-
-//PIECHART
 function pieChart(diameter, data) {
   var lastAngle = 0;
   for (var i = 0; i < data.length; i++) {
@@ -2908,7 +2451,6 @@ function pieChart(diameter, data) {
   }
   
 }
-// WHITE CIRCLE 
   function Block() {
     this.x = width / 2;
     this.y = 300;
@@ -2919,26 +2461,18 @@ function pieChart(diameter, data) {
     }
   }
 var whitecircle;
-var angles = []; //angle to be used = angle valued * 360/ total sum
-//PRELOAD JSON FILE
-
 function preload() {
   data = loadJSON("data1.json");
 }
-
-
 function setup() {
   createCanvas(600, 600);
   noStroke();
-  angles.push(data[i]["net-worth"]); //two different for loops
   anglesSum += data[i]["net-worth"]; 
   console.log(angles);
 }
-
 function draw() {
   background(300);
   
-  //pieChart
   pieChart(500, angles);
   
   
@@ -2951,29 +2485,20 @@ function pieChart(diameter, data) {
     arc(width/2, height/2, diameter, diameter, lastAngle, lastAngle+radians(angles[i]));
     lastAngle += radians(angles[i]);
   }
-
 }
-//PRELOAD JSON FILE
-
 function preload() {
   data = loadJSON("data1.json");
 }
-
-// ARC VARIABLES
 var angles = [ 3, 10, 45, 350, 60, 38, 75, 67 ];
-
 function setup() {
   createCanvas(600, 600);
   noStroke();
 }
-
 function draw() {
   background(300);
   
-  //pieChart
   pieChart(500, angles);
   
-  //circle-on-top
   fill(300, 300, 300);
   ellipse (width/2, 300, 420, 420);
   
@@ -2986,42 +2511,24 @@ function pieChart(diameter, data) {
     arc(width/2, height/2, diameter, diameter, lastAngle, lastAngle+radians(angles[i]));
     lastAngle += radians(angles[i]);
   }
-
-
-}//PRELOAD JSON FILE
 function preload() {
   data = loadJSON("data1.json");
 }
-
-//VARIABLES
 var angles = [0, 1, 2, 3, 4, 5];
-//let anglesSum;
 var whitecircle;
-let bubbles = []; // dots on screen
-let counter = 0; // amount of dots
 let whitespot = {
   x: 250,
   y: 250,
 }
-
-//INDIVIDUAL BUBBLES 
 class PersonBubble {
   constructor() {
     this.r = random(12, 1);
-    let bubblearea = random(0, 210 - this.r); //area of circle accouting for 
-    let bubbleangle = random(0, 2 * PI); // 2PI is 360 degrees
     this.x = bubblearea * cos(bubbleangle) + 300;
     this.y = bubblearea * sin(bubbleangle) + 300;
-
   }
 }
-
 function setup() {
   createCanvas(600, 600);
-
-  whitecircle = new Block; //WHITE CIRCLE 
-
-  //DISPLAY INDIVIDUAL BUBBLES THAT DO NOT OVERLAP 
   while (bubbles.length < 1000) {
     let overlapping = false;
     let bubble1 = new PersonBubble;
@@ -3042,11 +2549,7 @@ function setup() {
     }
   }
 }
-
-
 function draw() {
-
-  //BUBBLES
   for (let j = 0; j < bubbles.length; j++) {
     let bubble1 = bubbles[j];
     if (dist(bubble1.x, bubble1.y, mouseX, mouseY) < bubble1.r) {
@@ -3058,18 +2561,9 @@ function draw() {
     ellipse(bubble1.x, bubble1.y, bubble1.r * 2);
   }
   
-  //ANGLES
- //anglesSum += data.individuals[0,1, 2, 3, 4].["NET-WORTH"];
- //for (let k = 0; k < 50; k++)
   
-  angles.push(data.individuals[0, 1, 2, 3, 4]["NET-WORTH"]); //two different for loops
   console.log(angles);
 }
-
-pieChart(500, angles); // DRAW PIE CHART 
-whitecircle.display(); // DRAW THE WHITE CIRCLE
-
-//PIECHART
 function pieChart(diameter, data) {
   var lastAngle = 0;
   for (var i = 0; i < data.length; i++) {
@@ -3078,9 +2572,7 @@ function pieChart(diameter, data) {
     arc(width / 2, height / 2, diameter, diameter, lastAngle, lastAngle + radians(angles[i]));
     lastAngle += radians(angles[i]);
   }
-
 }
-// WHITE CIRCLE 
 function Block() {
   this.x = width / 2;
   this.y = 300;
@@ -3089,27 +2581,19 @@ function Block() {
     fill(300, 300, 300);
     ellipse(this.x, this.y, this.diameter, this.diameter);
   }
-}//PRELOAD JSON FILE
-
 function preload() {
   data = loadJSON("data1.json");
 }
-
-// ARC VARIABLES
 var angles = [ 30, 10, 45, 350, 60, 38, 75, 67 ];
-
 function setup() {
   createCanvas(600, 600);
   noStroke();
 }
-
 function draw() {
   background(300);
   
-  //pieChart
   pieChart(500, angles);
   
-  //circle-on-top
   fill(300, 300, 300);
   ellipse (width/2, 300, 420, 420);
   
@@ -3122,8 +2606,6 @@ function pieChart(diameter, data) {
     arc(width/2, height/2, diameter, diameter, lastAngle, lastAngle+radians(angles[i]));
     lastAngle += radians(angles[i]);
   }
-
-
 }var wave;
 var reverbbutton;
 var reverb;
@@ -3131,26 +2613,20 @@ var button;
 var slider;
 var playing = false;
 var on = false;
-
 function setup() {
   createCanvas(100, 100);
   wave = new p5.Oscillator();
   slider = createSlider(100, 1200, 440);
-
   wave.setType('sine');
   wave.start();
   wave.freq(100);
   wave.amp(0);
-
-
   button = createButton('play/pause');
   button.mousePressed(toggle);
   
-    //reverb
   reverbbutton = createButton("reverb");
   reverbbutton.mousePressed(toggle2);
 }
-
 function draw() {
   wave.freq(slider.value());
   if (playing) {
@@ -3159,7 +2635,6 @@ function draw() {
     background(51);
   }
 }
-
 function toggle() {
   if (!playing) {
     wave.amp(0.5, 1);
@@ -3168,15 +2643,10 @@ function toggle() {
     wave.amp(0, 1);
     playing = false;
   }
-
-
 }
-
-
 function toggle2() {
   if(!on) {
   reverb = new p5.Reverb();
-  reverb.process(wave, 8, 2); // 3 second reverbTime, decayRate of 2%
   reverbbutton.html("off");
   }
   else {
@@ -3188,9 +2658,7 @@ var video;
 var vScale = 10;
 let px; 
 let py;
-
 let particle; 
-
 function setup() {
   createCanvas(400, 400);
   pixelDensity(2);
@@ -3199,14 +2667,12 @@ function setup() {
   particle = new Particle(320, 240);
   
 }
-
 function draw() {
   background(200, 200, 200);
   video.loadPixels();
   particle.update();
   particle.show();
 }
-
 function Particle(x, y) {
   this.x = x; 
   this.y = y;
@@ -3215,7 +2681,6 @@ function Particle(x, y) {
   this.x += random(-1, 1);
   this.y += random(-1, 1);
 }
-
 this.show = function() {
   noStroke();
   var px = this.x/ vScale;
@@ -3230,7 +2695,6 @@ var button;
 var reverbbutton;
 var reverb;
 var on = false;
-
 function setup() {
   noCanvas();
   button = createButton("play");
@@ -3238,11 +2702,9 @@ function setup() {
   button.mousePressed(togglePlaying);
   background(51);
   
-  //reverb
   reverbbutton = createButton("reverb");
   reverbbutton.mousePressed(toggle);
 }
-
 function togglePlaying() {
   if (!song.isPlaying()) {
     song.play();
@@ -3252,15 +2714,12 @@ function togglePlaying() {
     button.html("play");
   }
 }
-
 function loaded() {
   console.log("loaded");
 }
-
 function toggle() {
   if(!on) {
   reverb = new p5.Reverb();
-  reverb.process(song, 8, 2); // 3 second reverbTime, decayRate of 2%
   reverbbutton.html("off");
   }
   else {
@@ -3270,38 +2729,30 @@ function toggle() {
 }var mic;
 let volArray = [];
 let avg = 0;
-
 function setup() {
   createCanvas(600, 600);
   video = createVideo('hope-movie.mov');
   video.play();
   video.hide();
 }
-
 function draw() {
   background(255);
   image(video, 0, 0, width, height);
 }
-
 function mousePressed() {
-    video.loop(); // set the video to loop and start playing
 }var mic;
 let volArray = [];
 let avg = 0;
-
 function setup() {
   createCanvas(600, 600);
   mic = new p5.AudioIn();
   mic.start();
 }
-
 function draw() {
   background(255);
   var vol = mic.getLevel();
-  // vol*=0.2;
   
   volArray.push(vol);
-  // console.log(volArray.length);
   
   if (volArray.length > 100) {
     avg = 0;
@@ -3316,96 +2767,52 @@ function draw() {
   avg = map(avg, 0.001, 0.005, 255, 0);
 	console.log("avg mapped: " + avg);
   stroke(255);
-  // console.log(vol);
   fill(0, 0, 0, avg);
   rect(0, 0, 600, 600);
   
-}//images 
 const PATH = 'mari_pr_pics', FILE = 'img_8733', EXT = '.jpg';
 const IMAGES = 4, imgs = Array(IMAGES);
 var idx = 0;
-
-
-//serial
-var serial; // variable to hold an instance of the serialport library
-var portName = '/dev/cu.usbmodem14411'; // fill in your serial port name here
-var inData; // for incoming serial data
-var outByte = 0; // for outgoing data
-
-//p5
 var data;
 var time = 0;
 var elem;
-
 function preload() {
   data = loadJSON('newdebt.json'); {
   for (var idx = 0; idx < 8; idx++) 
     imgs[idx] = loadImage(PATH + FILE + EXT));
 }
 }
-
-
 function setup() {
   createCanvas(600, 600);
    noLoop();
   
-  //dom elements 
    elem = createDiv();
    elem.position(40, 230);
    elem.style('font-family', 'Avenir');
    elem.style('font-size', '8px');
-
-  //serial
-  serial = new p5.SerialPort(); // make a new instance of the serialport library
-  serial.on('data', serialEvent); // callback for when new data arrives
-  serial.on('error', serialError); // callback for errors
-  serial.open(portName); // open a serial port
 }
-
 function mousePressed() {
   time++;
 }
-
-function serialEvent() {
-  var inData = serial.readLine();
   if (inData) {
     var trimmed = trim(inData);
     var num = int(trimmed);
     time = floor(map(num, 0, 1023, 0, 8));
-    print(time);
   }
 }
-
-function serialError(err) {
-  print('error:', err);
 }
-
-
 function draw() {
    background(imgs[idx]);
-
   var net_change = data.debt[time].net_change;
-  //print(net_change);
   var debt_change = data.debt[time].debt_change;
- //print(debt_change);
-
   var rad1 = sqrt(debt_change * 1500 / PI);
   var rad2 = sqrt(net_change * 1500 / PI);
-
   fill(20, 60, 80);
   ellipse(width / 2, height / 3, rad1 * 2);
   fill(20, 0, 80);
   ellipse(width / 10, height / 3, rad2 * 2);
   elem.html("<h1>" + data.debt[time].month + "</h1>");
 }
-
-//serial
-var serial; // variable to hold an instance of the serialport library
-var portName = '/dev/cu.usbmodem14411'; // fill in your serial port name here
-var inData; // for incoming serial data
-var outByte = 0; // for outgoing data
-
-//p5
 var data;
 var time = 0;
 var elem;
@@ -3413,16 +2820,12 @@ var elem2;
 var elem3;
 var  elem4;
 var  elem5;
-
 function preload() {
   data = loadJSON('newdebt.json');
 }
-
 function setup() {
   createCanvas(1000, 700);
   bg = loadImage("assets/mari.jpg");
-
-    //dom elements H4
    elem4 = createDiv();
    elem4.position(130, 20);
    elem4.style('font-family', 'Avenir');
@@ -3453,14 +2856,12 @@ function setup() {
    elem6.style('font-size', '14px');
    elem6.style('color', 'white');
   
-  //dom elements H1
    elem = createDiv();
    elem.position(40, 530);
    elem.style('font-family', 'Avenir');
    elem.style('font-size', '12px');
    elem.style('color', 'white');
   
-  //dom elements H2
    elem2 = createDiv();
    elem2.position(620, 440);
    elem2.style('font-family', 'Avenir');
@@ -3473,44 +2874,24 @@ function setup() {
    elem3.style('font-size', '12px');
    elem3.style('color', 'white');
   
-  //serial
-  serial = new p5.SerialPort(); // make a new instance of the serialport library
-  serial.on('data', serialEvent); // callback for when new data arrives
-  serial.on('error', serialError); // callback for errors
-  serial.open(portName); // open a serial port
 }
-
 function mousePressed() {
   time++;
 }
-
-function serialEvent() {
-  var inData = serial.readLine();
   if (inData) {
     var trimmed = trim(inData);
     var num = int(trimmed);
     time = floor(map(num, 0, 1023, 8, 0));
-    print(time);
   }
 }
-
-function serialError(err) {
-  print('error:', err);
 }
-
-
 function draw() {
   background(bg);
   
-
   var net_change = data.debt[time].net_change;
-  //print(net_change);
   var debt_change = data.debt[time].debt_change;
- //print(debt_change);
-
   var rad1 = sqrt(debt_change * 1500 / PI);
   var rad2 = sqrt(net_change * 1500 / PI);
-
   fill(140, 214, 255);
   ellipse(width / 1.5, 400, rad1 * 5);
   fill(255, 206, 213);
@@ -3525,71 +2906,52 @@ function draw() {
   elem7.html("<h1>" + data.m2 + "</h1>");
   elem8.html("<h1>" + data.m1 + "</h1>");
 }
-
 var data;
 var time = 0;
 var elem;
-
 function preload() {
   data = loadJSON('newdebt.json');
 }
-
 function setup() {
   createCanvas(600, 600);
     elem = createDiv();
 }
-
 function mousePressed() {
   changeTime();
 }
-
 function draw() {
   background(200);
   var net_change = data.debt[time].net_change;
-  print(net_change);
   var debt_change = data.debt[time].debt_change;
-  print(debt_change);
-
   var rad1 = sqrt(debt_change * 1500 / PI);
   var rad2 = sqrt(net_change * 1500 / PI);
-
   fill(20, 60, 80);
   ellipse(width / 2, height / 3, rad1 * 2);
   fill(20, 0, 80);
   ellipse(width / 10, height / 3, rad2 * 2);
   elem.html("<h1>" + data.debt[time].month + "</h1>");
 }
-
 function changeTime() {
   time++;
 }var data;
 var i=0;
 var j=0;
-
 function preload() {
   data = loadJSON('debt.json');
 }
-
 function setup() {
   createCanvas(600, 600);
   noLoop();
 }
-
 function mousePressed() {
   redraw();
 }
-
 function draw() {
-  print(i);
   background(200);
   var net_worth = data.debt[i].net_worth;
-  print(net_worth);
   var debt_ammt = data.debt[j].debt_ammt;
-  print(debt_ammt);
-
   var rad1 = sqrt(debt_ammt * 1500 / PI);
   var rad2 = sqrt(net_worth * 1500 / PI);
-
   fill(20, 60, 80);
   ellipse(width / 2, height / 3, rad1*2);
   fill(20, 0, 80);
@@ -3598,7 +2960,6 @@ function draw() {
   i++;
   j++;
 }let flower; 
-
 function setup() { 
   createCanvas(400, 400);
   "
@@ -3607,7 +2968,6 @@ function setup() {
 function draw() { 
   background(220);
 }let flower; 
-
 function setup() { 
   createCanvas(400, 400);
   "
@@ -3616,7 +2976,6 @@ function setup() {
 function draw() { 
   background(220);
 }let flower; 
-
 function setup() { 
   createCanvas(400, 400);
   "
@@ -3625,7 +2984,6 @@ function setup() {
 function draw() { 
   background(220);
 }let flower; 
-
 function setup() { 
   createCanvas(400, 400);
   "
@@ -3635,8 +2993,6 @@ function draw() {
   background(220);
 }var rSlider, gSlider, bSlider;
 var h1; 
-
-
 function setup() {
   
   createCanvas(400, 400);
@@ -3662,7 +3018,6 @@ h1.style("font-size", "25px");
   h1.style("position", 160, 60);
   h1.style("font-size", "25px");
 }
-
 function draw() {
   var r = rSlider.value();
   var g = gSlider.value();
@@ -3672,28 +3027,11 @@ function draw() {
    text(gSlider.x * 2 + gSlider.width, 65);
   text(bSlider.x * 2 + bSlider.width, 95);
 }
-// Declare a "SerialPort" object
-var serial;
-var latestData = "waiting for data";  // you'll use this to write incoming data to the canvas
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  // Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-  serial.open("/dev/cu.usbmodem19");
-   serial.on('data', gotData);
-
 }
-
-// There is data available to work with from the serial port
 function gotData() {
-  var currentString = serial.readLine();  // read the incoming string
-  trim(currentString);                    // remove any trailing whitespace
-  if (!currentString) return;             // if the string is empty, do no more
-  console.log(currentString);             // println the string
-  latestData = currentString;            // save it for the draw method
 }
-
 function draw() {
   background(255,255,255);
   fill(0,0,0);
@@ -3701,26 +3039,13 @@ function draw() {
   fill(mappedVar , 205, 5);
   ellipse(200, 200, 350, 350);
   text(latestData, 10, 10);
-}var serial;          // variable to hold an instance of the serialport library
-var portName = '/dev/cu.usbmodem14411'; // fill in your serial port name here
-var inData;                            // for incoming serial data
-var outByte = 0;                       // for outgoing data
-
-
 var d = 150;
 function setup() { 
   createCanvas(500, 500);
-  serial = new p5.SerialPort();    // make a new instance of the serialport library
- serial.on('data', serialEvent);  // callback for when new data arrives
- serial.on('error', serialError); // callback for errors
- serial.open(portName);           // open a serial port
-
 }
-
 function draw() { 
   background(0, 60, 100);
   push();
-  //translate(0, (millis() / 40) % 45);
   translate(0, d);
   translate(165, 0);
   drawWing();
@@ -3728,68 +3053,42 @@ function draw() {
   scale(-1, 1);
   drawWing();
   pop();
-
 }
-
-function serialEvent() {
-  var inData = serial.readLine();
-
   if (inData.length > 0){
     d = int(inData);
   }
 }
-
-function serialError(err){
-  print('error:', err);
 }
-
 function drawWing() {
-fill(200, 40, 200);// feathers
   arc(150, 105, 200, 10, 5, PI/2); 
   
-  fill(200, 140, 200); // second layer of feathers
   arc(200, 100, 200, 5, 5, PI/1); 
-
-  fill(200, 40, 200);// feathers
   arc(140, 115, 200, 10, 5, PI/2); 
   
-  fill(200, 140, 200); // second layer of feathers
   arc(190, 110, 160, 5, 5, PI/1); 
  
-  fill(200, 40, 200);// feathers
   arc(130, 125, 200, 10, 5, PI/2); 
   
-  fill(200, 140, 200); // second layer of feathers
   arc(180, 120, 150, 5, 5, PI/1); 
   
-  fill(200, 40, 200);// feathers
   arc(120, 135, 200, 10, 5, PI/2); 
   
-  fill(200, 140, 200); // second layer of feathers
   arc(170, 130, 140, 5, 5, PI/1); 
   
-    fill(200, 40, 200);// feathers
   arc(110, 145, 200, 10, 5, PI/2); 
   
-  fill(200, 140, 200); // second layer of feathers
   arc(160, 140, 120, 5, 5, PI/1); 
   
-  fill(200, 40, 200);// feathers
   arc(100, 155, 200, 10, 5, PI/2); 
   
-  fill(200, 140, 200); // second layer of feathers
   arc(150, 150, 100, 5, 5, PI/1); 
   
-    fill(200, 40, 200);// feathers
   arc(100, 165, 160, 10, 5, PI/2); 
   
-  fill(200, 140, 200); // second layer of feathers
   arc(140, 160, 80, 5, 5, PI/1); 
   
   
-  /////
   
-  fill(200, 70, 20); // bottom left feathers
   arc(100, 170,50, 50, 1, PI/1.8);
   fill(200, 70, 20);
   arc(100, 160,50, 50, 1, PI/1.8);
@@ -3797,31 +3096,20 @@ fill(200, 40, 200);// feathers
   arc(100, 150,50, 50, 1, PI/1.8);
   
   
-  //////
   
   
-  fill(200, 70, 20); // bottom muscle
   arc(100, 100, 80, 200, 0, PI/2);
   
   
-  //////
   
   fill(200, 20, 20);
-  arc(100, 100, 200, 50, 0, PI/2); //top muscle
-
 }let portName = '/dev/cu.UEBoom-LWACP';
-let serial;
 let bg = 0; 
 let col = 255; 
-
   function setup() { 
   createCanvas(400, 400);
   
-  serial = new p5.SerialPort(); 
-  serial.open(portName);
-  serial.on(data.parseData); // whenever p5 receives data, run this callback function
 } 
-
 function draw() { 
   background(220);
   bacgrkgound(bg); 
@@ -3829,70 +3117,46 @@ function draw() {
   nostroke(); 
   fill(col);
   ellipse(200, 200, 100);
-
 }
-
 function parseData() {
-  var inData =serial.readline(); 
   if (inData.length > 0){
     var values =inData.split(',');
-    print(lnData);
-    //bg =int(inData);
   }
 }function setup() { 
   createCanvas(400, 400);
 } 
-
-
 function draw() { 
   background(220);
   
-  fill(200, 40, 200);// feathers
   arc(150, 105, 200, 10, 5, PI/2); 
   
-  fill(200, 140, 200); // second layer of feathers
   arc(200, 100, 200, 5, 5, PI/1); 
-
-  fill(200, 40, 200);// feathers
   arc(140, 115, 200, 10, 5, PI/2); 
   
-  fill(200, 140, 200); // second layer of feathers
   arc(190, 110, 160, 5, 5, PI/1); 
  
-  fill(200, 40, 200);// feathers
   arc(130, 125, 200, 10, 5, PI/2); 
   
-  fill(200, 140, 200); // second layer of feathers
   arc(180, 120, 150, 5, 5, PI/1); 
   
-  fill(200, 40, 200);// feathers
   arc(120, 135, 200, 10, 5, PI/2); 
   
-  fill(200, 140, 200); // second layer of feathers
   arc(170, 130, 140, 5, 5, PI/1); 
   
-    fill(200, 40, 200);// feathers
   arc(110, 145, 200, 10, 5, PI/2); 
   
-  fill(200, 140, 200); // second layer of feathers
   arc(160, 140, 120, 5, 5, PI/1); 
   
-  fill(200, 40, 200);// feathers
   arc(100, 155, 200, 10, 5, PI/2); 
   
-  fill(200, 140, 200); // second layer of feathers
   arc(150, 150, 100, 5, 5, PI/1); 
   
-    fill(200, 40, 200);// feathers
   arc(100, 165, 160, 10, 5, PI/2); 
   
-  fill(200, 140, 200); // second layer of feathers
   arc(140, 160, 80, 5, 5, PI/1); 
   
   
-  /////
   
-  fill(200, 70, 20); // bottom left feathers
   arc(100, 170,50, 50, 1, PI/1.8);
   fill(200, 70, 20);
   arc(100, 160,50, 50, 1, PI/1.8);
@@ -3900,35 +3164,23 @@ function draw() {
   arc(100, 150,50, 50, 1, PI/1.8);
   
   
-  //////
   
   
-  fill(200, 70, 20); // bottom muscle
   arc(100, 100, 80, 200, 0, PI/2);
   
   
-  //////
   
   fill(200, 20, 20);
-  arc(100, 100, 200, 50, 0, PI/2); //top muscle
  
-
 }
-var bCircle; // declare var
-
 function setup() { 
   createCanvas(400, 400);
-  bCircle = new Circle(); // what the object does 
 	angleMode(DEGREES);
 }
-
 function draw() { 
   background(220);
   bCircle.mainLogic();
-  bCircle.move();  // move the object
 }
-
-class Circle { //write class w constructor
   constructor() {
     this.x = 200;
     this.y = 200;
@@ -3942,32 +3194,24 @@ class Circle { //write class w constructor
   display () {
     ellipse(200, 200, 100);
   }
-
   check() {
 		this.stillOnScreen = (this.x < width) &&
 												 (this.y < height) &&
 												 (this.x > 0) &&
 												 (this.y > 0);
   }
-
   mouseInCircle() {
-      //find distance from mouse to center
       var dist = sqrt(pow(abs(200 - mouseX), 2) + pow(abs(200 - mouseY), 2));
       this.mouseTouching = dist < 50;
   }
-
   updatePosition() {
       this.y = this.y + sin(this.direction)*this.speed;
       this.x = this.x + cos(this.direction)*this.speed;
   }
-
   mainLogic() {
-    if(bCircle.isMoving) { //    is the circle moving
       bCircle.check();
       if(bCircle.stillOnScreen) {
-          //do nothing
       }
-      else { // bCircle is not on the screen
         this.x = 200;
         this.y = 200;  
         this.speed = 10;
@@ -3978,17 +3222,13 @@ class Circle { //write class w constructor
       }
       bCircle.updatePosition();
     }
-    else { //bCircle is not moving
       bCircle.mouseInCircle();
-      if(bCircle.mouseTouching) { //mouse is in the circle
         bCircle.isMoving = true;
       }
       else {
-        //do nothing
       }
     }
   }
-
   move() {
     push();
 		var off_x = this.x - 200;
@@ -3998,51 +3238,32 @@ class Circle { //write class w constructor
     pop();
   }
 }let ball;
-
 function setup() {
   createCanvas(600, 400);
   ball = new Ball(200, 300);
-  print(Ball.cd, Ball.cy);
 }
-
-
 function draw() {
-  // ball.move();
   ball.show();
   background();
- // if (cd => 300, cd + 5) {
-  //  ball.push(new Ball(mouseX, mouseY));
   }
-
-
 class Ball {
   constructor(cd, cy) {
     this.x = cd;
     this.y = cy;
   }
-
-  //	move(); {
-  // 		 this.y = this.y +random (1, 1);
-  //     this.x = this.x + random(4, 4);
-  //}
   show() {
     stroke(255);
     fill(random(255), random(243), random(21), 70);
     ellipse(this.x, this.y, 25, 25);
   }
 }let Ball; 
-
 function setup() {
   createCanvas(600, 400);
 \
-  print(Ball.x, Ball.y);
 }
-
-
 function draw() {
   background(0);
 }
-
 class Ball() {
     constructor() {
     	this.x = 300; 
@@ -4058,65 +3279,34 @@ show (); {
       ellipse (ball.x, ball.y, mouseX, mouseY);
 }
   
-   let cy = 200; //all circles are at 180px on y axis
-let cd = 300; //circle diameter
-var f = 800; //confetti distance;
-var fd = 1; //confetti diameter
-
-
-
 function setup() {
   createCanvas(600, 400);
 }
-
-
 function draw() {
   background(0);
   stroke(66);
   strokeWeight(2);
   ball();
   rain();
-
   function ball() {
     if (cd => 300, cd + 5) {
       fill(random(255), random(243), random(21), 70);
       ellipse(cd, cy, mouseX, mouseY);
     }
-
   }
-
   function rain() {
     for (var z = 0; z <= width; z += 10) {
-
       fill(random(0), random(100), random(255), 10);
       ellipse(random(z), random(f), fd, mouseY);
     }
   }
-}let Ball1; //declaring ball
-
-//let cy = 200; //all circles are at 180px on y axis
-//let cd = 300; //circle diameter
-//var f = 800; //confetti distance;
-//var fd = 1; //confetti diameter
-
-//cd + 1) left over from last code
-
 function setup() {
   createCanvas(600, 400);
   Ball1 = new Ball1();
-  print(Ball1.cd, Ball1.c3);
- // rain = new.rain();
 }
-
-
 function draw() {
   background(0);
- // stroke(66);
- // strokeWeight(2);
- // ball.move();
-//  rain.move();
 }
-
 class Ball1() {
     constructor() {
     	this.cd = 300; 
@@ -4124,73 +3314,29 @@ class Ball1() {
     }
 }
     
-     // fill(random(255), random(243), random(21), 70);
-      //ellipse(cd, cy, mouseX, mouseY);
   
-
-  //class rain() {
-//    for (var z = 0; z <= width; z += 10) {
-
-      //fill(random(0), random(100), random(255), 10);
-      //ellipse(random(z), random(f), fd, mouseY);
     
   
-// Declare a "SerialPort" object
-var serial;
-var latestData = "waiting for data";  // you'll use this to write incoming data to the canvas
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  // Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-  serial.open("/dev/cu.usbmodem19");
-   serial.on('data', gotData);
-
 }
-
-// There is data available to work with from the serial port
 function gotData() {
-  var currentString = serial.readLine();  // read the incoming string
-  trim(currentString);                    // remove any trailing whitespace
-  if (!currentString) return;             // if the string is empty, do no more
-  console.log(currentString);             // println the string
-  latestData = currentString;            // save it for the draw method
 }
-
 function draw() {
   background(255,255,255);
   fill(0,0,0);
-  //var mappedVar = map(latestData, 490,540,0,width);
   var mappedVar = map(latestData, 400,950,0,255);
   fill(mappedVar , 205, 5);
   ellipse(200, 200, 350, 350);
   text(latestData, 10, 10);
-}// Declare a "SerialPort" object
-var serial;
-var latestData = "waiting for data";  // you'll use this to write incoming data to the canvas
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  // Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-  serial.open("/dev/cu.usbmodem19");
-   serial.on('data', gotData);
-
 }
-
-// There is data available to work with from the serial port
 function gotData() {
-  var currentString = serial.readLine();  // read the incoming string
-  trim(currentString);                    // remove any trailing whitespace
-  if (!currentString) return;             // if the string is empty, do no more
-  console.log(currentString);             // println the string
-  latestData = currentString;            // save it for the draw method
 }
-
 function draw() {
   background(255,255,255);
   fill(0,0,0);
-  //var mappedVar = map(latestData, 490,540,0,width);
   var mappedVar = map(latestData, 400,950,0,width);
   ellipse(mappedVar, 100, 50, 50);
   text(latestData, 10, 10);
@@ -4201,23 +3347,18 @@ function setup () {
   myButton.mouseClicked(theyClicked);
   myButton.style("name", " =createButton("press to win");
 }
-
 function draw () {
 }
-
 function theyClicked () {
-  print("hey");
   background(random(255), random(255), random(255));
 }let allRays = [];
 let angle = 0;
 let directionx = [];
 let directiony = []
                   
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   for (var i = 0; i < allRays.length; i++) {
@@ -4225,14 +3366,10 @@ function draw() {
     allRays[i].check();
     allRays[i].show();
   }
-	push(); //remember what it was like before translate, rotate
   translate(width / 2, height / 2);
   rotate(angle);
   ellipse(0, 0, 40, 20);
-  pop(); //restore what translate and rotate messed up
-  //push and pop not really neccessary if last thing draw
 }
-
 class Ray {
   constructor(x, y, startAngle) {
     this.origin = x;
@@ -4250,7 +3387,6 @@ class Ray {
     this.stillOnScreen = (this.distance < width / 2);
   }
   show() {
-    push();// remember the fill and stroke before
     fill(255, 0, 0, 255 - this.distance * 2);
     stroke(255, 0, 0, 255 - this.distance * 2);
     if (this.stillOnScreen) {
@@ -4260,11 +3396,8 @@ class Ray {
         ellipse(x, y, 2 + i * 2, 2 + i * 2);
       }
     }
-    pop();  //restore fill and stroke
   }
 }
-
-
 function keyPressed() {
   if (keyCode == LEFT_ARROW) {
     angle = angle + 0.1;
@@ -4275,12 +3408,9 @@ function keyPressed() {
   }
 }var dots = [];
 let angle = 0;
-
 function setup() {
   createCanvas(400, 400);
-  // dot = new Circle(100, 100);
 }
-
 function draw() {
   background(220);
   for (var i = 0; i < dots.length; i++) {
@@ -4291,39 +3421,28 @@ function draw() {
     allRays[k].check();
     allRays[k].show();
   }
-push(); //remember what it was like before translate, rotate
   translate(width / 2, height / 2);
   rotate(angle);
   ellipse(0, 0, 40, 20);
-  pop(); //restore what translate and rotate messed up
-  //push and pop not really neccessary if last thing draw
 }
   
   if (mouseIsPressed) {
     dots.push(new Circle(mouseX, mouseY));
-
   }\
 }
-
-
-
 class Circle {
   constructor(x, y) {
     this.x = x;
     this.y = y;
   }
-
   show() {
     fill(5, 6, 169);
     ellipse(this.x, this.y, 50, 50);
   }
-}var circle; // Declare object
-
 function setup() {
   createCanvas(400, 400);
   circle = new movedcircle();
 }
-
 function draw() {
   background(50, 89, 100);
   circle.move();
@@ -4342,7 +3461,6 @@ class movedcircle {
     this.x += random(this.speed);
     this.y += random(this.speed);
   }
-
   display () {
     ellipse(this.x, this.y, this.diameter, this.diameter);
   }
@@ -4350,22 +3468,16 @@ class movedcircle {
     mousePressed () {
   let d = dist(mouseX, mouseY, this.x, this.y);
       if (d <50) {
-        print("hey");
   }
 }
-}var circle; // Declare object
-
 function setup() {
   createCanvas(400, 400);
-  // Create object
   circle = new movedcircle();
 }
-
 function draw() {
   background(50, 89, 100);
   circle.move();
 }
-
 function movedcircle() {
   this.x = 25;
   this.y = 25;
@@ -4377,12 +3489,10 @@ function movedcircle() {
   / circle[i].mousePressed();
   }
 }
-
   this.move = function() {
     this.x += random(this.speed);
     this.y += random(this.speed);
   };
-
   this.display = function() {
     ellipse(this.x, this.y, this.diameter, this.diameter);
   }
@@ -4391,19 +3501,14 @@ function movedcircle() {
       if (d < 15) {
       }
     }
-}var circle; // Declare object
-
 function setup() {
   createCanvas(400, 400);
-  // Create object
   circle = new movedcircle();
 }
-
 function draw() {
   background(50, 89, 100);
   circle.move();
 }
-
 function movedcircle() {
   this.x = 25;
   this.y = 25;
@@ -4415,12 +3520,10 @@ function movedcircle() {
   / circle[i].mousePressed();
   }
 }
-
   this.move = function() {
     this.x += random(this.speed);
     this.y += random(this.speed);
   };
-
   this.display = function() {
     ellipse(this.x, this.y, this.diameter, this.diameter);
   }
@@ -4429,19 +3532,14 @@ function movedcircle() {
       if (d < 15) {
       }
     }
-}var circle; // Declare object
-
 function setup() {
   createCanvas(400, 400);
-  // Create object
   circle = new movedcircle();
 }
-
 function draw() {
   background(50, 89, 100);
   circle.move();
 }
-
 function movedcircle() {
   this.x = 25;
   this.y = 25;
@@ -4453,12 +3551,10 @@ function movedcircle() {
   / circle[i].mousePressed();
   }
 }
-
   this.move = function() {
     this.x += random(this.speed);
     this.y += random(this.speed);
   };
-
   this.display = function() {
     ellipse(this.x, this.y, this.diameter, this.diameter);
   }
@@ -4467,19 +3563,14 @@ function movedcircle() {
       if (d < 15) {
       }
     }
-}var circle; // Declare object
-
 function setup() {
   createCanvas(400, 400);
-  // Create object
   circle = new movedcircle();
 }
-
 function draw() {
   background(50, 89, 100);
   circle.move();
 }
-
 function movedcircle() {
   this.x = 25;
   this.y = 25;
@@ -4491,12 +3582,10 @@ function movedcircle() {
   / circle[i].mousePressed();
   }
 }
-
   this.move = function() {
     this.x += random(this.speed);
     this.y += random(this.speed);
   };
-
   this.display = function() {
     ellipse(this.x, this.y, this.diameter, this.diameter);
   }
@@ -4506,21 +3595,18 @@ function movedcircle() {
       }
     }
 }let pettle = [];
-
 function setup() {
   createCanvas(400, 400);
   for (let i = 0; i < 10; i++) {
     pettle[i] = new pettle();
   }
 }
-
 function draw() {
   background(255, 25, 16);
   for (let i = 0; i < pettle.size; i++) {
     pettle[i].show();
   }
 }
-
 class pettle {
   constructor() {
     this.x = 
@@ -4530,13 +3616,11 @@ class pettle {
     this.col = (200);
     this.on = false;
   }
-
   show() {
     noStroke();
     fill(this.col);
     ellipse(this.x, this.y, this.r, this.r);
   }
-
   move() {
     if (this.on) {
       this.x = this.x + random(-1, 1);
@@ -4547,7 +3631,6 @@ class pettle {
     }
     
   }
-
   mouseClicked() {
     let d = dist(mouseX, mouseY, this.x, this.y);
     if (d < 15) {
@@ -4555,21 +3638,18 @@ class pettle {
     }
   }
 }let pettle = [];
-
 function setup() {
   createCanvas(400, 400);
   for (let i = 0; i < 10; i++) {
     pettle[i] = new pettle();
   }
 }
-
 function draw() {
   background(255, 25, 16);
   for (let i = 0; i < pettle.size; i++) {
     pettle[i].show();
   }
 }
-
 class pettle {
   constructor() {
     this.x = 
@@ -4579,13 +3659,11 @@ class pettle {
     this.col = (200);
     this.on = false;
   }
-
   show() {
     noStroke();
     fill(this.col);
     ellipse(this.x, this.y, this.r, this.r);
   }
-
   move() {
     if (this.on) {
       this.x = this.x + random(-1, 1);
@@ -4596,7 +3674,6 @@ class pettle {
     }
     
   }
-
   mouseClicked() {
     let d = dist(mouseX, mouseY, this.x, this.y);
     if (d < 15) {
@@ -4604,12 +3681,9 @@ class pettle {
     }
   }
 }var dots=[];
-
 function setup() {
   createCanvas(400, 400);
- // dot = new Circle(100, 100);
 }
-
 function draw() {
   background(220);
   for (var i=0; i< dots.length; i++){
@@ -4618,41 +3692,21 @@ function draw() {
   if (mouseIsPressed) {
     dots.push(new Circle(mouseX, mouseY));
    
-
   }
 }
-
 class Circle {
   constructor(x, y) {
-
     this.x = x;
     this.y = y;
   }
-
   show() {
     fill(5, 6, 169);
     ellipse(this.x, this.y, 50, 50);
-
   }
-
 }
-var rw = 2; //rectangle width
-var rh = 100; //rectangle height
-var ry = 25; //line at y axis
-var cy = 180; //all circles are at 180px on y axis
-var cd = 100; //circle diameter
-var f = 800; //confetti distance;
-var fd = 1; //confetti diameter
-
-
-
 function setup() {
   createCanvas(600, 400);
-
 }
-
-
-
 function balloon() {
   for (var x = 75; x <= width; x += 150) {
     fill(random(255), random(128), random(255));
@@ -4672,27 +3726,19 @@ function balloon() {
     if (mouseX >= width / 3) {
       fill(9, 140, 29);
       ellipse(width / 3 + 175, cy, cd, cd);
-
       if (mouseX >= width) {
         fill(9, 140, 219);
         ellipse(width - 75, cy, cd, cd);
       }
-
     }
 }
-
 function draw() {
   background(0);
-
   spiral(10, 36, 50, 222, 2)
 }
-
-// spiral 
 function spiral(size, r, g, b, a) {
   for (var i = 0; i <= 150; i++) {
-    //color
     fill(r, g, b, a)
-    //ellipse shape and position
     ellipse
       (i, i, i * size, i * size);
   }
@@ -4702,27 +3748,10 @@ function spiral(size, r, g, b, a) {
   for (var z = 0; z <= width; z += 10) {
     fill(192, 192, 193);
     ellipse(random(z), random(f), fd, fd);
-
-
   }
-
-}var rw = 2; //rectangle width
-var rh = 100; //rectangle height
-var ry = 25; //line at y axis
-var cy = 180; //all circles are at 180px on y axis
-var cd = 100; //circle diameter
-var f = 800; //confetti distance;
-var fd = 1; //confetti diameter
-
-
-
 function setup() {
   createCanvas(600, 400);
-
 }
-
-
-
 function balloon() {
   for (var x = 75; x <= width; x += 150) {
     fill(random(255), random(128), random(255));
@@ -4732,19 +3761,13 @@ function balloon() {
     rect(y, ry, rw, rh);
   }
 }
-
 function draw() {
   background(0);
-
   spiral(10, 36, 50, 222, 2)
 }
-
-// spiral 
 function spiral(size, r, g, b, a) {
   for (var i = 0; i <= 150; i++) {
-    //color
     fill(r, g, b, a)
-    //ellipse shape and position
     ellipse
       (i, i, i * size, i * size);
   }
@@ -4754,7 +3777,6 @@ function spiral(size, r, g, b, a) {
   for (var z = 0; z <= width; z += 10) {
     fill(192, 192, 193);
     ellipse(random(z), random(f), fd, fd);
-
     if (mouseX >= width / 4) {
       fill(244, 212, 66);
       ellipse(width / 4 - 75, cy, cd, cd);
@@ -4766,25 +3788,15 @@ function spiral(size, r, g, b, a) {
     if (mouseX >= width / 3) {
       fill(9, 140, 29);
       ellipse(width / 3 + 175, cy, cd, cd);
-
-
-
       if (mouseX >= width) {
         fill(9, 140, 219);
         ellipse(width - 75, cy, cd, cd);
       }
-
     }
   }
-
-
-
-
 }function setup() { 
   createCanvas(600, 600, WEBGL);
 } 
-
-
 function draw(){
   background(140,60,85);
   rotateX(frameCount * 0.01);
@@ -4792,16 +3804,13 @@ function draw(){
   fill(90, 90, 130);
   box(200, 200, 200);
 }
-
 function (cubeA)
   if (mouseHover cubeA) {then
 var xStart = 0;
 var direction = 5
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(250, 205, 200);
   spiral(3, 222, 20, 56, 255);
@@ -4810,62 +3819,43 @@ function draw() {
   if(xStart > width/2) {
      xStart = 100;
     direction = -direction;
-    print(direction) ;
   }
      
   
 }
-
-// spiral 
 function spiral(size, r, g, b, a) {
   for (var i = 0; i <= 150; i++) {
-    //color
     fill(r, g, b, a)
-    //ellipse shape and position
     ellipse(xStart+ i * 4*direction, i * 5, i * size, i * size);
   }
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(250, 205, 200);
   spiral(3, 222, 20, 56, 255);
   spiral(5, 36, 50, 222, 2)
 }
-
-// spiral 
 function spiral(size, r, g, b, a) {
   for (var i = 0; i <= 150; i++) {
-    //color
     fill(r, g, b, a)
-    //ellipse shape and position
     ellipse(i * 4, i * 5, i * size, i * size);
   }
 }var rot = 0;
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(20, 96, 184);
     spherer(10,width/2,height/2);
   /
-
 }
-
-
-//sphere
 function spherer(size,xr, yr) {
   for (var i = 1; i < 25; i++) {
-
-    //horizontal-sphere
     noFill;
     ellipse (200, 185, 240, 10);
     noFill(250, 50, 06);
     ellipse (200, 235, 225, 10);
-
-    //sphere shape and position
     noFill();
     stroke(255);
     ellipse(xr, yr, i * size, 200);
@@ -4873,12 +3863,10 @@ function spherer(size,xr, yr) {
 }function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(20, 96, 184,67);
   
   for (var i=0; i>100; i<=160; i++);
-  //sphere
   noFill;
   ellipse (200, 200, i, 150);
    
@@ -4892,11 +3880,9 @@ function draw() {
 }
 var xStart = 0;
 var direction = 5
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(250, 205, 200);
   spiral(3, 222, 20, 56, 255);
@@ -4905,24 +3891,18 @@ function draw() {
   if(xStart > width/2) {
      xStart = 100;
     direction = -direction;
-    print(direction) ;
   }
      
   
 }
-
-// spiral 
 function spiral(size, r, g, b, a) {
   for (var i = 0; i <= 150; i++) {
-    //color
     fill(r, g, b, a)
-    //ellipse shape and position
     ellipse(xStart+ i * 4*direction, i * 5, i * size, i * size);
   }
 }function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(220, 50, 80);
   for (var x = 60; x<=4000; x = x+6)
@@ -4932,7 +3912,6 @@ function draw() {
 }function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(250, 205, 250);
   stroke (255);
@@ -4940,57 +3919,41 @@ function draw() {
   for (var x = 0; x<=100; x++) {
     
 noFill()
-  //  fill (0, 5, 65);
     ellipse (x*4, 0+(x*5), x*5, x*5);
 }
 }var sun = 20; 
-
 var boat = {
    post: 20,
    bottom: 20
  };
-
 var flag = {
   p1: 100,
   p2: 150,
   p3: 100,
 };
-
  var ocean = {
    wave: 400,
    r: 86,
    g: 204,
    b: 190
  };
-
  function setup() {
    createCanvas(400, 400);
  }
-
  function draw() {
-   //background
    background(201, 234, 237);
    
-   //sun
    fill(252, 180, 126)
    ellipse(sun, 25, 50, 50);
    sun = sun +.3;
-
-   //boat-bottom
    fill(232, 192, 180);
    ellipse(mouseX, 150, 76, 90);
-   //boat.bottom = boat.bottom + .3;
    
-   //boat-line
    fill(232, 192, 180);
    rect(mouseX, 24, 1, 80);
-  // boat.flag = boat.flag + .3;
    
-   //triangle
    fill(232, 192, 180);
    triangle(mouseX, 90, mouseX+80, 90, mouseX, 25);
-
-   //wave
    fill(66, ocean.g, ocean.b);
    arc(10, 160, 70, 80, 0, PI + QUARTER_PI, CHORD);
    arc(80, 160, 70, 80, 0, PI + QUARTER_PI, CHORD);
@@ -4998,18 +3961,14 @@ var flag = {
    arc(220, 160, 70, 80, 0, PI + QUARTER_PI, CHORD);
    arc(290, 160, 70, 80, 0, PI + QUARTER_PI, CHORD);
    arc(360, 160, 70, 80, 0, PI + QUARTER_PI, CHORD);
-
-   //ocean
    fill(66, ocean.g, ocean.b);
    ocean.r = ocean.r - .4;
    ocean.g = ocean.g - .4;
    ocean.b = ocean.b + .5;
    rect(-1, 160, 401, 300);
-
  }function setup() { 
   createCanvas(400, 400);
   background(191, 247, 223);
-
 }
 function draw() {
   fill(255, 255, 230);
@@ -5036,5 +3995,4 @@ function draw() {
   ellipse(120, 295, 30, 30);
   fill(150, 230, 230);
   ellipse(180, 295, 30, 30);
-
 }

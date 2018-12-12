@@ -1,61 +1,39 @@
 var bg_default;
 var newspaper_1;
 var newspaper_2;
-
 var ourfont;
-
-var currentstatus = 0; //1= camera, 2 = glass, 3 = time
-
-//tool
 var toolshow = 20;
 var bar_bg_p = 860;
-
 var fade = 255;
-
-var scene = 1; // 0 = big scene
-
 var canvas;
-
 var bgmusic;
-
-
 function preload() {
   ourfont = loadFont('TpldKhangXiDictTrial.otf');
-
   bg_default = loadImage('asset/background/bg_default.jpg');
   newspaper_1 = loadImage('asset/background/newspaer_1.jpg ');
   newspaper_2 = loadImage('asset/background/newspaer_2.jpg ');
-
   camera_active = loadImage('asset/camera.png ');
   camera_down = loadImage('asset/camera_down.png ');
   glass_active = loadImage('asset/glass.png ');
   glass_down = loadImage('asset/glass_down.png ');
   time_active = loadImage('asset/time.png ');
   time_down = loadImage('asset/time_down.png ');
-
   alert_camera = loadImage('asset/alert_camera.png');
   alert_glass = loadImage('asset/alert_glass.png');
-
   ok_active = loadImage('asset/ok_active.png ');
   ok_down = loadImage('asset/ok_down.png ');
-
   s1_resident = loadImage('asset/scene/01residents.jpg');
   s1_construction = loadImage('asset/scene/02construction.jpg');
   s1_gov = loadImage('asset/scene/03gov.jpg');
   s1_house = loadImage('asset/scene/04house.jpg');
-
   people = loadImage('asset/scene2/people.png ');
   house = loadImage('asset/scene2/house.jpg ');
   court = loadImage('asset/scene2/court.jpg ');
   construction = loadImage('asset/scene2/construction.png ');
-
   s2_house = loadImage('asset/06house.jpg ');
   s3_court = loadImage('asset/05court.jpg ');
-
   bgmusic = loadSound('asset/chongqing2.m4a');
-
 }
-
 function setup() {
   bgmusic.setVolume(0.1);
   bgmusic.play();
@@ -63,19 +41,13 @@ function setup() {
   
   textFont(ourfont);
   image(newspaper_2, 1055, 170, 383, 690);
-
-  // set the dots of first scene
   dots[0] = new Dots(267, 290, 255);
   dots[1] = new Dots(848, 677, 255);
   dots[2] = new Dots(922, 150, 255);
   dots[3] = new Dots(519, 156, 255);
   dots[4] = new Dots(345, 345, 255);
   dots[5] = new Dots(626, 270, 255);
-
-  //photos of scene one
   s1_photos = [s1_resident, s1_construction, s1_gov, s1_house,s3_court,s2_house]
-
-  //words of scene one
   for (let i of s1_txt0) {
     s1_txt0s = concat(s1_txt0, splitTokens(i));
   }
@@ -88,31 +60,18 @@ function setup() {
   for (let i of s1_txt3) {
     s1_txt3s = concat(s1_txt3, splitTokens(i));
   }
-
   for (let i of s3_txt) {
     s3_txts = concat(s3_txt, splitTokens(i));
   }
-
   for (let i of s2_txt) {
     s2_txts = concat(s2_txt, splitTokens(i));
   }
 }
-
-
-
 function draw() {
-
-  if (scene == 1) { // if in the scene 0
-    image(bg_default, 0, 0, 1057, 860); //place scene
     if (!alert_camera_status && currentstatus == 1 ) {
       for (let i = 0; i < 4; i++) {
-
-        if (dots[i].near()) { //if click sth
-          photoshow(s1_photos[i]); // show that photos
           dots[i].disappear();
-          txtout =i;// show that words
         }
-        dots[i].show(); //show the dots in s1
       }
     }
     if(currentstatus ==2){
@@ -126,10 +85,7 @@ function draw() {
       scene =1;
     }
     if (!alert_camera_status && currentstatus == 1 ){
-      if (dots[5].near()) { //if click sth
-        photoshow(s1_photos[5]); // show that photos
         dots[5].disappear();
-        txtout =5;// show that words
       }
     }
     dots[5].show();
@@ -140,101 +96,60 @@ function draw() {
       scene =1;
     }
     if (!alert_camera_status && currentstatus == 1 ){
-      if (dots[4].near()) { //if click sth
-        photoshow(s1_photos[4]); // show that photos
         dots[4].disappear();
-        txtout =4;// show that words
       }
-
     }
     dots[4].show();
   }
-
   image(newspaper_1, 1055, 0, 383, 170);
-
   if(alltxt.length <7){
   titleshow(titles[0]);
   timeshow(timeinfos[0]);
 }
-
   if(alltxt.length == 7){
     titleshow(titles[1]);
     timeshow(timeinfos[1]);
   }
-
   alert_camera_show();
   alert_camera_happen();
-
-  alert_glass_show(); // when four dots are unlocked, unlock the glass function
-  alert_glass_happen(); // the alert get out
-
-  switchstatus(); // the bar and status
-
 	txtcomeout();
-
-  //use for locating mouse
-  //fill(0);
-//  text('X' + mouseX, mouseX, mouseY);
-  //text('Y' + mouseY, mouseX, mouseY + 20);
 }
 var bg_default;
 var newspaper_1;
 var newspaper_2;
-
 var ourfont;
-
-var currentstatus = 0; //1= camera, 2 = glass, 3 = time
-
-//tool
 var toolshow = 20;
 var bar_bg_p = 860;
-
 var fade = 255;
-
-var scene = 1; // 0 = big scene
-
 var canvas;
-
 var bgmusic;
-
-
 function preload() {
   ourfont = loadFont('TpldKhangXiDictTrial.otf');
-
   bg_default = loadImage('asset/background/bg_default.jpg');
   newspaper_1 = loadImage('asset/background/newspaer_1.jpg ');
   newspaper_2 = loadImage('asset/background/newspaer_2.jpg ');
-
   camera_active = loadImage('asset/camera.png ');
   camera_down = loadImage('asset/camera_down.png ');
   glass_active = loadImage('asset/glass.png ');
   glass_down = loadImage('asset/glass_down.png ');
   time_active = loadImage('asset/time.png ');
   time_down = loadImage('asset/time_down.png ');
-
   alert_camera = loadImage('asset/alert_camera.png');
   alert_glass = loadImage('asset/alert_glass.png');
-
   ok_active = loadImage('asset/ok_active.png ');
   ok_down = loadImage('asset/ok_down.png ');
-
   s1_resident = loadImage('asset/scene/01residents.jpg');
   s1_construction = loadImage('asset/scene/02construction.jpg');
   s1_gov = loadImage('asset/scene/03gov.jpg');
   s1_house = loadImage('asset/scene/04house.jpg');
-
   people = loadImage('asset/scene2/people.png ');
   house = loadImage('asset/scene2/house.jpg ');
   court = loadImage('asset/scene2/court.jpg ');
   construction = loadImage('asset/scene2/construction.png ');
-
   s2_house = loadImage('asset/06house.jpg ');
   s3_court = loadImage('asset/05court.jpg ');
-
   bgmusic = loadSound('asset/chongqing2.m4a');
-
 }
-
 function setup() {
   bgmusic.setVolume(0.1);
   bgmusic.play();
@@ -242,19 +157,13 @@ function setup() {
   
   textFont(ourfont);
   image(newspaper_2, 1055, 170, 383, 690);
-
-  // set the dots of first scene
   dots[0] = new Dots(267, 290, 255);
   dots[1] = new Dots(848, 677, 255);
   dots[2] = new Dots(922, 150, 255);
   dots[3] = new Dots(519, 156, 255);
   dots[4] = new Dots(345, 345, 255);
   dots[5] = new Dots(626, 270, 255);
-
-  //photos of scene one
   s1_photos = [s1_resident, s1_construction, s1_gov, s1_house,s3_court,s2_house]
-
-  //words of scene one
   for (let i of s1_txt0) {
     s1_txt0s = concat(s1_txt0, splitTokens(i));
   }
@@ -267,31 +176,18 @@ function setup() {
   for (let i of s1_txt3) {
     s1_txt3s = concat(s1_txt3, splitTokens(i));
   }
-
   for (let i of s3_txt) {
     s3_txts = concat(s3_txt, splitTokens(i));
   }
-
   for (let i of s2_txt) {
     s2_txts = concat(s2_txt, splitTokens(i));
   }
 }
-
-
-
 function draw() {
-
-  if (scene == 1) { // if in the scene 0
-    image(bg_default, 0, 0, 1057, 860); //place scene
     if (!alert_camera_status && currentstatus == 1 ) {
       for (let i = 0; i < 4; i++) {
-
-        if (dots[i].near()) { //if click sth
-          photoshow(s1_photos[i]); // show that photos
           dots[i].disappear();
-          txtout =i;// show that words
         }
-        dots[i].show(); //show the dots in s1
       }
     }
     if(currentstatus ==2){
@@ -305,10 +201,7 @@ function draw() {
       scene =1;
     }
     if (!alert_camera_status && currentstatus == 1 ){
-      if (dots[5].near()) { //if click sth
-        photoshow(s1_photos[5]); // show that photos
         dots[5].disappear();
-        txtout =5;// show that words
       }
     }
     dots[5].show();
@@ -319,114 +212,69 @@ function draw() {
       scene =1;
     }
     if (!alert_camera_status && currentstatus == 1 ){
-      if (dots[4].near()) { //if click sth
-        photoshow(s1_photos[4]); // show that photos
         dots[4].disappear();
-        txtout =4;// show that words
       }
-
     }
     dots[4].show();
   }
-
   image(newspaper_1, 1055, 0, 383, 170);
-
   if(alltxt.length <7){
   titleshow(titles[0]);
   timeshow(timeinfos[0]);
 }
-
   if(alltxt.length == 7){
     titleshow(titles[1]);
     timeshow(timeinfos[1]);
   }
-
   alert_camera_show();
   alert_camera_happen();
-
-  alert_glass_show(); // when four dots are unlocked, unlock the glass function
-  alert_glass_happen(); // the alert get out
-
-  switchstatus(); // the bar and status
-
 	txtcomeout();
-
-  //use for locating mouse
-  //fill(0);
-//  text('X' + mouseX, mouseX, mouseY);
-  //text('Y' + mouseY, mouseX, mouseY + 20);
 }
 var bg_default;
 var newspaper_1;
 var newspaper_2;
-
 var ourfont;
-
-var currentstatus = 0; //1= camera, 2 = glass, 3 = time
-
-//tool
 var toolshow = 20;
 var bar_bg_p = 860;
-
 var fade = 255;
-
-var scene = 1; // 0 = big scene
-
-
-
 function preload() {
   ourfont = loadFont('TpldKhangXiDictTrial.otf');
-
   bg_default = loadImage('asset/background/bg_default.jpg');
   newspaper_1 = loadImage('asset/background/newspaer_1.jpg ');
   newspaper_2 = loadImage('asset/background/newspaer_2.jpg ');
-
   camera_active = loadImage('asset/camera.png ');
   camera_down = loadImage('asset/camera_down.png ');
   glass_active = loadImage('asset/glass.png ');
   glass_down = loadImage('asset/glass_down.png ');
   time_active = loadImage('asset/time.png ');
   time_down = loadImage('asset/time_down.png ');
-
   alert_camera = loadImage('asset/alert_camera.png');
   alert_glass = loadImage('asset/alert_glass.png');
-
   ok_active = loadImage('asset/ok_active.png ');
   ok_down = loadImage('asset/ok_down.png ');
-
   s1_resident = loadImage('asset/scene/01residents.jpg');
   s1_construction = loadImage('asset/scene/02construction.jpg');
   s1_gov = loadImage('asset/scene/03gov.jpg');
   s1_house = loadImage('asset/scene/04house.jpg');
-
   people = loadImage('asset/scene2/people.png ');
   house = loadImage('asset/scene2/house.jpg ');
   court = loadImage('asset/scene2/court.jpg ');
   construction = loadImage('asset/scene2/construction.png ');
-
   s2_house = loadImage('asset/06house.jpg ');
   s3_court = loadImage('asset/05court.jpg ');
-
 }
-
 function setup() {
   createCanvas(1440, 860);
   
   textFont(ourfont);
   image(newspaper_2, 1055, 170, 383, 690);
-
-  // set the dots of first scene
   dots[0] = new Dots(267, 290, 255);
   dots[1] = new Dots(848, 677, 255);
   dots[2] = new Dots(922, 150, 255);
   dots[3] = new Dots(519, 156, 255);
   dots[4] = new Dots(345, 345, 255);
   dots[5] = new Dots(626, 270, 255);
-
-  //photos of scene one
   s1_photos = [s1_resident, s1_construction, s1_gov, s1_house,s3_court,s2_house]
-
-  //words of scene one
   for (let i of s1_txt0) {
     s1_txt0s = concat(s1_txt0, splitTokens(i));
   }
@@ -439,31 +287,18 @@ function setup() {
   for (let i of s1_txt3) {
     s1_txt3s = concat(s1_txt3, splitTokens(i));
   }
-
   for (let i of s3_txt) {
     s3_txts = concat(s3_txt, splitTokens(i));
   }
-
   for (let i of s2_txt) {
     s2_txts = concat(s2_txt, splitTokens(i));
   }
 }
-
-
-
 function draw() {
-
-  if (scene == 1) { // if in the scene 0
-    image(bg_default, 0, 0, 1057, 860); //place scene
     if (!alert_camera_status && currentstatus == 1 ) {
       for (let i = 0; i < 4; i++) {
-
-        if (dots[i].near()) { //if click sth
-          photoshow(s1_photos[i]); // show that photos
           dots[i].disappear();
-          txtout =i;// show that words
         }
-        dots[i].show(); //show the dots in s1
       }
     }
     if(currentstatus ==2){
@@ -477,10 +312,7 @@ function draw() {
       scene =1;
     }
     if (!alert_camera_status && currentstatus == 1 ){
-      if (dots[5].near()) { //if click sth
-        photoshow(s1_photos[5]); // show that photos
         dots[5].disappear();
-        txtout =5;// show that words
       }
     }
     dots[5].show();
@@ -491,104 +323,60 @@ function draw() {
       scene =1;
     }
     if (!alert_camera_status && currentstatus == 1 ){
-      if (dots[4].near()) { //if click sth
-        photoshow(s1_photos[4]); // show that photos
         dots[4].disappear();
-        txtout =4;// show that words
       }
-
     }
     dots[4].show();
   }
-
   image(newspaper_1, 1055, 0, 383, 170);
-
   if(alltxt.length <7){
   titleshow(titles[0]);
   timeshow(timeinfos[0]);
 }
-
   if(alltxt.length == 7){
     titleshow(titles[1]);
     timeshow(timeinfos[1]);
   }
-
   alert_camera_show();
   alert_camera_happen();
-
-  alert_glass_show(); // when four dots are unlocked, unlock the glass function
-  alert_glass_happen(); // the alert get out
-
-  switchstatus(); // the bar and status
-
 	txtcomeout();
-
-  //use for locating mouse
-  //fill(0);
-//  text('X' + mouseX, mouseX, mouseY);
-  //text('Y' + mouseY, mouseX, mouseY + 20);
 }
 var bg_default;
 var newspaper_1;
 var newspaper_2;
-
 var ourfont;
-
-var currentstatus = 0; //1= camera, 2 = glass, 3 = time
-
-//tool
 var toolshow = 20;
 var bar_bg_p = 860;
-
 var fade = 255;
-
-var scene = 1; // 0 = big scene
-
-
 function preload() {
   ourfont = loadFont('TpldKhangXiDictTrial.otf');
-
   bg_default = loadImage('asset/background/bg_default.jpg');
   newspaper_1 = loadImage('asset/background/newspaer_1.jpg ');
   newspaper_2 = loadImage('asset/background/newspaer_2.jpg ');
-
   camera_active = loadImage('asset/camera.png ');
   camera_down = loadImage('asset/camera_down.png ');
   glass_active = loadImage('asset/glass.png ');
   glass_down = loadImage('asset/glass_down.png ');
   time_active = loadImage('asset/time.png ');
   time_down = loadImage('asset/time_down.png ');
-
   alert_camera = loadImage('asset/alert_camera.png');
   alert_glass = loadImage('asset/alert_glass.png');
-
   ok_active = loadImage('asset/ok_active.png ');
   ok_down = loadImage('asset/ok_down.png ');
-
   s1_resident = loadImage('asset/scene/01residents.jpg');
   s1_construction = loadImage('asset/scene/02construction.jpg');
   s1_gov = loadImage('asset/scene/03gov.jpg');
   s1_house = loadImage('asset/scene/04house.jpg');
-
-
-
 }
-
 function setup() {
   createCanvas(1440, 860);
   textFont(ourfont);
   image(newspaper_2, 1055, 170, 383, 690);
-
-  // set the dots of first scene
   dots[0] = new Dots(267, 290, 255);
   dots[1] = new Dots(848, 677, 255);
   dots[2] = new Dots(922, 150, 255);
   dots[3] = new Dots(519, 156, 255);
-
-  //photos of scene one
   s1_photos = [s1_resident, s1_construction, s1_gov, s1_house]
-
-  //words of scene one
   for (let i of s1_txt0) {
     s1_txt0s = concat(s1_txt0, splitTokens(i));
   }
@@ -602,22 +390,11 @@ function setup() {
     s1_txt3s = concat(s1_txt3, splitTokens(i));
   }
 }
-
-
-
 function draw() {
-
-  if (scene == 1) { // if in the scene 0
-    image(bg_default, 0, 0, 1057, 860); //place scene
     if (!alert_camera_status && currentstatus == 1 ) {
       for (let i = 0; i < dots.length; i++) {
-
-        if (dots[i].near()) { //if click sth
-          photoshow(s1_photos[i]); // show that photos
           dots[i].disappear();
-          txtout =i;// show that words
         }
-        dots[i].show(); //show the dots in s1
       }
     }
     if(currentstatus ==2){
@@ -626,86 +403,48 @@ function draw() {
     }
   }
   image(newspaper_1, 1055, 0, 383, 170);
-
   titleshow(titles[0]);
   timeshow(timeinfos[0]);
-
   alert_camera_show();
   alert_camera_happen();
-
-  alert_glass_show(); // when four dots are unlocked, unlock the glass function
-  alert_glass_happen(); // the alert get out
-
-  switchstatus(); // the bar and status
-
 	txtcomeout();
-
-  //use for locating mouse
-  //fill(0);
-  //text('X' + mouseX, mouseX, mouseY);
-  //text('Y' + mouseY, mouseX, mouseY + 20);
 }
 var bg_default;
 var newspaper_1;
 var newspaper_2;
-
 var ourfont;
-
-var currentstatus = 0; //1= camera, 2 = glass, 3 = time
-
-//tool
 var toolshow = 20;
 var bar_bg_p = 860;
-
 var fade = 255;
-
-var scene = 1; // 0 = big scene
-
-
 function preload() {
   ourfont = loadFont('asset/TpldKhangXiDictTrial.otf');
-
   bg_default = loadImage('asset/background/bg_default.jpg');
   newspaper_1 = loadImage('asset/background/newspaer_1.jpg ');
   newspaper_2 = loadImage('asset/background/newspaer_2.jpg ');
-
   camera_active = loadImage('asset/camera.png ');
   camera_down = loadImage('asset/camera_down.png ');
   glass_active = loadImage('asset/glass.png ');
   glass_down = loadImage('asset/glass_down.png ');
   time_active = loadImage('asset/time.png ');
   time_down = loadImage('asset/time_down.png ');
-
   alert_camera = loadImage('asset/alert_camera.png');
   alert_glass = loadImage('asset/alert_glass.png');
-
   ok_active = loadImage('asset/ok_active.png ');
   ok_down = loadImage('asset/ok_down.png ');
-
   s1_resident = loadImage('asset/scene/01residents.jpg');
   s1_construction = loadImage('asset/scene/02construction.jpg');
   s1_gov = loadImage('asset/scene/03gov.jpg');
   s1_house = loadImage('asset/scene/04house.jpg');
-
-
-
 }
-
 function setup() {
   createCanvas(1440, 860);
   textFont(ourfont);
   image(newspaper_2, 1055, 170, 383, 690);
-
-  // set the dots of first scene
   dots[0] = new Dots(267, 290, 255);
   dots[1] = new Dots(848, 677, 255);
   dots[2] = new Dots(922, 150, 255);
   dots[3] = new Dots(519, 156, 255);
-
-  //photos of scene one
   s1_photos = [s1_resident, s1_construction, s1_gov, s1_house]
-
-  //words of scene one
   for (let i of s1_txt0) {
     s1_txt0s = concat(s1_txt0, splitTokens(i));
   }
@@ -719,136 +458,76 @@ function setup() {
     s1_txt3s = concat(s1_txt3, splitTokens(i));
   }
 }
-
-
-
 function draw() {
-
-  if (scene == 1) { // if in the scene 0
-    image(bg_default, 0, 0, 1057, 860); //place scene
     if (!alert_camera_status && currentstatus == 1 ) {
       for (let i = 0; i < dots.length; i++) {
-
-        if (dots[i].near()) { //if click sth
-          photoshow(s1_photos[i]); // show that photos
           dots[i].disappear();
-          txtout =i;// show that words
         }
-        dots[i].show(); //show the dots in s1
       }
     }
     if(currentstatus ==2){
-     // glass_circle();
-     // glass_zoom();
     }
   }
   image(newspaper_1, 1055, 0, 383, 170);
-
   titleshow(titles[0]);
   timeshow(timeinfos[0]);
-
   alert_camera_show();
   alert_camera_happen();
-
-  alert_glass_show(); // when four dots are unlocked, unlock the glass function
-  alert_glass_happen(); // the alert get out
-
-  switchstatus(); // the bar and status
-
 	txtcomeout();
   
-  //use for locating mouse
-  //fill(0);
-  //text('X' + mouseX, mouseX, mouseY);
-  //text('Y' + mouseY, mouseX, mouseY + 20);
 }
 var bg_default;
 var newspaper;
-
 var people;
 var showPeople = false;
-
 var house;
 var showHouse = false;
-
 var construction;
 var showConstruction = false;
-
 var court;
 var showCourt = false;
-
-//status
 var camera_active;
 var camera_down;
 var glass_active;
 var glass_down;
 var time_active;
 var time_down;
-
-var currentstatus = 0; //1= camera, 2 = glass, 3 = time
-
-//tool 
 var toolshow = 20;
 var bar_bg_p = 860;
-
 var fade = 255;
-
-
-//alert
 var blockbg = 40;
-
 var count1 = 0;
 var alert_camera;
-
 var ok_active;
 var ok_down;
 var alert_camera_status = 0;
-
-// let main;
-// let zoom;
-// var ctx;
-// var zoomCtx;
-
 function preload() {
   bg_default = loadImage('asset/background/bg_default.jpg');
   newspaper = loadImage('asset/background/newspaer.jpg ');
-
   camera_active = loadImage('asset/camera.png ');
   camera_down = loadImage('asset/camera_down.png ');
   glass_active = loadImage('asset/glass.png ');
   glass_down = loadImage('asset/glass_down.png ');
   time_active = loadImage('asset/time.png ');
   time_down = loadImage('asset/time_down.png ');
-
   alert_camera = loadImage('asset/alert_camera.png ');
-
   ok_active = loadImage('asset/ok_active.png ');
   ok_down = loadImage('asset/ok_down.png ');
   people = loadImage('people.png ');
   house = loadImage('house.jpg ');
   court = loadImage('court.jpg ');
   construction = loadImage('construction.png ');
-
 }
-
 function setup() {
   createCanvas(1440, 860);
  
 }
-
-
-
 function mousePressed() {
 var d = dist(mouseX, mouseY, 870, 660);
   if (d < 190) {
     showConstruction = !showConstruction;
-    print(showConstruction);
   }
 }
-
-
-
-
  
 function draw() {
   image(people, 0, 0,1057, 860);
@@ -856,148 +535,19 @@ function draw() {
   image(construction,0,0,1057, 860);
   image(bg_default, 0, 0, 1057, 860);
   image(newspaper, 1057, 0, 383, 860);
-
-  //button 1 people
   stroke(250, 255, 3);
   fill(30, 30, 30, 50);
   rect(235, 300, 60, 80);
-
-
-  //  function mousePressed(){
-  // if(mouseX>235&&mouseX<295&&mouseY>300&&<mouseY<380){
-
-  // }
-
-
-  //button 2 house
   stroke(250, 255, 3);
   fill(30, 30, 30, 50);
   rect(420, 280, 130, 80);
-
-  // if(mouseX>420 && mouseX<550 && mouseY>280 && <mouseY<360){
-  //}
-
-
-  // //button 3 kongfu
-  // stroke(250, 255, 3);
-  // fill(30, 30, 30, 50);
-  // rect(520, 520, 40, 50);
-  // // if(mouseX>520 & mouseX<560 && mouseY>520 && mouseY<570){
-  // //}
-
-  //button 4 court
   stroke(250, 255, 3);
   fill(30, 30, 30, 50);
   rect(780, 180, 276, 140);
-  // if(mouseX>780 && mouseX<1056 && mouseY>180 && mouseY<320){
-  //}
-
-  //button 5 construction
   stroke(250, 255, 3);
   fill(30, 30, 30, 50);
   ellipse(870, 660, 380, 380);
-// var d = dist(mouseX, mouseY, 870, 660);
-  //   if (d < 190) {
-//   showHouse = !showHouse;
-//     print(showHouse);
-//   }
-// }
-
-
-  // function mousePressed() {
-
-  //   
-
-
-
-  //   }
-  // }
-
-
-
-  //tool bar
-
-  //   noStroke();
-  //   fill(30, 30, 30, 50);
-  //   rect(0, bar_bg_p, 1057, 60);
-
-
-
-  //   //status2: glass status
-  //   if (currentstatus == 2) {
-  //     image(camera_down, 30, bar_bg_p - 40, 145, 110);
-  //     image(glass_active, 175, bar_bg_p - 40, 163, 110);
-  //     image(time_down, 338, bar_bg_p - 40, 117, 110);
-
-  //     //zoom in ellipse
-  //     noFill();
-  //     stroke(255);
-  //     ellipse(mouseX - 30, mouseY - 30, 140);
-  //     line(mouseX - 50, mouseY - 30, mouseX - 10, mouseY - 30);
-  //     line(mouseX - 30, mouseY - 50, mouseX - 30, mouseY - 10);
-  //   }
-
-
-
-  //   //switch status
-
-  //   // if (mouseX > 0 && mouseX < 175 && mouseY > 750) {
-  //   //   image(camera_active, 30, bar_bg_p - 40, 145, 110);
-  //   //   image(glass_down, 175, bar_bg_p - 40, 163, 110);
-  //   //   image(time_down, 338, bar_bg_p - 40, 117, 110);
-  //   //   if (mouseIsPressed) {
-  //   //     currentstatus = 1;
-  //   //   }
-  //   // }
-
-
-  //   if (mouseX > 175 && mouseX < 338 && mouseY > 750) {
-  //     image(camera_down, 30, bar_bg_p - 40, 145, 110);
-  //     image(glass_active, 175, bar_bg_p - 40, 163, 110);
-  //     image(time_down, 338, bar_bg_p - 40, 117, 110);
-  //     if (mouseIsPressed) {
-  //       currentstatus = 2;
-  //     }
-  //   }
-
-  //   if (mouseX > 338 && mouseX < 1057 && mouseY > 750) {
-  //     image(camera_down, 30, bar_bg_p - 40, 145, 110);
-  //     image(glass_down, 175, bar_bg_p - 40, 163, 110);
-  //     image(time_active, 338, bar_bg_p - 40, 117, 110);
-  //     if (mouseIsPressed) {
-  //       currentstatus = 3;
-  //       console.log(currentstatus);
-  //     }
-  //   }
-
-  //   //get out
-  //   if (mouseY > 800) {
-  //     bar_bg_p -= toolshow;
-  //     if (bar_bg_p <= 800) {
-  //       bar_bg_p = 800;
-  //     }
-  //   } else if (mouseY > 0 && mouseY < 800) {
-  //     bar_bg_p += toolshow;
-  //     if (bar_bg_p > 880) {
-  //       bar_bg_p = 880;
-  //     }
-
-
-  // if (showPeople) {
-  //   fadeIn(people, 3);
-  //   fadeOut(bg_default, -3);
-  // } else {
-  //   fadeIn(bg_default, 3);
-  //   fadeOut(people, -3);
-  // }
   
-  // if (showHouse) {
-  //   fadeIn(house, 5);
-  //   fadeOut(bg_default, -5);
-  // } else {
-  //   fadeIn(bg_default, 5);
-  //   fadeOut(house, -5);
-  // }
   
     if (showConstruction) {
     fadeIn(construction, 5);
@@ -1007,34 +557,9 @@ function draw() {
     fadeOut(construction, -5);
   }
   
-
-
-
-
-  // function makeImages() {  
-  //   noStroke();
-  //   translate(width/2, height/2);
-  //   alvos();
-  //   normal=bg_default; 
-  //   scale(1.5);
-  //   alvos();
-  //   magnified=bg_default;
-  // }
-
-  // function alvos() {
-  //   background(255);
-  //   for (let i=5; i>0; i--) {
-  //     fill(200, 0, 0);
-  //     ellipse(0, 0, i*40, i*40);
-  //     fill(255);
-  //     ellipse(0, 0, i*40-20, i*40-20);
-  //   }
 }
-
-
 function fadeOut(a, speed) {
   a.loadPixels();
-
   for (let j = 0; j < a.height; j++) {
     for (let i = 0; i < a.width; i++) {
       let index = (i + j * a.width) * 4;
@@ -1045,41 +570,31 @@ function fadeOut(a, speed) {
   }
   a.updatePixels();
 }
-
 function fadeIn(a, speed) {
   a.loadPixels();
-
   for (let j = 0; j < a.height; j++) {
     for (let i = 0; i < a.width; i++) {
       let index = (i + j * a.width) * 4;
-
       if (speed > 0 && a.pixels[index + 3] < 255) {
         a.pixels[index + 3] = a.pixels[index + 3] + speed;
       }
     }
   }
   a.updatePixels();
-}var txt1 = ["A string walks into a bar and orders a drink. The bartender says we don't serve strings in here and you're a string. "]//create a new array
 var txt2 = ['Everything will be good and peaful.']
-
 var stxt1 =[];
 var stxt2 = [];
-
 var alltxt = [''];
 var showtxtnum = 0;
 var lastshowtxtnum =0;
 var bigger = 0;
 var lbigger =0;
-
 var mousestatus = 0;
-
 var txtbx = 10;
 var txtby = 50;
-
 function setup() {
   createCanvas(400, 400);
   
-  //split them into words and make them become an array
   for(let i of txt1){
   	stxt1 = concat(stxt1,splitTokens(i));
     
@@ -1090,11 +605,9 @@ function setup() {
   }
   
 }
-
 function draw() {
   background(220);
   
-  //push the txt array being clicked into the alltxt array 
   if(mouseIsPressed && mouseX<200 && mousestatus!=1){
     mousestatus = 1;
     alltxt.push(stxt1);
@@ -1111,13 +624,11 @@ function draw() {
   }
  	console.log(showtxtnum,lastshowtxtnum);
   
-  //if there is one more array being pushed inside allarray
   if(showtxtnum>lastshowtxtnum){
     bigger++}
   
   if(bigger>lbigger){
     
-  //show the words
   for(let i =0;i<alltxt[showtxtnum].length;i++){
     text(alltxt[showtxtnum][i],txtbx,txtby);
     txtbx = txtbx + textWidth(alltxt[showtxtnum][i])+textWidth('a');
@@ -1129,28 +640,18 @@ function draw() {
   }
   lastshowtxtnum = showtxtnum;
   lbigger = bigger; 
-}var txt1 = ["A string walks into a bar and orders a drink. The bartender says we don't serve strings in here and you're a string. "]//create a new array
 var txt2 = ['Everything will be good and peaful.']
-
 var stxt1 =[];
 var stxt2 = [];
-
 var alltxt = [''];
 var showtxt = [];
-
 var showtxtnum = 0;
-var showtxtl =0; // length of showtxt
-var showtxtll = 0; //length of showtxt lasttime
-
 var mousestatus = 0;
-
 var txtbx = 10;
 var txtby = 50;
-
 function setup() {
   createCanvas(400, 400);
   
-  //split them into words and make them become an array
   for(let i of txt1){
   	stxt1 = concat(stxt1,splitTokens(i));
     
@@ -1161,18 +662,15 @@ function setup() {
   }
   
 }
-
 function draw() {
   background(220);
   
-  //push the txt array being clicked into the alltxt array 
   if(mouseIsPressed && mouseX<200 && mousestatus!=1){
     mousestatus = 1;
     alltxt.push(stxt1);
     showtxtnum++;
     showtxt.push(showtxtnum);
     showtxtl = showtxt.length;
-    //console.log(showtxt);
     
   }
  if(mouseIsPressed && mouseX>200 && mousestatus!=2){
@@ -1185,13 +683,10 @@ function draw() {
     
    	
   }
- 	//console.log(showtxtnum,lastshowtxtnum);
   for(let j =0;j<showtxt.length;j++){
     
-  //if there is one more array being pushed inside allarray
   if(showtxtl>showtxtll){
   
-  //show the words
   for(let i =0;i<alltxt[showtxt[j]].length;i++){
     text(alltxt[showtxt[j]][i],txtbx,txtby);
     txtbx = txtbx + textWidth(alltxt[showtxt[j]][i])+textWidth('a');
@@ -1203,25 +698,18 @@ function draw() {
   }
   }
   showtxtll = showtxtl;
-}var txt1 = ["A string walks into a bar and orders a drink. The bartender says we don't serve strings in here and you're a string. "]//create a new array
 var txt2 = ['Everything will be good and peaful.']
-
 var stxt1 =[];
 var stxt2 = [];
-
 var alltxt = [''];
 var showtxtnum = 0;
 var lastshowtxtnum =0;
-
 var mousestatus = 0;
-
 var txtbx = 10;
 var txtby = 50;
-
 function setup() {
   createCanvas(400, 400);
   
-  //split them into words and make them become an array
   for(let i of txt1){
   	stxt1 = concat(stxt1,splitTokens(i));
     
@@ -1232,11 +720,9 @@ function setup() {
   }
    background(220);
 }
-
 function draw() {
  
   
-  //push the txt array being clicked into the alltxt array 
   if(mouseIsPressed && mouseX<200 && mousestatus!=1){
     mousestatus = 1;
     alltxt.push(stxt1);
@@ -1253,10 +739,8 @@ function draw() {
   }
  	console.log(showtxtnum,lastshowtxtnum);
   
-  //if there is one more array being pushed inside allarray
   if(showtxtnum>lastshowtxtnum){
     
-  //show the words
   for(let i =0;i<alltxt[showtxtnum].length;i++){
     text(alltxt[showtxtnum][i],txtbx,txtby);
     txtbx = txtbx + textWidth(alltxt[showtxtnum][i])+textWidth('a');
@@ -1267,22 +751,13 @@ function draw() {
   }
   }
   lastshowtxtnum = showtxtnum;
-}//var words = "A string walks into a bar and orders a drink. The bartender says we don't serve strings in here and you're a string. Nope, I'm a frayed knot."
 let txt;
 let tokens = [];
-
 let arrayx= [];
-
 let textbeginx = 0;
 let textbeginy = 0;
-
-txt1 = ["A string walks into a bar and orders a drink. The bartender says we don't serve strings in here and you're a string. "]//create a new array
   txt2 = ['Everything will be good and peaful.']
-
-
 let textshow = 0;
-
-
 function setup() {
   
   
@@ -1294,11 +769,8 @@ function setup() {
   	tokens = concat(tokens,splitTokens(i));
   }
  
-  //tokens = splitTokens(txt[0]);
-  //tokens = splitTokens(txt[0],'t');// t是断点
   console.log(tokens);
 }
-
 function draw() {
   background(220);
   
@@ -1314,7 +786,6 @@ function draw() {
   
   
   arrayx.push(tokens);
-  //console.log(arrayx[0]);
   
   
   let x = 10;
@@ -1330,11 +801,7 @@ function draw() {
         x=10;
      	}
     
-  //  if(i==(tokens.length-1)){
-  //    textbeginx = x;
-  //    textbeginy = y;
     	
-   // }
     
     
   }
@@ -1343,24 +810,16 @@ function draw() {
   text('Y:'+mouseY,300,350);
  
  	
-  //text(words,20,20,300,300);
-
 }var bg;
 var v = [];
-
 function preload(){
   bg = loadImage('asset/background/bg_origin.jpg');
 }
-
 function setup() {
   createCanvas(1440, 860);
 }
-
-
-
 function draw() {
   image(bg,0,0,1440,860);
-  //background(220);
   noFill();
   stroke(255);
   rect(mouseX-120,mouseY-70,140,90);
@@ -1380,11 +839,7 @@ function draw() {
       				ellipse(x*5,y*5,5,5);
           }
          
-      // for(var i =0;i<140;i++){
-       //	for(var j = 0;j<90;j++){
         	
-        //}
-      // }
        }
   }
   
@@ -1393,61 +848,38 @@ function draw() {
 }var bg_default;
 var newspaper_1;
 var newspaper_2;
-
 var ourfont;
-
-var currentstatus = 0; //1= camera, 2 = glass, 3 = time
-
-//tool 
 var toolshow = 20;
 var bar_bg_p = 860;
-
 var fade = 255;
-
-var scene = 1; // 0 = big scene
-
-
 function preload() {
   ourfont = loadFont('TpldKhangXiDictTrial.otf');
-
   bg_default = loadImage('asset/background/bg_default.jpg');
   newspaper_1 = loadImage('asset/background/newspaer_1.jpg ');
   newspaper_2 = loadImage('asset/background/newspaer_2.jpg ');
-
   camera_active = loadImage('asset/camera.png ');
   camera_down = loadImage('asset/camera_down.png ');
   glass_active = loadImage('asset/glass.png ');
   glass_down = loadImage('asset/glass_down.png ');
   time_active = loadImage('asset/time.png ');
   time_down = loadImage('asset/time_down.png ');
-
   alert_camera = loadImage('asset/alert_camera.png');
-
   ok_active = loadImage('asset/ok_active.png ');
   ok_down = loadImage('asset/ok_down.png ');
-
   s1_resident = loadImage('asset/scene/01residents.jpg');
   s1_construction = loadImage('asset/scene/02construction.jpg');
   s1_gov = loadImage('asset/scene/03gov.jpg');
   s1_house = loadImage('asset/scene/04house.jpg');
-
 }
-
 function setup() {
   createCanvas(1440, 860);
   textFont(ourfont);
   image(newspaper_2, 1055, 170, 383, 690);
-
-  // set the dots of first scene
   dots[0] = new Dots(267, 290, 255);
   dots[1] = new Dots(848, 677, 255);
   dots[2] = new Dots(922, 150, 255);
   dots[3] = new Dots(519, 156, 255);
-
-  //photos of scene one
   s1_photos = [s1_resident, s1_construction, s1_gov, s1_house]
-
-  //words of scene one
   for (let i of s1_txt0) {
     s1_txt0s = concat(s1_txt0, splitTokens(i));
   }
@@ -1461,58 +893,33 @@ function setup() {
     s1_txt3s = concat(s1_txt3, splitTokens(i));
   }
 }
-
-
-
 function draw() {
-
-  if (scene == 1) { // if in the scene 0
-    image(bg_default, 0, 0, 1057, 860); //place scene 
     if (!alert_camera_status) {
       for (let i = 0; i < dots.length; i++) {
-
-        if (dots[i].near()) { //if click sth
-          photoshow(s1_photos[i]); // show that photos 
           dots[i].disappear();
-          txtout =i;// show that words
         }
-        dots[i].show(); //show the dots in s1
       }
     }
   }
   image(newspaper_1, 1055, 0, 383, 170);
-
   titleshow(titles[0]);
   timeshow(timeinfos[0]);
-
   alert_camera_show();
   alert_camera_disappear();
-
-
-  switchstatus(); // the bar and status
-
 	txtcomeout();
-
-  //use for locating mouse
-  //fill(0);
-  //text('X' + mouseX, mouseX, mouseY);
-  //text('Y' + mouseY, mouseX, mouseY + 20);
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
 }var mic;
 var volhistory = [];
-
 function setup() {
   createCanvas(400, 400);
   angleMode(DEGREES);
   mic = new p5.AudioIn();
   mic.start();
 }
-
 function draw() {
   
   micLevel = mic.getLevel();
@@ -1532,12 +939,10 @@ function draw() {
     vertex(x,y);
   }
   endShape();
-
   if(volhistory.length>360){
   	volhistory.splice(0,1);
   }
   
-/*  
   beginShape();
   for(let i = 0; i<volhistory.length;i++){
   	var y = map(volhistory[i],0,1,height/2,-100);
@@ -1549,11 +954,9 @@ function draw() {
   	volhistory.splice(0,1);
   }
   
-  */
 }var wave;
 var slider;
 var env;
-
 function setup() {
   createCanvas(400, 400);
   
@@ -1570,24 +973,19 @@ function setup() {
   
   
 }
-
 function draw() {
   wave.freq(slider.value());
   background(220);
 }
-
 function mousePressed(){
 	env.play();
 }var teapot;
-
 function preload() {
   teapot = loadModel('Book.obj');
 }
-
 function setup() {
   createCanvas(200, 200, WEBGL);
 }
-
 function draw() {
   background(200);
   rotateX(mouseX/50);
@@ -1596,18 +994,15 @@ function draw() {
   
 }let whati;
 let amplitude;
-
 function preload(){
 	whati = loadSound('song.mp3');
 }
-
 function setup() {
   whati.setVolume(0.1);
   whati.play();
   amplitude = new p5.Amplitude();
   createCanvas(400, 400);
 }
-
 function draw() {
   background(0);
   var level = amplitude.getLevel();
@@ -1615,19 +1010,15 @@ function draw() {
   ellipse(width/2, height/2, size, size);
 }var img;
 let ball=[];
-
 function preload() {
   img = loadImage('robot color.png');
 }
-
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   for(let i =0; i<100;i++){
   	ball[i] = new Ball(random(windowWidth),random(windowHeight),random(5),random(5),134,random(10));
   }
 }
-
 function draw() {
   background('#d07f0d');
   
@@ -1637,7 +1028,6 @@ function draw() {
   }
   image(img,windowWidth/2-100,100,200,489);
 }
-
 class Ball {
   constructor(x,y,x1,y1,c,size){
     this.x = x;
@@ -1666,7 +1056,6 @@ class Ball {
   
 }var video;
 var canvas;
-
 function setup() {
   canvas = createCanvas(640,480,WEBGL);
   background(51);
@@ -1674,53 +1063,37 @@ function setup() {
   video.size(640,480);
   video.id('p5video');
   canvas.id('p5canvas')
-
   var seriously = new Seriously()；
-
   var src = seriously.source('#p5video');
   var target = seriously.target('#p5canvas');
-
   var blur = seriously.effect('blur');
   blur.source = src;
   target.source = blur;
-
   seriously.go();
 }
 let weather;
 let url;
-var cityname; //the input of the city 
-
 let temp;
 let pressure; 
 let humidity;
 let windspeed;
 let cloud;
-
 let wheelx;
 let wheely;
-
 let fWheel;
 let bWheel;
-
-let api ="https://api.openweathermap.org/data/2.5/find?q=";
-let city;//the text of the city
 let apikey ="&units=metric&appid=b8969a3f7ee75ed3210ef407f52694f7";
-
-
 function preload() {
 	fWheel = loadImage('assets/fWheel.png');
   bWheel = loadImage('assets/bWheel.png');
 }
-
 function setup() {
   
   createCanvas(windowWidth, windowHeight);
   let button = select("#submit");
   button.mousePressed(weatherask);
-
   cityname = select("#city");
 }
-
 function gotData(data){ 
   temp = data.list[0].main.temp;
   humidity = data.list[0].main.humidity;
@@ -1731,16 +1104,12 @@ function gotData(data){
   console.log('windspeed:'+windspeed);
   console.log('cloud:'+cloud);
 }
-
-
 function draw() {
- 	//let fr= int(windspeed*2);
   frameRate(windspeed);
   wheelx = random(wheelx-10,wheelx+10);
   wheely = random(wheely-10,wheely+10);
   line(wheelx,wheelx+windowWidth/2);
   
-  // front wheel - temp
   image(fWheel, wheelx, wheely, temp*15, temp*15);
   
   fill(255);
@@ -1748,17 +1117,13 @@ function draw() {
   fill(0);
   text('TEMP:'+temp,wheelx+20,wheely+125);
   
-  // back wheel - humidity
   image(bWheel, wheelx+windowWidth/3, wheely, humidity*3, humidity*3); 
 	
   fill(255);
   rect(wheelx+windowWidth/3,wheely+150,90,40);
   fill(0);
   text('HUM:'+humidity,wheelx+20+windowWidth/3,wheely+175);
-
 }
-
-
 function weatherask(){
   city = cityname.value();
 	url = api+city+apikey;
@@ -1768,36 +1133,24 @@ function weatherask(){
   fr= int(windspeed*2)
 }let weather;
 let url;
-var cityname; //the input of the city 
-
 let temp;
 let pressure; 
 let humidity;
 let windspeed;
 let cloud;
-
 let imagetest;
-
-
-let api ="https://api.openweathermap.org/data/2.5/find?q=";
-let city;//the text of the city
 let apikey ="&units=metric&appid=b8969a3f7ee75ed3210ef407f52694f7";
-
 function preload() {
   imgtest = loadImage('dolls.gif');
 }
-
-
 function setup() {
   createCanvas(1600, 800);
   
   var button = select("#submit");
   button.mousePressed(weatherask);
-
   cityname = select("#city");
 	
 }
-
 function gotData(data){ 
   temp = data.list[0].main.temp;
   humidity = data.list[0].main.humidity;
@@ -1808,13 +1161,10 @@ function gotData(data){
   console.log('windspeed:'+windspeed);
   console.log('cloud:'+cloud);
 }
-
 function draw() {
-  //background(255);
   imgtest.filter('POSTERIZE',14);
   image(imgtest,0,0);
 }
-
 function weatherask(){
   city = cityname.value();
 	url = api+city+apikey;
@@ -1823,28 +1173,21 @@ function weatherask(){
 let temp;
 let url;
 var cityname;
-
-
-let api ="https://api.openweathermap.org/data/2.5/find?q=";
 let city;
 let apikey ="&units=metric&appid=b8969a3f7ee75ed3210ef407f52694f7";
-
 function setup() {
   createCanvas(400, 400);
   
   var button = select("#submit");
   button.mousePressed(weatherask);
-
   cityname = select("#city");
 	
 }
-
 function gotData(data){
   
   temp = data.list[0].main.temp;
   console.log(data.list[0].main.temp);
 }
-
 function draw() {
   if(temp<10){
   background(20,20,100);
@@ -1861,26 +1204,21 @@ function draw() {
   textSize(16);
   text(city,178,220);
 }
-
 function weatherask(){
   city = cityname.value();
 	url = api+city+apikey;
   loadJSON(url,gotData);
 }var video;
-
 var vscale = 20;
-
 function preload() {
   img = loadImage('IMG_4553.JPG');
 }
-
 function setup() {
   createCanvas(640, 480);
   pixelDensity(1);
   video = createCapture(VIDEO);
   video.size(width/vscale,height/vscale);
 }
-
 function draw() {
   background(250);
   
@@ -1895,14 +1233,10 @@ function draw() {
       var bright = (r+g+b)/3;
       
       var w= map(r,0,255,0,vscale);
-      	//hint(r,120,b);
       	noStroke();
       	image(img, i*vscale, j*vscale,w, w);
-      	//ellipse(i*vscale,j*vscale,w,w);
-      // noprotect
     }
   }
-  //updatePixels();
 }var video;
 var video2;
 var r,g,b;
@@ -1913,7 +1247,6 @@ var recth = 40;
 var press = false;
 var lastpress = false;
 var bright;
-
 function setup() {
   createCanvas(640, 480);
   pixelDensity(1);
@@ -1924,9 +1257,7 @@ function setup() {
   video2.size(40,30);
   video2.hide();
 }
-
 function draw() {
-  //background(220);
   fill(220);
   noStroke();
   rect(0,0,300,480);
@@ -1940,14 +1271,11 @@ function draw() {
   b = pixels[index+2];
   fill(r,g,b);
   textSize(20);
-  //text(r+','+g+','+b,10,280);
   fill(0);
   textSize(11);
   text('Move the mouse to your favourite thing. Click and get the protrait of your unqiue color.',10,400,240);
     
  
-  //fill(40);
-	//rect(300,0,width,height)
   video2.loadPixels();
     for (var x = 0; x< video2.width;x++){
   	for(var y = 0;y<video2.height;y++){
@@ -1986,7 +1314,6 @@ var recth = 40;
 var press = false;
 var lastpress = false;
 var bright;
-
 function setup() {
   createCanvas(640, 480);
   pixelDensity(1);
@@ -1997,9 +1324,7 @@ function setup() {
   video2.size(40,30);
   video2.hide();
 }
-
 function draw() {
-  //background(220);
   fill(220);
   noStroke();
   rect(0,0,300,480);
@@ -2012,15 +1337,12 @@ function draw() {
   b = pixels[index+2];
   fill(r,g,b);
   textSize(20);
-  //text(r+','+g+','+b,10,280);
   fill(0);
   textSize(11);
   text('Move the mouse to your favourite thing. Click and get the protrait of your unqiue color.',10,400,240);
     
   
   if(mouseIsPressed){
-  //fill(40);
-	//rect(300,0,width,height)
   video2.loadPixels();
     for (var x = 0; x< video2.width;x++){
   	for(var y = 0;y<video2.height;y++){
@@ -2036,7 +1358,6 @@ function draw() {
     }
     }
     rect(300,300,340,180);
-    //console.log((r+g+b)/3)
     if((r+g+b)/3<=220){
       fill(255);}
     else if ((r+g+b)/3>220) {
@@ -2057,7 +1378,6 @@ var rectw = 64;
 var recth = 40;
 var press = false;
 var lastpress = false;
-
 function setup() {
   createCanvas(320, 320);
   pixelDensity(1);
@@ -2065,9 +1385,7 @@ function setup() {
   video.size(640,320);
   video.hide();
 }
-
 function draw() {
-  //background(220);
   
   image(video,0,0,320,240);
   
@@ -2103,26 +1421,16 @@ function draw() {
   lastpress = press;
       
 }
-
-
-
-
-
 var img;
 var w=16;
-
-
 function preload() {
   img = loadImage('IMG_4553.JPG');
 }
-
 function setup() {
   createCanvas(400, 400);
   pixelDensity(1);
-  //image.size(width/w,height/w);
   
 }
-
 function draw() {
   background(220);
   img.loadPixels();
@@ -2139,7 +1447,6 @@ function draw() {
   
  
 }var img;
-
 function setup() {
   createCanvas(100, 100);
   img = createImage(100,100);
@@ -2151,25 +1458,20 @@ function setup() {
   }
   img.updatePixels();
 }
-
 function draw() {
   background(220);
   image(img,0,0);
 }var video;
-
 var vscale = 16;
-
 function preload() {
   img = loadImage('IMG_4553.JPG');
 }
-
 function setup() {
   createCanvas(640, 480);
   pixelDensity(1);
   video = createCapture(VIDEO);
   video.size(width/vscale,height/vscale);
 }
-
 function draw() {
   background(250);
   
@@ -2184,28 +1486,20 @@ function draw() {
       var bright = (r+g+b)/3;
       
       var w= map(r,0,255,0,vscale);
-      	//hint(r,120,b);
       	noStroke();
       	image(img, i*vscale, j*vscale,w, w);
-      	//ellipse(i*vscale,j*vscale,w,w);
-      // noprotect
     }
   }
-  //updatePixels();
 }var video;
-
 var vScale = 16;
-
 function setup() {
   createCanvas(640, 480);
   pixelDensity(1);
   video = createCapture(VIDEO);
   video.size(width/vScale, height/vScale);
 }
-
 function draw() {
   background(51);
-
   video.loadPixels();
   loadPixels();
   for (var y = 0; y < video.height; y++) {
@@ -2214,31 +1508,24 @@ function draw() {
       var r = video.pixels[index+0];
       var g = video.pixels[index+1];
       var b = video.pixels[index+2];
-
       var bright = (r+g+b)/3;
-
       var w = map(bright, 0, 255, 0, vScale);
-
       noStroke();
       fill(255);
       rectMode(CENTER);
       rect(x*vScale, y*vScale, w, w);
-
     }
   }
  
 }
 var video;
-
 var vscale = 16;
-
 function setup() {
   createCanvas(640, 480);
   pixelDensity(1);
   video = createCapture(VIDEO);
   video.size(width/vscale,height/vscale);
 }
-
 function draw() {
   background(250);
   
@@ -2256,47 +1543,33 @@ function draw() {
       	fill(r,120,b);
       	noStroke();
       	ellipse(i*vscale,j*vscale,w,w);
-      // noprotect
     }
   }
-  //updatePixels();
 }var video;
-
-
 function setup() {
   createCanvas(800, 240);
   video = createCapture(VIDEO);
   video.size(320,240);
-  //video.hide();
 	
 }
-
-
 function draw() {
   
     image(video,0,0);
     
   
 }
-
 var video;
 var button;
 var snapshots = [];
 var go = false;
-
 function setup() {
   createCanvas(800, 240);
   video = createCapture(VIDEO,ready);
   video.size(320,240);
-  //video.hide();
- 	// button = createButton('snap');
-  //button.mousePressed(takesnap);
 }
-
 function ready(){
 	go = true;
 }
-
 function draw() {
   if(go){
   snapshots.push(video.get());
@@ -2307,7 +1580,6 @@ function draw() {
   var l = 60;
   for(var i = 0;i<snapshots.length;i++){
     
-    //tint(255,50);
     image(snapshots[i],x,y,w,l);
     x = x + w;
     if (x >width){
@@ -2317,51 +1589,30 @@ function draw() {
   }
   
 }
-
-// Declare a "SerialPort" object
-let serial;
-let latestData = "waiting for data"; // you'll use this to write incoming data to the canvas
 let correctkey = 1;
 var keynumber = [1, 2, 3];
 let lastData;
-
 let hole;
-
-
 var windowframe;
 var redbg;
-
 var windowclosed;
-
 var dolls;
 var dollseyes;
-
 var happytwins;
-
 let crownlaugh;
 var crownLaughed = false;
 let crying;
-
 let i = 0;
 let count= 0;
-
 let clown;
 let clownY = 130;
 let clownYminus = 5;
-
 let happysong;
 let happysonged = false;
-
 let beginning;
 let began = false;
-
 let sign; 
-
 let slogan;
-
-
-
-
 function preload() {
   hole = loadImage('hole.png');
   windowframe = loadImage('window2.png');
@@ -2378,49 +1629,19 @@ function preload() {
   sign = loadImage('sign.png');
   slogan = loadImage('slogan.png');
 }
-
-
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
-
-  // Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-  serial.open("/dev/cu.usbmodem1411");
-  serial.on('data', gotData);
 }
-
-// There is data available to work with from the serial port
 function gotData() {
-  var currentString = serial.readLine(); // read the incoming string
-  trim(currentString); // remove any trailing whitespace
-  if (!currentString) return; // if the string is empty, do no more
-  console.log("DATA: " + currentString); // println the string
-  latestData = Number(currentString); // save it for the draw method
 }
-
 function draw() {
-
-  //background red+orange
   image(redbg, 0, 0);
-
-  //characters coming here
-
-  //dolls 
   image(dolls, 0, 0);
   let transeyes = [0, 100, 100, 100, 100, 255];
   image(dollseyes, 0, 0, random(transeyes));
-
-  //flashing light
   fill(0, random(0, 100));
   rect(0, 0, windowWidth, windowHeight);
-
-  //the window
   image(windowframe, 0, -30);
-
-
-  //reset the correct key 
   if (latestData == 4) {
     
      if (!began) {
@@ -2433,16 +1654,10 @@ function draw() {
     
     
   }
-
   fill(255);
   textSize(30);
-
-  //the correct key 
-
-
   if (latestData == correctkey) {
     image(windowclosed, 0, -30);
-
     i++;
     if (i > 80) {
       happyending();
@@ -2460,8 +1675,6 @@ function draw() {
                    console.log('return');
                   }
 		
-
-    //the wrong key   
   } else if (latestData != correctkey && (latestData == 1 || latestData == 2 || latestData == 3)) {
     began = false;
     console.log(began);
@@ -2473,7 +1686,6 @@ function draw() {
       crownLaughed = true;
     }
     image(redbg, 0, 0);
-
     
     clownY-=clownYminus;
     
@@ -2485,16 +1697,11 @@ function draw() {
     
     }
     
-    //dolls 
     image(dolls, 0, 0);
     let transeyes = [0, 100, 100, 100, 100, 255];
     image(dollseyes, 0, 0, random(transeyes));
-
-    //flashing light
     fill(0, random(0, 100));
     rect(0, 0, windowWidth, windowHeight);
-
-    //the window
     image(windowframe, 0, -30);
     
     push();
@@ -2503,40 +1710,21 @@ function draw() {
     fill('#fe9200');
     text(correctkey,1138,276);
     pop();
-
-    //text("no!",windowWidth/2,windowHeight/2);
   }
-
-  //console.log(correctkey, latestData);
-
 }
-
-
 function happyending() {
   image(slogan,0,-30);
   image(happytwins, 0, 0);
   image(windowframe, 0, -30);
-
 }
-
 function return2default(){
-	//background red+orange
   image(redbg, 0, 0);
-
-  //characters coming here
-
-  //dolls 
   image(dolls, 0, 0);
   let transeyes = [0, 100, 100, 100, 100, 255];
   image(dollseyes, 0, 0, random(transeyes));
-
-  //flashing light
   fill(0, random(0, 100));
   rect(0, 0, windowWidth, windowHeight);
-
-  //the window
   image(windowframe, 0, -30);
-
 	correctkey = random(keynumber);
     crownLaughed = false;
     clownYminus = 5;
@@ -2546,130 +1734,68 @@ function return2default(){
     began = false;
   count = 0;
 }
-
-
-
-/*  Arduino CODE
-
 #define SENSORPIN1 9
 #define SENSORPIN2 5
 #define SENSORPIN3 3
 #define button 13
-
 int sensorState1 = 0,lastState1 = 0;
 int sensorState2 = 0,lastState2 = 0;
 int sensorState3 = 0,lastState3 = 0;
 int buttonState = 0, lastState_button =0;
-
-
 void setup() {
-  // put your setup code here, to run once:
 pinMode(SENSORPIN1,INPUT);
 digitalWrite(SENSORPIN1,HIGH);
-
 pinMode(SENSORPIN2,INPUT);
 digitalWrite(SENSORPIN2,HIGH);
-
 pinMode(SENSORPIN3,INPUT);
 digitalWrite(SENSORPIN3,HIGH);
-
 pinMode(button,INPUT);
-
-Serial.begin(9600);
-
 }
-
 void loop() {
-  // put your main code here, to run repeatedly:
-
 sensorState1 = digitalRead(SENSORPIN1);
-
 sensorState2 = digitalRead(SENSORPIN2);
-
 sensorState3 = digitalRead(SENSORPIN3);
-
 buttonState = digitalRead(button);
-
-
-//sensor1
  if (sensorState1 && !lastState1) {
-    Serial.println(1);
   } 
-  /*if (!sensorState1 && lastState1) {
-    Serial.println("SENSORPIN 1 is Broken");
   lastState1 = sensorState1;
-
-//sensor2
  if (sensorState2 && !lastState2) {
-    Serial.println(2);
   } 
-
   lastState2 = sensorState2;
-
-
-//sensor3
  if (sensorState3 && !lastState3) {
-    Serial.println(3);
   } 
    lastState3 = sensorState3;
-
-
-//button
 if(buttonState && !lastState_button){
- Serial.println(4);
 }
 if(!buttonState && lastState_button){
-  Serial.println(5);
 }
 lastState_button = buttonState;
   
  
 }
-
-
-
-
-*/// Declare a "SerialPort" object
-let serial;
-let latestData = "waiting for data"; // you'll use this to write incoming data to the canvas
 let correctkey = 1;
 var keynumber = [1, 2, 3];
 let lastData;
-
 let hole;
-
-
 var windowframe;
 var redbg;
-
 var windowclosed;
-
 var dolls;
 var dollseyes;
-
 var happytwins;
-
 let crownlaugh;
 var crownLaughed = false;
 let crying;
-
 let i = 0;
-
 let clown;
 let clownY = 130;
 let clownYminus = 5;
-
 let happysong;
 let happysonged = false;
-
 let beginning;
 let began = false;
-
 let sign; 
-
 let slogan;
-
-
 function preload() {
   hole = loadImage('hole.png');
   windowframe = loadImage('window2.png');
@@ -2686,49 +1812,19 @@ function preload() {
   sign = loadImage('sign.png');
   slogan = loadImage('slogan.png');
 }
-
-
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
-
-  // Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-  serial.open("/dev/cu.usbmodem1411");
-  serial.on('data', gotData);
 }
-
-// There is data available to work with from the serial port
 function gotData() {
-  var currentString = serial.readLine(); // read the incoming string
-  trim(currentString); // remove any trailing whitespace
-  if (!currentString) return; // if the string is empty, do no more
-  console.log("DATA: " + currentString); // println the string
-  latestData = Number(currentString); // save it for the draw method
 }
-
 function draw() {
-
-  //background red+orange
   image(redbg, 0, 0);
-
-  //characters coming here
-
-  //dolls 
   image(dolls, 0, 0);
   let transeyes = [0, 100, 100, 100, 100, 255];
   image(dollseyes, 0, 0, random(transeyes));
-
-  //flashing light
   fill(0, random(0, 100));
   rect(0, 0, windowWidth, windowHeight);
-
-  //the window
   image(windowframe, 0, -30);
-
-
-  //reset the correct key 
   if (latestData == 4) {
     correctkey = random(keynumber);
     crownLaughed = false;
@@ -2747,16 +1843,10 @@ function draw() {
     
     
   }
-
   fill(255);
   textSize(30);
-
-  //the correct key 
-
-
   if (latestData == correctkey) {
     image(windowclosed, 0, -30);
-
     i++;
     if (i > 80) {
       happyending();
@@ -2768,10 +1858,7 @@ function draw() {
     }
       began = false;
     }
-
 		
-
-    //the wrong key   
   } else if (latestData != correctkey && (latestData == 1 || latestData == 2 || latestData == 3)) {
     began = false;
     console.log(began);
@@ -2783,7 +1870,6 @@ function draw() {
       crownLaughed = true;
     }
     image(redbg, 0, 0);
-
     
     clownY-=clownYminus;
     
@@ -2795,16 +1881,11 @@ function draw() {
     
     }
     
-    //dolls 
     image(dolls, 0, 0);
     let transeyes = [0, 100, 100, 100, 100, 255];
     image(dollseyes, 0, 0, random(transeyes));
-
-    //flashing light
     fill(0, random(0, 100));
     rect(0, 0, windowWidth, windowHeight);
-
-    //the window
     image(windowframe, 0, -30);
     
     push();
@@ -2813,114 +1894,59 @@ function draw() {
     fill('#fe9200');
     text(correctkey,1138,276);
     pop();
-
-    //text("no!",windowWidth/2,windowHeight/2);
   }
-
   console.log(correctkey, latestData);
-
 }
-
-
 function happyending() {
   image(slogan,0,-30);
   image(happytwins, 0, 0);
   image(windowframe, 0, -30);
-
 }
-
 function return2default(){
 	
 }
-
-
-
-/*  Arduino CODE
-
 #define SENSORPIN1 9
 #define SENSORPIN2 5
 #define SENSORPIN3 3
 #define button 13
-
 int sensorState1 = 0,lastState1 = 0;
 int sensorState2 = 0,lastState2 = 0;
 int sensorState3 = 0,lastState3 = 0;
 int buttonState = 0, lastState_button =0;
-
-
 void setup() {
-  // put your setup code here, to run once:
 pinMode(SENSORPIN1,INPUT);
 digitalWrite(SENSORPIN1,HIGH);
-
 pinMode(SENSORPIN2,INPUT);
 digitalWrite(SENSORPIN2,HIGH);
-
 pinMode(SENSORPIN3,INPUT);
 digitalWrite(SENSORPIN3,HIGH);
-
 pinMode(button,INPUT);
-
-Serial.begin(9600);
-
 }
-
 void loop() {
-  // put your main code here, to run repeatedly:
-
 sensorState1 = digitalRead(SENSORPIN1);
-
 sensorState2 = digitalRead(SENSORPIN2);
-
 sensorState3 = digitalRead(SENSORPIN3);
-
 buttonState = digitalRead(button);
-
-
-//sensor1
  if (sensorState1 && !lastState1) {
-    Serial.println(1);
   } 
-  /*if (!sensorState1 && lastState1) {
-    Serial.println("SENSORPIN 1 is Broken");
   lastState1 = sensorState1;
-
-//sensor2
  if (sensorState2 && !lastState2) {
-    Serial.println(2);
   } 
-
   lastState2 = sensorState2;
-
-
-//sensor3
  if (sensorState3 && !lastState3) {
-    Serial.println(3);
   } 
    lastState3 = sensorState3;
-
-
-//button
 if(buttonState && !lastState_button){
- Serial.println(4);
 }
 if(!buttonState && lastState_button){
-  Serial.println(5);
 }
 lastState_button = buttonState;
   
  
 }
-
-
-
-
-*/var boba;
-
 function preload(){
 	boba = loadJSON('Menu.json');
 }
-
 function setup() {
   createCanvas(400, 400);
   let price = boba.Appetizers.Fruit_Tea_Boba.Large;
@@ -2928,16 +1954,13 @@ function setup() {
  
   
 }
-
 function draw() {
   background(220);
   
 }var boba;
-
 function preload(){
 	boba = loadJSON('Menu.json');
 }
-
 function setup() {
   createCanvas(400, 400);
   let price = boba.Appetizers[0].sizes[0].price;
@@ -2945,92 +1968,60 @@ function setup() {
  
   
 }
-
 function draw() {
   background(220);
   
-}// Get your own API Key @http://developer.nytimes.com
 let allWords = [];
 let ts = 16;
 let i = 0;
-
 function preload() {
   let q = "trump";
-  let apikey = "Get your own API from http://developer.nytimes.com";
-  let url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + q + "&api-key=" + apikey;
   loadJSON(url, processSnippets);
   
-  // load the api of article search with the key word of trump
 }
-
 function setup() {
   createCanvas(800, 800);
   fill(0);
 }
-
-
 function draw() {
-  background(255, 5);//draw a new background with 5% of transparency every time a word appears
   ts++;
-  ts %= 48;//change the text size from 16 to 48
   if (allWords.length > 0) {
     i += 1;
     i %= allWords.length;
     textSize(ts);
-    let word = allWords[floor(i)]; //get every word in allWords array
-    text(allWords[floor(i)], random(width), random(height)); // place it randomly in the canvas
   }
 }
-
-
-
 function processSnippets(data) {
   let docs = data.response.docs;
   console.log(data);
-
   let putins = ["Putin", "Vladi", "Vlad", "Vova"];
   let trumps = ["Trump", "president", "President"];
-
-
   for (let doc of docs) {
-    let words = splitTokens(doc.snippet); // get all the words in snippet
-    //console.log(words);
     for (let w in words) {
       let word = words[w];
       for (let trump of trumps) {
-        if (match(word, trump)) {//if the word in snippet match the word in array trumps
-          words[w] = putins[floor(random(putins.length))]; //replace that word with a random word in putins
           break;
         }
       }
       shuffle(words, true);
     }
-    allWords = concat(allWords, words);//put all the words together
   }
 }let txt;
 let tokens = [];
-
 function preload() {
   txt = loadStrings('text.txt');
-
 }
-
-
 function setup() {
   createCanvas(400, 400);
   for (let i of txt) {
     tokens = concat(tokens, splitTokens(i));
   }
-  //console.log(tokens);
 }
-
 function draw() {
   background(220);
-
   textSize(20);
   let x = 10;
   let y = 50;
-
   for (let token of tokens) {
     text(token, x, y);
     x = x + textWidth(token) + textWidth('a');
@@ -3039,34 +2030,22 @@ function draw() {
       x = 10;
     }
   }
-
-
 }var weather;
-var api = 'https://api.openweathermap.org/data/2.5/find?q=';
 var city ='Beijing';
 var unit ='&units=metric';
 var userkey = '&appid=8075f0f23a9fe47353466313848609c3';
 var input;
-
 function setup(){
 createCanvas(600,250);
   var button =select('#submit');
   button.mousePressed(askWeather);
   input=select('#city');
-
 }
-
 function askWeather(){
-
   var url = api+input.value()+unit+userkey;
   loadJSON(url, gotData);
-
-
-
 }
-
 function gotData(data){
-  print(data);
   weather=data;
 }
 function draw(){
@@ -3109,11 +2088,8 @@ function draw(){
     
     
     
-
   }
-
 }
-
 function headtext(){
     textSize(13);
     fill(255);
@@ -3123,7 +2099,6 @@ function headtext(){
   text('WindSpeed', 40, 190);
   
 }
-
 function description(){
    textSize(10);
     fill(255);
@@ -3131,29 +2106,16 @@ function description(){
     text('Humidity', 40, 90);
     text('Pressure', 40, 140);
 }
-
 var url=[];
-
-var api = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q="
 var begin_date;
 var end_date;
 var key_word;
-
 var snippet=[];
 var headlines = [];
-
 var article;
-
-var submit; //the button 
-var begindate; // input of begin date
-var enddate; //input of enddate
 var keyword;
-
 var img;
-
 var time=[];
-
-
 function setup() {
   createCanvas(1600,300);
   
@@ -3167,7 +2129,6 @@ function setup() {
  
   
 }
-
 function draw() {
   fill(0);
 	ellipse(100,170,headlines.length*10);
@@ -3179,14 +2140,12 @@ function draw() {
   fill('#FF5733');
   text('numbers of articles',90,190);
   }
-  // meeting with some troubles as the number of articles is always smaller than 10 in the API
   
  for(i=0;i<headlines.length;i++){
     
   	var alltitles = createElement('h1',headlines[i]);
    	var allsnippet = createElement('h3',snippet[i]);
    	var alltimes = createElement('h4',time[i]);
-   	//alltitles.position(0,60+100*i)
     alltitles.style("color","black");
    	allsnippet.style("color","white ");
    	alltimes.style("color","#FF5733");
@@ -3196,7 +2155,6 @@ function draw() {
   
  
 }
-
 function gotData(data) {
   
 	article = data.response.docs;
@@ -3220,55 +2178,36 @@ function gotData(data) {
   
   
 }
-
 function timeupdate(){
 	begin_date = begindate.value();
   end_date = enddate.value();
   key_word = keyword.value();
   for(let page = 0;page<10;page++){
   url[page] = api +key_word+"?page="+page+ "&api-key=b20d32b716bf4f4c817cc818c91d7000&begin_date="+ begin_date +"&end_date=" + end_date ;
- 	//it doesn't work...
   }
   loadJSON(url[3], gotData);  
   console.log(url);
 }
-
-
-
-
-
 let weather;
 let url;
-var cityname; //the input of the city 
-
 let temp;
 let pressure; 
 let humidity;
 let windspeed;
 let cloud;
-
 let imagetest;
-
-
-let api ="https://api.openweathermap.org/data/2.5/find?q=";
-let city;//the text of the city
 let apikey ="&units=metric&appid=b8969a3f7ee75ed3210ef407f52694f7";
-
 function preload() {
   imgtest = loadImage('dolls.gif');
 }
-
-
 function setup() {
   createCanvas(600, 400);
   
   var button = select("#submit");
   button.mousePressed(weatherask);
-
   cityname = select("#city");
 	
 }
-
 function gotData(data){ 
   temp = data.list[0].main.temp;
   humidity = data.list[0].main.humidity;
@@ -3279,38 +2218,30 @@ function gotData(data){
   console.log('windspeed:'+windspeed);
   console.log('cloud:'+cloud);
 }
-
 function draw() {
   background(255);
   image(imgtest,0,0);
 }
-
 function weatherask(){
   city = cityname.value();
 	url = api+city+apikey;
   loadJSON(url,gotData);
 }function setup() {
   createCanvas(400, 400);
-  loadJSON("http://api.open-notify.org/astros.json",gotdata,'jsonp');
 }
-
 function gotdata(data){
 	console.log(data);
 }
-
 function draw() {
   background(220);
   
 }
 var data;
-
 function preload(){
 	data = loadJSON("bird.json");
 }
-
 function setup() {
   noCanvas();
-  //var bird = data.birds[1].members[2];
   var birds = data.birds;
   
   for(let i = 0; i< birds.length;i++){
@@ -3323,34 +2254,25 @@ function setup() {
   	}
  
 }
-
 function draw() {
   background(220);
 }var ff;
-
 function preload(){
   ff = loadJSON("sunflower.json");
 }
-
 function setup() {
   createCanvas(400, 400);
   
 }
-
 function draw() {
   background(ff.red,ff.green,ff.blue);
   text(ff.name,30,30);
 }var windowframe;
 var redbg;
-
 var windowclosed;
-
 var dolls;
 var dollseyes;
-
 var happytwins;
-
-
 function preload() {
   windowframe = loadImage('window2.png');
   redbg = loadImage('redbg.png');
@@ -3359,19 +2281,13 @@ function preload() {
   happytwins = loadImage('happytwins.png ');
   windowclosed = loadImage('closedwindow.jpg');
 }
-
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
 }
-
 function draw() {
-  //background red+orange
   image(redbg,0,0);
   
-  //characters coming here
   
-  //dolls 
    image(dolls,0,0);
   let transeyes = [0,100,100,100,100,255]; 
   image(dollseyes,0,0,random(transeyes));
@@ -3380,18 +2296,14 @@ function draw() {
   
   
   
-  //flashing light
   fill(0,random(0,100));
   rect(0,0,windowWidth,windowHeight);
 	
   
-
-//happy twins
   background('#f9e59f');
   image(happytwins,0,0);
   
   
-  //the window
   image(windowframe, 0, -30);
   
   
@@ -3404,15 +2316,10 @@ function draw() {
   
 }var windowframe;
 var redbg;
-
 var windowclosed;
-
 var dolls;
 var dollseyes;
-
 var happytwins;
-
-
 function preload() {
   windowframe = loadImage('window2.png');
   redbg = loadImage('redbg.png');
@@ -3421,19 +2328,13 @@ function preload() {
   happytwins = loadImage('happytwins.png ');
   windowclosed = loadImage('closedwindow.jpg');
 }
-
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
 }
-
 function draw() {
-  //background red+orange
   image(redbg,0,0);
   
-  //characters coming here
   
-  //dolls 
    image(dolls,0,0);
   let transeyes = [0,100,100,100,100,255]; 
   image(dollseyes,0,0,random(transeyes));
@@ -3442,18 +2343,14 @@ function draw() {
   
   
   
-  //flashing light
   fill(0,random(0,100));
   rect(0,0,windowWidth,windowHeight);
 	
   
-
-//happy twins
   background('#f9e59f');
   image(happytwins,0,0);
   
   
-  //the window
   image(windowframe, 0, -30);
   
   
@@ -3464,47 +2361,29 @@ function draw() {
  }
   
   
-}// Declare a "SerialPort" object
-let serial;
-let latestData = "waiting for data"; // you'll use this to write incoming data to the canvas
 let correctkey = 1;
 var keynumber = [1, 2, 3];
 let lastData;
-
 let hole;
-
-
 var windowframe;
 var redbg;
-
 var windowclosed;
-
 var dolls;
 var dollseyes;
-
 var happytwins;
-
 let crownlaugh;
 var crownLaughed = false;
 let crying;
-
 let i = 0;
-
 let clown;
 let clownY = 130;
 let clownYminus = 5;
-
 let happysong;
 let happysonged = false;
-
 let beginning;
 let began = false;
-
 let sign; 
-
 let slogan;
-
-
 function preload() {
   hole = loadImage('hole.png');
   windowframe = loadImage('window2.png');
@@ -3521,49 +2400,19 @@ function preload() {
   sign = loadImage('sign.png');
   slogan = loadImage('slogan.png');
 }
-
-
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
-
-  // Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-  serial.open("/dev/cu.usbmodem1411");
-  serial.on('data', gotData);
 }
-
-// There is data available to work with from the serial port
 function gotData() {
-  var currentString = serial.readLine(); // read the incoming string
-  trim(currentString); // remove any trailing whitespace
-  if (!currentString) return; // if the string is empty, do no more
-  console.log("DATA: " + currentString); // println the string
-  latestData = Number(currentString); // save it for the draw method
 }
-
 function draw() {
-
-  //background red+orange
   image(redbg, 0, 0);
-
-  //characters coming here
-
-  //dolls 
   image(dolls, 0, 0);
   let transeyes = [0, 100, 100, 100, 100, 255];
   image(dollseyes, 0, 0, random(transeyes));
-
-  //flashing light
   fill(0, random(0, 100));
   rect(0, 0, windowWidth, windowHeight);
-
-  //the window
   image(windowframe, 0, -30);
-
-
-  //reset the correct key 
   if (latestData == 4) {
     correctkey = random(keynumber);
     crownLaughed = false;
@@ -3582,16 +2431,10 @@ function draw() {
     
     console.log(buttoncount);
   }
-
   fill(255);
   textSize(30);
-
-  //the correct key 
-
-
   if (latestData == correctkey) {
     image(windowclosed, 0, -30);
-
     i++;
     if (i > 80) {
       happyending();
@@ -3603,10 +2446,7 @@ function draw() {
     }
       began = false;
     }
-
 		
-
-    //the wrong key   
   } else if (latestData != correctkey && (latestData == 1 || latestData == 2 || latestData == 3)) {
     began = false;
     console.log(began);
@@ -3618,7 +2458,6 @@ function draw() {
       crownLaughed = true;
     }
     image(redbg, 0, 0);
-
     
     clownY-=clownYminus;
     
@@ -3630,16 +2469,11 @@ function draw() {
     
     }
     
-    //dolls 
     image(dolls, 0, 0);
     let transeyes = [0, 100, 100, 100, 100, 255];
     image(dollseyes, 0, 0, random(transeyes));
-
-    //flashing light
     fill(0, random(0, 100));
     rect(0, 0, windowWidth, windowHeight);
-
-    //the window
     image(windowframe, 0, -30);
     
     push();
@@ -3648,127 +2482,62 @@ function draw() {
     fill('#fe9200');
     text(correctkey,1138,276);
     pop();
-
-    //text("no!",windowWidth/2,windowHeight/2);
   }
-
-  //console.log(correctkey, latestData);
-
 }
-
-
 function happyending() {
   image(slogan,0,-30);
   image(happytwins, 0, 0);
   image(windowframe, 0, -30);
-
-
-
-
 }
-
-
-
-/*  Arduino CODE
-
 #define SENSORPIN1 9
 #define SENSORPIN2 5
 #define SENSORPIN3 3
 #define button 13
-
 int sensorState1 = 0,lastState1 = 0;
 int sensorState2 = 0,lastState2 = 0;
 int sensorState3 = 0,lastState3 = 0;
 int buttonState = 0, lastState_button =0;
-
-
 void setup() {
-  // put your setup code here, to run once:
 pinMode(SENSORPIN1,INPUT);
 digitalWrite(SENSORPIN1,HIGH);
-
 pinMode(SENSORPIN2,INPUT);
 digitalWrite(SENSORPIN2,HIGH);
-
 pinMode(SENSORPIN3,INPUT);
 digitalWrite(SENSORPIN3,HIGH);
-
 pinMode(button,INPUT);
-
-Serial.begin(9600);
-
 }
-
 void loop() {
-  // put your main code here, to run repeatedly:
-
 sensorState1 = digitalRead(SENSORPIN1);
-
 sensorState2 = digitalRead(SENSORPIN2);
-
 sensorState3 = digitalRead(SENSORPIN3);
-
 buttonState = digitalRead(button);
-
-
-//sensor1
  if (sensorState1 && !lastState1) {
-    Serial.println(1);
   } 
-  /*if (!sensorState1 && lastState1) {
-    Serial.println("SENSORPIN 1 is Broken");
   lastState1 = sensorState1;
-
-//sensor2
  if (sensorState2 && !lastState2) {
-    Serial.println(2);
   } 
-
   lastState2 = sensorState2;
-
-
-//sensor3
  if (sensorState3 && !lastState3) {
-    Serial.println(3);
   } 
    lastState3 = sensorState3;
-
-
-//button
 if(buttonState && !lastState_button){
- Serial.println(4);
 }
 if(!buttonState && lastState_button){
-  Serial.println(5);
 }
 lastState_button = buttonState;
   
  
 }
-
-
-
-
-*/// Declare a "SerialPort" object
-
 let ding;
-
 function preload() {
 	ding= loadSound('415510__inspectorj__bell-counter-a.wav');
 }
-let serial;
-let latestData = "waiting for data"; // you'll use this to write incoming data to the canvas
-
-let xball = [400,600,650,700,800,840,920,1000,1300,1500,1600,1800,1900,2100,2150,2400];//the start position of balls
 let balls = [];
-
 let ballcolors = [0,'#AF5F3C'];
 let ballcolor = 0;
-
 let score = 0;
 let laststate = false;
 let thisstate = false;
-
 function setup() {
   createCanvas(700, 500);
   
@@ -3776,38 +2545,21 @@ function setup() {
   balls[i] = new ball(xball[i]);
   }
   
-  // Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-  serial.open("/dev/cu.usbmodem1411");
-  serial.on('data', gotData);
 }
-
-// There is data available to work with from the serial port
 function gotData() {
-  var currentString = serial.readLine(); // read the incoming string
-  trim(currentString); // remove any trailing whitespace
-  if (!currentString) return; // if the string is empty, do no more
-  console.log("DATA: " + currentString); // println the string
-  latestData = currentString; // save it for the draw method
 }
-
 function draw() {
  background("#EFBB24");
-  //text(score,660,30);
   stroke('#CB4042');
   line(50,0,50,500);
 	for(let j = 0; j<balls.length;j++){
-    //console.log(balls[j].x);
-    THISSTATE(); // give this statevalue
     if(balls[j].online() && thisstate){
     	balls[j].c = '#AF5F3C';
       ding.setVolume(0.1);
   		ding.play();
-      //score++;
       
     }
     else{
-      //fill(5);
     }
     laststate = thisstate;
     console.log(laststate);
@@ -3817,12 +2569,10 @@ function draw() {
   }
 	
 }
-
 class ball{
 	constructor(x){
   	this.x = x;
     this.c = ballcolor;
-    //this.y = 250;
   }
   
   show(){
@@ -3840,10 +2590,8 @@ class ball{
   	return(this.x >0 && this.x < 50);
   }
   
-
   
 }
-
 function THISSTATE(){
 	if(latestData == 0){
   	thisstate =  true;
@@ -3852,20 +2600,14 @@ function THISSTATE(){
   	thisstate = false;
   }
   
-}//var words = "A string walks into a bar and orders a drink. The bartender says we don't serve strings in here and you're a string. Nope, I'm a frayed knot."
 let txt;
 let tokens = [];
-
 let arrayx= [];
-
 let textbeginx = 0;
 let textbeginy = 0;
 function preload(){
-	txt = loadStrings('text.txt'); //create a new array
   
 }
-
-
 function setup() {
   
   
@@ -3876,11 +2618,7 @@ function setup() {
   	tokens = concat(tokens,splitTokens(i));
   }
  
-  //tokens = splitTokens(txt[0]);
-  //tokens = splitTokens(txt[0],'t');// t是断点
-  //console.log(tokens.length);
 }
-
 function draw() {
   background(220);
   
@@ -3890,10 +2628,7 @@ function draw() {
   textAlign(LEFT);
   
   
- // if(mouseIsPressed)
- // {
   arrayx.push(tokens);
-  //console.log(arrayx[0]);
   
   
   let x = 10;
@@ -3915,66 +2650,33 @@ function draw() {
     
     
   }
- // }
   text('X:'+mouseX,300,300);
   text('Y:'+mouseY,300,350);
  
  	
-  //text(words,20,20,300,300);
 }let starty =300;
-
 function setup() {
   createCanvas(300, 300);
 }
-
 function draw() {
   background(220);
   beginShape();
-  vertex(120,starty+20);//1
-  vertex(140,starty+20);//2
-  vertex(150,starty); //3
-  vertex(160,starty+20); //4
-  vertex(180,starty+20); //5
-  vertex(165,starty+35);//6
-  vertex(170,starty+55);//7
-  vertex(150,starty+45);//8
-  vertex(130,starty+55);//9
-  vertex(135,starty+35);//10
-  vertex(120,starty+20);//11
   endShape();
   starty--;
-}// Declare a "SerialPort" object
-let serial;
-let latestData = "waiting for data"; // you'll use this to write incoming data to the canvas
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  // Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-  serial.open("/dev/cu.usbmodem1411");
-  serial.on('data', gotData);
   setInterval(function() {
     console.log("HELLO");
-    serial.write(1);
   }, 1000);
 }
-
-// There is data available to work with from the serial port
 function gotData() {
-  var currentString = serial.readLine(); // read the incoming string
-  trim(currentString); // remove any trailing whitespace
-  if (!currentString) return; // if the string is empty, do no more
-  console.log("DATA: " + currentString); // println the string
-  latestData = currentString; // save it for the draw method
 }
-
 function draw() {
  
 }function preload() {
  thunder = loadSound('193170__netaj__thunder.wav');
 	ding= loadSound('415510__inspectorj__bell-counter-a.wav');
 }
-
 let canvas1;
 let thismoment;
 let starty;
@@ -3985,8 +2687,6 @@ let p;
 let inputname;
 let buttonname;
 let Dname;
-//let startend;
-
 function setup() {
   canvas1 = createCanvas(300, 300);
   canvas1.position(windowWidth/2-150,0);
@@ -4006,57 +2706,37 @@ function setup() {
   
   up = select("#up");
   up.mouseWheel(starshow);
-  //up.mouseOut(starnotshow);
   
   starword = select("#star");
   
   p = selectAll("p");
 }
-
 function draw() {
   background(30,30,30,bgopacity);
   stroke(255);
   fill(255);
   beginShape();
-  vertex(120,starty+20);//1
-  vertex(140,starty+20);//2
-  vertex(150,starty); //3
-  vertex(160,starty+20); //4
-  vertex(180,starty+20); //5
-  vertex(165,starty+35);//6
-  vertex(170,starty+55);//7
-  vertex(150,starty+45);//8
-  vertex(130,starty+55);//9
-  vertex(135,starty+35);//10
-  vertex(120,starty+20);//11
   endShape();
-  //ellipse(150,starty,30,30);
   if(starty>=200){
   starty-=3;
   }
   
 }
-
-
-
 function momenthappen(){
 	thismoment.style("text-decoration-line","underline line-through");
   thunder.setVolume(0.3);
   thunder.play();
   
   for(let i in p){
-  //let colorp = random(100);
   p[i].style("color", "black");
   }
 }
-
 function momentnothappen(){
   thismoment.style("text-decoration-line","underline")
   for(let i in p){
   p[i].style("color", "white");
   }
 }
-
 function starshow(){
   starty = 300;
   bgopacity = 255;
@@ -4065,37 +2745,28 @@ function starshow(){
   starword.style("color","white");
   
 }
-
 function showname(){
 	Dname.html(inputname.value());
-  //inputname.position(windowWidth+100,0);
-  //buttonname.position(windowWidth+100,0);
   
 }
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
-  //ellipse(200,200,20,20);
 }function setup() {
   noCanvas();
 }
-
 function draw() {
   background(220);
 }let sad;
 let rainx ;
 let rainy ;
-
 function setup() {
   var canvas = createCanvas(200, 200);
   
@@ -4103,29 +2774,24 @@ function setup() {
   sad.mouseOver(raining);
   canvas.position(200,0);
 }
-
 function draw() {
   background(220,0);
   ellipse(rainx,rainy,30,30);
   rainy++;
 }
-
 function raining(){
   fill('blue');
   rainx = 40;
   rainy = 40;
   sad.position(50,100);
-	//ellipse(rainx,rainy,30,30);
   
 }let balls = [];
-
 function setup() {
   createCanvas(400, 400);
   for(let i=0;i<10;i++){
   	balls[i] = new ball(255);
   }
 }	
-
 function draw() {
   background(220);
   for(let j in balls){
@@ -4133,7 +2799,6 @@ function draw() {
     balls[j].fadeout();
   }
 }
-
 class ball{
 	constructor(o){
     this.o = o;
@@ -4148,7 +2813,6 @@ class ball{
     this.o -=3;
   }
   
-
 }let redballs ;
 let score =0;
 let laststate = false;
@@ -4156,14 +2820,12 @@ let currentstate = false;
 let j=0;
 let obegin;
 let oend;
-
 function setup() {
   createCanvas(400, 400);
   
   redballs= new redball(255);
   
 }
-
 function draw() {
   background(220);
   
@@ -4177,7 +2839,6 @@ function draw() {
   	currentstate = false;
   }
   
-  //for(i=0;i<redballs.length;i++){
   redballs.fadeout();
   if(redballs.hit() && currentstate && !laststate){
     stroke('red');
@@ -4192,13 +2853,8 @@ function draw() {
   noStroke();
   fill(100);
   text(score, 30,30);
-  //console.log(currentstate);
 }
-
   
-
-
-
 class redball{
 	constructor(o){
   	this.o = o;
@@ -4212,7 +2868,6 @@ class redball{
   fadeout(){
     this.o -=3;
     noFill();
-    //fill(255,0,0,this.o);
     if(this.o>obegin && this.o<oend){
     strokeWeight(10);
     stroke(0,0,255);
@@ -4229,24 +2884,19 @@ class redball{
   hit(){
     return(this.o>obegin && this.o<oend);
   }
-
   
-
 }
-
 let redballs ;
 let score =0;
 let laststate = false;
 let currentstate = false;
 let j=0;
-
 function setup() {
   createCanvas(400, 400);
   
   redballs= new redball(255);
   
 }
-
 function draw() {
   background(220);
   
@@ -4257,7 +2907,6 @@ function draw() {
   	currentstate = false;
   }
   
-  //for(i=0;i<redballs.length;i++){
   redballs.fadeout();
   if(redballs.hit() && currentstate && !laststate){
     stroke('red');
@@ -4272,13 +2921,8 @@ function draw() {
   noStroke();
   fill(100);
   text(score, 30,30);
-  //console.log(currentstate);
 }
-
   
-
-
-
 class redball{
 	constructor(o){
   	this.o = o;
@@ -4292,7 +2936,6 @@ class redball{
   fadeout(){
     this.o -=3;
     noFill();
-    //fill(255,0,0,this.o);
     if(this.o>100 && this.o<200){
     strokeWeight(10);
     stroke(0,0,255);
@@ -4309,16 +2952,12 @@ class redball{
   hit(){
     return(this.o>100 && this.o<200);
   }
-
   
-
 }
-
 let blueballs = [];
 let i=0;
 let bluecount=0;
 let score = 0;
-
 function setup() {
   createCanvas(400, 400);
   for(i=0;i<30;i++){
@@ -4326,7 +2965,6 @@ function setup() {
   }
  frameRate(30);
 }
-
 function draw() {
   background(220);
   text(score,30,30);
@@ -4336,12 +2974,8 @@ function draw() {
   blueballs[0].expand();
   if(blueballs[0].normaldisappear() && blueballs.length>1){
   	blueballs.splice(0,1);
-    //score++;
   }
-
-
 }
-
 class blueball{
 	constructor(c){
   	this.x = random(180,220);
@@ -4363,7 +2997,6 @@ class blueball{
   normaldisappear(){
   	if(this.c>100){
     	return(this.c>100);	
-      //i++;
     }
   }
   
@@ -4371,7 +3004,6 @@ class blueball{
     this.c = 400;
   }
 }
-
 function keyPressed(){
   for(let ball in blueballs){
   if(blueballs.length>1 && key == 'a' ){
@@ -4382,120 +3014,62 @@ function keyPressed(){
 }
 let blueballs = [];
 let i;
-
 function setup() {
   createCanvas(400, 400);
   for(i=0;i<100;i++){
   blueballs[i] = new blueball; 
   }
 }
-
 function draw() {
   background(220);
   for(i=0;i<blueballs.length;i++){
   	blueballs[i].show();
   }
 }
-
 class blueball{
 	constructor(){
-  	//this.x = x;
-    //this.y = y;
   }
   
   show(){
     fill('blue');
   	ellipse(random(180,220),random(180,240),30,30);
   }
-}/* Danny Rozin
 Introduction to Physical Computing
 ITP
-
 This sketch will send one binary byte from P5 to arduino
 See arduino code in bottom, have LED connected to pin 3
-
-move mouseX to dim LED*/
-
-var serial; // variable to hold an instance of the serialport library
-var fromSerial = 0; //variable to hold the data
-
-
-
 function setup() {
   
-  serial = new p5.SerialPort(); // make a new instance of  serialport librar	
-  serial.on('list', printList); // callback function for serialport list event
-  serial.on('data', serialEvent); // callback for new data coming in	
-  serial.list(); // list the serial ports
-  serial.open("/dev/cu.usbmodem1421"); // open a port
   
   capture =createCapture(VIDEO);
   capture.size(320,240);
 }
-
 function draw() {
-  //image(capture,0,0,320,240);
   var pixelColor = get(mouseX,mouseY);
   var ourBrightness = brightness(pixelColor);
-  serial.write(mouseX); 
   
-  // sends as byte unles iyts a string
 }
-
-// get the list of ports:
-function printList(portList) {
   for (var i = 0; i < portList.length; i++) {
-    // Display the list the console:
-    println(i + " " + portList[i]);
   }
 }
-
-function serialEvent() {
-  // this is called when data is recieved	
 }
-
-/*  
-// Arduino Code 
 void setup() {
-  Serial.begin(9600);
 }
 void loop() {
-  if(Serial.available()){
-  byte byteFromSerial = Serial.read();
-  analogWrite(3,byteFromSerial);
   }
 }
-*/// Declare a "SerialPort" object
-let serial;
-let latestData = "waiting for data"; // you'll use this to write incoming data to the canvas
-
-
-
 function setup() {
   createCanvas(600, 600);
-  // Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-  serial.open("/dev/cu.usbmodem1411");
-  serial.on('data', gotData);
   setInterval(function() {
     console.log("HELLO");
-    serial.write(1);
   }, 1000);
   
 	noFill();
   strokeWeight(10);
   
 }
-
-// There is data available to work with from the serial port
 function gotData() {
-  var currentString = serial.readLine(); // read the incoming string
-  trim(currentString); // remove any trailing whitespace
-  if (!currentString) return; // if the string is empty, do no more
-  console.log("DATA: " + currentString); // println the string
-  latestData = currentString; // save it for the draw method
 }
-
 function draw() {
  	background(150, 0, 20);
   var v = map(latestData,50,250,600,height/2);
@@ -4506,60 +3080,33 @@ function draw() {
   line(230,380,200,450);
   line(230,380,260,450);
   
-}// Declare a "SerialPort" object
-let serial;
-let latestData = "waiting for data"; // you'll use this to write incoming data to the canvas
-
-
-
 function setup() {
   createCanvas(600, 600);
-  // Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-  serial.open("/dev/cu.usbmodem1411");
-  serial.on('data', gotData);
   setInterval(function() {
     console.log("HELLO");
-    serial.write(1);
   }, 1000);
   
 	noFill();
   strokeWeight(10);
   
 }
-
-// There is data available to work with from the serial port
 function gotData() {
-  var currentString = serial.readLine(); // read the incoming string
-  trim(currentString); // remove any trailing whitespace
-  if (!currentString) return; // if the string is empty, do no more
-  console.log("DATA: " + currentString); // println the string
-  latestData = currentString; // save it for the draw method
 }
-
 function draw() {
  	background(127, 0, 127);
   var v = map(latestData,50,250,600,0);
-
-  // Left Eye
   ellipse(width*.4, height*.4, v*.25 + 10, v*.25 + 10);
-
-  // Right Eye
   ellipse(width*.6, height*.4, (2500/v) + 10, (2500/v) + 10);
 	
-  // Mouth
   bezier(width*.3, v*.6 + height/2, width*.4, height*.8, width*.6, height*.8, width*.7, v*.55 + height/2);
   
   v+=random(-5, 5);
-  // Nose
   bezier(width*.5, height*.5, v*.6, height*.6, v*.6, height*.8, width*.45, height*.67);
-
   
 }var canvas;
 var button;
 var bgcolor;
 var slider;
-
 function setup() {
   canvas = createCanvas(400, 400);
   bgcolor = color(0);
@@ -4568,9 +3115,6 @@ function setup() {
   button.mousePressed(changecolor);
   slider = createSlider(0,40,0);
 }
-
-
-
 function draw() {
   background(20,140,bgcolor);
     for ( let i=0;i<slider.value();i++){
@@ -4580,19 +3124,15 @@ function draw() {
       }
   }
 }
-
 function changecolor(){
 	bgcolor = random(255);
 }let Balls = [];
-
 function setup() {
   createCanvas(400, 400);
   for(i=0;i<100;i++){
   	Balls[i] = new ball(random(width),random(height));
   }
 }
-
-
 function draw() {
   background(220);
   for(let b=0;b<Balls.length;b++){
@@ -4609,17 +3149,13 @@ function draw() {
   }
   
 }
-
 let Balls = [];
-
 function setup() {
   createCanvas(400, 400);
   for(i=0;i<100;i++){
   	Balls[i] = new ball(random(width),random(height));
   }
 }
-
-
 function draw() {
   background(220);
   for(let b=0;b<Balls.length;b++){
@@ -4630,34 +3166,24 @@ function draw() {
   }
   
 }
-
 let Balls = [];
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function mouseClicked(){
   let Ball = new ball(mouseX,mouseY);
   Balls.push(Ball);
 }
-
-
 function draw() {
   background(220);
   for(let b=0;b<Balls.length;b++){
   Balls[b].run();
   }
 }
-
-//let num1 = 1;
-//let num2 = 1;
 let input1;
 let input2;
 let sum;
-
 function setup() {
-  //createCanvas(400, 400);
   input1 = createInput();
   input1.position(50,200);
   input1.changed(returnsum);
@@ -4676,40 +3202,29 @@ function setup() {
   
   
 }
-
 function draw() {
-  //background(220);
-  //text('the sum is ' + add(num1,num2),160,200);
-  //sum.html(add(input1.value(),input2.value()));
   
 }
-
 function add(num1,num2){
 	return float(num1)+float(num2);
 }
-
 function returnsum(){
  sum.html(add(input1.value(),input2.value()));
 }let ball = [];
-
 function setup() {
   createCanvas(1440, 686);
   for (let i = 0; i < 100; i++) {
     ball[i] = new Ball(random(width), random(height), random(5), random(5), random(10, 50));
   }
 }
-
 function draw() {
   background(0);
   rectMode(CENTER);
   fill(255);
   rect(width / 2, height / 2, width - 20, height - 20);
   for (let q = 0; q < 100; q++) {
-
     ball[q].bounce();
     ball[q].show();
-    //ball[q].bounce();
-    //ball[q].show();
     
   }
   
@@ -4725,7 +3240,6 @@ function draw() {
   
   
 }
-
 class Ball {
   constructor(x, y, x1, y1, size) {
     this.x = x;
@@ -4734,7 +3248,6 @@ class Ball {
     this.y1 = y1;
     this.size = size;
   }
-
   bounce() {
     this.x += this.x1;
     this.y += this.y1;
@@ -4745,12 +3258,10 @@ class Ball {
       this.y1 = -this.y1;
     }
   }
-
   show() {
     fill(20, 20, this.c);
     ellipse(this.x, this.y, this.size, this.size);
   }
-
   light(other) {
     return (dist(this.x, this.y, other.x, other.y) <= (this.size / 2 + other.size/2));
     
@@ -4764,15 +3275,12 @@ class Ball {
 }let Mbackground = [];
 let speedx = 4;
 let speedy = 4;
-
-
 function setup() {
   createCanvas(400, 400);
   for (let i = 0; i < 100; i++) {
     Mbackground[i] = new mbackground(random(width / 2), random(height / 2), 0, 100, 100);
   }
 }
-
 function draw() {
   background(220);
   for (i = 0; i < 100; i++) {
@@ -4780,7 +3288,6 @@ function draw() {
     Mbackground[i].move();
     Mbackground[i].bounce();
   }
-
   for (let p = 0; p < 100; p++) {
     for (let j = 0; j < 100; j++) {
       if (Mbackground[p].insert(Mbackground[j])) {
@@ -4790,8 +3297,6 @@ function draw() {
     }
   }
 }
-
-
 class mbackground {
   constructor(x, y, c, lengthx, lengthy) {
     this.x = x;
@@ -4799,19 +3304,15 @@ class mbackground {
     this.c = c;
     this.lx = lengthx;
     this.ly = lengthy;
-
   }
-
   show() {
     stroke(this.c);
     line(this.x, this.y, this.x + this.lx, this.y + this.ly);
   }
-
   move() {
     this.x += speedx;
     this.y += speedy;
   }
-
   bounce() {
     if (this.y + this.ly >= height || this.y + this.ly <= 0) {
       speedy = -speedy;
@@ -4824,26 +3325,16 @@ class mbackground {
       this.ly = -this.ly;
     }
   }
-
-
   insert(other) {
     return ((this.lx / this.ly) != (other.lx / other.ly));
   }
-
   lightup() {
     this.c = 'red';
   }
-
-}// by NIANQI ZHANG & ZHE WANG
-// Please play it in fullscreen of PC
-
-//load content. text. color.sound
 let foodcontent = ['蛋 鱼', '粉 肠', '面 仔 公', '球 肉 牛', '仔 蛋 鸡'];
 let colorcontent = ['#BBD239', '#39D2C9', '#F39C12', '#D25539', '#EFEF1F'];
 let NEONTEXT = [];
 let ball = [];
-
-
 function preload() {
   NeonFont = loadFont('TpldKhangXiDictTrial.otf');
   foodsound[0] = loadSound('fish.mp3');
@@ -4852,39 +3343,26 @@ function preload() {
   foodsound[3] = loadSound('beef.mp3');
   foodsound[4] = loadSound('egg.mp3');
 }
-
-
 function setup() {
-
   createCanvas(1440, 686);
   rectMode(CENTER);
-
-  //load background ball into array;
   for (let i = 0; i < 150; i++) {
     ball[i] = new Ball(random(width), random(height), random(5), random(5), random(5, 30));
   }
   
-  //load neon text into array
   for (let food = 0; food < foodcontent.length; food++) {
     NEONTEXT[food] = new neontext(100, 150 + food * 100, foodcontent[food], colorcontent[food]);
   }
-
-  //load neon frame into array
   neon = new Neon(defaultneon);
-
 }
-
-
 function draw() {
 	fill(0);
   background(0);
-  //show background balls
   for (let q = 0; q < 150; q++) {
     ball[q].bounce();
     ball[q].show();
   }
   
-  //light up balls when they collide
    for(q=0;q<150;q++){
   	for(let p =0;p<150;p++){
     	if(ball[q].light(ball[p])&& q!=p){
@@ -4894,40 +3372,30 @@ function draw() {
     }
   }
   
-  //parts without interaction 
   cover();
   instruction();
   
-  //the button
 	button();
   
-  //the front neon 
   neon.show();
   neon.flash();
-
-  // the text
   for (let t = 0; t < NEONTEXT.length; t++) {
     if (NEONTEXT[t].inrect()) {
       NEONTEXT[t].returncolor();
       soundnumber = t;
     }
-
     NEONTEXT[t].drag();
     NEONTEXT[t].show();
 		
   }
-
-
 }let ball= [];
 let i;
-
 function setup() {
   createCanvas(400, 400);
   for(i = 0;i<100;i++){
   ball[i] = new Ball(random(width),random(height),random(30),random(-1,1),random(-3,3));
   }
 }
-
 function draw() {
   background(220);
   
@@ -4941,20 +3409,14 @@ function draw() {
   
     
     
-    //if(ball[b].isNear(mouseX,mouseY)){
-    	//ball.splice(b,1);
-      //print(ball.length);
     
     
   
     
   }
   
-  //if(ball.length =1){
   	
-  //}
 }
-
 class Ball{
 	constructor(x,y,size,speedx, speedy){
   	this.x = x;
@@ -5001,15 +3463,11 @@ class Ball{
 let row = 5;
 let gx;
 let gy;
-
-
-
 function setup() {
   createCanvas(400, 400);
   gx = width/col;
   gy = height/ row;
 }
-
 function draw() {
   background(220);
   for(let i = 0;i<=col;i++){
@@ -5021,23 +3479,19 @@ function draw() {
       noFill();
       }
     	rect(i*gx,j*gy,gx,gy);
-
     }
   }
 }let neon;
 let colorSet = ['#4f7df6', '#374054','#4f7df6','#fdbde0'];
-
 function setup() {
   createCanvas(600, 500);
 }
-
 function draw() {
   background(0);
   neon = new Neon();
   neon.show();
   neon.flash();
 }
-
 class Neon {
   constructor(neonX, neonY, neonW, neonH) {
     this.x = neonX;
@@ -5045,7 +3499,6 @@ class Neon {
     this.w = neonW;
     this.h = neonH;
   }
-
   show() {
     rectMode(CENTER);
     stroke(colorSet[0]);
@@ -5053,18 +3506,12 @@ class Neon {
     fill(0);
     rect(width / 2, height / 2, width - 170, height - 280);
   }
-
   flash() {
     rectMode(CENTER);
     strokeWeight(2);
     stroke(colorSet[1]);
     for (var i = width / 2 - (width - 180) / 2; i < width / 2 + (width - 170) / 2; i += 6) {
       
-      if (i == ((width / 2 - (width - 180) / 2) + 6*7)) {//这里让他第七行是这样写吗？ 还是i==7
-        // var color1 = [79, 125, 246];
-        // var color2 = [253, 189, 224];
-        // var coloeSet=[color1,color2];
-        // fill(colorSet[floor(random(0,1))]);
         stroke(colorSet[3]);}
     	else{
         stroke(colorSet[1]);}
@@ -5075,18 +3522,15 @@ class Neon {
   }
 }let neon;
 let colorSet = ['#4f7df6', '#374054','#4f7df6','#fdbde0'];
-
 function setup() {
   createCanvas(600, 500);
 }
-
 function draw() {
   background(0);
   neon = new Neon();
   neon.show();
   neon.flash();
 }
-
 class Neon {
   constructor(neonX, neonY, neonW, neonH) {
     this.x = neonX;
@@ -5094,7 +3538,6 @@ class Neon {
     this.w = neonW;
     this.h = neonH;
   }
-
   show() {
     rectMode(CENTER);
     stroke(colorSet[0]);
@@ -5102,7 +3545,6 @@ class Neon {
     fill(0);
     rect(width / 2, height / 2, width - 170, height - 280);
   }
-
   flash() {
     rectMode(CENTER);
     strokeWeight(2);
@@ -5110,12 +3552,6 @@ class Neon {
     for (var i = width / 2 - (width - 180) / 2; i < width / 2 + (width - 170) / 2; i += 6) {
       var x = i;
       line(x, height / 2 - (height - 286) / 2, x, height / 2 + (height - 284) / 2);
-
-      if (i == (width / 2 - (width - 180) / 2) * 7) {//这里让他第七行是这样写吗？ 还是i==7
-        // var color1 = [79, 125, 246];
-        // var color2 = [253, 189, 224];
-        // var coloeSet=[color1,color2];
-        // fill(colorSet[floor(random(0,1))]);
         fill(colorSet[2]);
         line(x, height / 2 - (height - 286) / 2, x, height / 2 + (height - 284) / 2);
       }
@@ -5124,14 +3560,11 @@ class Neon {
 }let a;
 let b;
 let w = false;
-
 function setup() {
   createCanvas(400, 400);
 	a =  random(0,width);
 	b =  random(0,height);
 }
-
-
 function draw() {
   background(220);
   if(w){
@@ -5142,7 +3575,6 @@ function draw() {
   drag();
   text('大大大哲',a,b);
 }
-
 function drag(){
 	if(mouseIsPressed && dist(mouseX,mouseY,a,b)<40){
     w = true;
@@ -5156,11 +3588,9 @@ function drag(){
 function preload() {
   NeonFont = loadFont('TpldKhangXiDictTrial.otf');
 }
-
 let foodcontent = ['鱼蛋','肠粉','公仔面','牛肉球','鸡蛋仔'];
 let colorcontent = ['#BBD239','#39D2C9','#F39C12','#D25539','#EFEF1F'];
 let NEONTEXT = [];
-
 function setup() {
   createCanvas(600, 500);
   for(let food = 0;food<foodcontent.length;food++){
@@ -5168,19 +3598,16 @@ function setup() {
   }
   
 }
-
 function draw() {
   background(0);
   rectMode(CENTER);
   fill(20);
   rect(width/2,height/2,width-170,height-220);
   for(let t of NEONTEXT){
-  	//t.blink();
     t.show();
     
   }
 }
-
 function mouseClicked(){
 	for(let c of NEONTEXT){
     if(c.cover(mouseX,mouseY)){
@@ -5189,8 +3616,6 @@ function mouseClicked(){
   }
   
 }
-
-
 class neontext{
   constructor(neontx,neonty,neontt,neontc){
   	this.x = neontx;
@@ -5199,10 +3624,6 @@ class neontext{
     this.c = neontc;
   }
   
- // blink(){
- // 	this.x += random(-2,2);
- //   this.y += random(-2,2);
- //  }
   
   show(){
     fill(255);
@@ -5224,11 +3645,7 @@ class neontext{
   
   changecolor(){
   	fill(20);
-    print('good');
   }
-}// by NIANQI ZHANG & ZHE WANG
-// Please play it in fullscreen of PC
-
 let NeonFont;
 let neon;
 let foodsound = [];
@@ -5241,9 +3658,6 @@ let colorcontent = ['#BBD239', '#39D2C9', '#F39C12', '#D25539', '#EFEF1F'];
 let NEONTEXT = [];
 let colorblink = false;
 let defaultneon = '#374054';
-
-
-//preload sound and font
 function preload() {
   NeonFont = loadFont('TpldKhangXiDictTrial.otf');
   foodsound[0] = loadSound('fish.mp3');
@@ -5252,25 +3666,17 @@ function preload() {
   foodsound[3] = loadSound('beef.mp3');
   foodsound[4] = loadSound('egg.mp3');
 }
-
-
 function setup() {
   
   createCanvas(1440, 686);
   
-  //neon text
   for (let food = 0; food < foodcontent.length; food++) {
     NEONTEXT[food] = new neontext(100, 150+food*100, foodcontent[food], colorcontent[food]);
   }
   
-  //neon frame
 	neon = new Neon(defaultneon);
   
-  //frameRate(5);
 }
-
-
-//play sound
 function mouseClicked(){
     if(dist(mouseX,mouseY,width/2,height/2+150)<40){
     	foodsound[soundnumber].setVolume(0.1);
@@ -5278,10 +3684,7 @@ function mouseClicked(){
     	defualtB = colorcontent[soundnumber];
   }
   }
-
-
 function draw() {
-
   background(0);
   rectMode(CENTER);
   
@@ -5296,32 +3699,23 @@ function draw() {
       defaultneon = random(cneon);
       soundnumber = t;
     }
-
     NEONTEXT[t].drag();
     NEONTEXT[t].show();
     
     instruction();
   }
-
   
 }let ball=[];
 let cantonese = ['做乜','唔该'];
 var cantonesenumber = 0;
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  //for(var i = 0;i<20;i++){
-  //  ball[i] = new Ball(random(0,width),random(0,height),10,10-i,i*20,i*5)
-  //}
 }
-
 function mouseDragged(){
 	let r = random(0,140);
   let b = new Ball(mouseX,mouseY,5,15,r,r/2);
   ball.push(b);
 }
-
-
 function draw() {
   background(0);
   rectMode(CENTER);
@@ -5331,9 +3725,7 @@ function draw() {
     i.show();
     i.bounce();
   }
-
 }
-
 class Ball {
   constructor(x,y,x1,y1,c,size){
     this.x = x;
@@ -5368,27 +3760,15 @@ class Ball {
 }let ball=[];
 let cantonese = ['做乜','唔该'];
 var cantonesenumber = 0;
-
 function setup() {
   createCanvas(400, 400);
-  //for(var i = 0;i<20;i++){
-  // ball[i] = new Ball(random(0,width),random(0,height),10,10-i,i*20,i*5)
-  //}
-
 }
-
 function mouseDragged(){
 	let r = random(0,40);
   let b = new Ball(mouseX,mouseY,1,12,r,r*2);
   ball.push(b);
-  //for(var j of ball){
-  //j.clicked(mouseX,mouseY);
-  //j.show;
-  //}
   
 }
-
-
 function draw() {
   background(0);
   rectMode(CENTER);
@@ -5398,13 +3778,11 @@ function draw() {
     ball[i].show();
     ball[i].bounce();
   }
-
   if(ball.length>10){
    ball.splice(0,1); 
     
   }
 }
-
 class Ball {
   constructor(x,y,x1,y1,c,size){
     this.x = x;
@@ -5432,7 +3810,6 @@ class Ball {
     	this.x = px;
       this.y = py;
       this.c = 34;
-     print('haohaohao');
     }
   
   }
@@ -5446,25 +3823,17 @@ class Ball {
       cantonesenumber = 0;
     }
     text(cantonese[cantonesenumber],this.x,this.y);
-    //ellipse(this.x,this.y,this.size,this.size);
   }
   
 }let ball=[];
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  //for(var i = 0;i<20;i++){
-  //  ball[i] = new Ball(random(0,width),random(0,height),10,10-i,i*20,i*5)
-  //}
 }
-
 function mouseDragged(){
 	let r = random(0,40);
   let b = new Ball(mouseX,mouseY,10,20,r,r*2);
   ball.push(b);
 }
-
-
 function draw() {
   background(0);
   rectMode(CENTER);
@@ -5474,9 +3843,7 @@ function draw() {
     i.show();
     i.bounce();
   }
-
 }
-
 class Ball {
   constructor(x,y,x1,y1,c,size){
     this.x = x;
@@ -5507,7 +3874,6 @@ class Ball {
 let ball2;
 var colorbox = ['#1ABC9C','#8E44AD','#F39C12','#9B59B6'];
 let colorNumber = 0;
-
 function setup() {
   createCanvas(400, 400);
   background(0);
@@ -5518,21 +3884,18 @@ function setup() {
   ball1 = new Ball(130,290,15,5,20);
   ball2 = new Ball(30,180,20,5,100);
 }
-
 function draw() {
   ball1.bounce();
   ball1.show();
   ball2.bounce();
   ball2.show();
 }
-
 class Ball {
   constructor(x,y,x1,y1,size){
     this.x = x;
     this.y = y;
     this.x1 = x1;
     this.y1 = y1;
-    //this.c = random(40,200);
     this.size = size;
   }
   
@@ -5558,37 +3921,29 @@ class Ball {
   
 }var colorr = [120,78,20];
 var colorNumber = 0;
-
 function setup() {
   createCanvas(400, 400);
   background(220);
 }
-
 function draw() {
-  //background(220);
   noStroke();
   if(mouseIsPressed){
 	fill(20,120,colorr[colorNumber],40);
 	ellipse(mouseX,mouseY,20,20);
   }
-
 }
-
 function mousePressed(){
 	colorNumber++;
   if(colorNumber == colorr.length){
     colorNumber = 0;}
 }
-
 let ball1;
 let ball2;
-
 function setup() {
   createCanvas(400, 400);
   ball1 = new Ball(30,140,10,10,134,20);
   ball2 = new Ball(130,40,20,5,4,100);
 }
-
 function draw() {
   background(0);
   rectMode(CENTER);
@@ -5599,7 +3954,6 @@ function draw() {
   ball2.bounce();
   ball2.show();
 }
-
 class Ball {
   constructor(x,y,x1,y1,c,size){
     this.x = x;
@@ -5627,12 +3981,10 @@ class Ball {
   }
   
 }let ball1;
-
 function setup() {
   createCanvas(400, 400);
   ball1 = new Ball();
 }
-
 function draw() {
   background(0);
   rectMode(CENTER);
@@ -5641,7 +3993,6 @@ function draw() {
   ball1.bounce();
   ball1.show();
 }
-
 class Ball {
   constructor(x,y,x1,y1){
     this.x = random(0,width);
@@ -5670,7 +4021,6 @@ class Ball {
 var numRows;
 var colW;
 var colH;
-
 function setup() {
   createCanvas(400, 400);
   noStroke();
@@ -5681,12 +4031,10 @@ function setup() {
   colorMode(HSL);
   
 }
-
 function draw() {
   background(220);
   for (var col = 0; col < numCols; col++) {
     for (var row = 0; row < numRows; row++) {
-
       if ((col + row) % 2 == 0) {
         fill('black');
       } else {
@@ -5697,28 +4045,15 @@ function draw() {
       let d = dist(mouseX,mouseY,x,y);
       let trued = map(d,0,dist(0,0,width,height),80,50);
       fill(43,90,trued);
-
       rect(x, y, colW, colH);
-
     }
   }
-
 }var moonSize = 68;
 var col = 3;
 var row = 4;
 var mouseClicked;
-let widthc = 40; //width of circle
-let q = 10; //short width of circle
-let countcx = 50; // count x for contour
-let countcy = 50; // count y for contour
-var a = 140; // color of bg
-var b = 1; // change color of bg
 let circlex = 60;
 let circley = 60;
-let w; // count x for background
-let e; // count y for background
-
-//absolute value 
 function absolute(lol) {
   if (circlex - lol > 0) {
     return (circlex - lol);
@@ -5726,31 +4061,23 @@ function absolute(lol) {
     return (-(circlex - lol));
   }
 }
-
 function setup() {
   createCanvas(430, 550);
   noStroke();
   mouseClicked = false;
 }
-
 function draw() {
   
-  // Draw the frame
   background(61, 241, 216);
   fill("#1C1B2F");
   rect(10, 10, width - 20, height - 20);
-
-  // Draw the 3x4 moons
   for (j = 0; j < row; j++) {
     for (i = 0; i < col; i++) {
-      // 108 is the distance between neighbors
       var x = i * 108;
       var y = j * 108;
       push();
       translate(x, y);
       if (j == row - 1 && i == col - 1) {
-        // fine-tune the parameters to make the 
-        // moon phases look different and async
         drawMoon(mouseX / 113 + i / 1.05 + j / 1.09, true);
       } else {
         drawMoon(mouseX / 113 + i / 1.05 + j / 1.09, false);
@@ -5758,15 +4085,12 @@ function draw() {
       pop();
     }
   }
-
-  //change to pic 2
   if (mouseClicked) {
     background(0);
     
   push();
     translate(5, 20);
     
-  // change background
   for (w = 50; w < 400; w += 100) {
     for (var e = 50; e < 500; e += 80) {
       stroke(55, e - 20, e + 50);
@@ -5778,12 +4102,8 @@ function draw() {
         var a = map(mouseX, w, 50 + w, 2 * PI, 0);
         arc(w, e, random(20), 50, 0, lineme, CHORD);
       }
-
     }
   }
-
-
-  //shadow of the circle
   fill(0);
   for (circlex = 60; circlex < width - 0; circlex += 90) {
     for (circley = 60; circley < height - 200; circley += 80) {
@@ -5797,20 +4117,14 @@ function draw() {
       }
     }
   }
-
-
-  //contour of moons
   fill(0);
   beginShape();
-
   vertex(0, 0);
   vertex(width, 0);
   vertex(width, height);
   vertex(0, height);
-
   for (countcx = 40; countcx < width - 20; countcx += 90) {
     for (countcy = 40; countcy < height - 200; countcy += 80) {
-
       beginContour();
       noStroke();
       vertex(countcx, q + countcy);
@@ -5821,13 +4135,11 @@ function draw() {
       vertex(countcx + widthc, q + countcy);
       vertex(countcx + widthc - q, countcy);
       vertex(q + countcx, countcy);
-
       endContour();
     }
   }
   endShape(CLOSE);
 	pop();
- //frams
   fill(61, 241, 216);
   rect(0, 0, width, 10);
   rect(0, 0, 10, height);
@@ -5849,15 +4161,11 @@ function draw() {
     text('CLICK THE FULL MOON', width * 0.62, 520);
   }
 }
-
 function drawMoon(phase, glitch) {
-  // Clamp the phase to be in between [0, 1) to 
-  // make the moon phases morph continuously
   var t = (phase % 1);
   
   translate(108, 108);
   if (t < 0.5) {
-    if (t < 0.25) { // t = 0~0.25
       var r = map(t, 0, 0.25, moonSize, 0);
       if (glitch) {
         fill(61, random(150, 241), 216);
@@ -5867,7 +4175,6 @@ function drawMoon(phase, glitch) {
       arc(0, 0, moonSize, moonSize, PI / 2, PI * 1.5);
       fill("#1C1B2F");
       arc(0, 0, r, moonSize, PI / 2, PI * 1.5);
-    } else { // t = 0.25~0.5
       var r = map(t, 0.25, 0.5, 0, moonSize);
       if (glitch) {
         fill(61, random(150, 241), 216);
@@ -5877,7 +4184,6 @@ function drawMoon(phase, glitch) {
       arc(0, 0, r, moonSize, -PI / 2, PI / 2);
       arc(0, 0, moonSize, moonSize, PI / 2, PI * 1.5);
     }
-  } else { // t = 0.5~0.75
     if (t < 0.75) {
       var r = map(t, 0.5, 0.75, moonSize, 0);
       fill("#1C1B2F");
@@ -5895,7 +4201,6 @@ function drawMoon(phase, glitch) {
       }
       arc(0, 0, moonSize, moonSize, -PI / 2, PI / 2);
       arc(0, 0, r, moonSize, PI / 2,  PI * 1.5);
-    } else { // t = 0.75~1
       var r = map(t, 0.75, 1, 0, moonSize);
       if (glitch) {
         fill(61, random(150, 241), 216);
@@ -5908,7 +4213,6 @@ function drawMoon(phase, glitch) {
     }
   }
 }
-
 function mousePressed() {
   var d = dist(mouseX, mouseY, 323, 430);
   if (d < 20) {
@@ -5916,19 +4220,9 @@ function mousePressed() {
   } else {
     mouseClicked = false;
   }
-}let widthc = 40; //width of circle
-let q = 10; //short width of circle
-let countcx = 50; // count x for contour
-let countcy = 50; // count y for contour
-var a = 140; // color of bg
-var b = 1; // change color of bg
 let circlex = 60;
 let circley = 60;
-let w; // count x for background
-let e; // count y for background
 let button = true;
-
-//absolute value 
 function absolute(lol) {
   if (circlex - lol > 0) {
     return (circlex - lol);
@@ -5936,16 +4230,13 @@ function absolute(lol) {
     return (-(circlex - lol));
   }
 }
-
 function setup() {
   createCanvas(400, 550);
   pixelDensity();
   background(0);
 }
-
 function draw() {
   translate(5, 20);
-  // change background
   for (w = 50; w < 400; w += 100) {
     for (var e = 50; e < 500; e += 80) {
       stroke(55, e - 20, e + 50);
@@ -5957,12 +4248,8 @@ function draw() {
         var a = map(mouseX, w, 50 + w, 2 * PI, 0);
         arc(w, e, random(20), 50, 0, lineme, CHORD);
       }
-
     }
   }
-
-
-  //shadow of the circle
   if(button){
   fill(0);}
   else {
@@ -5980,20 +4267,14 @@ function draw() {
       }
     }
   }
-
-
-  //contour of moons
   fill(0);
   beginShape();
-
   vertex(0, 0);
   vertex(width, 0);
   vertex(width, height);
   vertex(0, height);
-
   for (countcx = 40; countcx < width - 20; countcx += 90) {
     for (countcy = 40; countcy < height - 200; countcy += 80) {
-
       beginContour();
       noStroke();
       vertex(countcx, q + countcy);
@@ -6004,20 +4285,15 @@ function draw() {
       vertex(countcx + widthc, q + countcy);
       vertex(countcx + widthc - q, countcy);
       vertex(q + countcx, countcy);
-
       endContour();
     }
   }
   endShape(CLOSE);
-
-  //frams
   fill(61, 241, 216);
   rect(-5, -20, width, 10);
   rect(-5, -20, 10, height);
   rect(-5, height - 30, width, 10);
   rect(width - 15, -20, 10, height);
-
-  //words
   if (mouseX > 150 && mouseX < 330) {
     if(mouseX<250 && mouseY>460 && mouseY<475){
     fill(161, random(200, 241), 66);}
@@ -6029,28 +4305,19 @@ function draw() {
     text('HI, MY FULL MOON', 150, 450);}
     else{
     text('BYE, MY FULL MOON', 150, 450);}
-
   }
-  //mouse
-  //ellipse(mouseX-5,mouseY-20,20,20);
 }
-
 function mousePressed(){
   if(mouseX>150 && mouseX<250 && mouseY>460 && mouseY<475){
   button = !button;
   }
 }
-
 let r = 50;
-
 function setup() {
   createCanvas(420, 600);	
   background(20);
-  	//noStroke();
 }
-
 function draw() {
-  //background(20);
   for (var i = 50; i < 400; i += 80) {
     for (var j = 50; j < 500; j += 80) {
       stroke(55,j-20,j+50);
@@ -6064,7 +4331,6 @@ function draw() {
         var a = map(mouseX, i, r + i, 2 * PI, 0);
         arc(i, j, random(20), 50, 0, a, CHORD);
       }
-
     }
   }
 }var img;
@@ -6074,14 +4340,10 @@ function preload() {
 var i = 0;
 var j = 0;
 var dot = 0;
-
 function setup() {
-  //colorMode(HSL);
   image(img, 0, 0);
 }
-
 function draw(){
-
 for(i=0;i<100;i++){
   	for(j=0;j<100;j++){
   		var fullColor = img.get(i, j);
@@ -6095,26 +4357,17 @@ for(i=0;i<100;i++){
   		fill(dot);
   		ellipse(i,j,1,1);
 	}
-  //text(c, 50,50);
-
  }
-
 }
 var img;
 let i = 0;
 let j = 0;
-
 function preload() {
-  img = loadImage('https://farm6.staticflickr.com/5298/5577819894_98688285c8_z.jpg');
 }
-
 function setup() {
   createCanvas(400,400);
   colorMode(HSL);
-  //image(img, 0, 0);
-
 }
-
 function draw(){
   var a = map(mouseX,0,width,0,10);
   for(i=0;i<400;i=i+10){
@@ -6129,7 +4382,6 @@ function draw(){
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   for (var i = width/10;i<=width;i+=(width/10)){
@@ -6137,11 +4389,9 @@ function draw() {
     line(0,i,width,i);
   }
 }var c = 0; 
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   noStroke();
@@ -6154,11 +4404,9 @@ function draw() {
 }
   
     
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   noStroke();
@@ -6177,11 +4425,9 @@ function draw() {
 }
   
     
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   noStroke();
@@ -6200,11 +4446,9 @@ function draw() {
 }
   
     
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   noStroke();
@@ -6219,7 +4463,6 @@ function draw() {
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   noStroke();
@@ -6234,7 +4477,6 @@ function draw() {
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   noStroke();
@@ -6258,11 +4500,9 @@ var xspeed = 10;
 var yspeed = 10;
 var bg=129;
 var bgchange = 10;
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(bg);
   bgchange = bounce(bg,
@@ -6274,7 +4514,6 @@ function draw() {
   ellipse(x,y,50,50);
   
 }
-
 function bounce(state,low,high,speed){
   if(state> high || state< low){
     speed*=-1;}
@@ -6282,11 +4521,9 @@ function bounce(state,low,high,speed){
 }let buttonAOn = false;
 let buttonBOn = false;
 let buttonCOn = false;
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   noStroke();
@@ -6303,7 +4540,6 @@ function draw() {
     rect(width*2/3,0,width/3,height);
   }
 }
-
 function mousePressed(){
 	if(mouseX<width/3){
     buttonAOn=!buttonAOn;
@@ -6314,18 +4550,10 @@ function mousePressed(){
   else {
     buttonCOn=!buttonCOn;
   }
-}let x = 0; // rectangle width
-//let count = 0; // decide odd number or not
-let i = 0; //width count
-let j = 0; //height count
-
 function setup() {
   createCanvas(400, 400);
-  //createCanvas(windowWidth, windowHeight);
   x = 40;
-  //count = 0;
 }
-
 function draw() {
   background(220);
   noStroke();
@@ -6338,22 +4566,15 @@ function draw() {
         fill(255);
         rect(i*x, j*x, x, x);
       }
-      //count++;
     }
   }
-
-
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   var c = p5.Vector.fromAngle((45/180)*PI, 60);
   line(200,200,c.x,c.y);
-}// I put the bg in the setup as the blur is really interesting!
-// But the logic is the same. 
-
 var x= {
   a:0,
   b:0,
@@ -6366,23 +4587,19 @@ var y= {
   c:0,
   d:0,
 };
-
 function setup() {
   createCanvas(400, 400);
   background(245);
   x.a = x.b = x.c = x.d = width/2;
   y.a = y.b = y.c = y.d = height/2;
 }
-
 function draw() {
   noStroke();
   
-  //towards left
   fill(23,29,200,50);
   ellipse(x.a,y.a,50,50);
   	x.a = x.a -1; 
   
-  //towards different coners
   fill(123,29,200,50);
   ellipse(x.b,y.b,50,50);
   	x.b = x.b+1;
@@ -6393,7 +4610,6 @@ function draw() {
   	x.c = x.c-1;
   	y.c = y.c+1;
   
-  //10 times faster
   fill(203,129,120,50);
   ellipse(x.d,y.d,50,50);
   	x.d = x.d+10;
@@ -6405,19 +4621,15 @@ function draw() {
 let b;
 let x;
 let y;
-
 function setup() {
   createCanvas(400, 400);
-  // rectMode(CENTER);
   a = width/4;
   b = height/4;
   x = width/2;
   y = height/2;
 }
-
 function draw() {
   background(220);
-  // rect(width/2,height/2,width/2,height/2);
   beginShape();
   	vertex(x-a,y-b);
   	vertex(x+a,y-b);
@@ -6429,16 +4641,12 @@ let y;
 let a;
 let b;
 let c;
-
 function setup() {
   createCanvas(400, 400);
   background(220);
   x = 0;
-
 }
-
 function draw() {
-
   point(x,y);
   x = x+1;
   y = x*x/30;
@@ -6455,7 +4663,6 @@ let qx=0;
 let qy=0;
 let dx;
 let dy;
-
 function setup() {
   createCanvas(800, 400); 
   textSize(20);
@@ -6464,16 +4671,12 @@ function setup() {
   a=450;
   b=180;
 }
-
 function draw() {
-  //background
   background('#F08080');
   noStroke();
   fill(30,90,200);
   ellipse(width/2,height/2,width/4,width/4);
   
-//yes and no
-
   if(dist(mouseX,mouseY,width/2,height/2)>width/8){
   fill(caesar);
   dx=qx-mouseX;
@@ -6485,7 +4688,6 @@ function draw() {
   text('yes',qx-30,qy+32);
   text('yes',qx-45,qy+9);
   text('yes',qx-15,qy-10);
-  //stroke(caesar);
   line(qx,qy,mouseX,mouseY);
   }
   else {
@@ -6501,59 +4703,46 @@ function draw() {
     pop();
   }
   
-//sadness
-  //eye
   fill('#F08080');
   stroke('#F08080');
   strokeWeight(2);
   line(420,180,460,180);
   
-  //nose
   noFill();
 	bezier(393,190,428,209,425,216,395,220);
   
-  //drop
   fill('#F08080');
   quad(a,b,a+2,b+6,a,b+12,a-2,b+6)
   b = b+1.5;
   if(b>350){
     b=180}
   
-  //mouth
   noFill();
   arc(400,260,90,20,(210/180)*PI,(270/180)*PI);
   
-//happy random
   if(nancy>50){
-      //eye
   fill(30,90,200);
   stroke(30,90,200);
   strokeWeight(2);
   line(170,180,200,180);
   line(130,180,150,180);
   
-  //nose
   noFill();
 	bezier(163,190,200,209,300,216,165,220);
   
-  //mouth
   noFill();
   arc(170,260,80,20,(100/180)*PI,(180/180)*PI);  
   }
-
   else{
-  //eye
   fill(30,90,200);
   stroke(30,90,200);
   strokeWeight(2);
   line(620,180,670,180);
   line(570,180,600,180);
   
-  //nose
   noFill();
 	bezier(603,190,540,209,500,216,600,220);
   
-  //mouth
   noFill();
   arc(620,260,100,20,(10/180)*PI,(90/180)*PI);  
   }
@@ -6561,12 +4750,10 @@ function draw() {
 }
 let a;
 let b;
-
 function setup() {
   createCanvas(400, 400);
 	background(220);
 }
-
 function draw() {
   
   a = mouseX-1;
@@ -6574,33 +4761,27 @@ function draw() {
 	ellipse(a,mouseY,50,50);
   ellipse(b,20,50,50);
 }
-
 function mouseClicked(){
   background(random(0,250));
 }
 function setup() {
   createCanvas(500, 500);
 }
-
 function draw() {
   background('#bd1e24');
   noFill();
   strokeWeight(3);
   
-  // face
   stroke(1000);
   arc(250,200,130,220,(60/180)*PI,(130/180)*PI);
   
-  //mouth
   line(240,285,250,280);
   line(250,280,260,285); 
  
   
   
-  //nose
   line(250,230,255,252);
   
-  //hair
   line(250,140,220,150);
   line(230,160,190,180);
   line(200,185,165,220);
@@ -6608,12 +4789,9 @@ function draw() {
   line(315,240,290,265);
   line(290,150,320,165);
   
-  /* beginShape();
   	vertex(230, 175);
 		bezierVertex(125, 210, 2220, 365, 200, 290);
-  endShape(); */
   
-
   beginShape();
   	vertex(245, 155);
 		bezierVertex(475, 240, 240, 300, 300, 300);
@@ -6625,14 +4803,12 @@ function draw() {
 		bezierVertex(185, 220, 160, 290, 195, 300);
   endShape();
   
-  //glasses
   fill(10,10,random(0,300));
   ellipse(210,230,30,30);
   line(225,230,260,230);
   ellipse(290,230,30,30);
   
   
-  //front hair
   	stroke(250);
   	noFill();
     beginShape();
@@ -6640,13 +4816,10 @@ function draw() {
 		bezierVertex(220, 170, 190, 285, 220, 280);
   endShape();
   
-  /*
-  //name
   textSize(15);
   fill(1000);
   noStroke();
   var c = ['me','monster'];
-  text(random(c),225,380);*/
 } let x=0;
 let y=0;
 function setup() {
@@ -6656,48 +4829,33 @@ function setup() {
   frameRate(20);
   background(name);
 }
-
 function draw() {
   
   
-  //width = width +2;
-  //rect(width/2,height/2,width/2,height/2);
-  //translate(200,200);
-  //rotate((50/180)*PI);
-  //rect(0,0,60,70);
   x=x+0.5;
   y=20*x*x+8;
 	ellipse(x,y,40,40);
-
 }let angle = 0;
-
 function setup() {
   createCanvas(500, 500);
 }
-
 function draw() {
   background(30);
   noFill();
   strokeWeight(3);
   
-  /* translate(mouseX,mouseY);
   rotate(angle);
-  angle = angle + 0.08;*/
   
-  // face
   stroke(180);
   arc(250,200,130,220,(60/180)*PI,(130/180)*PI);
   
-  //mouth
   line(240,285,250,280);
   line(250,280,260,285); 
  
   
   
-  //nose
   line(250,230,255,252);
   
-  //hair
   stroke('#00CED1');
   line(250,140,220,150);
   stroke('#7FFFD4');	
@@ -6711,10 +4869,8 @@ function draw() {
   stroke(120);
   line(290,150,320,165);
   
-  /* beginShape();
   	vertex(230, 175);
 		bezierVertex(125, 210, 2220, 365, 200, 290);
-  endShape(); */
   
   stroke('#6A5ACD');
   beginShape();
@@ -6728,7 +4884,6 @@ function draw() {
 		bezierVertex(185, 220, 160, 290, 195, 300);
   endShape();
   
-  //glasses
   stroke('#FA8072');
   fill(140,80,random(0,200));
   ellipse(210,230,30,30);
@@ -6736,7 +4891,6 @@ function draw() {
   ellipse(290,230,30,30);
   
   
-  //front hair
   	stroke(250);
   	noFill();
     beginShape();
@@ -6744,7 +4898,6 @@ function draw() {
 		bezierVertex(220, 170, 190, 285, 220, 280);
   endShape();
   
-  //name
   textSize(15);
   fill(140,80,random(0,200));
   noStroke();
@@ -6753,12 +4906,10 @@ function draw() {
 }function setup() {
   createCanvas(600, 450);
 }
-
 function draw() {
   background(1,255,255);
   noStroke();
   
-  //draw the red shape
 	fill(255,0,0);
   beginShape();
   vertex(0,0);
@@ -6769,24 +4920,19 @@ function draw() {
   vertex(0,30);
   endShape(); 
   
-  /* or in this way
   stroke(255,0,0);
   strokeWeight(40);
   line(0,0,600,450);
-  noStroke(); */
   
   
-  //draw the green shape
   fill(20,200,0);
   ellipse(300,225,320,240);
   
-  //draw the blue shape
   fill(0,0,150);
   rect(420,195,40,40);
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(30);
   fill(8, 232, 222);
@@ -6797,7 +4943,6 @@ function draw() {
   frameRate(800);
   colorMode(RGB, 255, 255, 255, 1);
 }
-
 function draw() {
   background(color('hsl(80, 70%, 90%)'));
   
@@ -6832,9 +4977,6 @@ function draw() {
   text(word,210,170);
   textSize(20);
   
-	//var color = ['30,70,220','0,0,250'];
-  //var c = random(color);
-  //	fill(c);
   
   fill(30,70,220);
   ellipse(300,200,20,20);
@@ -6843,16 +4985,13 @@ function draw() {
   ellipse(300,200,20,20);
 }
 function setup() {
-  createCanvas(500, 500); // Here is it! 
 }
-
 function draw() {
  background(30,180,250);
 }
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(255);
   point(100, 100);

@@ -2,13 +2,11 @@ var x;
 var y; 
 var trans; 
 var dtrans; 
-
 function setup() {
   createCanvas(400, 400);
   trans = 1; 
   dtrans = -0.01; 
 }
-
 function draw() {
   noStroke(); 
   background(255);
@@ -24,33 +22,20 @@ function draw() {
     dtrans = -dtrans;
   }
 }
-
-// function mousePressed() {
-//   x = mouseX; 
-//   y = mouseY; 
-//   trans = 1;
-// }
-
 var stars = [];
 var trans; 
 var dtrans; 
-
 function setup() {
   createCanvas(600, 600);
-  // trans = 1; 
-  // dtrans = -0.01; 
   for (var i = 0; i < 400; i++) {
-    // stars[i] = new Star();
     let star = new Star(random(0,width), random(0,height), random(0,5), 1, -0.01); 
     stars.push(star); 
   }
 }
-
 function draw() {
   speed = 1;
   background(0);
     
-  //translate(width / 2, height / 2);
     for (var i = 0; i < stars.length; i++) {
       let star = new Star();
       stars.push(star); 
@@ -66,20 +51,13 @@ function draw() {
 }var greeting, button, bgcolor; 
 var c; 
 var img;
-
 var isImage = false;
-
-// var imageState = 0;
-
-
 function preload() {
   img = loadImage('1.png');
 }
-
 function setup() {
   createCanvas(400, 400);
   bgcolor = color(220); 
-
   
   greeting = createElement('h2', 'Welcome, put your finger on'); 
   greeting.position(width/2-140, height/2-50); 
@@ -87,27 +65,18 @@ function setup() {
   button = createButton('Ready?'); 
   button.position(greeting.x + 120, height/2+30);
   button.mousePressed(welcome); 
-
   img.loadPixels(); 
   c = img.get(img.width / 2, img.height / 2); 
   
   background(bgcolor);
 }
-
 function draw() {
   
-  // if(imageState == 0){
-  //   background(150);
-  // }
-  // else if(imageState == 1){
-  //   // draw image;
-  // }
   
   if(isImage == true){
   	image(img, 25, 25, 50, 50); 
   }
 }
-
 function welcome() {
   greeting.html('Please wear the headphone'); 
   greeting.position(width/2-140, height/2 -50); 
@@ -116,26 +85,15 @@ function welcome() {
   button.mousePressed(imageLoaded); 
   
 }
-
 function imageLoaded() {
   isImage = true;
   
   console.log('tr'); 
-}// Daniel Shiffman
-// http://codingtra.in
-// http://patreon.com/codingtrain
-
-// Simple Particle System
-// Edited Video: https://www.youtube.com/watch?v=UcdigVaIYAk
-
 var spots; 
-
 function preload() {
   img = loadImage("1.png");
 }
-
 particles = [];
-
 function setup() {
   createCanvas(600, 400);
   var density = displayDensity();
@@ -155,11 +113,8 @@ function setup() {
   }
   console.log(spots.length);
 }
-
 function draw() {
   background(0);
-  //var spot = random(spots); 
-  //for (let i = 0; i < spots.length; i++) {
   for (let i = 0; i < 10; i++) {
     var spot = spots[i]; 
     let p = new Particle(mouseX,mouseY);
@@ -169,14 +124,11 @@ function draw() {
     particles[i].update();
     particles[i].show();
     if (particles[i].finished()) {
-      // remove this particle
       particles.splice(i, 1);
     }
   }
 }
-
 class Particle {
-
   constructor(x,y) {
     this.x = x;
     this.y = y;
@@ -184,37 +136,25 @@ class Particle {
     this.vy = random(-1, 0);
     this.alpha = 255;
   }
-
   finished() {
     return this.alpha < 0;
   }
-
   update() {
     this.x += this.vx;
     this.y += this.vy;
     this.alpha -= 3;
   }
-
   show() {
     noStroke();
-    //stroke(255);
     fill(255, this.alpha);
     ellipse(this.x, this.y, 16);
   }
-
-}// Daniel Shiffman
-// http://codingtra.in
-// http://patreon.com/codingtrain
-// Code for: https://youtu.be/QHEQuoIKgNE
-
 var circles;
 var spots;
 var img;
-
 function preload() {
   img = loadImage("1.png");
 }
-
 function setup() {
   createCanvas(900, 400);
   var density = displayDensity();
@@ -232,22 +172,16 @@ function setup() {
       }
     }
   }
-
   console.log(img.width);
   console.log(img.height);
   console.log("pixels", img.pixels.length);
   console.log("spots", spots.length);
   console.log(density)
 }
-
 function draw() {
   background(0);
-  // frameRate(20)
-
   var total = 10;
   var count = 0;
-  // var attempts = 0;
-
   while (count < total) {
     var newC = newCircle();
     if (newC !== null) {
@@ -256,14 +190,7 @@ function draw() {
       count++;
       
     }
-    // attempts++;
-    // if (attempts > 1000) {
-    //   noLoop();
-    //   console.log("finished");
-    //   break;
-    // }
   }
-
   for (var i = 0; i < circles.length; i++) {
     var circle = circles[i];
     if (circle.r > 5 && circle.r < 7) {
@@ -279,7 +206,6 @@ function draw() {
           if (circle !== other) {
             var d = dist(circle.x, circle.y, other.x, other.y);
             var distance = circle.r + other.r;
-
             if (d - 5 < distance) {
               circle.growing = false;
               break;
@@ -288,19 +214,15 @@ function draw() {
         }
       }
     }
-
     circle.show();
     circle.grow();
   }
 }
-
 function newCircle() {
   var r = int(random(0, spots.length));
   var spot = spots[r];
-
   var x = spot.x;
   var y = spot.y;
-
   var valid = true;
   for (var i = 0; i < circles.length; i++) {
     var circle = circles[i];
@@ -318,17 +240,14 @@ function newCircle() {
 }var circles;
 var spots;
 var img;
-
 function preload() {
   img = loadImage('1.png');
 }
-
 function setup() {
   createCanvas(900, 400);
   var density = displayDensity();
   pixelDensity(1);
   img.loadPixels();
-
   circles = [];
   for (var x = 0; x < img.width; x++) {
     for (var y = 0; y < img.height; y++) {
@@ -341,28 +260,21 @@ function setup() {
       }
     }
   }
-
 }
-
 function draw() {
   background(0);
-  // frameRate(20)
-
   for (var i = 0; i < circles.length; i++) {
     var circle = circles[i];
     circle.show();
    
   }
 }
-
 var circles;
 var spots;
 var img;
-
 function preload() {
   img = loadImage('1.png');
 }
-
 function setup() {
   createCanvas(900, 400);
   var density = displayDensity();
@@ -380,22 +292,17 @@ function setup() {
       }
     }
   }
-
   console.log(img.width);
   console.log(img.height);
   console.log("pixels", img.pixels.length);
   console.log("spots", spots.length);
   console.log(density)
 }
-
 function draw() {
   background(0);
-  // frameRate(20)
-
   var total = 50;
   var count = 0;
   var attempts = 0;
-
   while (count < total) {
     var newC = newCircle();
     if (newC !== null) {
@@ -409,20 +316,16 @@ function draw() {
       break;
     }
   }
-
   for (var i = 0; i < circles.length; i++) {
     var circle = circles[i];
-
     if (circle.growing) {
       if (circle.edges()) {
         circle.growing = false;
       } else {
         for (var j = 0; j < circles.length; j++) {
           var other = circles[j];
-          // if (circle !== other) {
             var d = dist(circle.x, circle.y, other.x, other.y);
             var distance = circle.r + other.r;
-
             if (d - 5 < distance) {
               circle.growing = false;
               break;
@@ -431,19 +334,16 @@ function draw() {
         }
       }
     
-
     circle.show();
     circle.grow();
   }
 }
-
 function newCircle() {
   var r = int(random(0, spots.length));
   
   var spot = spots[r];
   var x = spot.x;
   var y = spot.y;
-
   var valid = true;
   for (var i = 0; i < circles.length; i++) {
     var circle = circles[i];
@@ -461,11 +361,9 @@ function newCircle() {
 }var circles;
 var spots;
 var img;
-
 function preload() {
   img = loadImage("1.png");
 }
-
 function setup() {
   createCanvas(900, 400);
   var density = displayDensity();
@@ -483,27 +381,20 @@ function setup() {
       }
     }
   }
-
   console.log(img.width);
   console.log(img.height);
   console.log("pixels", img.pixels.length);
   console.log("spots", spots.length);
   console.log(density)
 }
-
 function draw() {
   background(0);
-  //frameRate(500)
-
-  //90 circles every frame
   var total = 90;
   var count = 0;
   var attempts = 0;
-
   while (count < total) {
     var newC = newCircle();
     if (newC !== null) {
-      //put new circles into the array. 
       circles.push(newC);
       count++;
     }
@@ -516,20 +407,16 @@ function draw() {
     
     console.log(attempts); 
   }
-
   for (var i = 0; i < circles.length; i++) {
     var circle = circles[i];
-
     if (circle.growing) {
       if (circle.edges()) {
         circle.growing = false;
       } else {
         for (var j = 0; j < circles.length; j++) {
           var other = circles[j];
-          // if (circle !== other) {
             var d = dist(circle.x, circle.y, other.x, other.y);
             var distance = circle.r + other.r;
-
             if (d < distance) {
               circle.growing = false;
               break;
@@ -542,30 +429,22 @@ function draw() {
     circle.grow();
   }
 }
-
-
-
 function newCircle() {
   var r = int(random(0, spots.length));
   var spot = spots[r];
   var x = spot.x;
   var y = spot.y;
-
   var valid = true;
-  //pick the point outside of the circle. 
-  //check whether the point is in the circle or not. 
   
   for (var i = 0; i < circles.length; i++) {
     var circle = circles[i];
     var d = dist(x, y, circle.x, circle.y);
     if (d < circle.r) {
-      //inside of the circle
       valid = false;
       break;
     }
   }
   if (valid) {
-    //add new circles 
     return new Circle(x, y);
   } else {
     return null;
@@ -575,7 +454,6 @@ let sampler = new Tone.Sampler({
 	"A1": "samples/casio/A1.mp3", 
   "D2": "samples/casio/D2.mp3"
 });
-
 sampler.envelope = {
   attack: 0.2,
   decay: 0,
@@ -583,7 +461,6 @@ sampler.envelope = {
   release: 0.1
 }
 sampler.toMaster();
-
 function keyPressed() {
   let pitch; 
   if(key == 'a'){
@@ -603,43 +480,30 @@ function keyPressed() {
   }
   
   if(pitch && sampler.loaded){
-    // Sampler will repitch the closest sample
   	sampler.triggerAttack(pitch);
   }
 }
-
 function keyReleased() {
   sampler.triggerRelease();
 }
-
 function setup() {
-
 }
-
 let turkey;
-
-// Load the image 1 time
 function preload() {
 	 turkey = loadImage("turkey.jpg");
 }
-
-
 function setup() {
   createCanvas(400, 400);
   
   turkey.filter(THRESHOLD);
-
       
   
-
-  // Do the threshold 1 time in setup
   turkey.loadPixels();
   for (let i = 0; i < turkey.pixels.length; i+=4) {
     let r = turkey.pixels[i];
     let g = turkey.pixels[i+1];
     let b = turkey.pixels[i+2];
     
-    // There is probably a better way to do threshold?
     if (r === 255 && g === 255 && b === 255) {
       turkey.pixels[i] = 0;
       turkey.pixels[i+1] = 0;
@@ -652,42 +516,30 @@ function setup() {
   }
   turkey.updatePixels();
 }
-
 function draw() {
   background(220);
   image(turkey, 25, 25);
-}// Daniel Shiffman
-// http://codingtra.in
-// http://patreon.com/codingtrain
-// Code for: https://youtu.be/ERQcYaaZ6F0
-
 var circles;
 var img;
-
 function preload() {
   img = loadImage("assets/kitten.jpg");
 }
-
 function setup() {
   createCanvas(600, 600);
   var density = displayDensity();
   pixelDensity(1);
   img.loadPixels();
   circles = [];
-
   console.log(img.width);
   console.log(img.height);
   console.log("pixels", img.pixels.length);
   console.log(density)
 }
-
 function draw() {
   background(0);
-
   var total = 10;
   var count = 0;
   var attempts = 0;
-
   while (count < total) {
     var newC = newCircle();
     if (newC !== null) {
@@ -701,10 +553,8 @@ function draw() {
       break;
     }
   }
-
   for (var i = 0; i < circles.length; i++) {
     var circle = circles[i];
-
     if (circle.growing) {
       if (circle.edges()) {
         circle.growing = false;
@@ -714,7 +564,6 @@ function draw() {
           if (circle !== other) {
             var d = dist(circle.x, circle.y, other.x, other.y);
             var distance = circle.r + other.r;
-
             if (d - 1 < distance) {
               circle.growing = false;
               break;
@@ -723,16 +572,13 @@ function draw() {
         }
       }
     }
-
     circle.show();
     circle.grow();
   }
 }
-
 function newCircle() {
   var x = random(0, img.width);
   var y = random(0, img.height);
-
   var valid = true;
   for (var i = 0; i < circles.length; i++) {
     var circle = circles[i];
@@ -753,17 +599,13 @@ function newCircle() {
     return null;
   }
 }function preload() {
-  moon = loadImage('assets/fingerprint.jpg');
 }
  var realWidth;
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
 imageRatio = moon.height/moon.width;
-print(imageRatio);
   realWidth=windowWidth
 }
-
 function draw() {
   background(225);
  	var moonWidth;
@@ -774,23 +616,17 @@ function draw() {
   if (windowWidth < realWidth) {
 		moonWidth = windowWidth;
   	moonHeight= moonWidth*imageRatio;
-		//print("w: "+moonWidth+", h: "+moonHeight);
   }
   image(moon,0,0,moonWidth,moonHeight);
 }
-
 function preload() {
-  moon = loadImage('assets/fingerprint.jpg');
 }
  var realWidth;
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
 imageRatio = moon.height/moon.width;
-print(imageRatio);
   realWidth=windowWidth
 }
-
 function draw() {
   background(225);
  	var moonWidth;
@@ -801,15 +637,12 @@ function draw() {
   if (windowWidth < realWidth) {
 		moonWidth = windowWidth;
   	moonHeight= moonWidth*imageRatio;
-		//print("w: "+moonWidth+", h: "+moonHeight);
   }
   image(moon,0,0,moonWidth,moonHeight);
 }
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(0);
   
@@ -831,7 +664,6 @@ var button;
 var slider; 
 var input; 
 var para;
-
 function setup() {
   createCanvas(400, 400);
   button = createButton('click');
@@ -842,15 +674,9 @@ function setup() {
   slider = createSlider(10,100,20);
   input = createInput(); 
 }
-
 function changeColor() {
   bgc = color(random(255));
 }
-
-// function mousePressed() {
-//   changeColor();
-// }
-
 function draw() {
   background(bgc);
   fill(200,slider.value(),slider.value());
@@ -863,7 +689,6 @@ function draw() {
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
 }var yearNum;
@@ -871,17 +696,13 @@ var tem;
 var json;
 var freq;
 var res; 
-
 function preload(){
   json = loadJSON("nasa.json", gotData);
 }
-
 function gotData(){
   console.log('data got');
 }
-
 function setup(){
-  //console.log(json);
   for(let i=0; i<138; i++){
     yearNum = json.data[i].column0;
     tem = json.data[i].column1;
@@ -897,18 +718,11 @@ function setup(){
   }
 }
   
-// var indexToPlayNow = 0;
-
-// function playNow() {
-//   res = 
-// }var gene; 
 var res; 
 var wave;
 var playing = false;
 var species;
 var input, asking; 
-
-
 function setup() {
   createCanvas(400, 400);
   var button = select('#submit');
@@ -919,9 +733,7 @@ function setup() {
   wave.amp(0);
   wave.start();   
 }
-
 function musicPlay() {
-  //The method is asynchronous, so the json will be loaded in the call back function. 
   loadJSON("gene.json", gotData); 
   
   if (!playing) {
@@ -930,20 +742,10 @@ function musicPlay() {
     palying = false;
   }
 }
-
 function gotData(data) {
-  // console.log(`gotData: ${data}`);
   console.log(data);
   gene = data[document.getElementById("input").value].genome
   console.log(" new gene " + gene)
-
-  // console.log('gene');
-  //indexToPlaynow replaces the "for loop" function below: 
-  // for (i = 0; i < gene.genome.length; i++) {
-  //   res = gene.genome.charAt(i);
-  //   console.log(res);
-  //   playNext(i);
-  // }
   if (playing) {
     wave.start();
     playNext();
@@ -952,20 +754,12 @@ function gotData(data) {
   } 
   playNext();
 }
-
 function draw() {
  
-  //toggle();
   background(220);
 }
-
 var indexToPlayNow = 0;
-
-
 function playNext() {
-  //console.log(indexToPlayNow);
-
-  // console.log(gene.genome)
   res = gene.charAt(indexToPlayNow % gene.length);
   
   if (res == "C") {
@@ -985,14 +779,11 @@ function playNext() {
   setTimeout(playNext, 200)
 }
 var song; 
-
 var amp;
 var volhistory  = [];
-
 function preload() {
   song = loadSound('blues.mp3');
 }
-
 function toggleSong() {
   if (song.isPlaying()) {
     song.pause();
@@ -1000,16 +791,13 @@ function toggleSong() {
     song.play();
   }
 }
-
 function setup() {
   createCanvas(400, 400);
-  //console.log(song);
   button = createButton('toggle');
   button.mousePressed(toggleSong); 
   song.play();
   amp = new p5.Amplitude(); 
 }
-
 function draw() {
   background(0);
   stroke(255);
@@ -1018,7 +806,6 @@ function draw() {
   var vol = amp.getLevel(); 
   volhistory.push(vol);
   for(var i = 0; i <volhistory.length; i++) {
-    //what is 0 and 0.1 here
     var y = map (volhistory[i], 0, 0.1, height/2, 0);
     vertex(i,y);
   }
@@ -1027,45 +814,32 @@ function draw() {
   if (volhistory.length > width) {
     volhistory.splice(0,1);
   }
-  //ellipse(100, 100, 200, vol*500);
-}var url = 'https://api.nytimes.com/svc/books/v3/lists/best-sellers/history.json?api-key=c208f00ba1604a17a0e0811f29b2f8e5';
-
-
 function setup() {
   noCanvas();
-  //createCanvas(400, 400);
   loadJSON(url, gotData, err);
 }
-
 function err() {
   console.log('error')
 }
-
 function gotData (data) {
-  //console.log(data.results[1].title);
   var titles = data.results;
   for (var i = 0; i <= titles.length; i++ ) {
     console.log(titles[i])
     createP(titles[i].title);
   }
 }
-
 function draw() {
   background(220);
 }
-
 var weather;
-var URL= 'https://api.openweathermap.org/data/2.5/weather?q=London&APPID=59f2ec9dc9840640eb29f4351404e8c1&units=metric';
 function setup() {
   createCanvas(400, 400);
   loadJSON(URL, gotData);
 }
-
 function gotData (data) {
   console.log(data);
   weather = data;
 }
-
 function draw() {
   
   background(220);
@@ -1078,24 +852,18 @@ var x = 0;
 function setup() {
   loadJSON('birds.json', gotData);
 }
-
 function gotData(data) {
   spaceData = data
 }
-
 function draw() {
   background(220);
-  //draw ellipse
   fill(255);
-  //spaceData initial value is undifined, it is false. 
-  //if spaceData exits, 
   if (spaceData) {
     randomSeed(4);
   for (i = 0; i < spaceData.number; i++) {
   ellipse(random(width), random(height), 15, 15)
   }
  }
-  //draw line
   stroke(8);
   line(x,0,x,height);
   x = x+1; 
@@ -1106,12 +874,8 @@ function draw() {
 function preload() {
   data = loadJSON("birds.json");
 }
-
 function setup() {
   noCanvas();
-  //createCanvas(400, 400);
-  //var bird = data.birds[1].members[2];
-  //createP(bird);
   var birds = data.birds;
      for (var i = 0; i < birds.length; i++) {
        createElement('h1', birds[i].family);
@@ -1121,45 +885,31 @@ function setup() {
        }
 }
 }
-
 function draw() {
-  //background(0);
-  //fill(flower.r, flower.g, flower.b);
-  //text(flower.name, 10, 50);
 }function setup() {
   createCanvas(400, 400);
   
   loadJSON("name.json", gotData);
-
 }
-
 function gotData(data) {
   for (let i = 0; i < data.length; i++) {
     ellipse(random(width), random(height),data[i].age);
     console.log(data[i].name);
   }
 }
-
-
 function draw() {
-  //background(220);
 }let clock = {
   x: 0,
   y: 0,
   r: 50 
 }
-
-
 let a = 0; 
-
 let c= [];
-
 function setup() {
   createCanvas(400, 400);
   angleMode(DEGREES);
     
 }
-
 function draw() {
  
 background(0);
@@ -1174,10 +924,8 @@ background(0);
   
       let clock_1 = new Clock(clock.x, clock.y, random(0, 360), clock.r);
       c.push(clock_1);
-
   }}
   for (let i = 0; i <25; i++ ) {
-
       c[i].display();
       c[i].move();
   }
@@ -1186,7 +934,6 @@ let rez = 10;
 let food;
 let w; 
 let h;
-
 function setup() {
   createCanvas(400, 400);
   w = floor(width/rez);
@@ -1195,7 +942,6 @@ function setup() {
   snake = new Snake();
   foodLocation();
 }
-
 function foodLocation() {
   let x = floor(random(w));
   let y = floor(random(h));
@@ -1213,13 +959,11 @@ function keyPressed() {
     snake.setDir(0,-1);
   }
 }
-
 function draw() {
   background(220);
   scale(rez);
   if (snake.eat(food)) {
     foodLocation();
-  } //if food has been eaten, need new food location. 
   snake.update();
   snake.show();
   
@@ -1227,40 +971,25 @@ function draw() {
   noStroke();
   fill(255,0,0);
   rect(food.x, food.y, 1, 1);
-}var serial;
 var portName = "/dev/cu.usbmodem1421";
 var inData;
-
-function serialEvent() {
-  inData = Number(serial.read());
   trim(inData);
   if (!inData) return;
   
   
 }
-
 function setup() {
-  serial = new p5.SerialPort();
-  serial.list();
-  serial.on('data',serialEvent);
-  serial.open(portName);
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   fill(0);
   text('sensor value: ' + inData, 30, 30);
 }
-
-function printList(portList) {
   for (var i = 0; i < portList.length; i++) {
-    println(i + " " + portList[i]);
   }
 }
-
   let balls = [];
-
 function setup() {
   createCanvas(400, 400);
   for (let i = 0; i < 100; i++) {
@@ -1268,7 +997,6 @@ function setup() {
     balls.push(ball);
   }
 }
-
 function draw() {
   background(220);
   for (let b of balls) { 
@@ -1284,9 +1012,7 @@ function draw() {
     }
   }
 }
-
 let balls = [];
-
 function setup() {
   createCanvas(400, 400);
   for (let i = 0; i < 100; i++) {
@@ -1294,7 +1020,6 @@ function setup() {
     balls.push(ball);
   }
 }
-
 function draw() {
   background(220);
   for (let b of balls) { 
@@ -1308,14 +1033,8 @@ function draw() {
       }
   }
 }let b = [];
-
-
 function setup() {
   createCanvas(400,400);
-  // for(let i=0; i < 10; i++) {
-  //   let ba = new Ball (random (0,width),random (0,height),random (-1,1), 1, random(10,20));
-  //   b.push(ba);
-  // }
 }
   
 function draw() {
@@ -1330,40 +1049,32 @@ function draw() {
     b[i].move();
    }
 }
-
 let a, b, c;
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   add(15,15);
   display();
 }
-
 function add(a,b) {
   c = a + b;
 }
-
 function display() {
   text(c,20,30);  
 }function preload() {
   playerImg = loadImage('image/nyc.png');
 } 
-
 function setup() {
   secondSetup();
   gameSetup();
   
 }
-
 function draw() {
   ui();
   runGame();
 }
-
   
 class Ball {
   constructor (xx,yy,xdir,ydir,rr) {
@@ -1392,16 +1103,13 @@ class Ball {
   }
   }
 }
-
 let b,b1;
-
 function setup() {
   createCanvas(400, 400);
   
   b = new Ball (50, 50, 1, 2, 50); 
   b1 = new Ball (90,80,2,1,40);
 }
-
 function draw() {
   background(220);
   b.display();
@@ -1413,7 +1121,6 @@ function draw() {
   b.bounce();
   b1.bounce();
 }
-
 let ball = {
   x:100,
   y:50,
@@ -1421,18 +1128,15 @@ let ball = {
   xspeed:1,
   yspeed:10
 }
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   show();
   move();
   bounce();
 }
-
 function show () {
   ellipse (ball.x, ball.y, ball.d, ball.d);
   move();
@@ -1443,7 +1147,6 @@ function move () {
   ball.x = ball.x + ball.xspeed;
   ball.y = ball.y + ball.yspeed;
 }
-
 function bounce () {
   if (ball.x < 0 || ball.x > width) {
     ball.xspeed = ball.xspeed * -1
@@ -1455,11 +1158,9 @@ function bounce () {
 let y = 0;
 let d1 = 40;
 let d2 = 80;
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   col = map (mouseX,0,width,0,255);
@@ -1478,32 +1179,25 @@ function draw() {
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   
   rectMode(CENTER);
   drawSomething(width/2, height/2, 200);
 }
-
 function drawSomething(x,y,s) {
   rect(x,y,s,s);
   if (s>10) {
     drawSomething(x,y,s/2);
-    //drawSomething(x.y.s-10);
   }
 }
 let b, b1; 
-
-
 function setup() {
   createCanvas(400, 400);
-
   b = new Ball (50, 50, 1, 2, 50); 
   b1 = new Ball (90,80,2,1,40);
   
 }
-
 function draw() {
   background(220);
   
@@ -1522,8 +1216,6 @@ function draw() {
     b.start () ;
   }
   
-  //ellipse(b.x, b.y, b.r, b.r); 
-  //ellipse(b1.x, b1.y, b1.r, b1.r);
 }let ball = {
   x:100,
   y:100,
@@ -1535,7 +1227,6 @@ function draw() {
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   
@@ -1543,18 +1234,15 @@ function draw() {
   moveBall();
   bounceBall();
 }
-
 function displayBall() {
   ellipse(ball.x, ball.y, ball.d, ball.d); 
   moveBall();
   bounceBall();
 }
-
 function moveBall () {
   ball.x = ball.x + ball.xspeed; 
   ball.y = ball.y + ball.yspeed; 
 }
-
 function bounceBall() {
   if (ball.x <=0 || ball.x >= width) {
     ball.xspeed = ball.xspeed * -1; 
@@ -1566,7 +1254,6 @@ function bounceBall() {
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   
@@ -1579,67 +1266,45 @@ function draw() {
   drawCircle(100,50);
   drawCircle(75,50);
 }
-
 function drawCircle(offset, diameter) {
   fill(random(0,100), random(0,255), random(0,255)); 
   ellipse(mouseX+offset, mouseY+offset, diameter, diameter); 
   
 }let dw;
 let dh;
-
 let button = false;
-
-// length of line (distance for loop updates)
 let l = 20;
-//color of lines
 let c = 255;
-
 let randomArray = [];
-
 let color;
-
-
-//line variables - defined in for loop 
 let x1;
 let x2;
 let y1;
 let y2;
-
 let p = 1;
-
 function setup() {
   noCursor();
   dw = displayWidth;
   dh = displayHeight;
-
   createCanvas(dw, dh);
-
-
   let idx = 0;
   for (let w = 0; w < dw; w += l) {
     for (let h = 0; h < dh; h += l) {
-
       randomArray[idx] = random(1);
       idx++;
-      //print(idx);
     }
   }
-
 }
-
 function draw() {
   color = {
     r: 0,
     g: map(mouseX, 0, dw, 50, 150),
     b: map(mouseY, 0, dh, 50, 200),
   }
-
   background(0);
-
   let idx = 0;
   for (let w = 0; w < dw; w += l) {
     for (let h = 0; h < dh; h += l) {
-
       if (randomArray[idx] < 0.5) {
         x1 = w;
         x2 = w + 3;
@@ -1650,12 +1315,8 @@ function draw() {
         }
         else{
         stroke(color.r, color.g, color.b, 5);}
-        //stroke(244, 241, 66);
         line(x1, y1, x2, y2)
         p = p * -1;
-
-
-
         x1 = w + 3;
         x2 = w + l;
         y1 = h + 10;
@@ -1666,12 +1327,9 @@ function draw() {
         }
         else{
         stroke(color.r, color.g, color.b, 5);}
-        //stroke(244, 241, 66);
         line(x1, y1, x2, y2)
         p = p * -1;
-
       } else {
-
         x1 = w + l;
         x2 = w + 12;
         y1 = h;
@@ -1681,9 +1339,7 @@ function draw() {
         }
         else{
           stroke(color.r, color.g, color.b, 5);}
-        //stroke(244, 241, 66);
         line(x1, y1, x2, y2)
-
         x1 = w + 12;
         x2 = w;
         y1 = h + 12;
@@ -1693,32 +1349,27 @@ function draw() {
         }
         else{
         stroke(color.r, color.g, color.b, 5);}
-        //stroke(244, 241, 66);
         line(x1, y1, x2, y2)
         p = p * -1;
       }
       idx++;
     }
   }
-
   noStroke();
   fill(255, 5);
   if (mouseIsPressed) {
       fill (255, 30);
       }
 ellipse(mouseX, mouseY, 200, 200);
-
 }let w = 1;
 let h = 1; 
 let x = 0;
 let y = 0;
 let d = 400/10
  
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   for (w = -1; w <=10; w++) {
@@ -1740,9 +1391,6 @@ function draw() {
    }
 }
   
-
-
-
   
   
 let w = 1;
@@ -1751,11 +1399,9 @@ let x = 0;
 let y = 0;
 let d = 400/10
  
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   for (w = 0; w <=10; w++) {
@@ -1768,11 +1414,9 @@ function draw() {
 }let x = 0;
 let d = 400/10; 
 let i = 1;
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(255);
   for (i = 0; i <= width/d; i +=1 ) {
@@ -1787,11 +1431,9 @@ function draw() {
 }let x = 0;
 let d = 400/10; 
 let i = 1;
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(255);
   for (i = 0; i <= width/d; i +=1 ) {
@@ -1809,15 +1451,11 @@ function draw() {
     }   
   }
 }
-
-
 let x = 0;
 let d = 400/10; 
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(255);
   for (x = 0; x <= width; x = x + d) { 
@@ -1832,11 +1470,9 @@ function draw() {
     }   
   }let colorIsRed = false; 
 let colorHasChanged = false; 
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   
@@ -1859,13 +1495,10 @@ function draw() {
 let y = 150; 
 let w = 50; 
 let h = 50; 
-
 let b = false;
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   
@@ -1880,7 +1513,6 @@ function draw() {
   } else {
       background (0);
     }
-
   
   fill (0);
   rect (x,y,w,h);
@@ -1888,11 +1520,9 @@ function draw() {
 let x = 0;
 let d = 400/10; 
 let i = 1;
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(255);
   for (i = 0; i <= width/d; i +=1 ) {
@@ -1910,52 +1540,36 @@ function draw() {
     }   
   }
 }
-
-
 let x = 0;
 let y = 0;
 let speed = 3;
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   if (x > width || x < 0) {
      speed = speed * -1
   }
   x += speed 
-
   ellipse (x,200,100,100);
-}// Learning Processing
-// Daniel Shiffman
-// http://www.learningprocessing.com
-
-// Example 5-4: Hold down the button
 var button = false;
-
 var x = 50;
 var y = 50;
 var w = 100;
 var h = 75;
-
 function setup() {
   createCanvas(200,200); 
 }
-
 function draw() {
-  // The button is pressed if (mouseX,mouseY) is inside the rectangle and mousePressed is true.
   if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h && mouseIsPressed) {
     button = true; 
   } else {
     button = false;
   }
-
-  //button on
  if (button) {
     background(255);
     stroke(0);
-  //button not on
   } else {
     background(0);
     stroke(255);
@@ -1963,20 +1577,15 @@ function draw() {
   
   fill(175);
   rect(x,y,w,h);
-}// 10print.org
-// Ported from the book
-
 var w = 16;
 var h = 16;
 var index = 0;
-
 function setup() {
   createCanvas(640, 384);
   background('#0000ff');
   strokeWeight(3);
   stroke(224);
 }
-
 function draw() {
   var x1 = w*index;
   var x2 = x1 + w;
@@ -1999,11 +1608,9 @@ function draw() {
 }var x = 0;
 var speed = 3;
 var b = 0;
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   noStroke();
@@ -2024,18 +1631,15 @@ function draw() {
     y: 200,
     d: 20
 };
-
 var col = {
     r:255,
     g:0,
     b:0
 };
-
 function setup() {
   createCanvas(400, 400);
   background(0);
 }
-
 function draw() {
   
   col.r = random(100,255);
@@ -2044,25 +1648,19 @@ function draw() {
   spot.x = random(0,width);
   spot.y = random(0,height);
   noStroke()
-  fill(col.r,col.g,col.b,100);//transprancy 
   ellipse(spot.x,spot.y,spot.d,spot.d);
 }var r = 0;
 var b = 255;
-
 var circle = {
   x:50,
   y:20,
   d:50
 };
-
 function setup() {
   createCanvas(400,400);
 }
-
 function draw() {
   noStroke();
-  //r = map(mouseX, 0, 400, 0, 255);
-  //b = map(mouseX, 0, 400, 255, 0);
   r = map(mouseY+mouseX, 0, 400, 0, 255);
   b = map(mouseY+mouseX, 0, 400, 255, 0);
   
@@ -2071,49 +1669,34 @@ function draw() {
   ellipse(mouseX,mouseY,circle.d,circle.d);
   
 }
-
-
-
   
-
-
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   fill(64, 224, 208);
   ellipse(200, 200, 110, 110);
 }
-// createCanvas goes in the setup funtion
 function setup() {
   createCanvas(400, 300);
 }
-
 function draw() {
-  //bg
   background(0,255,255);
   
-  //line
   stroke(255,0,0);
   strokeWeight(38);
   line(0,0,400,300);
   noStroke();
   
-  //ellispe in the middle 
   fill(0, 200, 0);
   ellipse(200,150,190,140);
   
-  //rectangle in the right of the ellilpse 
   fill(0, 0, 128);
   rect(270,125,25,25);
 }function setup() {
   createCanvas(400, 400);
-
 }
-
 function draw() {
   background(220);
   
@@ -2123,7 +1706,6 @@ function draw() {
   angleMode(DEGREES);
   noFill();
 }
-
 function draw() {
   background(255);
   stroke(0);
@@ -2132,7 +1714,6 @@ function draw() {
   strokeWeight();
   
   beginShape();
-  //curveVertex(mouseX, mouseY);
   curveVertex(150,150);
   curveVertex(220,265);
   curveVertex(380,265);
@@ -2151,10 +1732,7 @@ function draw() {
   curveVertex(45,280);
   curveVertex(80,200);
   curveVertex(150,150);
-  //curveVertex(150,150);
   endShape(CLOSE);
-  //endShape();
-  //Me_head
   fill(255);
   stroke(25,18,12);
   ellipse(300,100,77,80);
@@ -2173,7 +1751,6 @@ function draw() {
   endShape(CLOSE);
   fill(25,18,12);
   
-  //Me_face
   ellipse(280,100,15,15);
   strokeWeight(5);
   point(266,120);
@@ -2181,51 +1758,38 @@ function draw() {
   
   
 }
-
-
-
 var eye1 = {
   x: 280,
   y: 100
 };
-
 var eye1ending = {
   x: 128,
   y: 200
 }
-
 var eye2 = {
   x: 128,
   y: 200
 };
-
 var eye2ending = {
   x: 280,
   y: 100
 }
-
 var x = 0
-
-
 function setup() {
   createCanvas(500, 500);
   background(255);
   angleMode(DEGREES);
   noFill();
 }
-
 function draw() {
-  //console.log(`x: ${mouseX}, y: ${mouseY}`);
   background(255);
   if (eye1.x >= eye1ending.x) {
     eye1.x -= (eye1.x-eye1ending.x)/100;
     eye1.y -= (eye1.y-eye1ending.y)/100;
   
-    //console.log(eye1.x);
   };
   if (eye2.x <= eye2ending.x) {
     eye2.x -= (eye2.x - eye2ending.x)/100;
-    //1s=30frame
     eye2.y -= (eye2.y - eye2ending.y)/100;
   };
   
@@ -2234,13 +1798,11 @@ function draw() {
   fill('#73DC69');
   triangle(x,500,x+15,470,x+30,500);
   
-  //triangle(30,500,49,470,60,500);
   };
   
   if (mouseX >= 46 && mouseX <= 479) {
      fill(0,255,100);
   }
-
   noStroke();
   if (mouseX >= 46 && mouseX <= 479) {
      fill('#ec98a2');
@@ -2249,7 +1811,6 @@ function draw() {
      fill(178, 88, 37);
   }
   strokeWeight(2);
-  //horse
   beginShape();
   curveVertex(150, 150);
   curveVertex(160, 150);
@@ -2274,16 +1835,12 @@ function draw() {
   curveVertex(45, 280);
   curveVertex(80, 200);
   endShape(CLOSE);
-
   stroke(178, 88, 37);
   noStroke();
   triangle(130, 163, 140, 128, 160, 150);
  
-
-  //Me body
   fill(121, 121, 109);
   noStroke();
-
   beginShape();
   curveVertex(280, 135);
   curveVertex(300, 180);
@@ -2292,8 +1849,6 @@ function draw() {
   curveVertex(380, 168);
   curveVertex(360, 135);
   endShape(CLOSE);
-
-  //Me_head
    
   fill(255);
   stroke(25, 18, 12);
@@ -2302,7 +1857,6 @@ function draw() {
   strokeWeight(0);
   fill(25, 18, 12);
   strokeWeight(1);
-
   beginShape();
   curveVertex(250, 80);
   curveVertex(300, 35);
@@ -2312,8 +1866,6 @@ function draw() {
   curveVertex(300, 90);
   endShape(CLOSE);
   fill(25, 18, 12);
-
-  //Me_face
   ellipse(eye1.x, eye1.y, 15, 15);
   strokeWeight(3);
   noFill();
@@ -2322,10 +1874,8 @@ function draw() {
   bezierVertex(270, 135, 290, 135, 290, 120);
   endShape();
   
-  //Me_pant
   fill(241, 242, 236)
   noStroke();
-
   beginShape();
   curveVertex(290, 298);
   curveVertex(280, 250);
@@ -2335,18 +1885,13 @@ function draw() {
   curveVertex(330, 250);
   curveVertex(330, 298);
   endShape(CLOSE);
-
-  //me_boots
   fill(75, 33, 19);
   rect(290, 280, 42, 42, 15, 15, 2, 2);
   strokeWeight(30);
   arc(299, 320, 66, 42, 0, 180);
-
-  //me_arms
   fill(97, 97, 85);
   noStroke();
   strokeWeight(5);
-
   beginShape();
   curveVertex(300, 155);
   curveVertex(300, 178);
@@ -2356,15 +1901,10 @@ function draw() {
   curveVertex(330, 180);
   curveVertex(330, 155);
   endShape(CLOSE);
-
-  //Me_hand
   fill(9);
   arc(238, 213, 22, 22, 60, 240);
-
-  //ring
   stroke(66, 69, 78);
   strokeWeight(4);
-
   var p1 = {
       x: 230,
       y: 220
@@ -2384,8 +1924,6 @@ function draw() {
   curve(p1.x, p1.y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
   curve(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, p4.x, p4.y);
   curve(p2.x, p2.y, p3.x, p3.y, p4.x, p4.y, p4.x, p4.y);
-
-
   fill(random(250),0,random(255));
   noStroke();
   ellipse(eye2.x, eye2.y, 25, 25); 

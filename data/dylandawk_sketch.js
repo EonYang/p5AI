@@ -1,14 +1,9 @@
-let api = "http://magicseaweed.com/api/85bc951491c11073bd7724cf10ade967/forecast/?";
 let oceansideID = "664";
 let steamerID = "163";
 let spotID = oceansideID;
 let units = "&units=us";
 let url = api + spotID + units;
-
-
-
 function setup() {
-
   createCanvas(400, 400);
   fill(120,204,204);
   noStroke();
@@ -22,25 +17,20 @@ function setup() {
   buttonS.mousePressed(spotCheckSteamer);
                        
 }
-
 function gotData(data) {
   spotData = data;
 }
-
 function spotCheckOceanside(){
   spotID = oceansideID;
   url = api + spotID + units;
   loadJSON(url, gotData);
 }
-
 function spotCheckSteamer(){
   spotID = steamerID;
   url = api + spotID + units;
   loadJSON(url,gotData)
 }
   
-
-
 function draw() {
   
   let tempSlider = document.getElementById("tempSlider");
@@ -50,7 +40,6 @@ function draw() {
   let perSlider = document.getElementById("perSlider");
 	let perOutput = document.getElementById("per");
   perOutput.innerHTML = perSlider.value;
-
   let htSlider = document.getElementById("htSlider");
 	let htOutput = document.getElementById("ht");
   htOutput.innerHTML = htSlider.value;
@@ -60,7 +49,6 @@ function draw() {
   scene.drawWaves(tempSlider.value);
   
   
-}let serial;
 let portName = "/dev/cu.usbmodem162";
 let video;
 let poseNet;
@@ -78,56 +66,24 @@ let jawAngle = 90;
 let headAngle = 0;
 let jawArray = [20,20,10,10];
 let outData = [];
-
 function preload() {
   soundFormats('mp3', 'ogg');
   laugh = loadSound('/Assets/ScaryLaughShort.mp3')
 }
-
-
-
 function setup() {
   createCanvas(400, 400);
-// Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-	// Let's list the ports available
-  var portlist = serial.list();
-
-  	// serial.open("/dev/cu.usbmodem1421"); // open a port
-
-  serial.open(portName);
-  serial.on('connected', serverConnected);
-  serial.on('list', gotList);
-  serial.on('data', serialEvent);
-  serial.on('error', gotError);
-  serial.on('open', gotOpen);
   
-  //posenet video SetUp
   video =   createCapture(VIDEO);
-
   video.size(width, height);
-
-  // Create a new poseNet method with a single detection
   poseNet = ml5.poseNet(video, type, modelReady);
-  // This sets up an event that fills the global variable "poses"
-  // with an array every time new poses are detected
   poseNet.on('pose', function(results) {
   poses = results;
   });
-  // Hide the video element, and just show the canvas
-  //video.hide();
 }
-
 function modelReady() {
   select('#status').html('Model Loaded');
 }
-
-
-// A function to draw ellipses over the detected keypoints
 function drawKeypoints()  {
-  // Loop through all the poses detected
-  //for (let i = 0; i < poses.length; i++) {
-    // For each pose detected, loop through all the keypoints
   if (poses.length > 0){
     
     let pose = poses[0].pose;
@@ -138,9 +94,7 @@ function drawKeypoints()  {
     let rightShoulder;
     
     for (let j = 0; j < pose.keypoints.length; j++) {
-      // A keypoint is an object describing a body part (like rightArm or leftShoulder)
       let keypoint = pose.keypoints[j];
-      // Only draw an ellipse is the pose probability is bigger than 0.2
       if (keypoint.score > 0.2) {
         switch (j) {
           case 0:
@@ -181,7 +135,6 @@ function drawKeypoints()  {
           ellipse(rightEye.position.x, rightEye.position.y, 30, 30);
           fill(0);
           ellipse(rightEye.position.x, rightEye.position.y, 10, 13);
-
         }
         if (leftEye && rightEye)   avgEyeX = int((rightEyeX + leftEyeX)/2);
         headAngle = avgEyeX;
@@ -190,71 +143,26 @@ function drawKeypoints()  {
   }
   
 }
-
-
-
-// We are connected and ready to go
 function serverConnected() {
-    print("We are connected!");
 }
-
-// Got the list of ports
 function gotList(thelist) {
-  // theList is an array of their names
   for (var i = 0; i < thelist.length; i++) {
-    // Display in the console
-    print(i + " " + thelist[i]);
   }
 }
-
-// Connected to our serial device
 function gotOpen() {
-  print("Serial Port is open!");
 }
-
-// Ut oh, here is an error, let's log it
 function gotError(theerror) {
-  print(theerror);
 }
-
-// There is data available to work with from the serial port
 function gotData() {
-  var currentString = serial.readStringUntil("\r\n");
   console.log(currentString);
 }
-
-
-// Methods available
-// serial.read() returns a single byte of data (first in the buffer)
-// serial.readChar() returns a single char 'A', 'a'
-// serial.readBytes() returns all of the data available as an array of bytes
-// serial.readBytesUntil('\n') returns all of the data available until a '\n' (line break) is encountered
-// serial.readString() retunrs all of the data available as a string
-// serial.readStringUntil('\n') returns all of the data available as a tring until a (line break) is encountered
-// serial.last() returns the last byte of data from the buffer
-// serial.lastChar() returns the last byte of data from the buffer as a char
-// serial.clear() clears the underlying serial buffer
-// serial.available() returns the number of bytes available in the buffer
-
-
-function serialEvent() {
   
   outData = [jawAngle, headAngle];
-
-   // read a string from the serial port
-  // until you get carriage return and newline:
-  let inString = serial.readStringUntil('\r\n');
-  //check to see that there's actually a string there:
   if (inString.length > 0) {
-    if (inString !== 'hello') {           // if you get hello, ignore it
 			distance = inString;
     }
   }
-  print(distance)
   
-
-  //if (!laugh.isPlaying) isPlaying = 0;//checks to see is laugh track is playing
-  if (distance < 40 && !laugh.isPlaying()) {// checks to see if somethign close
     laugh.play();
     let i = 0;
     if(counter < jawArray[i]) {
@@ -262,44 +170,26 @@ function serialEvent() {
         jawAngle =0;
       } else jawAngle = 90;
       counter++;
-      serial.write(outData);
     } else if (counter == jawArray[i]) {
       i++;
       counter = 0;
     }
     
   }
-  serial.write(outData);
-  //print(outData);
 }
-
-
-
 function draw() {
   background(220);
   drawKeypoints();
   if (avgEyeX > 0) {
-  	// serial.write(avgEyeX, isPlaying + "\n");
-  	// print(avgEyeX, isPlaying + "\n");
   }
-
-}// API key d3709836286fd09bb96c4a4870a59a7f
-//http://api.openweathermap.org/data/2.5/weather?q=new%20york,us&appid=d3709836286fd09bb96c4a4870a59a7f
-
 function setup() {
   createCanvas(400, 400);
-  loadJSON("https://api.openweathermap.org/data/2.5/weather?q=new%20york,us&appid=d3709836286fd09bb96c4a4870a59a7f",drawWeather);
 }
-
 function drawWeather(data){
-  //console.log(data);
   console.log(data.main.temp)
 }
-
 function draw() {
-  //background(220);
   
-}let api = "https://magicseaweed.com/api/85bc951491c11073bd7724cf10ade967/forecast/?spot_id=";
 let oceansideID = "664";
 let steamerID = "163";
 let spotID = oceansideID;
@@ -311,11 +201,7 @@ let temp = 10;
 let ht = 10;
 let period = 10;
 htScale = 4;
-
-
-
 function setup() {
-
   createCanvas(windowWidth, windowHeight);
   fill(120,204,204);
   noStroke();
@@ -329,31 +215,23 @@ function setup() {
   buttonS.mousePressed(spotCheckSteamer);
                        
 }
-
 function gotData(data) {
   spotData = data;
-  print("gotData")
 }
-
 function spotCheckOceanside(){
   spotID = oceansideID;
   url = api + spotID + fields;
   loadJSON(url, gotData);
 }
-
 function spotCheckSteamer(){
   spotID = steamerID;
   url = api + spotID + fields;
-  print(url);
   loadJSON(url,gotData);
 }
   
-
-
 function draw() {
   background(0);
   if(spotData){
-    temp = floor((spotData[0].condition.temperature -32) * (5/9)); // converts to celcuis
     ht = spotData[0].swell.components.combined.height * htScale;
     period = spotData[0].swell.components.combined.period;
    
@@ -362,104 +240,41 @@ function draw() {
   scene.drawWaves(temp);
   
   
-}let serial;
 let portName = "/dev/cu.usbmodem14641";
 let inData;
-let fromSerial;
-
 function setup() {
   createCanvas(windowWidth,windowHeight);
   
-  //Wave Generator Setup Code
   scene = new wave(20,6,1,1);
-  //scene.createArrays();
   fill(120,204,204);
   noStroke()
   
- 	// Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-	// Let's list the ports available
-  var portlist = serial.list();
-
-  	// serial.open("/dev/cu.usbmodem1421"); // open a port
-
-  serial.open(portName);
-  serial.on('connected', serverConnected);
-  serial.on('list', gotList);
-  serial.on('data', serialEvent);
-  serial.on('error', gotError);
-  serial.on('open', gotOpen);
 }
-
-
 function modelReady() {
   select('#status').html('Model Loaded');
 }
-
 function draw() {
-  //image(video, 0, 0, width, height);
   background (220);
-  // We can call both functions to draw all keypoints and the skeletons
   drawKeypoints();
-  //drawSkeleton();
 }
-
-
-
-// We are connected and ready to go
 function serverConnected() {
-    print("We are connected!");
 }
-
-// Got the list of ports
 function gotList(thelist) {
-  // theList is an array of their names
   for (var i = 0; i < thelist.length; i++) {
-    // Display in the console
-    print(i + " " + thelist[i]);
   }
 }
-
-// Connected to our serial device
 function gotOpen() {
-  print("Serial Port is open!");
 }
-
-// Ut oh, here is an error, let's log it
 function gotError(theerror) {
-  print(theerror);
 }
-
-// There is data available to work with from the serial port
 function gotData() {
-  var currentString = serial.readStringUntil("\r\n");
   console.log(currentString);
 }
-
-
-function serialEvent() {
-	// this is called when data is recieved, data will then live in fromSerial	
-	fromSerial = serial.read();
 }
-
-// Methods available
-// serial.read() returns a single byte of data (first in the buffer)
-// serial.readChar() returns a single char 'A', 'a'
-// serial.readBytes() returns all of the data available as an array of bytes
-// serial.readBytesUntil('\n') returns all of the data available until a '\n' (line break) is encountered
-// serial.readString() retunrs all of the data available as a string
-// serial.readStringUntil('\n') returns all of the data available as a tring until a (line break) is encountered
-// serial.last() returns the last byte of data from the buffer
-// serial.lastChar() returns the last byte of data from the buffer as a char
-// serial.clear() clears the underlying serial buffer
-// serial.available() returns the number of bytes available in the buffer
-
 function draw() {
   background(0);
   fill(255);
-  //text("sensor value: " + fromSerial, 30, 30);
   
-  // Wave generator info
   
   let tempSlider = document.getElementById("tempSlider");
 	let output = document.getElementById("temp");
@@ -469,8 +284,6 @@ function draw() {
 	let perOutput = document.getElementById("per");
   perOutput.innerHTML = perSlider.value;
   
-	let potMapped = map(fromSerial, 0, 255, 0,30); 
-
   background(0);
   
   
@@ -483,7 +296,6 @@ let theta = 0;
 let r=10;
 let array = [1,2,3];
 let bigA = [];
-
 function setup() {
   createCanvas(400, 400);
   for(let j = 0; j<5; j++){
@@ -494,15 +306,10 @@ function setup() {
         bigA[j][i] = array[i];
       }
   }
-  print(bigA);
-
 }
-
 function draw() {
-
   
 }let dis = 60;
-
 function setup() {
   createCanvas(500, 500);
   frameRate(60);
@@ -512,10 +319,8 @@ function setup() {
   scene4 =new circle(width/2-dis,100,0,0,3*PI/5,30);
   scene5 =new circle(width/2-dis*2,100,0,0,4*PI/5,40);
   scene.storeCircles();
-  //scene2.storeCircles();
 		
 }
-
 function draw() {
   background(51,48,71);
   scene.drawCircles();
@@ -525,9 +330,7 @@ function draw() {
   scene5.drawCircles();
 }let maxDS=50;
 let counter =0;
-let big = true;// whether growing or shrinking
 let cArray =[];
-
 class circle {
   constructor(xx, yy, xxCtr, yyCtr) {
     this.x = xx;
@@ -538,8 +341,6 @@ class circle {
   storeCircles(){
     noStroke();
 		let scaleOne = 2; 
-    let size;//starting size
-		let deltaS=0;//size increment
   	for(i = 1; i <= maxDS; i++){
     	deltaS = deltaS + 1 / i;
     	size = deltaS*deltaS*scaleOne;
@@ -568,29 +369,22 @@ class circle {
     counter--;
   }
   theta += 0.1;
-  print(Math.sin(theta));
   }
-
 }
  let myArray= [];
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   if(mouseIsPressed){
   	for(let i = 20; i>=0 ;i--){
     	myArray[i] = i;
     }
-    print(myArray);
-    print(myArray.length);
   }
   if(keyIsPressed){
     var newLength = myArray.unshift(myArray[20])
     newLength = myArray.pop()
-    //myArray[12] = 12;
-    print(myArray);
   }
 }class bg {
   constructor(xx, yy, xxdir, yydir) {
@@ -615,10 +409,7 @@ function draw() {
     fill(114, 62, 95);
     rect(width / 2, height-h*3, width, h*6);
   }
-
 }
-
-
 function setup() {
   createCanvas(500, 400);
   rectMode(CENTER)
@@ -628,25 +419,18 @@ function setup() {
   scene.buildingsData();
  
 }
-
 function draw() {
   scene.sky();
   scene.stars();
-  //scene.shootingStars();
   scene.buildings();
   scene.move();
-
-}let nkey;// most recent key pressed
 let up = 'w';
 let down = 's' ;
 let left = 'a';
 let right = 'd';
-
 function keyTyped() {
   nkey = key;
-  print(nkey);
 }
-
 class Car {
   constructor(xx,yy,xxdir, yydir, rr){
     this.x = xx;
@@ -683,31 +467,22 @@ class Car {
       this.x+=1.5;
     }
   }
-
 }
 function setup() {
   createCanvas(400, 400);
   background(0);
 	car = new Car(width/2, height-100,1,1, 20);
-
 }
-
 function draw() {
   background(0)
-  //car.start();
   car.display();
   car.move();
 }
-
-
     
     let mx;
 let my;
-let sat = [];// color value
-let d;//distance
 let r,g,b;
 let counter;
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   rectMode(CENTER);
@@ -717,31 +492,22 @@ function setup() {
  
   
 }
-
 function draw() {
   background(0);
   if (mouseIsPressed) {
-
-    mx = mouseX;//Stores where the click was made
     my = mouseY;
     r = random(0,255);
  		g = random(0,255);
     b = random(0,255);
-    counter=0;//counter
   
   }
-
-  //Draws all the circles within a certain radius
     for (let x = 0; x < width; x += 10) {
       for (let y = 0; y < height; y += 10) {
-        d = dist(mx,my,x,y);// calculates distance between a circle and where the mose is pressed
         let itR= r/4;
         let itG= g/4;
         let itB= b/4;
-        if (d < 10) { //Below are the different radii for fireworks
           fill(r,g,b);
           ellipse(x, y, 5, 5);
-          print(counter)
         }else if(10 < d && d < 20 && counter >= 2) {
           fill(r,g,b);
           ellipse(x, y, 5, 5);
@@ -761,7 +527,6 @@ function draw() {
     r-=4;
   	g-=4;
   	b-=4;
-    if (r<=0) {// Keeps color values from going negative
       r=0;
     } else if(g<=0) {
       g=0;
@@ -770,11 +535,9 @@ function draw() {
     }
 }
 let circles = [];
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(0);
   
@@ -787,7 +550,6 @@ function draw() {
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   var circle1 = {radius: 20, x: 5, y: 5};
@@ -796,9 +558,7 @@ function draw() {
 	var dx = circle1.x - circle2.x;
 	var dy = circle1.y - circle2.y;
 	var distance = Math.sqrt(dx * dx + dy * dy);
-
 if (distance < circle1.radius + circle2.radius) {
-
 }
 }  let p1 = {x: 10, y:10, ht:20, wd:80, s:0};
 	let p2 = {x: 570, y:10, ht:20, wd:80, s:0};
@@ -813,13 +573,10 @@ function setup() {
   dirY = random(-2,2);
   dirX = sqrt((ball.v*ball.v)-(dirY*dirY));
   if (dirY<0) dirX = -dirX;
-    //score tally
 }
-
 function draw() {
   background(0);
   
-	//Player01 Detail
   let player01 = rect(p1.x, p1.y, p1.ht,p1.wd);
   if (mouseY >= (p1.wd/2) && mouseY <= height-(p1.wd/2)) {
     p1.y = mouseY-(p1.wd/2);
@@ -828,29 +585,20 @@ function draw() {
   } else if (mouseY >height-(p1.wd/2)) {
     p1.y = height-(p1.wd);
   }
-  //Player02 Detail
   let player02 = rect(p2.x,p2.y,p1.ht,p2.wd);
   let up = keyIsDown(UP_ARROW);
   let down = keyIsDown(DOWN_ARROW);
   if (up && p2.y > 0) {
-    p2.y -= 5; //Move up
   } else if (down && p2.y < height-p2.wd) {
-    p2.y += 5; //Move down
   }
-  //Ball Detail
   ellipse(ball.x, ball.y, ball.r*2,ball.r*2);
-  //Ball Velocity
   if (ball.x+ball.r >= 0 && ball.x-ball.r <= width){
     ball.x += dirX;
   	ball.y +=dirY;
   }
-  // Ball Wall Collision
   if (ball.y+(ball.r) >= height || ball.y-(ball.r) <= 0) {
     dirY = -dirY;
   }
-  //Ball Player one Collision
-  	//Face Collision
-
   if (ball.x-ball.r <= p1.x+p1.ht && ball.x > p1.x) {
     if(ball.y >= p1.y && ball.y <= p1.y+(p1.wd) ){
     	ball.x = p1.x+p1.ht+ball.r;
@@ -860,22 +608,16 @@ function draw() {
     	dirX = -dirX;
     }
   } 
-  	//Side Collision
-  /*if(ball.y+ball.r >= p1.y -(p1.wd/2) &&  p1.x <= ball.y && ball.y <= p1.x+p1.ht) {
     dirY = -dirY;
-  }*/
-  //Ball Player two Collision
   if (ball.x+ball.r >= p2.x && ball.y >= p2.y && ball.y <= p2.y+p2.wd) {
     ball.x= p2.x-ball.r; 
     dirX = -dirX;
   }
-  //speedup
   if (frameCount%200 == 0) {
     dirX = dirX*1.1;
     dirY = dirY*1.2;
   }
   
-  //Score and reset
   fill(255)
   text(p2.s, width/2 -20, 20);
   text(p1.s, width/2 +20, 20);
@@ -890,12 +632,10 @@ function draw() {
     if (dirY<0) dirX = -dirX;
   }
   
-
   
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
 	background(220);
   fill(64,224,208);
@@ -904,14 +644,11 @@ function draw() {
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
-
 }function setup() {
   createCanvas(400, 400);
 	
 }
-
 function draw() {
   	var hair = color(66,63,50);
 	var s01 = color(188,136,59);
@@ -934,7 +671,6 @@ function draw() {
   var eyeLX = 192.7;
   var eyeRX = 208.7;
   
-  //Eye Direction
   if (mouseX >= 200 && mouseX <=400) {
     eyeLX = (mouseX-200)/74 + 192.7;
   } else if (mouseX <=200 && mouseX > 10) {
@@ -946,17 +682,13 @@ function draw() {
   } else if (mouseX <=200 && mouseX >10) {
     eyeRX = 208.7 - (200-mouseX)/66.7;
   } else eyeRX = 208.7;
-	 print(mouseX);
 	angleMode(DEGREES);
 	
-	//
 	background(255);
 	noStroke();
 	fill(hair);
-	//Shadow
 	ellipse(200,362,158,24);
 	
-	//Jacket Hood
 	rectMode(CENTER);
 	fill(j02);
 	rect(202,99,58,18,8);
@@ -964,7 +696,6 @@ function draw() {
 	fill(j04);
 	rect(200,100,51,16,8)
 	
-	//Head + Neck
 	fill(hair);
 	ellipse(200,60,39,39);
 	fill(s02);
@@ -975,7 +706,6 @@ function draw() {
 	rect(200,74.7,32,35,12);
 	rect(200,61,32,19,9.37);
 	
-	//Hair
 	fill(hair);
 	ellipse(177,67,20,20);
 	ellipse(176,50,20,20);
@@ -983,7 +713,6 @@ function draw() {
 	ellipse(200,35,20,20);
 	ellipse(211,38,20,20);
 	
-	//Face
 	fill(hair);
 	rect(192.7,66.5, 10.2,3.4,1.7);
 	rect(208.6,66.5, 10.2,3.4,1.7);
@@ -1014,7 +743,6 @@ function draw() {
 	fill(s03);
 	rect(205,57.5,12,3,1.5);
 	
-		//Pants
 	fill(p01);
 	rect(182,261,13.3,140,3.7);
 	rect(218,261,13.3,140,3.7);
@@ -1026,8 +754,6 @@ function draw() {
 	rect(200,204.5,50,3);
 	
 	
-	//Jacket
-		//Arm(L)
 	fill(j05);
 	push();
 	translate(164.5,139.5);
@@ -1041,7 +767,6 @@ function draw() {
 	rect(0,0,19,61,12);
 	pop();
 	
-		//Torso
 	fill(j01);
 	rect(200,153,70,96,12);
 	rect(200,190,83,26,12);
@@ -1050,7 +775,6 @@ function draw() {
 	rect(208.5,119,3,28,1.5);
 	
 	
-		//Hand(L)
 	fill(s01);
 	push();
 	translate(133,115);
@@ -1078,9 +802,7 @@ function draw() {
 	rect(0,0,5,21,2.5);
 	pop();
 	
-
 	
-		//Hand(R)
 	push();
 	translate(221.5,181.7);
 	rotate(-296);
@@ -1088,7 +810,6 @@ function draw() {
 	pop();
 	
 	
-		//Arm(R)
 	fill(j02);
 	push();
 	translate(233.5,133.5);
@@ -1110,7 +831,6 @@ function draw() {
 	rect(0,0,4.7,22.5,2.3);
 	pop();
 	
-		//Pockets
 	fill(j04);
 	push();
 	translate(183.5,183.5)
@@ -1124,7 +844,6 @@ function draw() {
 	rect(0,0,7,21);
 	pop();
 	
-		//Shoes
 	push();
 	translate(200,342);
 	fill(sh01);
@@ -1141,7 +860,6 @@ function draw() {
 	rect(34.5,20,50,6);
 	pop();
 	
-		//Laces
 	push();
 	fill(j03);
 	translate(225,339);
@@ -1162,7 +880,6 @@ function draw() {
 	rotate(-30);
 	rect(0,0,10,2,1);
 	pop();
-
 		push();
 	fill(j03);
 	translate(176,339);
@@ -1183,6 +900,4 @@ function draw() {
 	rotate(30);
 	rect(0,0,10,2,1);
 	pop();
-
 }
-

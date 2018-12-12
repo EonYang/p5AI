@@ -6,25 +6,20 @@ let yspeed = 0;
 let spaceshipCount = 0;
 let counter;
 let clock;
-
 let trash = [];
 let trash_x;
 let trash_y;
 let trashNum = 6;
 let i;
-
 let trashking;
 let trashking_x = 0;
 let trashking_y = 0;
 let trashkingCount = 0;
-
 let health = [];
 let health_x;
 let health_y;
-
 let load = 0;
 let lives = 3;
-
 let bgimg;
 let shipimg;
 let healthimg;
@@ -34,9 +29,7 @@ let failimg;
 let winimg;
 let trashkingimg;
 let controlimg;
-
 let gameScene = 0;
-
 function preload() {
   bgimg = loadImage('bg.png');
   shipimg = loadImage('ship.png');
@@ -47,37 +40,26 @@ function preload() {
   winimg = loadImage('win.png');
   trashkingimg = loadImage('trashking.png');
   controlimg = loadImage('control.png');
-
 }
-
 function setup() {
   createCanvas(600, 600);
   loadPixels();
   rectMode(CENTER);
   spaceship = new Spaceship(spaceship_x, spaceship_y, xspeed, yspeed, load);
   trashking = new Trashking(trashking_x, trashking_y)
-
   for (i = 0; i < trashNum; i++) {
     trash_x = random(20, width - 20);
     trash_y = random(20, height - 20);
     trash[i] = new Trash(trash_x, trash_y);
   }
-
   for (let j = 0; j < 3; j++) {
     health_x = 135 - j * 45
     health_y = 20;
     health[j] = new Health(health_x, health_y);
   }
 }
-
 function draw() {
-  //gamescene 0 = story,
-  //gamescene 1 = how to play,
-  //gamescene 2 = game,
-  //gamescene 3 = fail,
-  //gamescene 4 = win,
 	
-
   if (gameScene == 0) {
     image(bgimg, 0, 0, 600, 600);
     noStroke();
@@ -87,7 +69,6 @@ function draw() {
     if (mouseIsPressed && (mouseX > 255 && mouseX < 335) && (mouseY > 494 && mouseY < 534))
       gameScene = 1;
   }
-
   if (gameScene == 1) {
     image(bgimg, 0, 0, 600, 600);
     noStroke();
@@ -98,11 +79,8 @@ function draw() {
     gameScene = 2;
     }
   }
-
   if (gameScene == 2) {
-    print(trashNum);
     counter = millis();
-    //continue game if not losing or winning
     if (lives == 0 || trashkingCount == 3) {
       gameScene = 3;
     } else if (spaceshipCount == 4) {
@@ -112,7 +90,6 @@ function draw() {
       image(bgimg, 0, 0, 600, 600);
       spaceship.run();
       trashking.run();
-
       fill(255);
       text('King of the Junk', 50, 75);
       text(trashkingCount, 160, 75);
@@ -120,9 +97,6 @@ function draw() {
       text(spaceshipCount, 160, 95);
       text('JunkLoad', 50, 115);
       text(load, 160, 115);
-
-
-      // setup health bar
       for (let h in health) {
         health[h].run();
         if (trashking.isNear(spaceship)) {
@@ -134,24 +108,18 @@ function draw() {
           trashking.y = 200;
         }
       }
-
-      // setup all trash and game rule
       for (let t in trash) {
         trash[t].run();
         if (trash[t].isNear(spaceship, 60)) {
           trash.splice(t, 1);
           trashNum = trashNum - 1;
           load = load + 1;
-          clock = counter; // when burn start
-
         } else if (trash[t].isNear(trashking, 250) && (trashNum > 1)) {
           trash.splice(t, 1);
           trashkingCount = trashkingCount + 1;
           trashNum = trashNum - 1;
         }
       }
-
-      //trashking movement
       if (dist(spaceship.x, spaceship.y, trashking.x, trashking.y) < 300 || spaceshipCount == 2 || trashNum == 0) {
         trashking.x += (spaceship.x - trashking.x) / 150
         trashking.y += (spaceship.y - trashking.y) / 150
@@ -161,7 +129,6 @@ function draw() {
           trashking.y += (trash[0].y - trashking.y) / 4000
         }
       }
-        // burn trash
         if ((counter - clock) >= 3500) {
           load = load - 1;
           spaceshipCount = spaceshipCount + 1;
@@ -170,7 +137,6 @@ function draw() {
       
     }
   }
-
   if (gameScene == 3) {
     image(bgimg, 0, 0, 600, 600);
     noStroke();
@@ -179,37 +145,26 @@ function draw() {
     image(failimg, 0, 0, 600, 600);
     if (mouseIsPressed && (mouseX > 255 && mouseX < 335) && (mouseY > 494 && mouseY < 534)) {
     window.location.reload();
-
     }
   }
-
   if (gameScene == 4) {
     image(bgimg, 0, 0, 600, 600);
     image(winimg, 0, 0, 600, 600);
-    //if (mouseIsPressed && (mouseX > 255 && mouseX < 335) && (mouseY > 494 && mouseY < 534)) {
-    //gameScene = 0;
   }
-
 }
-
 function keyPressed() {
   if (keyCode === UP_ARROW) {
-    //spaceship.moveUp(load)
     spaceship.yspeed = -3 + (load * 0.5);
   }
   if (keyCode === DOWN_ARROW) {
-    //spaceship.moveDown(load)
     spaceship.yspeed = 3 - (load * 0.5);
   }
   if (keyCode === LEFT_ARROW) {
-    //spaceship.moveLeft(load)
     spaceship.xspeed = -3 + (load * 0.5);
   }
   if (keyCode === RIGHT_ARROW) {
-    //spaceship.moveRight(load)
     spaceship.xspeed = 3 - (load * 0.5);
   }
-  return false; // prevent default
 }let spaceship;
 let spaceship_x = 300;
 let spaceship_y = 300;
@@ -218,25 +173,20 @@ let yspeed = 0;
 let spaceshipCount = 0;
 let counter;
 let clock;
-
 let trash = [];
 let trash_x;
 let trash_y;
 let trashNum = 6;
 let i;
-
 let trashking;
 let trashking_x = - 50;
 let trashking_y = - 50;
 let trashkingCount = 0;
-
 let health = [];
 let health_x;
 let health_y;
-
 let load = 0;
 let lives = 3;
-
 let bgimg;
 let shipimg;
 let healthimg;
@@ -245,10 +195,7 @@ let storyimg;
 let failimg;
 let winimg;
 let trashkingimg;
-
 let gameScene = 0;
-
-
 function preload() {
   bgimg = loadImage('bg.png');
   shipimg = loadImage('ship.png');
@@ -258,41 +205,25 @@ function preload() {
   failimg = loadImage('fail.png');
   winimg = loadImage('win.png');
   trashkingimg = loadImage('trashking.png');
-
 }
-
-
 function setup() {
   createCanvas(600, 600);
   loadPixels();
   rectMode(CENTER);
-
   spaceship = new Spaceship(spaceship_x, spaceship_y, xspeed, yspeed, load);
   trashking = new Trashking(trashking_x, trashking_y)
-
   for (i = 0; i < trashNum; i++) {
     trash_x = random(20, width - 20);
     trash_y = random(20, height - 20);
     trash[i] = new Trash(trash_x, trash_y);
   }
-
   for (let j = 0; j < 3; j++) {
     health_x = 135 - j * 45
     health_y = 20;
     health[j] = new Health(health_x, health_y);
   }
 }
-
 function draw() {
-  print(lives);
-
-  //gamescene 0 = story,
-  //gamescene 1 = how to play,
-  //gamescene 2 = game,
-  //gamescene 3 = fail,
-  //gamescene 4 = win,
-
-
   if (gameScene == 0) {
     image(bgimg, 0, 0, 600, 600);
     noStroke();
@@ -302,14 +233,12 @@ function draw() {
     if (mouseIsPressed && (mouseX > 255 && mouseX < 335) && (mouseY > 494 && mouseY < 534))
       gameScene = 2;
   }
-
   if (gameScene == 2) {
     if
     counter = millis();
     image(bgimg, 0, 0, 600, 600);
     spaceship.run();
     trashking.run();
-
     fill(255);
     text('King of the Junk', 50, 75);
     text(trashkingCount, 160, 75);
@@ -319,7 +248,6 @@ function draw() {
     text(load, 160, 115);
     
     
-		// setup health bar
     for (let h in health) {
       health[h].run();
       if (trashking.isNear(spaceship)) {
@@ -329,26 +257,18 @@ function draw() {
         spaceship.y = 500;
       }
     }
-
-		// setup all trash and game rule
     for (let t in trash) {
       trash[t].run();
       if (trash[t].isNear(spaceship,50)) {
         trash.splice(t, 1);
         trashNum = trashNum - 1;
         load = load + 1;
-        clock = counter; // when burn start
-
       } else if (trash[t].isNear(trashking,250) && (trashNum > 1)) {
         trash.splice(t, 1);
         trashkingCount = trashkingCount + 1;
         trashNum = trashNum - 1;
       }
     }
-
-
-
-    //trashking movement
     if (dist(spaceship.x, spaceship.y, trashking.x, trashking.y) < 200 || spaceshipCount == 2 || trashNum == 0) {
       trashking.x += (spaceship.x - trashking.x) / 200
       trashking.y += (spaceship.y - trashking.y) / 200
@@ -357,27 +277,21 @@ function draw() {
         trashking.x += (trash[0].x - trashking.x) / 5000
         trashking.y += (trash[0].y - trashking.y) / 5000
       }
-
-      // lose all lives then fail all trashking get 3 junk then fail
       if (lives == 0  || trashkingCount >= 3) {
         gameScene = 3;
       }
-      // burn trash
       if (load > 0) {
-        //clock = counter;
         if ((counter - clock) > 5000) {
           load = load - 1;
           spaceshipCount = spaceshipCount + 1;
           clock = counter;
         }
       }
-      // winning condiiton
       if (spaceshipCount > 3) {
         gameScene = 4;
       }
     }
   }
-
   if (gameScene == 3) {
     image(bgimg, 0, 0, 600, 600);
     noStroke();
@@ -388,45 +302,31 @@ function draw() {
       gameScene = 0;
     }
   }
-
   if (gameScene == 4) {
     image(bgimg, 0, 0, 600, 600);
     image(winimg, 0, 0, 600, 600);
-    //if (mouseIsPressed && (mouseX > 255 && mouseX < 335) && (mouseY > 494 && mouseY < 534)) {
-    //gameScene = 0;
   }
-
 }
-
-
-
 function keyPressed() {
   if (keyCode === UP_ARROW) {
-    //spaceship.moveUp(load)
     spaceship.yspeed = -3 + (load * 0.5);
   }
   if (keyCode === DOWN_ARROW) {
-    //spaceship.moveDown(load)
     spaceship.yspeed = 3 - (load * 0.5);
   }
   if (keyCode === LEFT_ARROW) {
-    //spaceship.moveLeft(load)
     spaceship.xspeed = -3 + (load * 0.5);
   }
   if (keyCode === RIGHT_ARROW) {
-    //spaceship.moveRight(load)
     spaceship.xspeed = 3 - (load * 0.5);
   }
-  return false; // prevent default
 }let memes = [];
 let tWidth;
 let preCounter;
-
 function setup() {
   createCanvas(400, 400);
   memes = ["POKEMON MASTER? WHY NOT POKEMON PHD?","YOU HAVE AN A-? YOUR A DISGRACE","LESS FACEBOOK MORE FACE IN BOOK","YOU SICK? GO STUDY TO BE DOCTOR. CURE YOURSELF.","AN A MINUS IS AN A  MINUS MY LOVE FOR YOU","IF AT FIRST YOU DON’T SUCCEED DONT COME BACK HOME","A-? THIS FAMILY IS ABOUT TO BE MINUS A SON","CALCULATOR? WHY NOT CALCUNOW?","YOU WATCH DOCTOR WHO? WHY NOT DOCTOR YOU?","OH,YOU WANT PS4? HOW ABOUT PHD?","YOU ARE 99%?WHY NOT 100%","TRY HARDER","WHAT IS DIFFERENCE BETWEEN A- AND A+? MY LOVE FOR YOU."]
 }
-
 function draw() {
   background(220);
   
@@ -444,48 +344,35 @@ let txt = '%';
 let img;
 let imgX = 0;
 let imgY = 0;
-
 function preload(){
   img = loadImage('tryharder.png');
 }
-
 function setup() {
   createCanvas(400, 400);
   
-  // set variables
   imgX = width/2;
   imgY = height/2;
   
-  // input buttons
   input1 = createInput(45);
   input1.position(20, 10);
   input2 = createInput(87);
   input2.position(180, 10);
   
-  // submit button
   button = createButton('calculate!');
   button.position(input2.x + input2.width+10, 10);
   
   
 }
-
 function draw() {
   background(220);
-  // modulo symbol
   text(txt, 160, 25);
   
-  // calculate modulo
   button.mousePressed(calculate);
   
-  // display image
   imageMode(CENTER);
   image(img, imgX, imgY, 100, 100);
-
-
 }
-
 function calculate(){
-  // calculate modulo
   let mod1 = input1.value();
   let mod2 = input2.value();
   ans = mod1%mod2;
@@ -494,7 +381,6 @@ function calculate(){
   button.hide();
   txt = '';
 }
-
 function keyPressed(){
   if (keyCode === LEFT_ARROW) {
     imgX = imgX - 5;
@@ -505,11 +391,9 @@ function keyPressed(){
 }
 let video, stronger, fft, sliderCol, toggle;
 let vScale = 21;
-
 function preload() {
   stronger = loadSound('kelly-clarkson-stronger-what-doesnt-kill-you.mp3');
 }
-
 function setup() {
   createCanvas(640, 480);
   toggle = createButton('Pause');
@@ -521,16 +405,13 @@ function setup() {
   sliderCol = createSlider(0, 255, 128);
   sliderCol.parent(colorChange);
   pixelDensity(1);
-
   video = createCapture(VIDEO);
   video.size(width / vScale, height / vScale);
   video.hide();
-
   fft = new p5.FFT();
   stronger.amp(0.8);
   stronger.play();
 }
-
 function draw() {
   background(26, 26, 26);
   video.loadPixels();
@@ -540,18 +421,14 @@ function draw() {
   let strongerBass = fft.getEnergy("bass");
   let heartSize = map(strongerBass, 0, 255, 0, 26)
   console.log(strongerHighMid);
-
   for (let x = 0; x < video.width; x++) {
     for (let y = 0; y < video.height; y++) {
       let i = (video.width - x - 1 + (y * video.width)) * 4;
       let r = video.pixels[i + 0];
       let g = video.pixels[i + 1];
       let b = video.pixels[i + 2];
-
       let bright = (r + g + b) / 3;
-
       let threshold = 90;
-
       if (strongerHighMid < threshold) {
         noStroke();
         fill(r + sliderCol.value(), g, b, random(100, 200));
@@ -565,7 +442,6 @@ function draw() {
     }
   }
 }
-
 function musicToggle() {
   if (!stronger.isPlaying()) {
     stronger.play();
@@ -576,22 +452,14 @@ function musicToggle() {
   }
 }let capture;
 let vScale = 16;
-
-
 function setup() {
   
   createCanvas(640, 480)
   capture = createCapture(VIDEO);
-  //capture.size(width/vScale, height/vScale);
-  //capture.size(width/vScale, height/vScale);
   capture.size(width/vScale, height/vScale);
-  //capture.hide();
   pixelDensity(1);
 }
-
 function draw() {
-  //background(51);
-
   capture.loadPixels();
   loadPixels();
   for (let y = 0; y < capture.height; y++) {
@@ -604,35 +472,21 @@ function draw() {
       	
     		fill(r,g,b);
         
-      	//noStroke();
       	rect(x*vScale,y*vScale,vScale,vScale);
-
-      	// pixels[index + 0] = bbb;
-      	// pixels[index + 1] = bbb;
-      	// pixels[index + 2] = bbb;
-      	// pixels[index + 3] = 255;
-
-
-
       }
     }
-  //updatePixels();
   }let x;
 let y;
 let speed;
 let rains = [];
 let capture;
 let vScale = 20;
-
-
 function setup() {
   createCanvas(640,480)
   capture = createCapture(VIDEO);
   capture.size(32, 24);
-  //capture.hide();
   pixelDensity(1);
  
-
   for (let i = 0; i < 200; i++) {
     x = random(width);
     y = random(-height, 0);
@@ -640,7 +494,6 @@ function setup() {
     rains[i] = new Rain(x, y, speed, 1);
   }
 }
-
 function draw() {
   background(50, 30);
   
@@ -653,22 +506,18 @@ let y = 200;
 let xspeed = 4;
 let yspeed = 5;
 let bounce;
-
 function preload(){
   bounce = loadSound("bounce.mp3");
   
 }
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   x += xspeed
   y += yspeed
   ellipse(x, y, 50, 50);
-
   if (x > width || x < 0) {
     xspeed *= -1
     bounce.play();
@@ -677,37 +526,27 @@ function draw() {
     yspeed *= -1;
     bounce.play();
   }
-}//copy(srcImage, sx, sy, sw, sh, dx, dy, dw, dh)
 let capture;
-
-
 function setup() {
   createCanvas(400, 400);
   capture = createCapture(VIDEO);
-  //capture.hide();
 }
-
 function draw() {
-  //background(220);
   loadPixels();
   copy(capture, mouseX, mouseY, 20, 20, mouseX, mouseY, 20, 20)
 }let dog;
 let col;
-
 function preload() {
   dog = loadImage("dog.png");
   
 }
-
 function setup() {
   createCanvas(400, 400);
   pixelDensity(1);
 }
-
 function draw() {
   background(220);
   dog.loadPixels();
-
   for (let y = 0; y < height; y += 10){
     for (let x = 0; x < width; x += 10) { 
       noStroke();
@@ -716,10 +555,8 @@ function draw() {
       rect(x, y, 10, 10);
     }
   }
-  //image(dog, 0, 0);
   updatePixels();
 }let img;
-
 function setup() {
   createCanvas(100, 100);
   img = createImage(100,100);
@@ -731,22 +568,17 @@ function setup() {
   }
   img.updatePixels();
 }
-
 function draw() {
   image(img,0,0);
 }var song, fft;
-
 function preload() {
   song = loadSound("icon.mp3");
 }
-
-
 function setup() {
   createCanvas(800, 800);
   fft = new p5.FFT();
   song.play();
 }
-
 function draw() {
   background(0, 0, 0);
   fft.analyze();
@@ -755,63 +587,46 @@ function draw() {
   midVal = (int)(fft.getEnergy("mid"));
   hMidVal = (int)(fft.getEnergy("highMid"));
   trebVal = (int)(fft.getEnergy("treble"));
-
   noStroke();
   fill(255, 186, 73);
   ellipse(width / 2, height / 2, bassVal * 4, bassVal * 4);
-
   noStroke();
   fill(32, 163, 158);
   ellipse(width / 2, height / 2, lMidVal * 2, lMidVal * 2);
-
   noStroke();
   fill(135, 195, 143);
   ellipse(width / 2, height / 2, midVal * 2, midVal * 2);
-
   noStroke();
   fill(239, 91, 91);
   ellipse(width / 2, height / 2, hMidVal * 2, hMidVal * 2);
-
   noStroke();
   fill(79, 0, 75);
   ellipse(width / 2, height / 2, trebVal * 2, trebVal * 2);
-
-
-}let api = 'https://api.openweathermap.org/data/2.5/find?q='
 let q = 'london';
 let apikey = '&APPID=22c1e19d364c6c17e5c0196ec5059c64';
 let unit = '&units=metric';
 let url;
-
 let weather;
 let input;
 let button;
 let windSpeed;
 let windD;
-
 let x;
 let y;
 let xl = 0;
-
 let speed = 0;
 let rains = [];
-
-
 function setup() {
   createCanvas(500, 500);
   button = select('#button');
   button.mousePressed(search);
   input = select('#input');
 }
-
 function draw() {
   background(100, 50);
-  print(xl);
-  for (let i = 0; i < rains.length; i++) { // let 100 balls run
     rains[i].run();
   }
 }
-
 function gotData(data) {
   console.log(data);
   weather = data;
@@ -823,42 +638,29 @@ function gotData(data) {
     for (let i = 0; i < 100; i++) {
       x = random(width);
       y = random(-height, 0);
-
       rains[i] = new Rain(x, y, speed, xl);
     }
   }
 }
-
 function search() {
   url = api + input.value() + apikey + unit;
   loadJSON(url, gotData);
-  //print(url);
 }var weather;
-var api = 'https://api.openweathermap.org/data/2.5/find?q=';
 var city ='Beijing';
 var unit ='&units=metric';
 var userkey = '&appid=8075f0f23a9fe47353466313848609c3';
 var input;
-
 function setup(){
 createCanvas(600,250);
   var button =select('#submit');
   button.mousePressed(askWeather);
   input=select('#city');
-
 }
-
 function askWeather(){
-
   var url = api+input.value()+unit+userkey;
   loadJSON(url, gotData);
-
-
-
 }
-
 function gotData(data){
-  print(data);
   weather=data;
 }
 function draw(){
@@ -901,11 +703,8 @@ function draw(){
     
     
     
-
   }
-
 }
-
 function headtext(){
     textSize(13);
     fill(255);
@@ -915,7 +714,6 @@ function headtext(){
   text('WindSpeed', 40, 190);
   
 }
-
 function description(){
    textSize(10);
     fill(255);
@@ -923,25 +721,18 @@ function description(){
     text('Humidity', 40, 90);
     text('Pressure', 40, 140);
 }
-
-// Get your own API Key @http://developer.nytimes.com
 let allWords = [];
 let ts = 16;
 let i = 0;
-
 function preload() {
   let q = "trump";
   let apikey = "e41ef1c430064c37aab7ba229af4fb9c";
-  let url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + q + "&api-key=" + apikey;
   loadJSON(url, processSnippets);
 }
-
 function setup() {
   createCanvas(800, 800);
   fill(0);
 }
-
-
 function draw() {
   background(255, 5);
   ts++;
@@ -954,17 +745,11 @@ function draw() {
     text(allWords[floor(i)], random(width), random(height));
   }
 }
-
-
-
 function processSnippets(data) {
   let docs = data.response.docs;
   console.log(data);
-
   let putins = ["Putin", "Vladi", "Vlad", "Vova"];
   let trumps = ["Trump", "president", "President"];
-
-
   for (let doc of docs) {
     let words = splitTokens(doc.snippet);
     for (let w in words) {
@@ -979,7 +764,6 @@ function processSnippets(data) {
     }
     allWords = concat(allWords, words);
   }
-}let api = 'https://api.openweathermap.org/data/2.5/find?q='
 let q = 'london';
 let apikey = '&APPID=22c1e19d364c6c17e5c0196ec5059c64';
 let unit = '&units=metric';
@@ -990,14 +774,12 @@ let button;
 let ripples = [];
 let r;
 let s;
-
 function setup() {
   createCanvas(500, 500);
   button = select('#button');
   button.mousePressed(search);
   input = select('#input');
 }
-
 function draw() {
   background(100);
   if (weather) {
@@ -1005,48 +787,38 @@ function draw() {
     let windSpeed = weather.list[0].wind.speed;
     r = map(temp,-30,40,100,255)
     s = map(windSpeed,0,30,1,10)
-    for (let i = 0; i < ripples.length; i++) { // let 100 balls run
       ripples[i].run();
-
     }
   }
 }
-
 function gotData(data) {
   console.log(data);
   weather = data;
 }
-
 function search() {
   url = api + input.value() + apikey + unit;
   loadJSON(url, gotData);
-
   for (let i = 0; i < 1; i++) {
     let radius = 0;
     ripples.push(new Ripple(r, 0, 30, radius,s));
   }
-  print(url);
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
 }let txt;
 let tokens = [];
 let padding = 30;
-
 function preload() {
   txt = loadStrings("joke.txt");
 }
-
 function setup() {
   createCanvas(400, 400);
   for (let l of txt) {
     tokens = concat(tokens, splitTokens(l));
   }
 }
-
 function draw() {
   background(220);
   let y = padding;
@@ -1059,30 +831,16 @@ function draw() {
       x = 0;
     }
   }
-}let serial;
 let latestData = "waiting for data";
-
 function gotData() {
-  var currentString = serial.readLine(); // read the incoming string
-  trim(currentString); // remove any trailing whitespace
-  if (!currentString) return; // if the string is empty, do no more
-  console.log("DATA: " + currentString); // println the string
-  latestData = currentString; // save it for the draw method
 }
-
 function setup() { 
   createCanvas(600, 600);
   rectMode(CENTER);
-  // Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-  serial.open("/dev/cu.usbmodem1411");
-  serial.on('data', gotData);
   setInterval(function() {
     console.log("HELLO");
-    serial.write(1);
   }, 1000);
 } 
-
 function draw() { 
   background(55,63,71,25);
   let radius = map(latestData,0,1023,1,54);
@@ -1104,51 +862,27 @@ function draw() {
   }
   }
   
-
   
 }
-
 function gotData() {
-  var currentString = serial.readLine(); // read the incoming string
-  trim(currentString); // remove any trailing whitespace
-  if (!currentString) return; // if the string is empty, do no more
-  console.log("DATA: " + currentString); // println the string
-  latestData = currentString; // save it for the draw method
 }
 let door;
 let door2;
 let trick;
 let treat;
-let serial;
 let distance = "waiting for data";
 let state = "waiting for data";
 let doorCanPlay = false;
 let stateCanPlay = false;
-
 function preload() {
   door = loadSound('door.mp3');
   door2 = loadSound('door2.mp3');
   treat = loadSound('treat.mp3');
   trick = loadSound('trick.mp3');
 }
-
 function setup() {
   createCanvas(400, 400);
-  //trick.loop();
-
-  // Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-  serial.open("/dev/cu.usbmodem1421");
-  serial.on('data', gotData);
-  // setInterval(function() {
-  //   console.log("HELLO");
-  //   serial.write(1);
-  // }, 1000);
-
-
 }
-
-
 function draw() {
   if (distance > 30) {
     if (doorCanPlay) {
@@ -1163,8 +897,6 @@ function draw() {
     door.pause();
   }
   
-  print(distance);
-
   if (state == 0) {
     if (stateCanPlay) {
       treat.loop();
@@ -1180,19 +912,11 @@ function draw() {
     treat.pause();
     trick.pause();
   }
-
-
   console.log(state)
 }
-
 function gotData() {
-  let currentString = serial.readStringUntil("\r\n"); // read the incoming string
-  trim(currentString); // remove any trailing whitespace
-  if (!currentString) return; // if the string is empty, do no more
-  //console.log(currentString); // println the string
   var sensorReadings = split(currentString, ",");
   if (sensorReadings.length > 1) {
-    distance = int(sensorReadings[0]); // save it for the draw method
     state = int(sensorReadings[1]);
   }
 }let slider_r;
@@ -1202,10 +926,7 @@ let r;
 let g;
 let b;
 let button;
-
-
 let ripples = [];
-
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	button = createButton("start");
@@ -1217,19 +938,15 @@ function setup() {
 	slider_g.position(20, 60);
 	slider_b.position(20, 100);
 }
-
 function draw() {
 	background(0, 0, 0, 25);
 	r = slider_r.value();
 	g = slider_g.value();
 	b = slider_b.value();
 	button.mousePressed(start);
-	for (let i = 0; i < ripples.length; i++) { // let 100 balls run
     ripples[i].run();
-
   }
 }
-
 function start() {
 	for (let i = 0; i < 1; i++) {
 		let radius = 0;
@@ -1238,7 +955,6 @@ function start() {
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
 }let a=0
@@ -1247,23 +963,16 @@ function draw() {
     x=300
     y=300
 		o=20
-
 let r=255
 		g=255
 		b=255
-
 function setup() {
   createCanvas(600, 600);
   background(55,63,71);
-
 }
-
 function mouseClicked(){
   background(55,63,71)
 };
-
-
-
 function draw() {
   x1=mouseX-x;
   y1=mouseY-y;
@@ -1276,7 +985,6 @@ function draw() {
   noFill()
   o=o+0.1
   ellipse(x,y,o,o)
-
   
   noStroke()
   r=random(0,255)
@@ -1295,152 +1003,51 @@ function draw() {
   stroke(r,g,b,100)
   rect(200,200,200,200)
  
-
-
-}let serial;
 let latestData = "waiting for data";
-
 function gotData() {
-  var currentString = serial.readLine(); // read the incoming string
-  trim(currentString); // remove any trailing whitespace
-  if (!currentString) return; // if the string is empty, do no more
-  console.log("DATA: " + currentString); // println the string
-  latestData = currentString; // save it for the draw method
 }
-
 function setup() { 
   createCanvas(windowWidth, windowHeight);
-  // Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-  serial.open("/dev/cu.usbmodem1411");
-  serial.on('data', gotData);
   setInterval(function() {
     console.log("HELLO");
-    serial.write(1);
   }, 1000);
 } 
-
 function draw() { 
   background(127, 0, 127);
   
   var v = map(latestData,0,1023,0,width);
-
-  // Left Eye
   ellipse(width*.4, height*.4, v*.25 + 10, v*.25 + 10);
-
-  // Right Eye
   ellipse(width*.6, height*.4, (2500/v) + 10, (2500/v) + 10);
 	
-  // Mouth
   bezier(width*.3, v*.6 + height/2, width*.4, height*.8, width*.6, height*.8, width*.7, v*.55 + height/2);
   
   v+=random(-5, 5);
-  // Nose
   bezier(width*.5, height*.5, v*.6, height*.6, v*.6, height*.8, width*.45, height*.67);
-
 }
-
 function gotData() {
-  var currentString = serial.readLine(); // read the incoming string
-  trim(currentString); // remove any trailing whitespace
-  if (!currentString) return; // if the string is empty, do no more
-  console.log("DATA: " + currentString); // println the string
-  latestData = currentString; // save it for the draw method
 }
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
-}// Declare a "SerialPort" object
-var serial;
-var latestData = "waiting for data";  // you'll use this to write incoming data to the canvas
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
-  // Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-
-  // Get a list the ports available
-  // You should have a callback defined to see the results
-  serial.list();
-
-  // Assuming our Arduino is connected, let's open the connection to it
-  // Change this to the name of your arduino's serial port
-  serial.open("/dev/cu.usbmodem1411");
-
-  // Here are the callbacks that you can register
-
-  // When we connect to the underlying server
-  serial.on('connected', serverConnected);
-
-  // When we get a list of serial ports that are available
-  serial.on('list', gotList);
-  // OR
-  //serial.onList(gotList);
-
-  // When we some data from the serial port
-  serial.on('data', gotData);
-  // OR
-  //serial.onData(gotData);
-
-  // When or if we get an error
-  serial.on('error', gotError);
-  // OR
-  //serial.onError(gotError);
-
-  // When our serial port is opened and ready for read/write
-  serial.on('open', gotOpen);
-  // OR
-  //serial.onOpen(gotOpen);
-
-  // Callback to get the raw data, as it comes in for handling yourself
-  //serial.on('rawdata', gotRawData);
-  // OR
-  //serial.onRawData(gotRawData);
 }
-
-// We are connected and ready to go
 function serverConnected() {
-  println("Connected to Server");
 }
-
-// Got the list of ports
 function gotList(thelist) {
-  println("List of Serial Ports:");
-  // theList is an array of their names
   for (var i = 0; i < thelist.length; i++) {
-    // Display in the console
-    println(i + " " + thelist[i]);
   }
 }
-
-// Connected to our serial device
 function gotOpen() {
-  println("Serial Port is Open");
 }
-
-// Ut oh, here is an error, let's log it
 function gotError(theerror) {
-  println(theerror);
 }
-
-// There is data available to work with from the serial port
 function gotData() {
-  var currentString = serial.readLine();  // read the incoming string
-  trim(currentString);                    // remove any trailing whitespace
-  if (!currentString) return;             // if the string is empty, do no more
-  console.log(currentString);             // println the string
-  latestData = currentString;            // save it for the draw method
 }
-
-// We got raw from the serial port
 function gotRawData(thedata) {
-  println("gotRawData" + thedata);
 }
-
 function draw() {
  
 }let planet = [];
@@ -1448,17 +1055,12 @@ let blackhole;
 let radius = 20;
 let starCount = 50;
 let canvasSize = 500;
-
 function setup() {
-
   createCanvas(canvasSize, canvasSize);
   pixelDensity(1);
   renderBuffer = createGraphics(canvasSize, canvasSize);
   renderBuffer.pixelDensity(1);
-	// renderBuffer.scale(0.25);
-
   blackhole = new Blackhole(radius);
-
   for (i = 0; i < starCount; i++) {
     let x = random(width);
     let y = random(height);
@@ -1472,9 +1074,7 @@ function setup() {
     planet[i] = new Planet(x, y, xspeed, yspeed, o, p, r, g, b, renderBuffer);
   }
 }
-
 function draw() {
-  let bg = map(radius, 20, 120, 90, 50); // less planet darker universe
   renderBuffer.background(bg);
   for (i = 0; i < planet.length; i++) {
     planet[i].run()
@@ -1490,7 +1090,6 @@ function draw() {
       blackhole.size += 2;
     }
   }
-
   loadPixels();
   renderBuffer.loadPixels();
   for (i = 0; i < canvasSize; i++) {
@@ -1525,16 +1124,13 @@ function draw() {
   }
   updatePixels();
   blackhole.draw();
-
   if (radius >= 2 * starCount + 20) {
     text("Universe is Destroyed", width / 2, height / 2)
   }
 }
-
 function pixelMouseDist(x, y) {
   return sqrt((x - mouseX) * (x - mouseX) + (y - mouseY) * (y - mouseY));
 }
-
 function circularWarp(x, y, r, f) {
   O = createVector(mouseX, mouseY);
   X = createVector(x, y);
@@ -1545,17 +1141,12 @@ let blackhole;
 let radius = 20;
 let starCount = 50;
 let canvasSize = 500;
-
 function setup() {
-
   createCanvas(canvasSize, canvasSize);
   pixelDensity(1);
   renderBuffer = createGraphics(canvasSize, canvasSize);
   renderBuffer.pixelDensity(1);
-	// renderBuffer.scale(0.25);
-
   blackhole = new Blackhole(radius);
-
   for (i = 0; i < starCount; i++) {
     let x = random(width);
     let y = random(height);
@@ -1569,9 +1160,7 @@ function setup() {
     planet[i] = new Planet(x, y, xspeed, yspeed, o, p, r, g, b, renderBuffer);
   }
 }
-
 function draw() {
-  let bg = map(radius, 20, 120, 90, 50); // less planet darker universe
   renderBuffer.background(bg);
   for (i = 0; i < planet.length; i++) {
     planet[i].run()
@@ -1587,7 +1176,6 @@ function draw() {
       blackhole.size += 2;
     }
   }
-
   loadPixels();
   renderBuffer.loadPixels();
   for (i = 0; i < canvasSize; i++) {
@@ -1622,16 +1210,13 @@ function draw() {
   }
   updatePixels();
   blackhole.draw();
-
   if (radius >= 2 * starCount + 20) {
     text("Universe is Destroyed", width / 2, height / 2)
   }
 }
-
 function pixelMouseDist(x, y) {
   return sqrt((x - mouseX) * (x - mouseX) + (y - mouseY) * (y - mouseY));
 }
-
 function circularWarp(x, y, r, f) {
   O = createVector(mouseX, mouseY);
   X = createVector(x, y);
@@ -1641,31 +1226,21 @@ function circularWarp(x, y, r, f) {
 var b = 255; 
 let x = 0;
 let y = 0;
-
-
 function setup() {
   createCanvas(600, 600);
 }
-
 function draw() {
   background(255,237,225);
  
-  //planet center
-  //ellipse(width/2,height/2,300,100);
   fill(169,221,214);
   stroke(169,221,214);
-  // r = map(sin(frameCount/100),-1,1,0,255);
-  // b = map(sin(frameCount/100),-1,1,255,0);
   strokeWeight(2);
   ellipse(width/2,height/2,80,80);
    
-  //orbit
   noFill();
   stroke(193,184,200);
   r = map(sin(frameCount/100),-1,1,0,255);
   b = map(sin(frameCount/100),-1,1,255,0);
-
-  //planets
   push();
   stroke(169,221,214);
   ellipse(width/2,height/2,120,120);
@@ -1685,7 +1260,6 @@ function draw() {
   stroke(220);
   ellipse(0,0,18,18);
  	pop();
-
   push();
   stroke(145,173,194);
   ellipse(width/2,height/2,250,250)
@@ -1725,13 +1299,10 @@ function draw() {
   ellipse(0,0,12,12);
   pop();
   
-  //mouse
   fill(252,119,83);
   noStroke();
   textSize(9);
   text('Click & Make a Wish : P',mouseX,mouseY);
-
-  //meteors
   push();
   fill(252,119,83);
   stroke(252,119,83);
@@ -1740,7 +1311,6 @@ function draw() {
   y = y+15;
   pop();
 }
-
 function mousePressed(){
   
 	x = random(0,600);
@@ -1749,12 +1319,9 @@ function mousePressed(){
    
 let planet = [];
 let blackhole;
-let radius = 20; //radius of the blackhole
-
 function setup() {
   createCanvas(600, 600);
   blackhole = new Blackhole(mouseX, mouseY);
-
   for (i = 0; i < 50; i++) {
     let x = random(width);
     let y = random(height);
@@ -1768,13 +1335,10 @@ function setup() {
     planet[i] = new Planet(x, y, xspeed, yspeed, o, p, r, g, b);
   }
 }
-
 function draw() {
-  let bg = map(radius, 20, 120, 80, 0); // less planet darker universe
   background(bg);
   fill(255);
   ellipse(mouseX, mouseY, radius);
-  //blackhole.run()
   for (i = 0; i < planet.length; i++) {
     planet[i].run()
     if (i > planet.length / 4) {
@@ -1789,15 +1353,10 @@ function draw() {
     }
   }
   if (radius == 2 * 50 + 20) {
-
     text("Universe is Destroyed", width / 2, height / 2)
   }
-}let balls = []; // create a group of balls
-
-
 function setup() {
   createCanvas(600, 600);
-  for (let i = 0; i < 10; i++) { // create 100 balls
     let x = random(width);
     let y = random(height);
     let xspeed = random(0, 6);
@@ -1806,10 +1365,8 @@ function setup() {
     balls.push(new Ball(x, y, xspeed, yspeed, shade));
   }
 }
-
 function draw() {
   background(30);
-  for (i = 0; i < balls.length; i++) { // let 100 balls run
     balls[i].run();
     for (j = i+1; j < balls.length; j++) {
       if (balls[i] !== balls[j] && balls[i].overlap(balls[j])) {
@@ -1821,25 +1378,8 @@ function draw() {
     }
   }
 }
-
-
-
-
-// function draw() {
-//   background(30);
-//   for (a of balls) {
-//     a.run();
-//     for (b of balls) {
-//       if (a !== b && a.overlap(b)) {
-//      balls.splice(a,1);
-//         balls.splice(b,1);
       
-//       }
-//     }
-//   }
-// }let balls = [];
 let i;
-
 function setup() {
   createCanvas(600, 600);
   for (i = 0 ; i<100; i++) {
@@ -1847,7 +1387,6 @@ function setup() {
     balls.push(ball);
   }
 }
-
 function draw() {
   background(220);
   
@@ -1862,34 +1401,22 @@ function draw() {
     }
    }
   }
-}let balls = []; // create a group of balls
-
-
 function setup() {
   createCanvas(600, 600);
 }
-
 function draw() {
   background(30);
-  for (let i = 0; i < balls.length; i++) { // let 100 balls run
     balls[i].run();
-
   }
 }
-
-
 function mousePressed() {
   for (let i = 0; i < 1; i++) {
     let xspeed = random(0, 7);
     let yspeed = random(0, 7);
     balls.push(new Ball(mouseX, mouseY, xspeed, yspeed));
   }
-}let balls = []; // create a group of balls
-
-
 function setup() {
   createCanvas(600, 600);
-  for (let i = 0; i < 100; i++) { // create 100 balls
     let x = random(width);
     let y = random(height);
     let xspeed = random(0, 7);
@@ -1898,10 +1425,8 @@ function setup() {
     balls[i] = new Ball(x, y, xspeed, yspeed, shade);
   }
 }
-
 function draw() {
   background(30);
-  for (let i = 0; i < balls.length; i++) { // let 100 balls run
     balls[i].run();
     if (balls[i].isNear(mouseX, mouseY)) {
       balls.splice(i, 1);
@@ -1911,37 +1436,28 @@ function draw() {
 let num1;
 let num2;
 let answer;
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   add(2,4);
 }
-
 function add(num1,num2){
   answer = num1 + num2;
-  print(answer);
   text("the answer is",20,30);
   text(answer, 100,30)
 }let x;
 let y;
 let l;
 let h;
-
 function setup() {
   createCanvas(600, 600);
   background(70, 70, 70);
   rectMode(CENTER);
-	//frameRate(10)
 }
-
 function draw() {
   noStroke()
-
-  //for (let i = 0; i< 20; i++){
     l = random(400)
     
     
@@ -1951,13 +1467,8 @@ function draw() {
  	  rect(0,0,l,l);
     pop()
   
- // }
-
-
   
 }
-
-
 function chooseColor() {
   if (random(1) > 0.8) {
     fill(70, 70, 70);
@@ -1976,23 +1487,16 @@ function chooseColor() {
     x=300
     y=300
 		o=20
-
 let r=255
 		g=255
 		b=255
-
 function setup() {
   createCanvas(600, 600);
   background(55,63,71);
-
 }
-
 function mouseClicked(){
   background(55,63,71)
 };
-
-
-
 function draw() {
   x1=mouseX-x;
   y1=mouseY-y;
@@ -2005,7 +1509,6 @@ function draw() {
   noFill()
   o=o+0.1
   ellipse(x,y,o,o)
-
   
   noStroke()
   r=random(0,255)
@@ -2024,22 +1527,16 @@ function draw() {
   stroke(r,g,b,100)
   rect(200,200,200,200)
  
-
-
 }let x;
 let y;
 let w;
 let h;
-
 function setup() {
   createCanvas(1000, 1000);
   background(70, 70, 70);
-	//frameRate(10)
 }
-
 function draw() {
   noStroke()
-
   x = random(width);
   y = random(height);
   w = random(100);
@@ -2047,12 +1544,8 @@ function draw() {
   for (let i = 0; i < 10; i++) {
     chooseColor()
     rect(x, y, w, h);
-
-
   }
 }
-
-
 function chooseColor() {
   if (random(1) > 0.8) {
     fill(70, 70, 70);
@@ -2067,8 +1560,6 @@ function chooseColor() {
   }
 }var x = 0;
 var y = 0;
-var r = 60; //radius
-
 function setup() {
   createCanvas(1000, 1000);
   noStroke();
@@ -2080,10 +1571,7 @@ function setup() {
     }
   }
 }
-
 function draw() {}
-
-
 function chooseColor() {
   if (random(1) > 0.8) {
     fill(70, 70, 70);
@@ -2097,7 +1585,6 @@ function chooseColor() {
     fill(255, 160, 160);
   }
 }
-
 function drawPattern() {
   if (random(1) > 0.5) {
     chooseColor()
@@ -2110,12 +1597,8 @@ function drawPattern() {
     chooseColor()
     arc(x + r, y + r / 2, r, r, HALF_PI, PI + HALF_PI, CHORD);
   }
-}let balls = []; // create a group of balls
-
-
 function setup() {
   createCanvas(600, 600);
-  for (let i = 0; i < 100; i++) { // create 100 balls
     let x = random(width);
     let y = random(height);
     let xspeed = random(0, 7);
@@ -2124,29 +1607,17 @@ function setup() {
     balls[i] = new Ball(x, y, xspeed, yspeed, shade);
   }
 }
-
 function draw() {
   background(30);
-  for (let i = 0; i < balls.length; i++) { // let 100 balls run
     balls[i].run();
     if (dist(balls[i].x, balls[i].y, balls[i + 1].x, balls[i + 1].y) < 50) {
       balls.splice(i, 1)
     }
   }
-
-  // if (balls[i].isNear(mouseX, mouseY)) {
-  //   balls.splice(i, 1);
-  // }
 }
-
 function mousePressed() {
-
-}let balls = []; // create a group of balls
-
-
 function setup() {
   createCanvas(600, 600);
-  for (let i = 0; i < 100; i++) { // create 100 balls
     let x = random(width);
     let y = random(height);
     let xspeed = random(0, 7);
@@ -2155,45 +1626,29 @@ function setup() {
     balls[i] = new Ball(x, y, xspeed, yspeed, shade);
   }
 }
-
 function draw() {
   background(30);
-  for (let i = 0; i < balls.length; i++) { // let 100 balls run
     balls[i].run();
     if (dist(balls[i].x, balls[i].y, balls[i + 1].x, balls[i + 1].y) < 50) {
       balls.splice(i, 1)
     }
   }
-
-  // if (balls[i].isNear(mouseX, mouseY)) {
-  //   balls.splice(i, 1);
-  // }
 }
-
 function mousePressed() {
-
 }let on = false;
 let Pushbutton = new pushbutton(300, 650, 150, 50, 130, on);
 let Pattern = new pattern(0, 0, 60);
-
-var r = 60; //radius
-var s = 20; //framerate
-
 function setup() {
   createCanvas(600, 700);
   noStroke();
   fill(237, 236, 218);
   rect(0, 0, width, height);
-  for (i = 0; i < 10; i++) { //drawthebackgroud
     drawBG();
   }
 }
-
 function draw() {
   Pushbutton.run();
 }
-
-
 function drawBG() {
   for (y = 0; y < 600; y += r) {
     for (x = 0; x < windowWidth; x += r) {
@@ -2201,7 +1656,6 @@ function drawBG() {
     }
   }
 }
-
 function mousePressed() {
   if (mouseX >= 225 && mouseX <= 375 && mouseY >= 625 && mouseY <= 675) {
     on = !on;
@@ -2209,40 +1663,18 @@ function mousePressed() {
 }let refresh = true;
 let Pushbutton = new pushbutton(225, 625, 150, 50, 0, refresh);
 let Pattern = new pattern(0,0,60);
-
-var r = 60; //radius
-var s = 20; //framerate
-
 function setup() {
   createCanvas(600, 700);
   noStroke();
   fill(237, 236, 218);
   rect(0, 0, width, height);
-  for (i = 0; i < 10; i++) { //drawthebackgroud
     drawBG();
   }
 }
-
 function draw() {
-  print(Pushbutton)
   frameRate(s);
   Pushbutton.run();
-
-  // if (refresh) {
-  //   noStroke()
-  //   Pattern.run()
-  //   x += r;
-  //   if (x > windowWidth - r / 2) {
-  //     y += r;
-  //     x = 0;
-  //   }
-  //   if (y >= 600 - r / 2) {
-  //     y = 0
-  //   }
-  // }
 }
-
-
 function drawBG() {
   for (y = 0; y < 600; y += r) {
     for (x = 0; x < windowWidth; x += r) {
@@ -2250,24 +1682,18 @@ function drawBG() {
     }
   }
 }
-
-
 let x = 200;
 let y = 200;
 let xspeed = 4;
 let yspeed = 5;
-
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   x += xspeed
   y += yspeed
   ellipse(x, y, 50, 50);
-
   if (x > width || x < 0) {
     xspeed *= -1
   }
@@ -2279,11 +1705,9 @@ let y = 0;
 let w = 40;
 let h = 80;
 let shade = 0;
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   for (let col = 0; col <= 10; col++) {
@@ -2304,40 +1728,18 @@ function draw() {
 }let refresh = true;
 let Pushbutton = new pushbutton(225, 625, 150, 50, 0, refresh);
 let Pattern = new pattern(0,0,60);
-
-var r = 60; //radius
-var s = 20; //framerate
-
 function setup() {
   createCanvas(600, 700);
   noStroke();
   fill(237, 236, 218);
   rect(0, 0, width, height);
-  for (i = 0; i < 10; i++) { //drawthebackgroud
     drawBG();
   }
 }
-
 function draw() {
-  print(Pushbutton)
   frameRate(s);
   Pushbutton.run();
-
-  // if (refresh) {
-  //   noStroke()
-  //   Pattern.run()
-  //   x += r;
-  //   if (x > windowWidth - r / 2) {
-  //     y += r;
-  //     x = 0;
-  //   }
-  //   if (y >= 600 - r / 2) {
-  //     y = 0
-  //   }
-  // }
 }
-
-
 function drawBG() {
   for (y = 0; y < 600; y += r) {
     for (x = 0; x < windowWidth; x += r) {
@@ -2345,15 +1747,11 @@ function drawBG() {
     }
   }
 }
-
-
 let ball_1 = new ball(100,200,4,6);
 let ball_2 = new ball(300,100,6,4);
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   ball_1.run();
@@ -2362,11 +1760,9 @@ function draw() {
 let x = 0;
 let y = 0;
 let gradient = 0;
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   noStroke();
   background(220);
@@ -2383,22 +1779,15 @@ function draw() {
   }
 }var x = 0
 var y = 0
-var r = 60 //radius
-var s = 10 //framerate
-
 function setup() {
   createCanvas(600, 600);
   noStroke()
-  for (i = 0; i < 30; i++) { //drawthebackgroud
     drawBG();
   }
 }
-
 function draw() {
   noStroke();
   frameRate(s);
-
-  //top 
   if (mouseIsPressed) {
     if (mouseX > 0 && mouseX < 300) {
       for (y = 0; y < windowHeight ; y += r) {
@@ -2436,30 +1825,7 @@ function draw() {
     }
   
   }
-
-  //  if (random(1) > 0.5) {
-  //   chooseColor()
-  //   arc(x + r / 2, y, r, r, 0, PI, CHORD);
-  //   chooseColor()
-  //   arc(x + r / 2, y + r, r, r, PI, 0, CHORD);
-  // } else {
-  //   chooseColor()
-  //   arc(x + r, y + r / 2, r, r, HALF_PI, PI + HALF_PI, CHORD);
-  //   chooseColor()
-  //   arc(x, y + r / 2, r, r, PI + HALF_PI, HALF_PI, CHORD);
-  // }
-  //   x = x + r;
-
-
-  //   if (x > windowWidth - r / 2) {
-  //     y = y + r;
-  //     x = 0 ;
-  //   }
-  //   if (y > windowHeight - r / 2) {
-  //     y = 0;
-  //   }
 }
-
 function chooseColor() {
   if (random(1) > 0.75) {
     fill(237, 236, 218);
@@ -2471,7 +1837,6 @@ function chooseColor() {
     fill(229, 106, 95)
   }
 }
-
 function drawBG() {
   for (y = 0; y < windowHeight; y += r) {
     for (x = 0; x < windowWidth; x += r) {
@@ -2490,22 +1855,15 @@ function drawBG() {
   }
 }var x = 0
 var y = 0
-var r = 60 //radius
-var s = 5 //framerate
-
 function setup() {
   createCanvas(600, 600);
   noStroke()
-  for (i = 0; i < 30; i++) { //drawthebackgroud
     drawBG();
   }
 }
-
 function draw() {
   noStroke();
   frameRate(s);
-
-  //top 
   if (mouseIsPressed) {
     if (mouseX > 0 && mouseX < windowWidth / 2) {
       for (y = 0; y < windowHeight ; y += r) {
@@ -2544,7 +1902,6 @@ function draw() {
     }
   }
 }
-
 function chooseColor() {
   if (random(1) > 0.75) {
     fill(237, 236, 218);
@@ -2556,7 +1913,6 @@ function chooseColor() {
     fill(229, 106, 95)
   }
 }
-
 function drawBG() {
   for (y = 0; y < windowHeight; y += r) {
     for (x = 0; x < windowWidth; x += r) {
@@ -2575,19 +1931,14 @@ function drawBG() {
   }
 }var x = 0;
 var y = 0;
-var r = 60; //radius
-var s = 20; //framerate
 var bright0 = 0;
 var refresh = false;
-
 function setup() {
   createCanvas(600, 700);
   noStroke();
-  for (i = 0; i < 10; i++) {                 //drawthebackgroud
   drawBG();
   }
 }
-
 function draw() {
   noStroke();
   frameRate(s);
@@ -2602,7 +1953,6 @@ function draw() {
       y = 0
     }
   }
-
   if (mouseIsPressed) {
     if (mouseX > 0 && mouseX < 300 && mouseY < 600) {
       for (y = 0; y < windowHeight; y += r) {
@@ -2619,13 +1969,10 @@ function draw() {
       }
     }
   }
-
-  if (mouseX > 225 && mouseX < 375 && mouseY > 625 && mouseY < 675) { //button
     bright0 = 180;
   } else {
     bright0 = 255;
   }
-
   noStroke();
   fill(237, 236, 218);
   rect(0, 600, 600, 100);
@@ -2634,9 +1981,7 @@ function draw() {
   noFill();
   strokeWeight(2);
   stroke(73, 73, 73);
-  rect(225, 625, 150, 50); // button
 }
-
 function mousePressed() {
   if (mouseX > 225 && mouseX < 375 && mouseY > 625 && mouseY < 675) {
     fill(73, 73, 73);
@@ -2644,7 +1989,6 @@ function mousePressed() {
     refresh = !refresh;
   }
 }
-
 function chooseColor() {
   if (random(1) > 0.75) {
     fill(237, 236, 218);
@@ -2656,7 +2000,6 @@ function chooseColor() {
     fill(229, 106, 95);
   }
 }
-
 function drawSemicircle() {
   if (random(1) > 0.5) {
     chooseColor()
@@ -2670,7 +2013,6 @@ function drawSemicircle() {
     arc(x + r, y + r / 2, r, r, HALF_PI, PI + HALF_PI, CHORD);
   }
 }
-
 function drawBG() {
   for (y = 0; y < 600; y += r) {
     for (x = 0; x < windowWidth; x += r) {
@@ -2679,17 +2021,12 @@ function drawBG() {
   }
 }var x = 0
 var y = 0
-var r = 60 //radius
-var s = 10 //framerate
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   noStroke()
-  for (i = 0; i < 30; i++) { //drawthebackgroud
     drawBG();
   }
 }
-
 function draw() {
   noStroke();
   frameRate(s);
@@ -2713,7 +2050,6 @@ function draw() {
     y = 0
   }
 }
-
 function chooseColor() {
   if (random(1) > 0.75) {
     fill(237,236,218);
@@ -2725,7 +2061,6 @@ function chooseColor() {
     fill(229,106,95)
   } 
 }
-
 function drawBG() {
   for (y = 0; y < windowHeight; y += r) {
     for (x = 0; x < windowWidth; x += r) {
@@ -2744,17 +2079,12 @@ function drawBG() {
   }
 }var x = 0
 var y = 0
-var r = 60 //radius
-var s = 10 //framerate
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   noStroke()
-  for (i = 0; i < 30; i++) { //drawthebackgroud
     drawBG();
   }
 }
-
 function draw() {
   noStroke();
   frameRate(s);
@@ -2778,7 +2108,6 @@ function draw() {
     y = 0
   }
 }
-
 function chooseColor() {
   if (random(1) > 0.75) {
     fill(237,236,218);
@@ -2790,7 +2119,6 @@ function chooseColor() {
     fill(229,106,95)
   } 
 }
-
 function drawBG() {
   for (y = 0; y < windowHeight; y += r) {
     for (x = 0; x < windowWidth; x += r) {
@@ -2809,11 +2137,9 @@ function drawBG() {
   }
 }let light = false;
 s = false;
-
 function setup() {
   createCanvas(600, 600);
 }
-
 function draw() {
   background(220);
   if (light) {
@@ -2836,7 +2162,6 @@ function draw() {
     rect(0, 0, 200, 600);
   }
 }
-
 function mousePressed() {
   if (mouseX > (2 * width) / 3) {
     s = true
@@ -2845,7 +2170,6 @@ function mousePressed() {
 }function setup() {
   createCanvas(500, 500);
 }
-
 function draw() {
   background(220);
   for (var i = 0; i < 10; i++) {
@@ -2865,7 +2189,6 @@ function draw() {
 }function setup() {
   createCanvas(500, 500);
 }
-
 function draw() {
   background(220);
   for (var i = 0; i < 10; i++) {
@@ -2878,15 +2201,12 @@ function draw() {
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
-
   for (var i = 0; i < width; i++) {
     var x = i * width / 10;
     noFill();
     rect(x, 0, width / 10, height);
-
     if (mouseX > x && mouseX < x + width / 10) {
       if (i<5) {
         fill('blue');
@@ -2900,15 +2220,12 @@ function draw() {
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
-
   for (var i = 0; i < width; i++) {
     var x = i * width / 10;
     noFill();
     rect(x, 0, width / 10, height);
-
     if (mouseX > x && mouseX < x + width / 10) {
       fill(255-i*10,i*20,100);
       rect(x, 0, width / 10, height);
@@ -2917,15 +2234,12 @@ function draw() {
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
-
   for (var i = 0; i < width; i++) {
     var x = i * width / 10;
     noFill();
     rect(x, 0, width / 10, height);
-
     if (mouseX > x && mouseX < x + width / 10) {
       if (i%2 == 0) {
         fill('blue');
@@ -2939,15 +2253,12 @@ function draw() {
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
-
   for (var i = 0; i < width; i++) {
     var x = i * width / 10;
     noFill();
     rect(x, 0, width / 10, height);
-
     if (mouseX > x && mouseX < x + width / 10) {
       if (i == 6) {
         fill(220);
@@ -2960,15 +2271,12 @@ function draw() {
   }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
-
   for (var i = 0; i < width; i++) {
     var x = i * width / 10;
     noFill();
     rect(x, 0, width / 10, height);
-
     if (mouseX > x && mouseX < x + width / 10) {
       fill('red');
       rect(x, 0, width / 10, height);
@@ -2977,19 +2285,15 @@ function draw() {
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   for (let i = 0; i < 10; i++) {
-    //console.log(i);
     let x = i * width/10;
     if (i == 7) fill('blue');
     else fill('white');
-    //ellipse(x, height / 2, 50, 50);
     line(x, 0, x, height);
   }
   
-  // The old way of doing things.
   line(0, 0, 0, height);
   line(width/10, 0, width/10, height);
   line(2*width/10, 0, 2*width/10, height);
@@ -3002,11 +2306,9 @@ function draw() {
   line(9*width/10, 0, 9*width/10, height);  
 }let light = false;
 		s = false;
-
 function setup() {
   createCanvas(600, 600);
 }
-
 function draw() {
   background(220);
   line (400,0,400,600)
@@ -3021,7 +2323,6 @@ function draw() {
     light = false;
   }
 }
-
 function mousePressed() {
   if (mouseX > (2 * width) / 3) {
     s = true
@@ -3029,11 +2330,9 @@ function mousePressed() {
   }
 }let x = 200;
 		xspeed = 10;
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   ellipse(x,200,50,50)
@@ -3045,10 +2344,8 @@ function draw() {
 }function setup() {
   createCanvas(600, 600);
 }
-
 function draw() {
   background(220);
-
   if (mouseX > (2 * width) / 3) {
     noStroke();
     fill("red");
@@ -3069,7 +2366,6 @@ function draw() {
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   ;
   ellipse(x,y,50,50)
@@ -3086,19 +2382,13 @@ let
 		yspeed=0
     x=300
     y=300
-
 function setup() {
   createCanvas(600, 600);
   background(55,63,71);
-
 }
-
 function mouseClicked(){
   background(55,63,71)
 };
-
-
-
 function draw() {
   xspeed=(mouseX-x)/100;
   yspeed=(mouseY-y)/100;
@@ -3119,23 +2409,16 @@ let a=0
     x=300
     y=300
 		o=20
-
 let r=255
 		g=255
 		b=255
-
 function setup() {
   createCanvas(600, 600);
   background(55,63,71);
-
 }
-
 function mouseClicked(){
   background(55,63,71)
 };
-
-
-
 function draw() {
   x1=mouseX-x;
   y1=mouseY-y;
@@ -3148,7 +2431,6 @@ function draw() {
   noFill()
   o=o+0.1
   ellipse(x,y,o,o)
-
   
   noStroke()
   r=random(0,255)
@@ -3167,11 +2449,8 @@ function draw() {
   stroke(r,g,b,100)
   rect(200,200,200,200)
  
-
-
 }let x,y,w,h
 let x1,y1
-
 function setup() {
   createCanvas(500, 500);
   rectMode(CENTER)
@@ -3180,7 +2459,6 @@ function setup() {
   w=width/2
   h=height/2
 }
-
 function draw() {
   background(220);
   
@@ -3195,57 +2473,33 @@ function draw() {
   
   
 }let x=200,y=200;
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   ellipse(x,y,100,100);
   
-  //Move a circle from the middle of the screen to the right of the screen. 
-  //x=x+1;
   
-  //How do I make it move to the left of the screen?
-  //x=x-1;
   
-  //Towards each of the 4 corners?
-		//top left
-  	//x=x-1;
-  	//y=y-1;
   
-  	//top right
-  	//x=x+1;
-  	//y=y-1;
   
-  	//bottom left
-  	//x=x-1;
-  	//y=y+1;
   
-  	//bottom right
-  	//x=x+1
-  	//y=y+1
   
-  //10 times faster?
   	x=x+10
   
   
   
-
 }let x,y
 let x1,y1,x2,y2
-
 function setup() {
   createCanvas(300, 500);
   rectMode(CENTER)
   x=width/2
   y=height/2
 }
-
 function draw() {
   background(220);
-  //rect(x,y,x,y)
   
   
   x1=width/4
@@ -3265,16 +2519,13 @@ function draw() {
 }function setup() {
   createCanvas(500, 500);
 }
-
 function draw() {
   background(220);
   
-  //body
   fill(250,200,0);
   noStroke();
   ellipse(250,300,250,300);
   
-  //
   stroke(0);
   strokeWeight(8);
   line(140,100,200,160);
@@ -3284,9 +2535,7 @@ function draw() {
   strokeWeight(8);
   line(360,100,300,160);
   ellipse(360,100,50,50);
-
   
-  //teeth
   fill(255);
   noStroke();
   triangle(235,340,255,340,245,400);
@@ -3294,7 +2543,6 @@ function draw() {
   noStroke();
   triangle(255,340,275,340,265,420);
   
-  //wings
   fill(250,200,0,100);
   noStroke();
   ellipse(100,240,130,130);
@@ -3309,7 +2557,6 @@ function draw() {
   noStroke();
   ellipse(400,350,130,130);
   
-   //eye
   fill(255);
   ellipse(250,240,150,150);
   fill(0);
@@ -3317,7 +2564,6 @@ function draw() {
 }function setup() {
   createCanvas(400, 300);
 }
-
 function draw() {
   background(0,255,255);
   
@@ -3335,16 +2581,13 @@ function draw() {
 }function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(220);
 	fill(64,224,208);
 	ellipse(200, 200, 100, 100);
 }function setup() { 
   createCanvas(200,200)
-  //here!
 } 
-
 function draw() { 
   background(220);
 }

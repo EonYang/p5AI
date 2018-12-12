@@ -1,6 +1,5 @@
 var kinectron;
 var img2;
-
 function setup() {
   createCanvas(960, 540);
   background(0);
@@ -8,32 +7,23 @@ function setup() {
   kinectron = new Kinectron('172.16.224.110');
   kinectron.makeConnection();
   kinectron.startKey(gotData);
-  // image(img, 0, 0, 1280, 540);
 }
-
 function draw() {
- // background(220);
 }
-
 function gotData(data){
   loadImage(data.src,gotImage);
-  //this is a callback that triggers another callback
 }
-
 function gotImage(img){
   image(img2, 0, 0, 1280, 540);
   image(img,0,0);
 }
-
 function preload() {
   img2 = loadImage('pexels-photo-356830.jpg');
 }
-
 var vid_1;
 var vid_2;
 var vid_3;
 var vid_4;
-
 function setup() {  
   
   vid_1=createVideo('images/sleep.mp4');
@@ -49,30 +39,24 @@ function setup() {
   
   vid_1.loop();
   
-  // console.log(vid_1.isPlaying());
   vid_2.hide();
   vid_3.hide();
   vid_4.hide();
   
 } 
-
 function mouseClicked() {
 	vid_1.hide();
   vid_2.show();
   vid_2.play();
   vid_2.onended(sayDone);
 }
-
 function sayDone(elt) {
-  // alert('done playing ' + elt.src);
   elt.hide();
   vid_3.show();
   vid_3.play();
   vid_3.onended(sayDone_2);
 }
-
 function sayDone_2(elt_2) {
-  // alert('done playing ' + elt.src);
   elt_2.hide();
   vid_4.show();
   vid_4.loop();
@@ -80,12 +64,10 @@ function sayDone_2(elt_2) {
 var kinectron = null;
 var x = 0;
 var y = 0;
-
 var bx = 0;
 var by = 0;
 var bxdir = 1;
 var bydir = 1;
-
 function setup() { 
   createCanvas(400, 400);
   
@@ -93,15 +75,12 @@ function setup() {
   kinectron.makeConnection();
   
 	kinectron.startTrackedJoint(kinectron.HANDRIGHT, gotRightHand);
-
 } 
-
 function gotRightHand(hand) {
  console.log(hand);
   x = hand.depthX * width;
   y = hand.depthY * height;
 }
-
 function draw() { 
   background(220);
   ellipse(x, y, 50, 50);
@@ -130,29 +109,23 @@ function draw() {
     by = y;
   }
   
-
   
 }
-
 var mic;
 var analyzer;
-var angle = 0.7853981634; // PI/4
 var coef = 0.5;
 var l = 300;
 var branches = 1;
 var steps = 6;
 var angleSlider, coefSlider, lSlider, branchesSlider, stepsSlider;
-
 function setup(){
 	createCanvas(800, 800);
 	
 	
-	//Create audio input
   mic = new p5.AudioIn()
   mic.start();
 	
 	textSize(20);
-	angleSlider = createSlider(0, 3.1415926536, 0.7853981634, 0.05); // from 0 to PI
   angleSlider.position(20, height-175);
   coefSlider = createSlider(0, 0.75, 0.5, 0.05);
   coefSlider.position(20, height-140);
@@ -165,44 +138,32 @@ function setup(){
 }
 function draw (){
 	background(0);
-
   branches = branchesSlider.value();
-
 	
-	// Get the overall volume (between 0 and 1.0)
 	micLevel = mic.getLevel();
 	
-// If the volume > 0.1, a line is drawn at the bottom center.
-// The louder the volume, the longer the line.
-
 var threshold = 0.1;
   if (micLevel > threshold) {
 		fill('green');
     rect(width/2, height, 50, micLevel*1000);
-		print(micLevel);
   }
   
-  // Graph the overall potential volume, w/ a line at the threshold
   var y = map(micLevel, 0, 1, height, 0);
   var ythreshold = map(threshold, 0, 1, height, 0);
-
   noStroke();
   fill(175);
   rect(0, 0, 20, height);
-  // Then draw a rectangle on the graph, sized according to volume
   fill(0);
   rect(0, y, 20, y);
   stroke(0);
   line(0, ythreshold, 19, ythreshold);
 	
-	//tree
 	
 	angle = angleSlider.value();
   coef = coefSlider.value();
   l = lSlider.value();
   branches = branchesSlider.value();
   steps = stepsSlider.value();
-
   stroke(0);
   fill(255);
   text("angle (" + round(degrees(angleSlider.value())) + ")", 165, height-155);
@@ -215,22 +176,17 @@ var threshold = 0.1;
   translate(width/2, height);
   branch(l, steps);
 	
-	//ellipse(width/2, constrain(height-micLevel*100*2, 0, height), 10, 10);
 }
-
 function branch(len, s) {
   line(0, 0, 0, -len);
   translate(0, -len);
-
   if(s > 0) {
     var bcoef = angle/branches;
-
     for (var i = 1; i <= branches; i++) {
       push();
       rotate(i*bcoef);
       branch(len*coef, s-1);
       pop();
-
       push();
       rotate(-i*bcoef);
       branch(len*coef, s-1);
@@ -246,29 +202,20 @@ var t = 0;
 var celsiusP;
 var fahrenheitP;
 var bg;
-
 function preload() {
   bg = loadImage('temp-meter-bg.png');
 }
-
 function inputWasInput() {
   var city = inputBox.value();
-  print(city);
   t=0;
-
-  loadJSON("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=d21e79452f4461671f1ccf2a209d48c3", jsonLoaded);
 }
-
 function jsonLoaded(newdata) {
   console.log(newdata);
   celsius = newdata.main.temp;
   fahrenheit = celsius * 9/5 + 32
-  // print(fahrenheit);
 }
-
 function setup() {
   createCanvas(400, 400);
-
   inputButton = createButton('load');
   inputButton.mouseClicked(inputWasInput);
   inputButton.position(150, 10);
@@ -279,10 +226,8 @@ function setup() {
   fahrenheitP = createP(fahrenheit + '&#8457;');
   fahrenheitP.position(240, 310);
 }
-
 function draw() {
   image(bg, 0, 0);
-
   h = map(celsius, -10, 100, 60, 300);
   fill('#ff6000');
   noStroke();
@@ -293,31 +238,22 @@ function draw() {
   celsiusP.position(240, 290+t);
   fahrenheitP.position(240, 310+t);
   
-  print(h);
 }
 var inputBox;
 var inputButton;
-
 var xdir = 0;
 var x = 0;
-
-
 function inputWasInput() {
   var city = inputBox.value();
-  print(city);
   
-  loadJSON("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=d21e79452f4461671f1ccf2a209d48c3", jsonLoaded);
 }
-
 function jsonNotLoaded(er) {
 	console.log(er);
 }
-
 function jsonLoaded(newdata) {
   console.log(newdata);
   xdir = newdata.wind.speed;
 }
-
 function setup() { 
   createCanvas(400, 400);
   
@@ -328,50 +264,31 @@ function setup() {
   inputBox.position(10, 10);  
   
 } 
-
 function draw() { 
   background(220);
-
   ellipse(x, 100, 50, 50);
   x = x + xdir;
   if (x > width) { x = 0; }
 }
-/*
-  Make sure you add the p5.serialport.js file
   to your project folder and include it in 
   your index.html.
   
-  You'll also need to have the p5.serialControl
   app open.
   
   Make sure you only have one program accessing
-  the Arduino's serial port at a time. For example,
-  you cannot have the Arduino serial monitor open
-  while trying to read serial data in p5.
   
   For a full tutorial:
-  https://itp.nyu.edu/physcomp/labs/labs-serial-communication/lab-serial-input-to-the-p5-js-ide/
-*/
-
 var portName = '/dev/cu.usbmodem1421';
-var serial;
 var bg = 0;
 var col = 255;
 var button = 1;
-
 function setup() { 
   createCanvas(400, 400);
   
-  serial = new p5.SerialPort();
-  serial.open(portName);
   
-  /*
     Whenever data is received, the parseData()
     function defined below will run.
-  */
-  serial.on('data', gotData);
 } 
-
 function draw() { 
   background(bg);
   
@@ -381,47 +298,30 @@ function draw() {
     ellipse(200,200,100);
   }
 }
-
 function gotData(){
-  var inData = serial.readLine();
   
-  /*
     parseData() will run every time data
-    is received on p5's serial connection.
-    serial.readLine() will return empty
     strings until p5 receives a carriage return
-    - Serial.println() in Arduino. The if
     statement below filters these out and only
     updates our variables when we receive a
     complete batch of data - in our case, the
     three sensor values. Uncomment the else
     statement at the bottom to see how often
-    serial.readLine() is returning empty strings.
-  */
   if (inData.length > 0){
-    print(inData);
     
-    /*
       Here I'm using the native js version of split.
       Below that you can see the p5 version 
       of split, which is commented out.
-    */
     var values = inData.split(',');
-    // var values = splitTokens(values, ',');
     
-    /*
       Once we split the received data into
       individual values, we still need to convert
       them from strings to integers.
-    */
     button = int(values[0]);
     bg = int(map(values[1], 0, 1023, 0, 255));
     col = int(map(values[2], 0, 1023, 0, 255));
   }
   
-  // else {
-  //   print('no data');
-  // }
 }var button1;
 var button2;
 var button3;
@@ -429,13 +329,11 @@ var emojiBalls = [];
 var img1;
 var img2;
 var img3;
-
 function preload() {
   img1 = loadImage('images/thumb-up.png');
   img2 = loadImage('images/heart.png');
   img3 = loadImage('images/rolling-eyes.png');
 }
-
 function setup() { 
   createCanvas(600, 600);
   imageMode(CENTER);
@@ -459,7 +357,6 @@ function setup() {
   button2.mousePressed(emoji(img2));
   button3.mousePressed(emoji(img3));
 } 
-
 function draw() { 
   background('#ececec');
   
@@ -473,7 +370,6 @@ function draw() {
     }
   }
 }
-
 function emoji (img) {
     emojiBalls.push(new Emoji(img));
 }
@@ -481,17 +377,14 @@ var button1;
 var button2;
 var button3;
 var emojiBalls = [];
-
 var img1;
 var img2;
 var img3;
-
 function preload() {
   img1 = loadImage('images/thumb-up.png');
   img2 = loadImage('images/heart.png');
   img3 = loadImage('images/rolling-eyes.png');
 }
-
 function setup() { 
   createCanvas(600, 600);
   imageMode(CENTER);
@@ -514,25 +407,10 @@ function setup() {
   button1.mousePressed(emoji1);
   button2.mousePressed(emoji2);
   button3.mousePressed(emoji3);
-  // if (button1.mousePressed) {
-  //   emojiNum++;
-  //   emojiBalls.push(new Emoji(img1));
-  // } else if (button2.mousePressed) {
-  // 	emojiNum++;
-  //   emojiBalls.push(new Emoji(img2));
-  // } else if (button3.mousePressed) {
-  // 	emojiNum++;
-  //   emojiBalls.push(new Emoji(img3));
-  // }
 } 
-
 function draw() { 
   background('#ececec');
   
-  //Make buttons
-  // button1.display();
-  // button2.display();
-  // button3.display();
   
   if (emojiBalls.length > 0) {
     for (var i = 0; i < emojiBalls.length; i++) {
@@ -544,42 +422,15 @@ function draw() {
     }
   }
 }
-
 function emoji1 () {
   
     emojiBalls.push(new Emoji(img1));
-
-  // else if ((mouseX > button2.x-button2.sizeWidth/2) && (mouseX < button2.x + button2.sizeWidth/2) && (mouseY > button2.y-button2.sizeHeight/2) && (mouseY < button2.y + button2.sizeHeight/2)){
-  //   emojiNum++;
-  //   emojiBalls.push(new Emoji(img2));
-  // }
-  // else if ((mouseX > button3.x-button3.sizeWidth/2) && (mouseX < button3.x + button3.sizeWidth/2) && (mouseY > button3.y-button3.sizeHeight/2) && (mouseY < button3.y + button3.sizeHeight/2)){
-  //   emojiNum++;
-  //   emojiBalls.push(new Emoji(img3));
-  // }
 }
-
 function emoji2 () {
     emojiBalls.push(new Emoji(img2));
 }
-
 function emoji3 () {
     emojiBalls.push(new Emoji(img3));
-}// var button1 = {
-//   x1: 300-20-50,
-//   y1: 600-60,
-//   s1: 40
-// }
-// var button2 = {
-//   x2: 300-20,
-//   y2: 600-60,
-//   s2: 40
-// }
-// var button3 = {
-//   x3: 300-20+50,
-//   y3: 600-60,
-//   s3: 40
-// }
 var button1;
 var button2;
 var button3;
@@ -588,13 +439,11 @@ var emojiNum = 0;
 var img1;
 var img2;
 var img3;
-
 function preload() {
   img1 = loadImage('images/thumb-up.png');
   img2 = loadImage('images/heart.png');
   img3 = loadImage('images/rolling-eyes.png');
 }
-
 function setup() { 
   createCanvas(600, 600);
   imageMode(CENTER);
@@ -602,11 +451,9 @@ function setup() {
   button2 = new Button(300, 540, 40, 40, img2);
   button3 = new Button(350, 540, 40, 40, img3);
 } 
-
 function draw() { 
   background('#ececec');
   
-  //Make buttons
   button1.display();
   button2.display();
   button3.display();
@@ -620,62 +467,9 @@ function draw() {
       }
     }
   }
-//   ellipseMode(CORNER);
-//   if (((mouseX > button1.x1) && (mouseX < button1.x1 + button1.s1) && (mouseY > button1.y1) && (mouseY < button1.y1 + button1.s1)) &&
-//      !mouseIsPressed){
-//     noStroke();
-//     fill('#ffffff');
-//     ellipse(button1.x1, button1.y1, button1.s1, button1.s1);
-//   }
-//   else if(((mouseX > button1.x1) && (mouseX < button1.x1 + button1.s1) && (mouseY > button1.y1) && (mouseY < button1.y1 + button1.s1)) &&
-//      mouseIsPressed){
-//     noStroke();
-//     fill('#cecece');
-//     ellipse(button1.x1, button1.y1, button1.s1, button1.s1);
-//   }
-//   else{
-//     noStroke();
-//     fill('#00a2ff');
-//     ellipse(button1.x1, button1.y1, button1.s1, button1.s1);
-//   }
   
-//   if(((mouseX > button2.x2) && (mouseX < button2.x2 + button2.s2) && (mouseY > button2.y2) && (mouseY < button2.y2 + button2.s2)) &&
-//     !mouseIsPressed){
-//     noStroke();
-//     fill('#ffffff');
-//     ellipse(button2.x2, button2.y2, button2.s2, button2.s2);
-//   }
-//   else if(((mouseX > button2.x2) && (mouseX < button2.x2 + button2.s2) && (mouseY > button2.y2) && (mouseY < button2.y2 + button2.s2)) &&
-//     mouseIsPressed){
-//     noStroke();
-//     fill('#cecece');
-//     ellipse(button2.x2, button2.y2, button2.s2, button2.s2);
-//   }
-//   else{
-//     noStroke();
-//     fill('#ffb400');
-//     ellipse(button2.x2, button2.y2, button2.s2, button2.s2);  
-//   }
   
-//   if(((mouseX > button3.x3) && (mouseX < button3.x3 + button3.s3) && (mouseY > button3.y3) && (mouseY < button3.y3 + button3.s3)) &&
-//     !mouseIsPressed){
-//     noStroke();
-//     fill('#ffffff');
-//     ellipse(button3.x3, button3.y3, button3.s3, button3.s3);
-//   }
-//   else if(((mouseX > button3.x3) && (mouseX < button3.x3 + button3.s3) && (mouseY > button3.y3) && (mouseY < button3.y3 + button3.s3)) &&
-//     mouseIsPressed){
-//     noStroke();
-//     fill('#cecece');
-//     ellipse(button3.x3, button3.y3, button3.s3, button3.s3);
-//   }
-//   else{
-//     noStroke();
-//     fill('#2ad466');
-//     ellipse(button3.x3, button3.y3, button3.s3, button3.s3);  
-//   }
 }
-
 function mouseClicked () {
   if ((mouseX > button1.x-button1.sizeWidth/2) && (mouseX < button1.x + button1.sizeWidth/2) && (mouseY > button1.y-button1.sizeHeight/2) && (mouseY < button1.y + button1.sizeHeight/2)){
     emojiNum++;
@@ -690,27 +484,11 @@ function mouseClicked () {
     emojiBalls.push(new Emoji(img3));
   }
 }
-// var button1 = {
-//   x1: 300-20-50,
-//   y1: 600-60,
-//   s1: 40
-// }
-// var button2 = {
-//   x2: 300-20,
-//   y2: 600-60,
-//   s2: 40
-// }
-// var button3 = {
-//   x3: 300-20+50,
-//   y3: 600-60,
-//   s3: 40
-// }
 var button1;
 var button2;
 var button3;
 var emojiBalls = [];
 var emojiNum = 0;
-
 function setup() { 
   createCanvas(600, 600);
   
@@ -718,11 +496,9 @@ function setup() {
   button2 = new Button(280, 540, 40, 40, '#ffb400', '#ffc029', '#e5a200');
   button3 = new Button(330, 540, 40, 40, '#2ad466', '#4de181', '#21b154');
 } 
-
 function draw() { 
   background(220);
   
-  //Make buttons
   button1.display();
   button2.display();
   button3.display();
@@ -736,62 +512,9 @@ function draw() {
       }
     }
   }
-//   ellipseMode(CORNER);
-//   if (((mouseX > button1.x1) && (mouseX < button1.x1 + button1.s1) && (mouseY > button1.y1) && (mouseY < button1.y1 + button1.s1)) &&
-//      !mouseIsPressed){
-//     noStroke();
-//     fill('#ffffff');
-//     ellipse(button1.x1, button1.y1, button1.s1, button1.s1);
-//   }
-//   else if(((mouseX > button1.x1) && (mouseX < button1.x1 + button1.s1) && (mouseY > button1.y1) && (mouseY < button1.y1 + button1.s1)) &&
-//      mouseIsPressed){
-//     noStroke();
-//     fill('#cecece');
-//     ellipse(button1.x1, button1.y1, button1.s1, button1.s1);
-//   }
-//   else{
-//     noStroke();
-//     fill('#00a2ff');
-//     ellipse(button1.x1, button1.y1, button1.s1, button1.s1);
-//   }
   
-//   if(((mouseX > button2.x2) && (mouseX < button2.x2 + button2.s2) && (mouseY > button2.y2) && (mouseY < button2.y2 + button2.s2)) &&
-//     !mouseIsPressed){
-//     noStroke();
-//     fill('#ffffff');
-//     ellipse(button2.x2, button2.y2, button2.s2, button2.s2);
-//   }
-//   else if(((mouseX > button2.x2) && (mouseX < button2.x2 + button2.s2) && (mouseY > button2.y2) && (mouseY < button2.y2 + button2.s2)) &&
-//     mouseIsPressed){
-//     noStroke();
-//     fill('#cecece');
-//     ellipse(button2.x2, button2.y2, button2.s2, button2.s2);
-//   }
-//   else{
-//     noStroke();
-//     fill('#ffb400');
-//     ellipse(button2.x2, button2.y2, button2.s2, button2.s2);  
-//   }
   
-//   if(((mouseX > button3.x3) && (mouseX < button3.x3 + button3.s3) && (mouseY > button3.y3) && (mouseY < button3.y3 + button3.s3)) &&
-//     !mouseIsPressed){
-//     noStroke();
-//     fill('#ffffff');
-//     ellipse(button3.x3, button3.y3, button3.s3, button3.s3);
-//   }
-//   else if(((mouseX > button3.x3) && (mouseX < button3.x3 + button3.s3) && (mouseY > button3.y3) && (mouseY < button3.y3 + button3.s3)) &&
-//     mouseIsPressed){
-//     noStroke();
-//     fill('#cecece');
-//     ellipse(button3.x3, button3.y3, button3.s3, button3.s3);
-//   }
-//   else{
-//     noStroke();
-//     fill('#2ad466');
-//     ellipse(button3.x3, button3.y3, button3.s3, button3.s3);  
-//   }
 }
-
 function mouseClicked () {
   if ((mouseX > button1.x) && (mouseX < button1.x + button1.sizeWidth) && (mouseY > button1.y) && (mouseY < button1.y + button1.sizeHeight)){
     emojiNum++;
@@ -807,23 +530,6 @@ function mouseClicked () {
   }
 }
 var stoneWidth, stoneHeight;
-// var eye1Left = {
-//   x: 600/2-50,
-//   y: 600/2-40
-// }
-// var eye1Right = {
-//   x: 600/2,
-//   y: 600/2-40
-// }
-// var eye2Left = {
-//   x: 434,
-//   y: 274
-// }
-// var eye2Right = {
-//   x: 456,
-//   y: 274
-// }
-
 function setup() { 
   
 	createCanvas(600, 600);
@@ -831,7 +537,6 @@ function setup() {
   frameRate(24);
   
 }
-
 function draw() { 
   
   var w1 = 296;
@@ -839,10 +544,8 @@ function draw() {
   
 	stoneWidth = 160;
 	stoneHeight = 540;
-
 	noStroke();
 	
-	//River Flow
   clear();
   w1 = w1 + random(-20, 20);
 	w2 = w2 + random(-20, 20);
@@ -850,7 +553,6 @@ function draw() {
 	quad(0, w1, width, w2, width, height, 0, height);
 	
 	
-	//Stone Shadow
 	fill('#bbbbbb');
 	beginShape();
 	curveVertex(262, 438);
@@ -867,7 +569,6 @@ function draw() {
 	curveVertex(436, 304);
 	endShape(CLOSE);
 	
-	//Stone
 	fill('#04abfc');
 	beginShape();
 	curveVertex(208, 198);
@@ -887,7 +588,6 @@ function draw() {
 	curveVertex(410, 278);
 	endShape(CLOSE);
 	
-	//Eye
 	fill('#ffffff');
 	ellipse(width/2-50, height/2-40, 36, 36);
 	ellipse(width/2, height/2-40, 36, 36);
@@ -898,7 +598,6 @@ function draw() {
   eyeBalls();
 	
 }
-
 function eyeBalls() {
   xcLeft1 = constrain(mouseX, width/2-50-8, width/2-50+8);
 	xcRight1 = constrain(mouseX, width/2-8, width/2+8);
@@ -907,7 +606,6 @@ function eyeBalls() {
 	yc1 = constrain(mouseY, height/2-40-8, height/2-40+8);
 	yc2 = constrain(mouseY, 274-2, 274+2);
   
-  //Eye Ball
 	fill('#000000');
 	ellipse(xcLeft1, yc1, 16, 16);
 	ellipse(xcRight1, yc1, 16, 16);
@@ -916,7 +614,6 @@ function eyeBalls() {
 	ellipse(xcRight2, yc2, 4, 4);
 }var ballVec = [];
 var lineVec = [];
-
 var ballNum = 5;
 var lineCol;
 var cnt = 0;
@@ -932,22 +629,18 @@ var button2 = {
   w2: 50,
   h2: 50 
 }
-
 function setup() { 
   createCanvas(400, 400);
   
   
- //Initiate Balls
   for(var i = 0; i < ballNum; i++){
     ballVec.push(new Ball());
   }
 } 
-
 function draw() { 
   background('#ececec');
   
   if(frameCount%30 == 1){
-    //change the color of each line every 60 frames
     lineVec = [];
     for(var i = 0; i < ballNum; i++){
       if(i == 1){
@@ -961,12 +654,10 @@ function draw() {
         lineVec.push(lineCol);
       }
     }
-    //Delete first ball and add another one every 60 frames
     ballVec.shift();
     ballVec.push(new Ball());
   }
   
-  //draw lines
   cnt = 0;
   for(var i = 0; i < ballNum; i++){
      if(i == 1){
@@ -984,7 +675,6 @@ function draw() {
      }
   }
   
-  //draw balls
   ellipseMode(CENTER);
   for(var i = 0; i < ballNum; i++){  
     stroke(ballVec[i].col);
@@ -994,10 +684,7 @@ function draw() {
   
   
   
-   //mouse over
-
   ellipseMode(CORNER);
-/*  if ((((mouseX > button1.x1) && (mouseX < button1.x1 + button1.w1) && (mouseY > button1.y1) && (mouseY < button1.y1 + button1.h1)) ||
       ((mouseX > button2.x2) && (mouseX < button2.x2 + button2.w2) && (mouseY > button2.y2) && (mouseY < button2.y2 + button2.h2))) &&
       !mouseIsPressed) {
     fill('#90c8f7');
@@ -1008,9 +695,7 @@ function draw() {
     fill('#cecece');
   } else {
     fill('#ffffff');
-  }*/
   
-  //Make buttons
   if (((mouseX > button1.x1) && (mouseX < button1.x1 + button1.w1) && (mouseY > button1.y1) && (mouseY < button1.y1 + button1.h1)) &&
      !mouseIsPressed){
     noStroke();
@@ -1062,8 +747,6 @@ function draw() {
     rect(button2.x2+10, button2.y2+23, 30, 4);    
   }
 }
-
-//class of Ball
 function Ball(){
   this.posX = random(0,width);
   this.posY = random(0,height);
@@ -1076,10 +759,7 @@ function Ball(){
     ellipse(this.posX, this.posY, this.dia, this.dia);
   }
 }
-
-
 function mousePressed(){
-
   if ((mouseX > button1.x1) && (mouseX < button1.x1 + button1.w1) && (mouseY > button1.y1) && (mouseY < button1.y1 + button1.h1)){
     ballNum++;
     ballVec.push(new Ball());
@@ -1095,8 +775,6 @@ function mousePressed(){
     lineVec.pop();
     lineVec.pop();
   }
-}// From: http://10print.org/
-
 var x = 0;
 var y = 0;
 var mx1 = 30;
@@ -1105,45 +783,35 @@ var mx2 = 30;
 var my2 = 410+30;
 var mx3 = 30;
 var my3 = 410+30+30;
-
 var sliderStart = 30;
 var sliderEnd = 470;
-
 var dragging1 = false;
 var dragging2 = false;
 var dragging3 = false;
-
-
 var r = 0;
 var g = 0;
 var b = 0;
-
 function setup() {
   createCanvas(500, 500);
   background(255);
 }
-
 function draw() {
   
   if (dragging1) {
     mx1 = mouseX;
-
   }
   
   if (dragging2) {
     mx2 = mouseX; 
-
   }
   
   if (dragging3) {
     mx3 = mouseX;
-
   }
   
   mx1 = constrain(mx1, sliderStart, sliderEnd);
   mx2 = constrain(mx2, sliderStart, sliderEnd);
   mx3 = constrain(mx3, sliderStart, sliderEnd);
-
   var r = map(mx1,sliderStart,sliderEnd,0,255);
   var g = map(mx2,sliderStart,sliderEnd,0,255);
   var b = map(mx3,sliderStart,sliderEnd,0,255);
@@ -1164,10 +832,8 @@ function draw() {
     rect(x+10,y+10,14,14)  
   }
   
-  // Slow down the motion
   frameRate(20)
   
-  // Loop
   x+=20
    if (x > width) {
     x = 0;
@@ -1180,15 +846,11 @@ function draw() {
     x = 0;
     y = 0;
   }
-
   
   noStroke()
-
   fill(255)
   rectMode(CORNER)
   rect(0,380,500,120)
-
- // Lines
   stroke(100)
   strokeWeight(1)
   line(0+30,380+30,width-30,380+30)
@@ -1201,7 +863,6 @@ function draw() {
   
   
  
-  // Sliders
   noStroke()
   if (dragging1) {
     fill('#a01700')
@@ -1229,10 +890,7 @@ function draw() {
   
   
 }
-
-// Dragging and release
 function mousePressed() {
-  // Did I click on slider?
   if (mouseX > mx1 -10 && mouseX < mx1 + 10 && mouseY > my1-7.5 && mouseY < my1 + 7.5) {
     dragging1 = true;
     
@@ -1248,9 +906,7 @@ function mousePressed() {
     
   }
 }
-
 function mouseReleased() {
-  // Stop dragging
   dragging1 = false;
   dragging2 = false;
   dragging3 = false;
@@ -1261,7 +917,6 @@ function mouseReleased() {
   xspeed: 10,
   yspeed: 10
 };
-
 function setup() { 
   createCanvas(400, 400);
   
@@ -1269,14 +924,12 @@ function setup() {
   ball.y = random(0, height),
   ball.d = random(10, 30)
 } 
-
 function draw() { 
   background(220);
   
   ellipse(ball.x, ball.y, ball.d);
   
   ball.x = ball.x + ball.xspeed;
-  // ball.y = ball.y + ball.yspeed;
   ball.y += ball.yspeed;
   
   if (ball.x > width || ball.x < 0) {
@@ -1287,12 +940,7 @@ function draw() {
   	ball.yspeed = ball.yspeed * -1;
   }
   
-  // if (ball.x < 0) {
-  // 	ball.xspeed = ball.xspeed * -1;
-  // }
 }var stoneWidth, stoneHeight, xm, xc, ym, yc;
-
-
 function setup() { 
   
 	createCanvas(600, 600);
@@ -1300,7 +948,6 @@ function setup() {
   frameRate(24);
   
 }
-
 function draw() { 
   
   var w1 = 296;
@@ -1319,7 +966,6 @@ function draw() {
 	
 	noStroke();
 	
-	//River Flow
   clear();
   w1 = w1 + random(-20, 20);
 	w2 = w2 + random(-20, 20);
@@ -1327,7 +973,6 @@ function draw() {
 	quad(0, w1, width, w2, width, height, 0, height);
 	
 	
-	//Stone Shadow
 	fill('#bbbbbb');
 	beginShape();
 	curveVertex(262, 438);
@@ -1344,7 +989,6 @@ function draw() {
 	curveVertex(436, 304);
 	endShape(CLOSE);
 	
-	//Stone
 	fill('#04abfc');
 	beginShape();
 	curveVertex(208, 198);
@@ -1364,7 +1008,6 @@ function draw() {
 	curveVertex(410, 278);
 	endShape(CLOSE);
 	
-	//Eye
 	fill('#ffffff');
 	ellipse(width/2-50, height/2-40, 36, 36);
 	ellipse(width/2, height/2-40, 36, 36);
@@ -1372,7 +1015,6 @@ function draw() {
 	ellipse(434, 274, 12, 12);
 	ellipse(456, 274, 12, 12);
 	
-	//Eye Ball
 	fill('#000000');
 	ellipse(xcLeft1, yc1, 16, 16);
 	ellipse(xcRight1, yc1, 16, 16);
@@ -1382,13 +1024,10 @@ function draw() {
   
   
 }
-
 var r, s;  
-
 function setup() { 
   
   createCanvas(600, 600);
-	//background('#333333');
 	
   r = '#f72b3a'; 
   s = 4;
@@ -1399,7 +1038,6 @@ function setup() {
   strokeJoin(ROUND);
   
 }
-
 function draw() { 
   x = mouseX;
   y = mouseY;
@@ -1411,11 +1049,9 @@ function draw() {
   quad(width/3, height/2, width/3*2, height/2+20, width/3*2+50, height/2+60, width/3-60, height/2+30);
   
 }var r, s;  
-
 function setup() { 
   
   createCanvas(800, 480);
-	//background('#333333');
 	
   r = '#f72b3a'; 
   s = 4;
@@ -1426,7 +1062,6 @@ function setup() {
   strokeJoin(ROUND);
   
 }
-
 function draw() { 
   x = mouseX/2;
   y = mouseY/2;
@@ -1447,7 +1082,6 @@ function draw() {
   quad(620+x, 148+y, 668+x, 122+y, 746, 328, 698, 356);
   quad(540, 264, 586, 234, 746, 328, 698, 356);
 }var r, s;  
-
 function setup() { 
   
   createCanvas(800, 480);
@@ -1472,10 +1106,7 @@ function setup() {
     p8= p6+random(0, height);
   
 }
-
 function draw() { 
-  //quad(x, y, x+80, y+20, x+80, y+100, x, y+80);
-  // quad(random(x), random(y), x+80, y+20, x+80, y+100, x, y+80);
   clear();
   quad(random(p1, width)+1, p2, p3, p4, p5, p6, p7, p8);
 }function setup() { 
@@ -1483,14 +1114,12 @@ function draw() {
   x = random(0, width);
   y = random(0, height)
 } 
-
 function draw() { 
   background(220);
   
   rect(x, y, 20, 50);
   x++;
   y++;
-  //x = x + random(-2, 2);
 }function setup() { 
   
   createCanvas(800, 480);
@@ -1499,7 +1128,6 @@ function draw() {
   r = color('#f72b3a');
   s = 4;
 	
-  //shape one
   noFill();
   stroke(r);
   strokeWeight(s);
@@ -1510,7 +1138,6 @@ function draw() {
   quad(176, 154, 248, 192, 248, 320, 176, 282);
   quad(52, 300, 176, 282, 248, 320, 126, 338);
   
-  //shape two
   noFill();
   stroke(r);
   strokeWeight(s);
@@ -1519,7 +1146,6 @@ function draw() {
   triangle(408, 126, 496, 302, 366, 292);
   quad(366, 292, 496, 302, 458, 344, 310, 332);
   
-  //shape three
   noFill();
   stroke(r);
   strokeWeight(s);
@@ -1538,18 +1164,14 @@ function draw() {
 	
   noFill();
   
-  //hamburger bottom
   stroke(g);
   strokeWeight(s);
 	rect(150, 400, 300, 60, 45);
   
-  //hamburger meat
-
   stroke(g);
   strokeWeight(s);
 	rect(150, 340, 300, 30, 45);
   
-  //lettuce
   stroke(g);
   strokeWeight(s);
 	arc(150, 290, 40, 40, 0, -30);
@@ -1586,7 +1208,6 @@ function draw() {
   strokeWeight(s);
 	arc(470, 290, 40, 40, QUARTER_PI, PI);
   
-  //hamburger top
   stroke(g);
   strokeWeight(s);
 	arc(300, 240, 300, 240, PI, PI);

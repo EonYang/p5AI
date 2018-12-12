@@ -5,14 +5,12 @@ var center = {
 var circles = [];
 var colorControl = 0.00025;
 var colorIntensity = 0.03;
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
   center.x = width / 2;
   center.y = height / 2;
   
-  /*
 		How to create more circles:
     1) Add another line with a new number
     2) First two variables are center location
@@ -20,20 +18,16 @@ function setup() {
     4) Fouth variable is larger circle radius
     5) Fifth variable is the number of points on the circle
     6) Sixth variable is the size of points
-	*/
   
   for (var i = 0; i<20 ; i++ ){
     circles[i] = new circle(center.x,center.y, round(random(5,200)),round(random(200,height/2)),round(random(2,70)),random(0.5,10));
-    /*
     circles[0] = new circle(center.x, center.y, 40, 100, 20, 5);
     circles[1] = new circle(center.x, center.y, 20, 150, 10, 3);
     circles[2] = new circle(center.x, center.y, 60, 80, 50, 1);
     circles[3] = new circle(center.x, center.y, 30, 70, 30, 1.5);
     circles[4] = new circle(center.x, center.y, 100, 220, 2, 4);
-    */
   }
 }
-
 function draw() {
   colorMode(HSB);
   background(220, 100, 25, 0.1);
@@ -50,23 +44,19 @@ function draw() {
     ellipse(center.x, center.y, j)
   }
   
-  //Update color
   colorIntensity += colorControl;
   if ((colorIntensity > 0.03) || (colorIntensity < 0.015)) {
     colorControl = -colorControl;
   }
 }
-
 function doubleClicked(){
  	
 }
-
 function drawCircles(){
   for (var j = 0; j < circles.length; j++) {
     circles[j].present();
   }
 }
-
 function drawNucleus(){
   
   fill(175, 75, 100, colorIntensity);
@@ -75,30 +65,24 @@ function drawNucleus(){
     ellipse(center.x, center.y, j)
   }
   
-  //Update color
   colorIntensity += colorControl;
   if ((colorIntensity > 0.03) || (colorIntensity < 0.015)) {
     colorControl = -colorControl;
   }
 }
-
 function mousePressed() {
   for (var j = 0; j < circles.length; j++) {
     circles[j].activate();
   }
 }
-
 class circle {
-
   constructor(centerX, centerY, rLow, rBig, num, strokeWidth) {
     this.rLow = rLow;
     this.rBig = rBig;
     this.r = [];
-    this.rgoal = rLow; //This is a little counter intuitive, but goal is changed before each click, so goal is also the current position 
     this.num = num;
     this.cX = centerX;
     this.cY = centerY;
-    this.speed = []; // Speed is also the reverse of speen in reality. This is my implementation, you can change it if you want, it doesn't matter
     this.active = [];
     this.angle = [];
     this.angleChange = random(-1, 1);
@@ -114,27 +98,21 @@ class circle {
       this.locY[i] = this.cY + sin(this.angle[i]) * this.rLow;
     }
   }
-
   move() {
     for (var i = 0; i < this.num; i++) {
       if (this.active[i]) {
-        this.r[i] += (this.rgoal - this.r[i]) / this.speed[i]; // update radius
-        if ((this.r[i] > this.rBig) || (this.r[i] < this.rLow)) { // Check if in the boundaries
           this.r[i] = this.rgoal;
           this.active[i] = false;
         }
         this.locX[i] = this.cX + cos(this.angle[i]) * this.r[i];
-        this.locY[i] = this.cY + sin(this.angle[i]) * this.r[i]; // Update location
       }
     }
   }
-
   updateAngle() {
     for (var i = 0; i < this.num; i++) {
       this.angle[i] += this.angleChange;
     }
   }
-
   isActive() {
     for (var i = 0; i < this.num; i++) {
       if (this.active[i]) {
@@ -142,23 +120,17 @@ class circle {
       }
     }
     return false;
-  } // The point of this little function is to check for when all of the points have finished moving
   
   activate() {
-    if (this.rgoal == this.rLow) { //This if statement changes the goal to the next
       this.rgoal = this.rBig;
       this.angleChange = random(-1, 1);
     } else {
       this.rgoal = this.rLow;
-      this.angleChange = 0 // This line makes the points stop rotating when collapsing to small size
     }
-    for (var i = 0; i < this.num; i++) { //This one activates each point and generates new speeds
       this.active[i] = true;
       this.speed[i] = random(10, 50);
     }
-
   }
-
   present() {
     strokeWeight(this.strokeWidth);
     stroke(255, 200);
@@ -168,7 +140,6 @@ class circle {
     for (var i = 0; i < this.num; i++) {
       point(this.locX[i], this.locY[i]);
     }
-
     this.updateAngle();
   }
 }var block = 30;
@@ -184,12 +155,10 @@ function setup() {
     for (var j = 0; j< height/block; j++){
       
       squaresLine[j] = new square(block/2+i*block,block/2+j*block,block);
-    	//squares[i][j] = new square(i,j,block);
   	}
     squares.push(squaresLine);
   }
 }
-
 function draw() {
   colorMode(HSB);
   background(220, 100, 25, 0.1);
@@ -198,13 +167,11 @@ function draw() {
       var xLoc = block/2+i*block;
       var yLoc = block/2+j*block;
       mappedRotation = map(dist(xLoc,yLoc,mouseX,mouseY), 0, sqrt(sq(width/2)+sq(height/2)),0, PI/2,true)
-    	//mappedRotation = map(dist(xLoc,yLoc,mouseX,mouseY), 0, sqrt(sq(width/2)+sq(height/2)),0, PI/2)
     	
       squares[i][j].present(mappedRotation);
   	}
   }
 }
-
 class square {
   constructor(xCenter,yCenter,dimension){
     this.x = xCenter;
@@ -223,8 +190,6 @@ class square {
     translate(this.x,this.y);
     rotate(mappedRot);
     colorMode(RGB);
-    //fill(125,30,70,0.3);
-    //fill(20,200,20, 100);
     stroke(0);
     strokeWeight(1);
     noFill();
@@ -243,22 +208,18 @@ class square {
       var x = (this.x-0.5*block)/block;
       var y = (this.y-0.5*block)/block
       if (random()<0.17 && y >= 1){
-        //top
         squares[x][y-1].isInfected = true;
         successfulInfection = true;
       }
       if (random()<0.17 && x >= 1){
-        //top
         squares[x-1][y].isInfected = true;
         successfulInfection = true;
       }
       if (random()<0.17 && y <= round(height/block)-1){
-        //top
         squares[x][y+1].isInfected = true;
         successfulInfection = true;
       }
       if (random()<0.17 && x <= round(width/block) - 1){
-        //top
         squares[x+1][y].isInfected = true;
         successfulInfection = true;
       }
@@ -287,7 +248,6 @@ class square {
     pop();
   }
 }
-
 function mousePressed(){
   var closest = [0,0];
 	for (var i = 0; i< width/block; i++){
@@ -295,7 +255,6 @@ function mousePressed(){
       var xLoc = block/2+i*block;
       var yLoc = block/2+j*block;
       mappedRotation = map(dist(xLoc,yLoc,mouseX,mouseY), 0, sqrt(sq(width/2)+sq(height/2)),0, PI/2,true)
-    	//mappedRotation = map(dist(xLoc,yLoc,mouseX,mouseY), 0, sqrt(sq(width/2)+sq(height/2)),0, PI/2)
 			if (dist(mouseX,mouseY,xLoc,yLoc)<dist(mouseX,mouseY,closest[0],closest[1])){
         closest = [xLoc,yLoc];
       }
@@ -320,12 +279,10 @@ function setup() {
     for (var j = 0; j< height/block; j++){
       
       squaresLine[j] = new square(block/2+i*block,block/2+j*block,block);
-    	//squares[i][j] = new square(i,j,block);
   	}
     squares.push(squaresLine);
   }
 }
-
 function draw() {
   colorMode(HSB);
   background(220, 100, 25, 0.1);
@@ -334,13 +291,11 @@ function draw() {
       var xLoc = block/2+i*block;
       var yLoc = block/2+j*block;
       mappedRotation = map(dist(xLoc,yLoc,mouseX,mouseY), 0, sqrt(sq(width/2)+sq(height/2)),0, PI/2,true)
-    	//mappedRotation = map(dist(xLoc,yLoc,mouseX,mouseY), 0, sqrt(sq(width/2)+sq(height/2)),0, PI/2)
     	
       squares[i][j].present(mappedRotation);
   	}
   }
 }
-
 class square {
   constructor(xCenter,yCenter,dimension){
     this.x = xCenter;
@@ -356,8 +311,6 @@ class square {
     translate(this.x,this.y);
     rotate(mappedRot);
     colorMode(RGB);
-    //fill(125,30,70,0.3);
-    //fill(20,200,20, 100);
     stroke(0);
     strokeWeight(1);
     noFill();
@@ -379,7 +332,6 @@ class square {
     pop();
   }
 }
-
 function mousePressed(){
   var closest = [0,0];
 	for (var i = 0; i< width/block; i++){
@@ -387,7 +339,6 @@ function mousePressed(){
       var xLoc = block/2+i*block;
       var yLoc = block/2+j*block;
       mappedRotation = map(dist(xLoc,yLoc,mouseX,mouseY), 0, sqrt(sq(width/2)+sq(height/2)),0, PI/2,true)
-    	//mappedRotation = map(dist(xLoc,yLoc,mouseX,mouseY), 0, sqrt(sq(width/2)+sq(height/2)),0, PI/2)
 			if (dist(mouseX,mouseY,xLoc,yLoc)<dist(mouseX,mouseY,closest[0],closest[1])){
         closest = [xLoc,yLoc];
       }
@@ -409,9 +360,7 @@ var r, g, b;
 var wait = 0;
 var ns = 1;
 var compensationF;
-
 function setup() {
-    // put setup code here
     createCanvas(windowWidth, windowHeight);
     background(0);
     smooth();
@@ -419,50 +368,37 @@ function setup() {
     r = random(255);
     g = random(255);
     b = random(255);
-    //noCursor();
     wait = millis();
 }
-
 function drawEllipse() {
     noFill();
     stroke(r, g, b, 28);
     ellipse(0, 0, 120, 80);
-    //triangle(-26,15,26,15,0,-30);
 }
-
 function mouseMoved() {
     if (mouseX < (windowWidth/3)){
-        //r = random(255);
         r = map(mouseY, 0, windowHeight, 0, 255);
     } else if (mouseX > ((windowWidth/3)-windowWidth)){
-        //b = random(255);
         b = map(mouseY, 0, windowHeight, 0, 255);
     } else {
-        //g = random(255);
         g = map(mouseY, 0, windowHeight, 0, 255);
     }
-  	//print(dist(width/2,height/2,mouseX,mouseY));
     radiusInc = map(dist(width/2,height/2,mouseX,mouseY),0,width/2,0,1);
     wait = millis();
 }
-
 function draw() {
-    // put drawing code here
     colorMode(HSB);
   	background(210, 100, 25, 0.1);
-    //background(0);
     
     scaleX = map(mouseX, 0, windowWidth, 1.5, 11.5);
     scaleY = map(mouseY, 0, windowHeight, 1.5, 11.5);
     minV = map(mouseX, 0, windowWidth, 0.1, 0.5);
     maxV = map(mouseY, 0, windowHeight, 0.8, 1.8);
     radius=10;
-    //background(0);
   	colorMode(RGB);
     for (var i=0; i<720; i += 0.5) {   
         push();
         translate(windowWidth/2, windowHeight/2);
-
         rotate(radians(i));
         translate(0, radius);
         rotate(radians(i*4));
@@ -478,7 +414,6 @@ function draw() {
         pop();
       	radius+=radiusInc;
     }
-}// Water
 function setup() {
   createCanvas(400, 400);
 	colorMode(HSB);
@@ -488,20 +423,14 @@ function setup() {
     g = random(255);
     b = random(255);
 }
-
 var rotationNoise = 1;
 var scaleNoiseX = 100000;
 var scaleNoiseY = 200000;
-
-
 function drawEllipse() {
     noFill();
     stroke(r, g, b, 28);
     ellipse(mouseX, mouseY, 120, 80);
-    //triangle(-26,15,26,15,0,-30);
 }
-
-
 function mouseMoved() {
     if (mouseX < (windowWidth/3)){
         r = map(mouseY, 0, windowHeight, 0, 255);
@@ -513,18 +442,12 @@ function mouseMoved() {
         g = map(mouseY, 0, windowHeight, 0, 255);
     }
 }
-
 function draw() {
-
 	background(220, 70, 70, 0.05);
   	
     
-    //background(0); 
     push();
-    //rotate(map(noise(rotationNoise), 0, 1, 0 , 2*PI));
-    //scale(map(noise(scaleNoiseX), 0, 1, minV, maxV), map(noise(scaleNoiseY), 0, 1, minV, maxV));
   	noFill();
-  //fill(r, g, b, 25);
     stroke(r, g, b, 25);
   	translate(mouseX,mouseY);
   	rotate(map(noise(rotationNoise), 0, 1, 0 , 2*PI));
@@ -533,7 +456,6 @@ function draw() {
   	scaleNoiseX += 0.005;
     scaleNoiseY += 0.005;
   	rotationNoise += 0.001;
-
   	
 }var scaleX; 
 var scaleY; 
@@ -541,9 +463,7 @@ var min;
 var max; 
 var radius;
 var r, g, b;
-
 function setup() {
-    // put setup code here
     createCanvas(windowWidth, windowHeight);
     background(0);
     smooth();
@@ -551,42 +471,31 @@ function setup() {
     r = random(255);
     g = random(255);
     b = random(255);
-    //noCursor();
 }
-
 function drawEllipse() {
     noFill();
     stroke(r, g, b, 28);
     ellipse(0, 0, 120, 80);
-    //triangle(-26,15,26,15,0,-30);
 }
-
 function mouseMoved() {
     if (mouseX < (windowWidth/3)){
-        //r = random(255);
         r = map(mouseY, 0, windowHeight, 0, 255);
     } else if (mouseX > ((windowWidth/3)-windowWidth)){
-        //b = random(255);
         b = map(mouseY, 0, windowHeight, 0, 255);
     } else {
-        //g = random(255);
         g = map(mouseY, 0, windowHeight, 0, 255);
     }
     radius = map(mouseY, 0, windowHeight, 100, 350);
 }
-
 function draw() {
-    // put drawing code here
     fill(0, 25);
     rect(0, 0, windowWidth, windowHeight);
-    //background(0);
     
     scaleX = map(mouseX, 0, windowWidth, 1.5, 11.5);
     scaleY = map(mouseY, 0, windowHeight, 1.5, 11.5);
     min = map(mouseX, 0, windowWidth, 0.1, 0.5);
     max = map(mouseY, 0, windowHeight, 0.8, 1.8);
     
-    //background(0);
     for (var i=0; i<720; i += 0.5) {   
         push();
         translate(windowWidth/2, windowHeight/2);
@@ -604,13 +513,10 @@ function draw() {
   deepspace_sparkle : '#465C69',
   peech_orange : '#EDCB96'
 }
-
 function setup() {
   createCanvas(400, 400);
   angleMode(DEGREES);
-  //noCursor();
 }
-
 function draw() {
   background(clr.light_gray);
   
@@ -645,7 +551,6 @@ function draw() {
   pop();
   
 }
-
 function mouseClicked(){
   saveCanvas();
 }var startScene = {
@@ -657,13 +562,11 @@ function mouseClicked(){
   slideIncr: 0.05,
   introPresent: true,
 }
-
 var atomScene = {
   circles: [],
   colorControl: 0.00025,
   colorIntensity: 0.03
 }
-
 var initiatedScene = {
   particles: [],
   finishedMoving: false,
@@ -672,7 +575,6 @@ var initiatedScene = {
   c: 0,
   growingCenter: true
 }
-
 var finishingScene = {
   particles: [],
   finishedMoving: false,
@@ -690,7 +592,6 @@ var chapterAlpha = 255;
 var chapterTime;
 var lastScene;
 var finishing = false;
-
 var fossilScene = {
   radiusInc: 1,
   startingRadius: 10,
@@ -702,13 +603,11 @@ var fossilScene = {
   compensationFactor: 0,
   wait: 0
 };
-
 var seedScene = {
   block: 30,
   squares: [],
   mappedRotation: 0
 }
-
 function preload() {
   dreamMusic = loadSound('Sounds/dreams.mp3');
   illusion = loadSound('Sounds/illusion.mp3');
@@ -720,56 +619,43 @@ function preload() {
   subFont = loadFont('Fonts/Hattori_Hanzo.otf');
   loadFont('Hattori_Hanzo.otf');
 }
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   rectMode(CENTER);
   textAlign(CENTER);
   angleMode(DEGREES);
-
   finishingScene.sizeC = sqrt(sq(width) + sq(height));
-
   for (var i = 0; i < width / seedScene.block; i++) {
     var squaresLine = []
     for (var j = 0; j < height / seedScene.block; j++) {
-
       squaresLine[j] = new square(seedScene.block / 2 + i * seedScene.block, seedScene.block / 2 + j * seedScene.block, seedScene.block);
-      //squares[i][j] = new square(i,j,block);
     }
     seedScene.squares.push(squaresLine);
   }
-
   firstParticle = new particle(windowWidth / 2, windowHeight / 2);
   firstBackParticle = new backwardParticle();
   finishingScene.particles.push(firstBackParticle);
   initiatedScene.particles.push(firstParticle);
-
   startButton = createButton("Start")
   startButton.class('textButton');
   startButton.mousePressed(start);
   startButton.position(windowWidth / 2 - startButton.size().width / 2, height / 2 + height * 0.3);
-
   nextButton = createButton('')
   nextButton.class('nextButton');
   nextButton.mousePressed(next);
   nextButton.position(width - nextButton.size().width, height / 2 - nextButton.size().height / 2);
   nextButton.hide();
-
   backButton = createButton('')
   backButton.class('backButton');
   backButton.mousePressed(previous);
   backButton.position(0, height / 2 - backButton.size().height / 2);
   backButton.hide();
-
   finishButton = createButton('')
   finishButton.class('finishButton');
   finishButton.mousePressed(finish);
   finishButton.position(width - finishButton.size().width, height / 2 - finishButton.size().height / 2);
   finishButton.hide();
-
-
 }
-
 function draw() {
   if (startScene.introPresent || startScene.fade >= 0 || startScene.titleFade >= 0) {
     showIntro();
@@ -784,11 +670,9 @@ function draw() {
       background(initiatedScene.c, 100, 25, 1);
       riverFlows.play();
     }
-
     if (lastScene != scene) {
       background(initiatedScene.c, 100, 25, 1);
     }
-
     if (scenes[scene] == 'Fossil') {
       drawFossil();
     } else if (scenes[scene] == 'Seed') {
@@ -796,7 +680,6 @@ function draw() {
     } else if (scenes[scene] == 'Atom') {
       drawAtom();
     }
-
     if (chapterAlpha > 0) {
       textSize(55);
       colorMode(RGB);
@@ -812,11 +695,9 @@ function draw() {
   } else if (!finishingScene.finishedMoving || illusion.isPlaying()) {
     initiatedFinishing();
   } else {
-    // restart everything here;
     restart();
   }
 }
-
 function mousePressed() {
   if (initiatedScene.finishedMoving && !dreamMusic.isPlaying() && millis() - pressTimeout > 1500 && !finishing) {
     if (scenes[scene] == 'Fossil') {
@@ -828,7 +709,6 @@ function mousePressed() {
           var xLoc = seedScene.block / 2 + i * seedScene.block;
           var yLoc = seedScene.block / 2 + j * seedScene.block;
           seedScene.mappedRotation = map(dist(xLoc, yLoc, mouseX, mouseY), 0, sqrt(sq(width / 2) + sq(height / 2)), 0, PI / 2, true)
-          //mappedRotation = map(dist(xLoc,yLoc,mouseX,mouseY), 0, sqrt(sq(width/2)+sq(height/2)),0, PI/2)
           if (dist(mouseX, mouseY, xLoc, yLoc) < dist(mouseX, mouseY, closest[0], closest[1])) {
             closest = [xLoc, yLoc];
           }
@@ -842,7 +722,6 @@ function mousePressed() {
     }
   }
 }
-
 function mouseMoved() {
   if (initiatedScene.finishedMoving && !dreamMusic.isPlaying() && !finishing) {
     if (scenes[scene] == 'Fossil') {
@@ -859,7 +738,6 @@ function mouseMoved() {
     }
   }
 }
-
 function mouseDragged() {
   if (initiatedScene.finishedMoving && !dreamMusic.isPlaying() && millis() - pressTimeout > 1500 && !finishing) {
     if (scenes[scene] == 'Seed') {
@@ -869,7 +747,6 @@ function mouseDragged() {
           var xLoc = seedScene.block / 2 + i * seedScene.block;
           var yLoc = seedScene.block / 2 + j * seedScene.block;
           seedScene.mappedRotation = map(dist(xLoc, yLoc, mouseX, mouseY), 0, sqrt(sq(width / 2) + sq(height / 2)), 0, PI / 2, true)
-          //mappedRotation = map(dist(xLoc,yLoc,mouseX,mouseY), 0, sqrt(sq(width/2)+sq(height/2)),0, PI/2)
           if (dist(mouseX, mouseY, xLoc, yLoc) < dist(mouseX, mouseY, closest[0], closest[1])) {
             closest = [xLoc, yLoc];
           }
@@ -879,7 +756,6 @@ function mouseDragged() {
     }
   }
 }
-
 function drawSeed() {
   angleMode(RADIANS);
   colorMode(HSB);
@@ -889,43 +765,33 @@ function drawSeed() {
       var xLoc = seedScene.block / 2 + i * seedScene.block;
       var yLoc = seedScene.block / 2 + j * seedScene.block;
       seedScene.mappedRotation = map(dist(xLoc, yLoc, mouseX, mouseY), 0, sqrt(sq(width / 2) + sq(height / 2)) / 2, 0, PI / 2, true)
-      //mappedRotation = map(dist(xLoc,yLoc,mouseX,mouseY), 0, sqrt(sq(width/2)+sq(height/2)),0, PI/2)
-
       seedScene.squares[i][j].present(seedScene.mappedRotation);
     }
   }
 }
-
 function drawAtom() {
   angleMode(DEGREES);
   colorMode(HSB);
   background(initiatedScene.c, 100, 25, 0.1);
   colorMode(RGB);
-
   for (var j = 0; j < atomScene.circles.length; j++) {
     atomScene.circles[j].present();
   }
-
   colorMode(HSB);
   fill(175, 75, 100, atomScene.colorIntensity);
   noStroke();
   for (var j = 15; j > 0; j--) {
     ellipse(width / 2, height / 2, j)
   }
-
-  //Update color
   atomScene.colorIntensity += atomScene.colorControl;
   if ((atomScene.colorIntensity > 0.03) || (atomScene.colorIntensity < 0.015)) {
     atomScene.colorControl = -atomScene.colorControl;
   }
 }
-
 function drawFossil() {
   angleMode(RADIANS);
   colorMode(HSB);
   background(initiatedScene.c, 100, 25, 0.1);
-  //background(0);
-
   var scaleX = map(mouseX, 0, windowWidth, 1.5, 11.5);
   var scaleY = map(mouseY, 0, windowHeight, 1.5, 11.5);
   var minV = map(mouseX, 0, windowWidth, 0.1, 0.5);
@@ -938,16 +804,13 @@ function drawFossil() {
     rotate(radians(i));
     translate(0, radius);
     rotate(radians(i * fossilScene.multiplier));
-
     if (millis() - fossilScene.wait > 3000) {
-
       scale(map(sin(radians((i + i * (noise(fossilScene.ns) - fossilScene.compensationFactor)) * scaleX)), -1, 1, minV, maxV), map(sin(radians((i + i * (noise(fossilScene.ns) - fossilScene.compensationFactor)) * scaleY)), -1, 1, minV, maxV));
       fossilScene.ns += 0.000003;
     } else {
       scale(map(sin(radians(i * scaleX)), -1, 1, minV, maxV), map(sin(radians(i * scaleY)), -1, 1, minV, maxV));
       fossilScene.compensationFactor = noise(fossilScene.ns);
     }
-
     noFill();
     stroke(fossilScene.r, fossilScene.g, fossilScene.b, 28);
     strokeWeight(1);
@@ -956,7 +819,6 @@ function drawFossil() {
     radius += fossilScene.radiusInc;
   }
 }
-
 function next() {
   background(initiatedScene.c, 100, 25, 1);
   pressTimeout = millis();
@@ -969,31 +831,25 @@ function next() {
     nextButton.show();
   }
   backButton.show();
-
   if (scenes[scene] == 'Seed') {
     seedScene.squares = [];
     for (var i = 0; i < width / seedScene.block; i++) {
       var squaresLine = []
       for (var j = 0; j < height / seedScene.block; j++) {
-
         squaresLine[j] = new square(seedScene.block / 2 + i * seedScene.block, seedScene.block / 2 + j * seedScene.block, seedScene.block);
-        //squares[i][j] = new square(i,j,block);
       }
       seedScene.squares.push(squaresLine);
     }
   }
-
   if (scenes[scene] == 'Atom') {
     for (var i = 0; i < 20; i++) {
       atomScene.circles[i] = new circle(width / 2, height / 2, round(random(5, 200)), round(random(200, height / 2)), round(random(2, 70)), random(0.5, 10));
     }
   }
-
   chapterTime = millis();
   chapterAlpha = 255;
   setSong();
 }
-
 function previous() {
   background(initiatedScene.c, 100, 25, 1);
   pressTimeout = millis();
@@ -1015,9 +871,7 @@ function previous() {
     for (var i = 0; i < width / seedScene.block; i++) {
       var squaresLine = []
       for (var j = 0; j < height / seedScene.block; j++) {
-
         squaresLine[j] = new square(seedScene.block / 2 + i * seedScene.block, seedScene.block / 2 + j * seedScene.block, seedScene.block);
-        //squares[i][j] = new square(i,j,block);
       }
       seedScene.squares.push(squaresLine);
     }
@@ -1026,7 +880,6 @@ function previous() {
   chapterAlpha = 255;
   setSong();
 }
-
 function finish() {
   finishing = true;
   finishingScene.nc = initiatedScene.nc;
@@ -1035,7 +888,6 @@ function finish() {
   finishButton.hide();
   backButton.hide();
 }
-
 function setSong() {
   if (scenes[scene] == 'Fossil') {
     catchingFlies.stop();
@@ -1054,16 +906,13 @@ function setSong() {
     sweetwater.loop();
   }
 }
-
 function initiatedFinishing() {
   push();
   colorMode(HSB);
-
   if (!finishingScene.finishedMoving) {
     finishingScene.c = floor(map(noise(finishingScene.nc), 0, 1, 210, 235));
     finishingScene.nc += 0.005;
   }
-
   if (finishingScene.shrinkingCenter) {
     image(blueImage, -20 + startScene.x, 0, width + 20 + startScene.x, height);
     fill(finishingScene.c, 100, 25, 1);
@@ -1074,7 +923,6 @@ function initiatedFinishing() {
   } else {
     background(finishingScene.c, 100, 25, 1);
   }
-
   pop();
   for (var particle of finishingScene.particles) {
     if (particle.moved == true) {
@@ -1090,16 +938,12 @@ function initiatedFinishing() {
       }
     }
     if (finishingScene.finishedMoving) {
-      print("hooray Finished");
     }
   }
 }
-
 function initiated() {
-
   push();
   colorMode(HSB);
-
   if (!initiatedScene.finishedMoving) {
     initiatedScene.c = floor(map(noise(initiatedScene.nc), 0, 1, 210, 235));
     initiatedScene.nc += 0.005;
@@ -1112,7 +956,6 @@ function initiated() {
   } else {
     background(initiatedScene.c, 100, 25, 1);
   }
-
   pop();
   for (var particle of initiatedScene.particles) {
     if (particle.moved == true) {
@@ -1128,26 +971,20 @@ function initiated() {
       }
     }
     if (initiatedScene.finishedMoving) {
-      print("hooray");
     }
   }
 }
-
 function showIntro() {
   image(blueImage, -20 + startScene.x, 0, width + 20 + startScene.x, height);
   textSize(50);
-
   startScene.x += startScene.slideIncr;
   if (startScene.x >= 20 || startScene.x <= 0) {
     startScene.slideIncr = -startScene.slideIncr;
   }
-
   fill(255, startScene.titleFade);
   textFont(titleFont);
   text("UNBLUE", width / 2, height / 2, 100, 100);
-
   textSize(30);
-  print(startScene.x);
   fill(255, startScene.fade);
   textFont(subFont);
   if (startScene.order == 1) {
@@ -1157,12 +994,10 @@ function showIntro() {
   } else {
     text("Press Start", width / 2, height / 2 + 100, 200, 100);
   }
-
   startScene.fade += startScene.increment;
   if ((startScene.fade >= 255 || startScene.fade <= 0) && startScene.introPresent) {
     startScene.increment = -startScene.increment;
   }
-
   if (startScene.fade <= 0 && startScene.introPresent) {
     startScene.order++;
     startScene.fade = 1;
@@ -1170,7 +1005,6 @@ function showIntro() {
       startScene.order = 1;
     }
   }
-
   if (!startScene.introPresent) {
     startScene.titleFade -= 3
   }
@@ -1179,16 +1013,13 @@ function showIntro() {
     startScene.titleFade += 3;
   }
 }
-
 function start() {
   dreamMusic.play();
   startButton.hide();
   startScene.introPresent = false;
   startScene.increment = -3
 }
-
 class backwardParticle {
-
   constructor() {
     this.radius = random(max(width, height) + 1, max(width, height) * 1.5)
     this.angle = random(0, 360);
@@ -1199,13 +1030,10 @@ class backwardParticle {
     this.speed = random(3, 9.5);
     this.moved = true;
   }
-
   move() {
     if (this.moved) {
       this.x += this.speed * cos(this.angle);
-
       this.y += this.speed * sin(this.angle);
-
       if (dist(this.x, this.y, width / 2, height / 2) >= sqrt(sq(width / 2) + sq(height / 2))) {
         this.moved = false;
         if (!finishingScene.shrinkingStopped) {
@@ -1220,24 +1048,19 @@ class backwardParticle {
         if (finishingScene.particles.length < 7000) {
           var particle1 = new backwardParticle();
           finishingScene.particles.push(particle1);
-
-
           var particle2 = new backwardParticle();
           finishingScene.particles.push(particle2);
         }
       }
     }
   }
-
   present() {
     fill(255);
     noStroke();
     ellipse(this.x, this.y, 5, 5);
   }
 }
-
 class particle {
-
   constructor(targetX, targetY) {
     this.targetX = targetX;
     this.targetY = targetY;
@@ -1248,13 +1071,10 @@ class particle {
     this.speed = random(5, 15);
     this.moved = true;
   }
-
   move() {
     if (this.moved) {
       this.x -= this.speed * cos(this.angle);
-
       this.y -= this.speed * sin(this.angle);
-
       if (dist(this.x, this.y, this.targetX, this.targetY) <= 10) {
         this.moved = false;
         initiatedScene.sizeC += 0.5;
@@ -1264,22 +1084,18 @@ class particle {
         if (initiatedScene.particles.length < 7000) {
           var particle1 = new particle(this.targetX, this.targetY);
           initiatedScene.particles.push(particle1);
-
-
           var particle2 = new particle(this.targetX, this.targetY);
           initiatedScene.particles.push(particle2);
         }
       }
     }
   }
-
   present() {
     fill(255);
     noStroke();
     ellipse(this.x, this.y, 5, 5);
   }
 }
-
 class square {
   constructor(xCenter, yCenter, dimension) {
     this.x = xCenter;
@@ -1292,64 +1108,51 @@ class square {
     this.clock = 0;
     this.clockInitiated = false;
   }
-
   present(mappedRot) {
     push();
     translate(this.x, this.y);
     rotate(mappedRot);
     colorMode(RGB);
-    //fill(125,30,70,0.3);
-    //fill(20,200,20, 100);
     stroke(0);
     strokeWeight(1);
     noFill();
-
     if (this.isInfected && !this.infectionStarted && !this.clockInitiated) {
       this.clockInitiated = true;
       this.clock = millis();
     }
-
     if (millis() - this.clock > random(600, 800) && this.clockInitiated) {
       this.infectionStarted = true;
       this.clockInitiated = false;
     }
-
     if (this.isInfected && this.infectionStarted) {
       var successfulInfection = false;
       var x = (this.x - 0.5 * seedScene.block) / seedScene.block;
       var y = (this.y - 0.5 * seedScene.block) / seedScene.block
       if (random() < 0.17 && y >= 1) {
-        //top
         seedScene.squares[x][y - 1].isInfected = true;
         successfulInfection = true;
       }
       if (random() < 0.17 && x >= 1) {
-        //top
         seedScene.squares[x - 1][y].isInfected = true;
         successfulInfection = true;
       }
       if (random() < 0.17 && y <= round(height / seedScene.block) - 1) {
-        //top
         seedScene.squares[x][y + 1].isInfected = true;
         successfulInfection = true;
       }
       if (random() < 0.17 && x < round(width / seedScene.block) - 1) {
-        //top
         seedScene.squares[x + 1][y].isInfected = true;
         successfulInfection = true;
       }
-
       if (!successfulInfection) {
         this.isInfected = false;
       }
       this.infectionStarted = false;
     }
-
     if (this.isInfected) {
       this.isSpecialColor = true;
       this.colorSat = 100;
     }
-
     if (this.isSpecialColor) {
       colorMode(HSB);
       fill(195, 100, this.colorSat, 1);
@@ -1357,31 +1160,25 @@ class square {
       if (this.colorSat == 0) {
         this.isSpecialColor = false;
       }
-
     }
     rect(0, 0, this.dimension, this.dimension);
     pop();
   }
 }
-
 class circle {
-
   constructor(centerX, centerY, rLow, rBig, num, strokeWidth) {
     this.rLow = rLow;
     this.rBig = rBig;
     this.r = [];
-    this.rgoal = rLow; //This is a little counter intuitive, but goal is changed before each click, so goal is also the current position 
     this.num = num;
     this.cX = centerX;
     this.cY = centerY;
-    this.speed = []; // Speed is also the reverse of speen in reality. This is my implementation, you can change it if you want, it doesn't matter
     this.active = [];
     this.angle = [];
     this.angleChange = random(-1, 1);
     this.locX = [];
     this.locY = [];
     this.strokeWidth = strokeWidth;
-
     for (var i = 0; i < num; i++) {
       this.active[i] = false;
       this.r[i] = this.rLow;
@@ -1390,27 +1187,21 @@ class circle {
       this.locY[i] = this.cY + sin(this.angle[i]) * this.rLow;
     }
   }
-
   move() {
     for (var i = 0; i < this.num; i++) {
       if (this.active[i]) {
-        this.r[i] += (this.rgoal - this.r[i]) / this.speed[i]; // update radius
-        if ((this.r[i] > this.rBig) || (this.r[i] < this.rLow)) { // Check if in the boundaries
           this.r[i] = this.rgoal;
           this.active[i] = false;
         }
         this.locX[i] = this.cX + cos(this.angle[i]) * this.r[i];
-        this.locY[i] = this.cY + sin(this.angle[i]) * this.r[i]; // Update location
       }
     }
   }
-
   updateAngle() {
     for (var i = 0; i < this.num; i++) {
       this.angle[i] += this.angleChange;
     }
   }
-
   isActive() {
     for (var i = 0; i < this.num; i++) {
       if (this.active[i]) {
@@ -1418,23 +1209,16 @@ class circle {
       }
     }
     return false;
-  } // The point of this little function is to check for when all of the points have finished moving
-
   activate() {
-    if (this.rgoal == this.rLow) { //This if statement changes the goal to the next
       this.rgoal = this.rBig;
       this.angleChange = random(-1, 1);
     } else {
       this.rgoal = this.rLow;
-      this.angleChange = 0 // This line makes the points stop rotating when collapsing to small size
     }
-    for (var i = 0; i < this.num; i++) { //This one activates each point and generates new speeds
       this.active[i] = true;
       this.speed[i] = random(10, 50);
     }
-
   }
-
   present() {
     strokeWeight(this.strokeWidth);
     stroke(255, 200);
@@ -1444,21 +1228,16 @@ class circle {
     for (var i = 0; i < this.num; i++) {
       point(this.locX[i], this.locY[i]);
     }
-
     this.updateAngle();
   }
 }
-
 function restart() {
   finishing = false;
-  //startScene 
   startScene.fade = 0;
   startScene.titleFade = 0;
   startScene.increment = 3;
   startScene.order = 1;
   startScene.introPresent = true;
-
-  //initiatedScene
   initiatedScene.particles = [];
   firstParticle = new particle(windowWidth / 2, windowHeight / 2);
   initiatedScene.particles.push(firstParticle);
@@ -1467,8 +1246,6 @@ function restart() {
   initiatedScene.nc = 10;
   initiatedScene.c = 0;
   initiatedScene.growingCenter = true;
-
-  //var finishingScene = {
   finishingScene.particles = [];
   firstBackParticle = new backwardParticle();
   finishingScene.particles.push(firstBackParticle);
@@ -1476,8 +1253,6 @@ function restart() {
   finishingScene.sizeC = sqrt(sq(width) + sq(height));
   finishingScene.shrinkingCenter = false;
   finishingScene.shrinkingStopped = false;
-
-
   scene = 0;
   firstStart = true;
   chapterAlpha = 255;
@@ -1489,9 +1264,7 @@ var min;
 var max; 
 var radius;
 var r, g, b;
-
 function setup() {
-    // put setup code here
     createCanvas(windowWidth, windowHeight);
     background(0);
     smooth();
@@ -1499,42 +1272,31 @@ function setup() {
     r = random(255);
     g = random(255);
     b = random(255);
-    //noCursor();
 }
-
 function drawEllipse() {
     noFill();
     stroke(r, g, b, 28);
     ellipse(0, 0, 120, 80);
-    //triangle(-26,15,26,15,0,-30);
 }
-
 function mouseMoved() {
     if (mouseX < (windowWidth/3)){
-        //r = random(255);
         r = map(mouseY, 0, windowHeight, 0, 255);
     } else if (mouseX > ((windowWidth/3)-windowWidth)){
-        //b = random(255);
         b = map(mouseY, 0, windowHeight, 0, 255);
     } else {
-        //g = random(255);
         g = map(mouseY, 0, windowHeight, 0, 255);
     }
     radius = map(mouseY, 0, windowHeight, 100, 350);
 }
-
 function draw() {
-    // put drawing code here
     fill(0, 25);
     rect(0, 0, windowWidth, windowHeight);
-    //background(0);
     
     scaleX = map(mouseX, 0, windowWidth, 1.5, 11.5);
     scaleY = map(mouseY, 0, windowHeight, 1.5, 11.5);
     min = map(mouseX, 0, windowWidth, 0.1, 0.5);
     max = map(mouseY, 0, windowHeight, 0.8, 1.8);
     
-    //background(0);
     for (var i=0; i<720; i += 0.5) {   
         push();
         translate(windowWidth/2, windowHeight/2);
@@ -1546,35 +1308,25 @@ function draw() {
         pop();
     }
 }let word2Vec;
-
 function modelLoaded() {
   select('#status').html('Model Loaded');
 }
-
 function setup() {
   noLoop();
   noCanvas();
-
-  // Create the Word2Vec model with pre-trained file of 10,000 words
   word2Vec = ml5.word2vec('data/wordvecs10000.json', modelLoaded);
-
-  // Select all the DOM elements
   let nearWordInput = select('#nearword');
   let nearButton = select('#submit');
   let nearResults = select('#results');
-
   let betweenWordInput1 = select("#between1");
   let betweenWordInput2 = select("#between2");
   let betweenButton = select("#submit2");
   let betweenResults = select("#results2");
-
   let addInput1 = select("#isto1");
   let addInput2 = select("#isto2");
   let addInput3 = select("#isto3");
   let addButton = select("#submit3");
   let addResults = select("#results3");
-
-  // Finding the nearest words
   nearButton.mousePressed(() => {
     let word = nearWordInput.value();
     word2Vec.nearest(word, (err, result) => {
@@ -1589,8 +1341,6 @@ function setup() {
       nearResults.html(output);
     });
   });
-
-  // Findind the average of two words
   betweenButton.mousePressed(() => {
     let word1 = betweenWordInput1.value();
     let word2 = betweenWordInput2.value();
@@ -1598,8 +1348,6 @@ function setup() {
       betweenResults.html(average[0].word);
     })
   });
-
-  // Adding two words together to "solve" an analogy
   addButton.mousePressed(() => {
     let is1 = addInput1.value();
     let to1 = addInput2.value();
@@ -1613,7 +1361,6 @@ var blockSpacing = {
   blockW : 40,
   blockH : 40
 }
-
 var sizeLimits = {
   maxW : 200,
   minW : 10,
@@ -1621,7 +1368,6 @@ var sizeLimits = {
   minH : 10
 }
 var APIKey = "psnU6wUFgdO93tQLmfaf9mF42JTdYhdD";
-var website = "https://api.giphy.com"
 var service = "/v1/gifs/random"
 var limit = "&limit=";
 var numOfBlocks;
@@ -1629,26 +1375,19 @@ var apiURL;
 var img
 var imageArray = [];
 var count = 0;
-
 function setup() {
   
   createCanvas(400, 400);
   background(200);
   
   numOfBlocks = floor(width/blockSpacing.blockW)*floor(width/blockSpacing.blockH);
-  print(numOfBlocks);
   
   apiURL = website + service + "?" + "api_key=" + APIKey + limit + numOfBlocks;
-  print(apiURL);
   loadJSON(apiURL, dataLoaded);
 }
-
 function iterate(){
-  var i = 0; // will help to iterate through a 1D array of images
   for (var x = 0; x< width; x+= blockSpacing.blockW){
-    // Iterates through each block top left x position
     for (var y = 0; y< height; y+= blockSpacing.blockH){
-      // Iterates through each block top left y position
       
       var imageWidth = floor(random(sizeLimits.minW, sizeLimits.maxW));
       var imageHeight = floor(random(sizeLimits.minH, sizeLimits.maxH));
@@ -1657,21 +1396,16 @@ function iterate(){
     }
   }
 }
-
 function dataLoaded(data){
   processData(data);
 }
-
 function loaded(){
   count++;
-  print(count);
   if (count == numOfBlocks) {
     iterate();
   }
 }
-
 function processData(data){
-  // process the data to extract images to imageArray
 	for (var j = 0; j< numOfBlocks; j++) {
     imageArray[j] = createImg(data.data.images.original.url, loaded).hide();
   }
@@ -1679,16 +1413,13 @@ function processData(data){
   blockW: 40,
   blockH: 40
 }
-
 var sizeLimits = {
   maxW: 100,
   minW: 20,
   maxH: 100,
   minH: 20
 }
-
 var APIKey = "psnU6wUFgdO93tQLmfaf9mF42JTdYhdD";
-var website = "https://api.giphy.com"
 var service = "/v1/gifs/random"
 var limit = "&limit=";
 var numOfBlocks;
@@ -1696,18 +1427,12 @@ var apiURL;
 var img
 var imageArray = [];
 var count = 0;
-
 let button;
 let c;
-
-
 function saveImage() { 
-//save a photo of the canvas to your computer
   saveCanvas(c, 'myCanvas', 'jpg');
 }
-
 function setup() {
-
   c = createCanvas(400, 400);
   background(200);
   
@@ -1716,37 +1441,26 @@ function setup() {
   button1.hide();
   
   numOfBlocks = floor(width / blockSpacing.blockW) * floor(width / blockSpacing.blockH);
-  print(numOfBlocks);
-
   apiURL = website + service + "?" + "api_key=" + APIKey;
-  print(apiURL);
   loadJSON(apiURL, dataLoaded);
 }
-
 function iterate() {
-  var i = 0; // will help to iterate through a 1D array of images
   for (var x = 0; x < width; x += blockSpacing.blockW) {
-    // Iterates through each block top left x position
     for (var y = 0; y < height; y += blockSpacing.blockH) {
-      // Iterates through each block top left y position
       var imageWidth = floor(random(sizeLimits.minW, sizeLimits.maxW));
       var imageHeight = floor(random(sizeLimits.minH, sizeLimits.maxH));
       image(imageArray[i], x, y, imageWidth, imageHeight);
       i++;
-      print("here");
     }
   }
   
   button1.show();
 }
-
 function dataLoaded(data) {
   processData(data);
 }
-
 function loaded() {
   count++;
-  print(count);
   if (count == numOfBlocks) {
     iterate();
   } 
@@ -1755,24 +1469,19 @@ function loaded() {
     loadJSON(apiURL, dataLoaded);
   }
 }
-
 function processData(data) {
-  // process the data to extract images to imageArray
   imageArray[count] = createImg(data.data.images.original.url, loaded).hide();
 }var blockSpacing = {
   blockW: 40,
   blockH: 40
 }
-
 var sizeLimits = {
   maxW: 100,
   minW: 20,
   maxH: 100,
   minH: 20
 }
-
 var APIKey = "Rj4NRE2qDVvjw7gAftCnEyjFkbMUqbXB";
-var website = "https://api.giphy.com"
 var service = "/v1/gifs/trending"
 var limit = "&limit=";
 var numOfBlocks;
@@ -1780,18 +1489,12 @@ var apiURL;
 var img
 var imageArray = [];
 var count = 0;
-
 let button;
 let c;
-
-
 function saveImage() { 
-//save a photo of the canvas to your computer
   saveCanvas(c, 'myCanvas', 'jpg');
 }
-
 function setup() {
-
   c = createCanvas(400, 400);
   background(200);
   
@@ -1800,47 +1503,33 @@ function setup() {
   button1.hide();
   
   numOfBlocks = floor(width / blockSpacing.blockW) * floor(width / blockSpacing.blockH);
-  print(numOfBlocks);
-
   apiURL = website + service + "?" + "api_key=" + APIKey + limit + numOfBlocks;
-  print(apiURL);
   loadJSON(apiURL, dataLoaded);
 }
-
 function iterate() {
-  var i = 0; // will help to iterate through a 1D array of images
   for (var x = 0; x < width; x += blockSpacing.blockW) {
-    // Iterates through each block top left x position
     for (var y = 0; y < height; y += blockSpacing.blockH) {
-      // Iterates through each block top left y position
       var imageWidth = floor(random(sizeLimits.minW, sizeLimits.maxW));
       var imageHeight = floor(random(sizeLimits.minH, sizeLimits.maxH));
       image(imageArray[i], x, y, imageWidth, imageHeight);
       i++;
-      print("here");
     }
   }
   
   button1.show();
 }
-
 function dataLoaded(data) {
   processData(data);
 }
-
 function loaded() {
   count++;
-  print(count);
   if (count == numOfBlocks) {
     iterate();
   }
   
 }
-
 function processData(data) {
-  // process the data to extract images to imageArray
   for (var j = 0; j < numOfBlocks; j++) {
-    print(data.data[j].images.original.url);
     imageArray[j] = createImg(data.data[j].images.original.url, loaded).hide();
   }
 }let video;
@@ -1861,7 +1550,6 @@ var dollarSize = 10;
 var previousMask;
 var currentMask;
 var showIlluminati = false;
-
 function preload() {
   dollarImage = loadImage('dollar.png');
   headphonesImage = loadImage('headphones.png');
@@ -1871,20 +1559,14 @@ function preload() {
   cicadaImage = loadImage('cicada.png');
   brokeImage = loadImage('broke.png');
 }
-
 function setup() {
   createCanvas(640, 480);
   video = createCapture(VIDEO);
   video.size(width, height);
-
-  // Create a new poseNet method with a single detection
   poseNet = ml5.poseNet(video, modelReady);
-  // This sets up an event that fills the global variable "poses"
-  // with an array every time new poses are detected
   poseNet.on('pose', function(results) {
     poses = results;
   });
-  // Hide the video element, and just show the canvas
   video.hide();
   dollarMaskButton = createButton('$$$');
   dollarMaskButton.mousePressed(function() {
@@ -1899,40 +1581,29 @@ function setup() {
     currentMask = "loveMask"
   });
 }
-
 function modelReady() {
   select('#status').html('Model Loaded');
 }
-
 function draw() {
   image(video, 0, 0, width, height);
-
-  // We can call both functions to draw all keypoints and the skeletons
   drawKeypoints();
-
   if (previousMask != currentMask) {
     reset();
   }
-
   switch (currentMask) {
     case "dollarMask":
       dollarMask();
       break;
-
     case "headphonesMask":
       headphonesMask();
       break;
-
     case "loveMask":
       lMask();
       break;
-
     default:
   }
-
   previousMask = currentMask;
 }
-
 function mousePressed() {
   switch (currentMask) {
     case "dollarMask":
@@ -1952,7 +1623,6 @@ function mousePressed() {
     default:
   }
 }
-
 function lMask() {
   if (releaseHearts && millis() - heartTime > 1500) {
     var heart1 = new Heart(points.leftEye[0] - 20, points.leftEye[1] - 20);
@@ -1961,7 +1631,6 @@ function lMask() {
     hearts.push(heart2);
     heartTime = millis();
   }
-
   for (var i = 0; i < hearts.length; i++) {
     hearts[i].move();
     hearts[i].present();
@@ -1969,11 +1638,9 @@ function lMask() {
       hearts.splice(i, 1);
     }
   }
-
   image(loveImage, points.leftEye[0] - 20, points.leftEye[1] - 20, 40, 40);
   image(loveImage, points.rightEye[0] - 20, points.rightEye[1] - 20, 40, 40);
 }
-
 function dollarMask() {
   if (notBroke) {
     image(dollarImage, points.leftEye[0] - dollarSize / 2, points.leftEye[1] - dollarSize / 2, dollarSize, dollarSize);
@@ -1983,7 +1650,6 @@ function dollarMask() {
     image(brokeImage, points.rightEye[0] - 20, points.rightEye[1] - 20, 40, 40);
   }
 }
-
 function headphonesMask() {
   var distance = dist(points.leftEar[0], points.leftEar[1], points.rightEar[0], points.rightEar[1])
   var offsetX = 0.35 * distance;
@@ -1996,29 +1662,18 @@ function headphonesMask() {
     image(cicadaImage, points.nose[0] - 20, points.nose[1] - 20, 40, 40);
   }
 }
-
 function loveMask() {
-
 }
-
-// A function to draw ellipses over the detected keypoints
 function drawKeypoints() {
-  // Loop through all the poses detected
   for (let i = 0; i < poses.length; i++) {
-    // For each pose detected, loop through all the keypoints
     let pose = poses[i].pose;
     for (let j = 0; j < 5; j++) {
-      // A keypoint is an object describing a body part (like rightArm or leftShoulder)
       let keypoint = pose.keypoints[j];
-      // Only draw an ellipse is the pose probability is bigger than 0.2
       if (keypoint.score > 0.2) {
-        /*
         fill(255, 0, 0);
         noStroke();
         ellipse(keypoint.position.x, keypoint.position.y, 10, 10);
         stroke(0);
-        strokeWeight(2);*/
-
         switch (j) {
           case 0:
             points.nose[0] = keypoint.position.x;
@@ -2040,16 +1695,13 @@ function drawKeypoints() {
             points.leftEar[0] = keypoint.position.x;
             points.leftEar[1] = keypoint.position.y;
         }
-        /*
         if (j != 0){
         	line(oldKeypoint.position.x,oldKeypoint.position.y,keypoint.position.x,keypoint.position.y);
-        }*/
         oldKeypoint = keypoint;
       }
     }
   }
 }
-
 function reset() {
   notBroke = true;
   cicada.stop();
@@ -2057,7 +1709,6 @@ function reset() {
   dollarSize = 10;
   releaseHearts = false;
 }
-
 class Heart {
   constructor(x, y) {
     this.x = x;
@@ -2065,11 +1716,9 @@ class Heart {
     this.speed = 1;
     this.noiseSeeds = random(1, 10000);
   }
-
   present() {
     image(loveImage, this.x, this.y, 40, 40);
   }
-
   move() {
     this.y -= this.speed;
     if (random() < 0.5) {
@@ -2082,40 +1731,32 @@ class Heart {
 }var classifier;
 var canva;
 var img;
-
 function setup() {
   canva = createCanvas(400, 400);
   canva.drop(gotFile);
   classifier = ml5.imageClassifier('MobileNet', gotModel);
 }
-
 function gotModel(){
   console.log('model loaded succesfully');
 }
-
 function gotFile(file){
   img = createImg(file.data, imageReady).hide();
 }
-
 function imageReady(){
   classifier.predict(img, gotResult);
 }
-
 function gotResult(err,data){
   console.log(data);
 }
-
 function draw() {
 }var video;
 function setup() {
   createCanvas(640, 480);
   background(255);
-
   video = createCapture(VIDEO);
   video.size(width, height);
   video.hide();
 }
-
 function draw() {
   tint(255, 30);
   image(video, 0, 0);
@@ -2129,27 +1770,22 @@ var goal = {
   bottomY: 17,
   difference: 7
 };
-
 var rectWindow = {
   topLeftX: 10,
   topLeftY: 10,
   bottomRightX: 60,
   bottomRightY: 90
 };
-
 function setup() {
   createCanvas(640, 480);
   rectMode(CORNERS);
   background(220);
-
   video = createCapture(VIDEO);
   video.size(width, height);
   video.hide();
-
   mic = new p5.AudioIn();
   mic.start();
 }
-
 function draw() {
   micLevel = mic.getLevel();
   mappedVal = map(micLevel, 0.006, 0.4, rectWindow.bottomRightY - 1, rectWindow.topLeftY + 1, true);
@@ -2159,27 +1795,22 @@ function draw() {
   showLvl();
   checkForCompletion();
   if (lvl > 10) lvl -= 1;
-  print(lvl);
 }
-
 function showRectWindow() {
   stroke(0);
   strokeWeight(2);
   fill(255);
   rect(rectWindow.topLeftX, rectWindow.topLeftY, rectWindow.bottomRightX, rectWindow.bottomRightY);
 }
-
 function showBackgroundImage() {
   tint(255, lvl);
   image(video, 0, 0);
 }
-
 function showLvl() {
   strokeWeight(4);
   stroke(255, 0, 0);
   line(rectWindow.topLeftX+3, mappedVal, rectWindow.bottomRightX-3, mappedVal);
 }
-
 function checkForCompletion() {
   if (mappedVal > goal.topY && mappedVal < goal.bottomY) {
     if (lvl <= 220) {
@@ -2191,15 +1822,12 @@ function checkForCompletion() {
     goal.bottomY = goal.topY + goal.difference;
   }
 }
-
 function showGoal() {
   fill(0, 255, 0, 120);
   noStroke();
   rect(rectWindow.topLeftX, goal.topY, rectWindow.bottomRightX, goal.bottomY);
-}let url = "https://api.icndb.com/jokes/random"
 let name;
 let surname;
-
 function setup() {
   createCanvas(400, 400);
   nameTextField = createInput("type your name");
@@ -2211,7 +1839,6 @@ function setup() {
   textSize(20);
   fill(0);
 }
-
 function checkForValues(){
   if(!nameTextField.value() || !surnameTextField.value()){
     text("Empty Field", width/2, height/2);
@@ -2219,16 +1846,12 @@ function checkForValues(){
     name = nameTextField.value();
     surname = surnameTextField.value()
     var urlFull = url + "?firstName="+name+"&lastName="+surname;
-    print(urlFull);
     loadJSON(urlFull, loaded);
   }
 }
-
 function loaded(data){
   var joke = data.value.joke;
-  print(joke);
   if (joke.includes("&quot;")) {
-      print("here");
       joke.replace("&quot;", "\"");
   }
   background(220);
@@ -2237,88 +1860,51 @@ function loaded(data){
   fill(0);
   text(joke, 0, height/3, width, height*2/3);
 }
-
 var xhr = new XMLHttpRequest();
 xhr.withCredentials = true;
-
-xhr.open("GET", "https://iam.bluemix.net/identity/token?grant_type=urn%3Aibm%3Aparams%3Aoauth%3Agrant-type%3Aapikey&apikey=BzdeJglfZWMein5vI9goMoEcyiefH6NAcRUYDeaI4kSC",'jsonp');
 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 xhr.setRequestHeader("Accept", "application/json");
-
 function setup() {
   createCanvas(400, 400);
   
-	/*
  xhr.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
-    print(this.responseText);
   }
- });*/
-
-  xhr.onreadystatechange = function() {//Call a function when the state changes.
     if(xhr.readyState == XMLHttpRequest.DONE) {
-      print(xhr.responseText);
-      print("done");
-      /*
         var x = JSON.parse(xhr.responseText);
-      	print(x.access_token)
-        */
       	
     }
   }
-
   xhr.send();
 }
-
 function some_func(data){
-  print(data);
 }
-
 function draw() {
   background(220);
 }var data = "grant_type=urn%3Aibm%3Aparams%3Aoauth%3Agrant-type%3Aapikey&apikey=BzdeJglfZWMein5vI9goMoEcyiefH6NAcRUYDeaI4kSC";
-
 var xhr = new XMLHttpRequest();
 xhr.withCredentials = true;
-
-xhr.open("POST", "https://iam.bluemix.net/identity/token");
 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 xhr.setRequestHeader("Accept", "application/json");
-
 function setup() {
   createCanvas(400, 400);
   
-	/*
  xhr.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
-    print(this.responseText);
   }
- });*/
-
-  xhr.onreadystatechange = function() {//Call a function when the state changes.
     if(xhr.readyState == XMLHttpRequest.DONE) {
-      print(xhr.responseText);
-      print("done");
-      /*
         var x = JSON.parse(xhr.responseText);
-      	print(x.access_token)
-        */
       	
     }
   }
-
   xhr.send(data);
 }
-
 function some_func(data){
-  print(data);
 }
-
 function draw() {
   background(220);
 }var systemVoice = new p5.Speech("Google UK English Male");
 var sayHello = new p5.SpeechRec();
-var serial;
 var portName;
 var data;
 var lastPress = 0;
@@ -2327,9 +1913,7 @@ var started = false;
 var hellos = ["hi", "hello", "sup", "what's up", "hey", "yes", "yeah", "ok", "okay"];
 var name;
 var lightsUp;
-
 function preload(){
-
   var candyDict = {
       numOpt: 3,
       answers: [["cupcake","cupcakes", "cup"], ["lollipop","pop","lolli"],["corn candy","corn candies", "corn"]],
@@ -2373,16 +1957,12 @@ function preload(){
   });
                            
   yesnoTouch = new yesNoQ(function(){
-      speak("Great, you can now begin!"); // This is for yes
-      setTimeout(function(){serial.write(1)}, 1500);
   		},function(){
       speak("You can leave then! Bye");
-      setTimeout(function(){serial.write(0)}, 500); // This is for no
     });
   
   getNameQ = new infoQ(function(){
       name = infoQ.that.info;
-      print("Name: " + name);
       setTimeout(speak, 500, name + ", ok.");
       setTimeout(speak, 2200, "Thats a weird name, but fine");
     	setTimeout(speak, 4200, "Well");
@@ -2390,60 +1970,43 @@ function preload(){
       setTimeout(function(){yesnoTouch.start();},6800);
   });
 }
-
 function setup() {
   createCanvas(400, 400);
-  serial = new p5.SerialPort();
-  serial.on('list', setupPort);
-  serial.on('data', dataEvent);
   sayHello.onResult = checkForHello;
   sayHello.onEnd = finishHello;
 }
-
 function checkForHello() {
   if (sayHello.resultValue == true) {
     said = sayHello.resultString.toLowerCase()
-    print("Said: " + said);
     for (let hello of hellos) {
       if (said.includes(hello)) {
-        //Checks for whether the response contains any of the key words to trigger this loop
         started = true;
         break;
       }
     }
   }
 }
-
 function finishHello() {
   if (started) {
-    // Start 
     startConversation();
   } else {
-    // Send false back to arduino
-    serial.write(0);
   }
   started = false;
 }
-
 function startConversation() {
   speak("Finally!");
   setTimeout(speak, 1000, "Somebody talked to me at last.");
   setTimeout(speak, 4000, "What is your name little human?");
   setTimeout(function(){getNameQ.start();}, 4500);
 }
-
 function setupPort(portList) {
   for (let port of portList) {
     if (port.includes("usbmodem"))
       portName = port;
-    serial.open(portName);
   }
 }
-
 function dataEvent() {
-  var dataString = serial.readLine();
   if (dataString.length > 0) {
-    print(dataString);
     
     if (dataString.includes('startGame')) {
       speak("Hey you");
@@ -2453,24 +2016,18 @@ function dataEvent() {
       }, 3000);
       
     } else {
-
       data = JSON.parse(dataString);
-      // game started playing
       if (millis() - lastPress > 5000 && !isTaken) {
         processGameData();
       } else {
-        print("waited too short or is busy with other line");
       }
-
     }
   }
 }
-
 function processGameData() {
   var stringOfData = [data.fsr1,data.fsr2,data.fsr3,data.fsr4].join(' ')
   
   if (stringOfData != '0 0 0 0'){
-    // if not empty reset the timer
     lastPress = millis();
     isTaken = true;
   }
@@ -2505,7 +2062,6 @@ function processGameData() {
       break;
       
     case '1 0 1 0':
-      // do smth
       speak("Could you do a simple favor for me ?");
       setTimeout(function(){simpleFavor.start();},1500);
       break;
@@ -2534,7 +2090,6 @@ function processGameData() {
       
     case '0 1 0 1':
       speak("You have nice skin.");
-      setTimeout(speak, 2300, "I want to wear it as a rain coat. Do you mind ?"); // Do you mind does sound that great
       setTimeout(function(){doYouMind.start()},4500);
       break;
       
@@ -2564,35 +2119,27 @@ function processGameData() {
     }
   
 }
-
 function draw() {
   background(220);
 }
-
 function speak(message, speed = 0.9) {
   systemVoice.setRate(speed);
   systemVoice.speak(message);
 }var systemVoice = new p5.Speech("Google UK English Male");
 var sayHello = new p5.SpeechRec();
-var serial;
 var portName;
 var data;
 var lastPress = 0;
 var started = false;
 var hellos = ["hi", "hello", "sup", "what's up", "hey"];
 var name;
-
 function preload(){
   yesnoTouch = new yesNoQ(function(){
-      speak("Great, you can now begin!"); // This is for yes
-      setTimeout(function(){serial.write(1)}, 1500);
   		},function(){
       speak("You can leave then! Bye");
-      setTimeout(function(){serial.write(0)}, 500); // This is for no
     });
   getNameQ = new infoQ(function(){
       name = infoQ.that.info;
-      print("Name: " + name);
       setTimeout(speak, 500, name + ", ok.");
       setTimeout(speak, 2200, "Thats a weird name, but fine");
     	setTimeout(speak, 4200, "Well");
@@ -2600,60 +2147,43 @@ function preload(){
       setTimeout(function(){yesnoTouch.start();},6500);
   });
 }
-
 function setup() {
   createCanvas(400, 400);
-  serial = new p5.SerialPort();
-  serial.on('list', setupPort);
-  serial.on('data', dataEvent);
   sayHello.onResult = checkForHello;
   sayHello.onEnd = finishHello;
 }
-
 function checkForHello() {
   if (sayHello.resultValue == true) {
     said = sayHello.resultString.toLowerCase()
-    print("Said: " + said);
     for (let hello of hellos) {
       if (said.includes(hello)) {
-        //Checks for whether the response contains any of the key words to trigger this loop
         started = true;
         break;
       }
     }
   }
 }
-
 function finishHello() {
   if (started) {
-    // Start 
     startConversation();
   } else {
-    // Send false back to arduino
-    serial.write(0);
   }
   started = false;
 }
-
 function startConversation() {
   speak("Finally!");
   setTimeout(speak, 1000, "Somebody talked to me at last.");
   setTimeout(speak, 4000, "What is your name little human?");
   setTimeout(function(){getNameQ.start();}, 5500);
 }
-
 function setupPort(portList) {
   for (let port of portList) {
     if (port.includes("usbmodem"))
       portName = port;
-    serial.open(portName);
   }
 }
-
 function dataEvent() {
-  var dataString = serial.readLine();
   if (dataString.length > 0) {
-    print(dataString);
     
     if (dataString == "startGame") {
       speak("Hey you");
@@ -2663,19 +2193,14 @@ function dataEvent() {
       }, 3000);
       
     } else {
-
       data = JSON.parse(dataString);
-      // game started playing
       if (millis() - lastPress > 5000) {
         processGameData();
       } else {
-        print("waited too short");
       }
-
     }
   }
 }
-
 function processGameData() {
   var stringOfData = [data.fsr1,data.fsr2,data.fsr3,data.fsr4].join(' ')
   switch (stringOfData)
@@ -2689,165 +2214,118 @@ function processGameData() {
       break;
       
     case '0 0 1 0':
-      // do smth
       break;
       
     case '0 0 0 1':
-      // do smth
       break;
       
     case '1 1 0 0':
-      // do smth
       break;
       
     case '1 0 1 0':
-      // do smth
       break;
       
     case '1 0 0 1':
-      // do smth
       break;
       
     case '1 1 1 0':
-      // do smth
       break;
       
     case '1 1 0 1':
-      // do smth
       break;
       
     case '1 1 1 1':
-      // do smth
       break;
       
     case '0 1 0 1':
-      // do smth
       break;
       
     case '0 1 1 1':
-      // do smth
       break;
       
     case '0 0 1 1':
-      // do smth
       break;
     
     case '1 0 1 1':
-      // do smth
       break;
     
     case '0 1 1 0':
-      // do smth
       break;
      
     default:
-
     }
   if (stringOfData != '0 0 0 0'){
-    // if not empty reset the timer
     lastPress = millis();
   }
   
-  /*
   if (data.fsr1 == 1) {
-    //trigger action for fsr1
     speak("Force Sensing Resistor number one was triggered");
     lastPress = millis();
   } else if (data.fsr2 == 1) {
-    //trigger action for fsr2
     speak("Force Sensing Resistor number two was triggered");
     lastPress = millis();
   } else if (data.fsr3 == 1) {
-    //trigger action for fsr3
     speak("Force Sensing Resistor number three was triggered");
     lastPress = millis();
   } else if (data.fsr4 == 1) {
-    //trigger action for fsr4
     speak("Force Sensing Resistor number four was triggered");
     lastPress = millis();
   } else {
-    //no fsrs are working right now 
   }
-	*/
 }
-
 function draw() {
   background(220);
 }
-
 function speak(message, speed = 0.9) {
   systemVoice.setRate(speed);
   systemVoice.speak(message);
 }var systemVoice = new p5.Speech("Google UK English Female");
-var serial;
 var portName;
 var data;
 var lastPress = 0;
-
 function setup() {
   createCanvas(400, 400);
-  serial = new p5.SerialPort();
-  serial.on('list',setupPort);
-  serial.on('data',dataEvent);
 }
-
 function setupPort(portList){
   for (let port of portList){
     if (port.includes("usbmodem"))
       portName = port;
-    	serial.open(portName);
   }
 }
-
 function dataEvent(){
-  var dataString = serial.readLine();
   if (dataString.length > 0 ) {
-    print(dataString);
     data = JSON.parse(dataString);
 		if (data.gamePlaying == 1) {
-      // game started playing
       if (millis()-lastPress > 5000){
        processGameData();
       } else {
-        print("waited too short");
       }
       
     } else if (data.gamePlaying == 0){
-      print("Not playing");
       
     } else {
-      // This should never be triggered
-      print("unknown erro with data");
     }
   }
 }
-
 function processGameData(){
   if (data.fsr1 == 1){
-    //trigger action for fsr1
     speak("Force Sensing Resistor number one was triggered");
     lastPress = millis();
   } else if (data.fsr2 == 1){
-    //trigger action for fsr2
     speak("Force Sensing Resistor number two was triggered");
     lastPress = millis();
   } else if (data.fsr3 == 1){
-    //trigger action for fsr3
     speak("Force Sensing Resistor number three was triggered");
     lastPress = millis();
   } else if (data.fsr4 == 1){
-    //trigger action for fsr4
     speak("Force Sensing Resistor number four was triggered");
     lastPress = millis();
   } else {
-    //no fsrs are working right now 
   }
 }
-
 function draw() {
   background(220);
 }
-
 function speak(message, speed = 0.9){
     systemVoice.setRate(speed);
     systemVoice.speak(message);
@@ -2855,10 +2333,8 @@ function speak(message, speed = 0.9){
 var arrow;
 var teethDepth;
 var redTeethColorChange = 0
-var serial;
 var portName;
 var inData;
-
 function setup() {
   createCanvas(400, 400);
   radius = 60;
@@ -2866,54 +2342,37 @@ function setup() {
   leftEye = new eye(width / 4, height / 4);
   rightEye = new eye(width * 3 / 4, height / 4);
   teethDepth = random(10, 30);
-  serial = new p5.SerialPort();
-  serial.on('list',setupPort);
-  serial.on('data',dataEvent);
 }
-
 function setupPort(portList){
   for (let port of portList){
     if (port.includes("usbmodem"))
       portName = port;
-    	serial.open(portName);
   }
 }
-
 function dataEvent(){
-  var dataString = serial.readLine();
   if (dataString.length > 0 ) {
-    print(dataString);
     var convertedData = Number(dataString);
     if (convertedData < 2000){
   		inData = map(convertedData,0, 25, 40,10,true)
     }
   }
 }
-
 function draw() {
   background(129, 191, 198);
   angleMode(DEGREES);
   strokeWeight(1);
-
-  // Time-Dependent color setup
   var r = abs(sin(map(millis() % 20000, 0, 20000, 0, 360)) * 255);
   var g = abs(sin(map(millis() % 20000, 0, 20000, 0, 360) + 120) * 255);
   var b = abs(sin(map(millis() % 20000, 0, 20000, 0, 360) + 240) * 255);
   fill(r, g, b);
-
-  // Call eye objects
   leftEye.show();
   rightEye.show();
-  //var pupilDia = random(10, 30);
   leftEye.showPupil(inData);
   rightEye.showPupil(inData);
-  // MOUTH
   fill(255);
   var distance = dist(width / 2, height * 3 / 5, mouseX, mouseY);
   var opening = abs(map(distance, 0, 200, 50, 0, true));
   quad(width / 3, height * 3 / 5, width * 2 / 3, height * 3 / 5, width * 2 / 3 - 30, height * 3 / 5 + opening, width / 3 + 30, height * 3 / 5 + opening);
-
-  // TEETH
   if (mouseIsPressed) {
     redTeethColorChange += 2;
   } else {
@@ -2923,8 +2382,6 @@ function draw() {
   fill(200 + redTeethColorChange, 200 - redTeethColorChange, 200 - redTeethColorChange);
   triangle(width / 3 + 8, height * 3 / 5, width * 12 / 30 + 8, height * 3 / 5, width * 11 / 30 + 8, height * 3 / 5 + teethDepth);
   triangle(width * 2 / 3 - 8, height * 3 / 5, width * 18 / 30 - 8, height * 3 / 5, width * 19 / 30 - 8, height * 3 / 5 + teethDepth);
-
-  // EYEBROWS
   stroke(0);
   strokeWeight(9);
   if (mouseIsPressed) {
@@ -2935,17 +2392,14 @@ function draw() {
     line(250, 30, 330, 8);
   }
 }
-
 class eye {
   constructor(x, y) {
     this.x = x;
     this.y = y;
   }
-
   show() {
     ellipse(this.x, this.y, 2 * radius);
   }
-
   showPupil(diameter) {
     fill(0, 200);
     if (dist(mouseX, mouseY, this.x, this.y) >= arrow) {
@@ -2964,67 +2418,46 @@ class eye {
       ellipse(mouseX, mouseY, diameter);
     }
   }
-}var serial;
 var portName;
 var data = 0;
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(12);
   capture = createCapture(VIDEO);
   capture.size(320, 240);
   capture.hide();
-  serial = new p5.SerialPort();
-  serial.on('list',setupPort);
-  serial.on('data',dataEvent);
 }
-
 function setupPort(portList){
   for (let port of portList){
     if (port.includes("usbmodem"))
       portName = port;
-    	serial.open(portName);
   }
 }
-
 function dataEvent(){
-	var dataString = serial.readLine();
   if (dataString.length > 0 ) {
     convertedData = Number(dataString);
-    print(convertedData);
     if (convertedData != -1){
   		data = map(Number(dataString), 0, 100, 0, 20,true)
     }
   }
 }
-
 function draw() {
   background(255);
   image(capture, 0, 0, 640, 480);
   filter(BLUR, data);
-}var serial;
 var portName;
 var inData;
 function setup() {
   createCanvas(400, 400);
-  serial = new p5.SerialPort();
-  serial.on('list',setupPort);
-  serial.on('data',dataEvent);
 }
-
 function setupPort(portList){
   for (let port of portList){
     if (port.includes("usbmodem"))
       portName = port;
-    	serial.open(portName);
   }
 }
-
 function dataEvent(){
-  inData = Number(serial.read())
-	print("got: "+ inData);
 }
-
 function draw() {
   background(220);
   ellipse(width/2,height/2,map(inData,0,255,10,100));
@@ -3036,14 +2469,11 @@ function draw() {
     energy : 90,
     oxygen : 100
   }
-
 	function preload(){
     
     healthCheckYesNo = new yesNoQ(function(){
-      speak("Great"); // This is for yes
       setTimeout(bodyCheck, 1500);},function(){
       speak("Answer Recorded");
-      setTimeout(nextAction, 2000); // This is for no
     })
     
     nameInfo = new infoQ(function(){
@@ -3053,7 +2483,6 @@ function draw() {
       setTimeout(function(){healthCheckYesNo.start()}, 4500);
     });
     
-    /* 
     DONT READ THAT UNLESS YOU WANT TO GO CRAZY
     var optionsToGoDict = {
       numOpt: 3,
@@ -3066,7 +2495,6 @@ function draw() {
     };
     
     optionToGo = new multiQ(optionsToGoDict);
-    */
     
     soundFormats('mp3');
     startSound = loadSound('intro.mp3');
@@ -3089,12 +2517,10 @@ function draw() {
     startSound.play();
     
     systemVoice.setRate(0.9);
-
     startButton = createButton("Start");
     startButton.position(width/2,height-50);
     startButton.mousePressed(startGame);
 	}
-
 	function startGame(){
     startButton.hide();
     launchSound.play();
@@ -3123,14 +2549,12 @@ function draw() {
 	function nextAction(){
     speak(character.name+","+"I am now updating your retina monitor software. Please wait");
     setTimeout(updateStats, 5000);
-    // Next stuff gets here
   }
 	
 	function speak(message, speed = 0.9){
     systemVoice.setRate(speed);
     systemVoice.speak(message);
   } 
-
 	function updateStats(){
     image(wallPaper, 0, 0, width,height);
     fill(255);
@@ -3148,7 +2572,6 @@ function draw() {
 	var nameGiven = false;
 	var yesnoAnswered = false;
 	var health =70;
-
 	function preload(){
     soundFormats('mp3');
     startSound = loadSound('intro.mp3');
@@ -3178,7 +2601,6 @@ function draw() {
     startButton.position(width/2,height-50);
     startButton.mousePressed(startGame);
 	}
-
 	function startGame(){
     startButton.hide();
     launchSound.play();
@@ -3191,7 +2613,6 @@ function draw() {
 	function checkForCredentials(){
     nameRec.start(); 
   }
-
 	function checkForBodyCheck(){
     yesnoRec.start();
     yesnoAnswered = false;
@@ -3221,28 +2642,24 @@ function draw() {
 	function speak(message){
     systemVoice.speak(message);
   }
-
 	function revitilize(){
     fixingSound.play()
   }
 	function scanning(){
     scanningSound.play();
   }
-
 	function errorName(){
     if (!nameGiven) {
     	speak("You have to provide the credentials to access the core functions");
     	setTimeout(checkForCredentials, 2500);
     }
   }
-
 	function errorYesNo(){
     if (!yesnoAnswered){
     	speak("Should I take this as a yes?");
     	setTimeout(checkForBodyCheck, 2500);
     } 
   }
-
 	function getName(){
 		if(nameRec.resultValue==true) {
 			name = nameRec.resultString;
@@ -3256,10 +2673,8 @@ function draw() {
     	setTimeout(checkForCredentials, 2000);
     }
 	}
-
 	function yesNo(){
     if (yesnoRec.resultValue==true) {
-    	print(yesnoRec.resultString);
       if ((yesnoRec.resultString == "yes")||(yesnoRec.resultString == "sure")||(yesnoRec.resultString == "yeah")){
 				speak("Great");
         setTimeout(bodyCheck, 1500);
@@ -3276,27 +2691,20 @@ function draw() {
 		} 
   }var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
-
 var geometry = new THREE.BoxGeometry( 1, 1, 1 );
 var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 var cube = new THREE.Mesh( geometry, material );
 scene.add( cube );
-
 camera.position.z = 5;
-
 var animate = function () {
 	requestAnimationFrame( animate );
-
 	cube.rotation.x += 0.01;
 	cube.rotation.y += 0.01;
-
 				renderer.render( scene, camera );
 };
-
 animate();var slider1;
 function setup() {
   createCanvas(400, 400);
@@ -3305,18 +2713,14 @@ function setup() {
   slider1.changed(update);
   background(220);
 }
-
 function draw() {
 }
-
 function update(){
   background(255-slider1.value());
 }
-
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   noStroke();
@@ -3332,7 +2736,6 @@ function draw() {
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   for(i=width/10;i<width;i+=width/10){
@@ -3343,37 +2746,27 @@ function draw() {
   createCanvas(600, 400);
   strokeWeight(5);
 }
-
 function draw() {
   background(220);
   noStroke();
-  // Change 10 to any number to make it work
   for(var i = 0; i<10; i++){
     fill(255);
     noStroke();
     if ((mouseX<(i+1)*width/10) && (mouseX>i*width/10) && (mouseY<=height) && (mouseY>=0)){
   		fill(255,0,0);
-      /* Uncomment this to paint the right half in blue
       if (i>4){
         fill(0,0,255);
-      }*/
       
-      /* Uncomment this to paint each other in blue
       if (i%2==1){
         fill(0,0,255);
-      }*/
       
-      /* Uncomment this to make every vertical different color
       fill(i*25,i*25,i*25);
-      */
     }
     
     
     
-    /* Uncomment this to remove collumn 7
     if(i==6){
       fill(255);
-    } */
     
     rect(width*i/10,0,width/10,height);
     stroke(0);
@@ -3386,7 +2779,6 @@ function setup() {
   createCanvas(600, 400);
   strokeWeight(5);
 }
-
 function draw() {
   background(220);
   noStroke();
@@ -3424,7 +2816,6 @@ function draw() {
   line(width/3,0,width/3,height);
   line(width*2/3,0,width*2/3,height);
 }
-
 function mousePressed(){
   if ((mouseX<=width/3) && ((mouseY<=height)&&(mouseY>=0))) {
     rectActive[0] = true;
@@ -3439,7 +2830,6 @@ function setup() {
   createCanvas(600, 400);
   strokeWeight(5);
 }
-
 function draw() {
   background(220);
   noStroke();
@@ -3477,7 +2867,6 @@ function draw() {
   line(width/3,0,width/3,height);
   line(width*2/3,0,width*2/3,height);
 }
-
 function mousePressed(){
   if ((mouseX<=width/3) && ((mouseY<=height)&&(mouseY>=0))) {
     rectActive[0] = true;
@@ -3490,11 +2879,9 @@ function mousePressed(){
   createCanvas(600, 400);
   strokeWeight(5);
 }
-
 function draw() {
   background(220);
   noStroke();
-  // Change 10 to any number to make it work
   for(var i = 0; i<10; i++){
     fill(255);
     noStroke();
@@ -3510,7 +2897,6 @@ var speed = 3;
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(220);
   x+=speed;
@@ -3523,14 +2909,12 @@ function draw() {
 var circles = [];
 var colorControl = 0.00025;
 var colorIntensity = 0.03;
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
   center.x = width / 2;
   center.y = height / 2;
   
-  /*
 		How to create more circles:
     1) Add another line with a new number
     2) First two variables are center location
@@ -3538,7 +2922,6 @@ function setup() {
     4) Fouth variable is larger circle radius
     5) Fifth variable is the number of points on the circle
     6) Sixth variable is the size of points
-	*/
   
   circles[0] = new circle(center.x, center.y, 40, 100, 20, 5);
   circles[1] = new circle(center.x, center.y, 20, 150, 10, 3);
@@ -3546,7 +2929,6 @@ function setup() {
   circles[3] = new circle(center.x, center.y, 30, 70, 30, 1.5);
   circles[4] = new circle(center.x, center.y, 100, 220, 2, 4);
 }
-
 function draw() {
   colorMode(RGB);
   background(0, 30);
@@ -3554,13 +2936,11 @@ function draw() {
   colorMode(HSB);
 	drawNucleus();
 }
-
 function drawCircles(){
   for (var j = 0; j < circles.length; j++) {
     circles[j].present();
   }
 }
-
 function drawNucleus(){
   
   fill(175, 75, 100, colorIntensity);
@@ -3569,30 +2949,24 @@ function drawNucleus(){
     ellipse(center.x, center.y, j)
   }
   
-  //Update color
   colorIntensity += colorControl;
   if ((colorIntensity > 0.03) || (colorIntensity < 0.015)) {
     colorControl = -colorControl;
   }
 }
-
 function mousePressed() {
   for (var j = 0; j < circles.length; j++) {
     circles[j].activate();
   }
 }
-
 class circle {
-
   constructor(centerX, centerY, rLow, rBig, num, strokeWidth) {
     this.rLow = rLow;
     this.rBig = rBig;
     this.r = [];
-    this.rgoal = rLow; //This is a little counter intuitive, but goal is changed before each click, so goal is also the current position 
     this.num = num;
     this.cX = centerX;
     this.cY = centerY;
-    this.speed = []; // Speed is also the reverse of speen in reality. This is my implementation, you can change it if you want, it doesn't matter
     this.active = [];
     this.angle = [];
     this.angleChange = random(-1, 1);
@@ -3608,27 +2982,21 @@ class circle {
       this.locY[i] = this.cY + sin(this.angle[i]) * this.rLow;
     }
   }
-
   move() {
     for (var i = 0; i < this.num; i++) {
       if (this.active[i]) {
-        this.r[i] += (this.rgoal - this.r[i]) / this.speed[i]; // update radius
-        if ((this.r[i] > this.rBig) || (this.r[i] < this.rLow)) { // Check if in the boundaries
           this.r[i] = this.rgoal;
           this.active[i] = false;
         }
         this.locX[i] = this.cX + cos(this.angle[i]) * this.r[i];
-        this.locY[i] = this.cY + sin(this.angle[i]) * this.r[i]; // Update location
       }
     }
   }
-
   updateAngle() {
     for (var i = 0; i < this.num; i++) {
       this.angle[i] += this.angleChange;
     }
   }
-
   isActive() {
     for (var i = 0; i < this.num; i++) {
       if (this.active[i]) {
@@ -3636,23 +3004,17 @@ class circle {
       }
     }
     return false;
-  } // The point of this little function is to check for when all of the points have finished moving
   
   activate() {
-    if (this.rgoal == this.rLow) { //This if statement changes the goal to the next
       this.rgoal = this.rBig;
       this.angleChange = random(-1, 1);
     } else {
       this.rgoal = this.rLow;
-      this.angleChange = 0 // This line makes the points stop rotating when collapsing to small size
     }
-    for (var i = 0; i < this.num; i++) { //This one activates each point and generates new speeds
       this.active[i] = true;
       this.speed[i] = random(10, 50);
     }
-
   }
-
   present() {
     strokeWeight(this.strokeWidth);
     stroke(255, 200);
@@ -3662,7 +3024,6 @@ class circle {
     for (var i = 0; i < this.num; i++) {
       point(this.locX[i], this.locY[i]);
     }
-
     this.updateAngle();
   }
 }var center = {
@@ -3671,13 +3032,11 @@ class circle {
 }
 var magic = 0;
 var circles = [];
-
 function setup() {
   createCanvas(400, 400);
   angleMode(DEGREES);
   center.x = width/2;
   center.y = height/2;
-  /*
 		How to create more circles:
     1) Add another line with a new number
     2) First two variables are center location
@@ -3685,26 +3044,22 @@ function setup() {
     4) Fouth variable is larger circle radius
     5) Fifth variable is the number of points on the circle
     6) Sixth variable is the size of points
-	*/
   circles[0] = new circle(center.x,center.y,40,100,20,5);
   circles[1] = new circle(center.x,center.y,20,150,10,3);
   circles[2] = new circle(center.x,center.y,60,80,50,1);
   circles[3] = new circle(center.x,center.y,30,70,30,1.5);
 }
-
 function draw() {
   background(0,20);
   for (var j = 0; j<circles.length; j++){
     circles[j].present();
   }
 }
-
 function mousePressed(){
   for (var j = 0; j<circles.length; j++){
     circles[j].activate();
   } 
 }
-
 class circle {
   
   constructor(centerX,centerY,rLow,rBig, num, strokeWidth){
@@ -3732,13 +3087,10 @@ class circle {
   move(){
     for(var i = 0; i<this.num; i++){
       if (this.active[i]){
-        this.r[i] += (this.rgoal-this.r[i])/this.speed[i]; // update radius
-        if ((this.r[i] > this.rBig)||(this.r[i] < this.rLow)){ // Check if in the boundaries
           this.r[i] = this.rgoal;
           this.active[i] = false;
         }
         this.locX[i] = this.cX + cos((360*i)/this.num)*this.r[i]; 
-        this.locY[i] = this.cY + sin((360*i)/this.num)*this.r[i]; // Update location
       }
     }
   }
@@ -3780,7 +3132,6 @@ var t;
 var told = 0;
 var tnew;
 var tdelta;
-var bullshitvar = 5;//Variable is introduced because the reversing is called multiple times because of slow compiling
 var ball = {
   x : 0,
   y : 0,
@@ -3791,14 +3142,12 @@ function setup() {
   ball.x = width/2;
   ball.y = height/2;
 }
-
 function draw() {
   background(220);
   tnew = millis()/100;
   tdelta = tnew-told;
   ball.y += v*tdelta+0.5*g*tdelta*tdelta;
   v += g*tdelta;
-  print(v);
   ellipse(ball.x,ball.y, ball.d);
   if ((ball.y>=(height-ball.d/2)) && (bullshitvar == 5)){
     v=-0.9*v;
@@ -3819,9 +3168,7 @@ var block = {
   sizeY: 0
 }
 var presentMenu = true;
-
 var rotations = [];
-
 function setup() {
   createCanvas(dimensionX, dimensionY);
   video = createCapture(VIDEO);
@@ -3832,11 +3179,9 @@ function setup() {
   block.sizeX = width / 8;
   block.sizeY = height / 6;
 }
-
 function draw() {
   	takeSnapshots();
 }
-
 function takeSnapshots() {
   if ((block.x == width) || ((block.x == -80) && direction < 0)) {
     direction = -direction;
@@ -3849,7 +3194,6 @@ function takeSnapshots() {
 var arrow;
 var teethDepth;
 var redTeethColorChange = 0
-
 function setup() {
   createCanvas(400, 400);
   radius = 60;
@@ -3858,31 +3202,23 @@ function setup() {
   rightEye = new eye(width * 3 / 4, height / 4);
   teethDepth = random(10, 30);
 }
-
 function draw() {
   background(129, 191, 198);
   angleMode(DEGREES);
   strokeWeight(1);
-
-  // Time-Dependent color setup
   var r = abs(sin(map(millis() % 20000, 0, 20000, 0, 360)) * 255);
   var g = abs(sin(map(millis() % 20000, 0, 20000, 0, 360) + 120) * 255);
   var b = abs(sin(map(millis() % 20000, 0, 20000, 0, 360) + 240) * 255);
   fill(r, g, b);
-
-  // Call eye objects
   leftEye.show();
   rightEye.show();
   var pupilDia = random(10, 30);
   leftEye.showPupil(pupilDia);
   rightEye.showPupil(pupilDia);
-  // MOUTH
   fill(255);
   var distance = dist(width / 2, height * 3 / 5, mouseX, mouseY);
   var opening = abs(map(distance, 0, 200, 50, 0, true));
   quad(width / 3, height * 3 / 5, width * 2 / 3, height * 3 / 5, width * 2 / 3 - 30, height * 3 / 5 + opening, width / 3 + 30, height * 3 / 5 + opening);
-
-  // TEETH
   if (mouseIsPressed) {
     redTeethColorChange += 2;
   } else {
@@ -3892,8 +3228,6 @@ function draw() {
   fill(200 + redTeethColorChange, 200 - redTeethColorChange, 200 - redTeethColorChange);
   triangle(width / 3 + 8, height * 3 / 5, width * 12 / 30 + 8, height * 3 / 5, width * 11 / 30 + 8, height * 3 / 5 + teethDepth);
   triangle(width * 2 / 3 - 8, height * 3 / 5, width * 18 / 30 - 8, height * 3 / 5, width * 19 / 30 - 8, height * 3 / 5 + teethDepth);
-
-  // EYEBROWS
   stroke(0);
   strokeWeight(9);
   if (mouseIsPressed) {
@@ -3904,17 +3238,14 @@ function draw() {
     line(250, 30, 330, 8);
   }
 }
-
 class eye {
   constructor(x, y) {
     this.x = x;
     this.y = y;
   }
-
   show() {
     ellipse(this.x, this.y, 2 * radius);
   }
-
   showPupil(diameter) {
     fill(0, 200);
     if (dist(mouseX, mouseY, this.x, this.y) >= arrow) {
@@ -3948,17 +3279,12 @@ function setup() {
 	notch = 0.1*radius;
   arrow = 0.6*radius;
 }
-
 function draw() {
   background(255);
   angleMode(DEGREES);
   noFill()
   strokeWeight(4);
   
-  // Didn't work well...
-  //var red = map(millis()%10000,0,10000,255,510)-map(millis()%20000,10000,20000,255,0,true)
-  //print(map(millis()%10000,0,10000,0,255))
-	//stroke(map(millis()%40000,0,20000,255,0,true), map(millis()%40000,10000,30000,255,0,true), map(millis()%40000,20000,40000,255,0,true));
   
   
   var r = abs(sin(map(millis()%20000,0,20000,0,360))*255);
@@ -3992,52 +3318,36 @@ function draw() {
 }var x;
 var y;
 var multiplier = 0.03;
-
 function setup() {
   createCanvas(400, 400);
   x = width/2;
   y = height/2;
 }
-
 function draw() {
   background(220);
   rectMode(CENTER);
   x += (mouseX-x)*multiplier
   y += (mouseY-y)*multiplier
   rect(x,y, width/4, height/4);
-}var speed = 4; //Change the speed to go faster
 var x;
 var y;
-
 function setup() {
   createCanvas(400, 400);
   x = width/2;
   y = height/2;
 }
-
 function draw() {
   background(200);
   ellipseMode(CENTER);
-
-  /* Left and right 
   x += speed
   if ((x>= width)||(x<=0)){
     speed = -speed
-	} */
-
-  /* Upper Right
   y -= speed*(height/width);
-  x += speed*(height/width);*/
   
-  /* Upper Left
   y -= speed*(height/width);
-  x -= speed*(height/width);*/
   
-  /* Lower Right
   y += speed*(height/width);
-  x += speed*(height/width);*/
   
-  // Lower Left
   y += speed*(height/width);
   x -= speed*(height/width);
  
@@ -4045,15 +3355,11 @@ function draw() {
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(100);
   rectMode(CENTER);
-	/* Draw a rectangle in the middle of the screen using rect() 
   rect(width / 2, height / 2, width / 2, height / 2);
-  */
   
-  // Draw a rectangle in the middle of the screen using vertex()
   beginShape(QUADS);
   vertex(width/4,height/4);
   vertex(width/4, height*3/4);
@@ -4068,7 +3374,6 @@ function setup() {
   x = width/2;
   y = height/2;
 }
-
 function draw() {
   fill(0);
   let z = round(random(0,5))
@@ -4107,18 +3412,15 @@ var ballDirection
 var gameStarted = false;
 var spacer = 2;
 var blockHeight = 30
-
 function setup() {
   createCanvas(800, 500);
   ballDirection = random(-45, 45);
 }
-
 function draw() {
   background(100);
   angleMode(DEGREES);
   rectMode(CENTER);
   ellipseMode(CENTER);
-	//generateBlocks();
   rect(mouseX, rectProperties.yPos, rectProperties.rectWidth, rectProperties.rectHeight);
   if (gameStarted) {
     updateBallLocation();
@@ -4128,20 +3430,16 @@ function draw() {
     ballLocation.xPos = mouseX;
   }
 }
-
 function mousePressed() {
   gameStarted = true;
 }
-
 function updateBallLocation() {
-
   ballLocation.xPos += ballSpeed * sin(ballDirection);
   ballLocation.yPos -= ballSpeed * cos(ballDirection);
   if (ballLocation.yPos < rectProperties.yPos) {
     if ((ballLocation.xPos <= ballDiameter / 2) || (ballLocation.xPos >= width - ballDiameter / 2)) {
       ballDirection = -ballDirection;
     }
-
     if (ballLocation.yPos <= ballDiameter / 2) {
       ballDirection = -(ballDirection - 180);
     }
@@ -4159,32 +3457,25 @@ function updateBallLocation() {
       }
     }
   }
-
 }
-
 function objectsColliding(ballXPos, ballYPos, ballD, objXPos, objYPos, objWidth, objHeight) {
   var circleDistanceX = abs(ballXPos - objXPos);
   var circleDistanceY = abs(ballYPos - objYPos);
-
   if (circleDistanceX > (objWidth + ballD) / 2) {
     return [false, 0];
   }
   if (circleDistanceY > (objHeight + ballD) / 2) {
     return [false, 0];
   }
-
   if (circleDistanceX <= (objWidth / 2)) {
     return [true, 1];
   }
   if (circleDistanceY <= (objHeight / 2)) {
     return [true, 2];
   } 
-
   var cornerDistance_sq = sq(circleDistanceX - objWidth / 2) + sq(circleDistanceY - objHeight / 2);
-
   return [(cornerDistance_sq <= sq(ballD / 2)), 3];
 }
-/* GETS LAGGY IF THIS PIECE IS RUN
 class gameBlock {
   constructor(x,y,bWidth,bHeight){
   	this.x = x
@@ -4198,15 +3489,11 @@ class gameBlock {
     if (!this.destroyed) {
       rectMode(CORNER)
       rect(this.x,this.y,this.bw,this.bh);
-      print("here");
     }
   }
 }
-
 function generateBlocks(){
   for(i=0; i<3; i++){
-    print("Not here pls");
-    //var numOfBlocks = round(random(8,12));
     numOfBlocks = 9;
     var newWidth = width - (numOfBlocks+1)*2;
     var bWidth = newWidth/numOfBlocks;
@@ -4216,61 +3503,43 @@ function generateBlocks(){
       gameBlocks[j].show();
     }
   }
-}*/
 function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
   background(4, 78, 209);
-
   const x = PI / 5.5;
   const vertStep = sin(x) * 7;
   const horzStep = cos(x) * 7;
   const horzStepEdge = horzStep / 2 + 10 * sin(x);
   const vertStepEdge = vertStep / 2 - 10 * cos(x);
-
   strokeWeight(1)
   stroke(0)
   fill(226, 49, 9);
-
-  // Creates the upper set of teeth iterating through each
   for (i = 0; i < 5; i++) {
     var initX = 105 + i * 2 * horzStep
     var initY = 195 - i * 2 * vertStep
     triangle(initX, initY, initX + horzStep, initY - vertStep, initX + horzStepEdge, initY - vertStepEdge);
   }
-
-  // Creates the lower set of teeth iterating through each
   for (i = 0; i < 4; i++) {
     var initX = 113 + i * 2 * horzStep
     var initY = 211 + i * 2 * vertStep
     triangle(initX, initY, initX + horzStep, initY + vertStep, initX + horzStepEdge, initY + vertStepEdge);
   }
-
-  // PacMan's Body
   fill(242, 217, 29);
   arc(100, 200, 150, 150, PI / 5.5, -PI / 5.5, PIE);
-
-  // PacMan's Eye
   fill(234, 127, 4);
   ellipse(120, 155, 18, 20);
   fill(0, 180)
   ellipse(125, 158, 6, 6);
-
-  // First Cherry
   fill(166, 31, 52);
   ellipse(260, 220, 60, 60);
   fill(70, 170);
   ellipse(263, 208, 10, 10);
-
-  // Second Cherry
   fill(166, 31, 52);
   ellipse(295, 232, 60, 60);
   fill(70, 170);
   ellipse(292, 222, 10, 10);
-
-  // Tails
   noFill();
   strokeWeight(3);
   stroke(142, 90, 5);
@@ -4278,5 +3547,4 @@ function draw() {
   curve(170, 200, 292, 222, 310, 130, 250, 100)
   fill(142, 90, 5);
   quad(305, 127, 314, 128, 312, 135, 307, 135);
-
 }

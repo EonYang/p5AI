@@ -1,22 +1,15 @@
 let circles = [];
-
 let video;
 let slider;
 let videoScale = 8;
-
-
-
 function setup() { 
   createCanvas (640, 480);
   pixelDensity(1);
   video = createCapture(VIDEO);
   video.size (width/videoScale,height/videoScale);
   video.hide();
-  // slider = createSlider(8, 64, 16);
   
 } 
-
-
 function draw() { 
   background(0,250);
   
@@ -33,15 +26,9 @@ function draw() {
       let bright = (r+g+b)/3;
       
       
-//       let pie = map(bright, 0,255,0,6);
       
       
-//       noStroke();
-//       fill(255,bright,bright,255);
       
-//       arc(x * videoScale, y * videoScale, videoScale, videoScale, 0, pie, PIE);
-//       // fill(bright,bright,0,200);
-      // ellipse(x * videoScale,y * videoScale,videoScale,videoScale)
       
       
       let th1 = 80;
@@ -53,9 +40,6 @@ function draw() {
        
         }
       
-      // if (circles.length > 100) {
-      //   circles.splice(0,5);
-      // }
       
         
       pixels[index + 0] =  bright;
@@ -70,33 +54,24 @@ function draw() {
      circles[i].expand();
  }  
     
-      // videoScale = slider.value();
     
   }
   
   
  
   
-
 }let circles = [];
-
 let video;
 let slider;
 let videoScale = 18;
-
-
-
 function setup() { 
   createCanvas (640, 480);
   pixelDensity(1);
   video = createCapture(VIDEO);
   video.size (width/videoScale,height/videoScale);
   video.hide();
-  // slider = createSlider(8, 64, 16);
   
 } 
-
-
 function draw() { 
   background(0,200);
   
@@ -113,15 +88,9 @@ function draw() {
       let bright = (r+g+b)/3;
       
       
-//       let pie = map(bright, 0,255,0,6);
       
       
-//       noStroke();
-//       fill(255,bright,bright,255);
       
-//       arc(x * videoScale, y * videoScale, videoScale, videoScale, 0, pie, PIE);
-//       // fill(bright,bright,0,200);
-      // ellipse(x * videoScale,y * videoScale,videoScale,videoScale)
       
       
       let th1 = 50;
@@ -150,36 +119,25 @@ function draw() {
      circles[i].expand();
  }  
     
-      // videoScale = slider.value();
     
   }
   
   
  
   
-
 }let circles = [];
-// let circles2 = [];
-
-
 let video;
-// let slider;
 let videoScale = 32;
 let th1 = 200;
-// let th2 = 30;
     
-
 function setup() { 
   createCanvas (640, 480);
   pixelDensity(1);
   video = createCapture(VIDEO);
   video.size (width/videoScale,height/videoScale);
   video.hide();
-  // slider = createSlider(8, 64, 16);
   
 } 
-
-
 function draw() { 
   background(0);
   
@@ -195,14 +153,9 @@ function draw() {
      
       let bright = (r+g+b)/3;
       
-      //Pies
-      // let pie = map(bright, 0,255,0,6);
       
       
-      // noStroke();
-      // fill(255,bright,bright,255);
       
-      // arc(x * videoScale, y * videoScale, videoScale, videoScale, 0, pie, PIE);
       
       
       let circleIndex = new Circle(x * videoScale, y * videoScale , 1);
@@ -218,7 +171,6 @@ function draw() {
         
       
       }
-
       
       
         
@@ -238,18 +190,13 @@ function draw() {
     circles2[i].show();
     circles2[i].expand();
       
-    // videoScale = slider.value();
     
   }
   
   
  
   
-
 }
-
-var portName = '/dev/cu.usbserial-A90BV9LH';
-var serial;
 var read1;
 var read2; 
 var inData;
@@ -257,18 +204,9 @@ var x = 20;
 var y = 20;
 var dx = 5;
 var dy = 5;
-
-
 function setup() {
   createCanvas(500, 400);
 }
-
-serial = new p5.SerialPort();
-serial.open(portName);
-serial.on('data', gotData);
-
-
-
 function draw() {
   background(200,50);
   strokeWeight(5);
@@ -276,12 +214,7 @@ function draw() {
   line(read2 - read1 - 8, height - 50, read2 + read1 + 8, height - 50);
   x = x + dx;
   y = y + dy;
-  //display the ball  
   ball(x, y);
-
-
-
-  //define the ball position and bounce during its move
   if (x < 20 || x > width - 20) {
     dx = -dx;
   }
@@ -297,56 +230,38 @@ function draw() {
     dy = 0;
     dx = 0;
   }
-
 }
-
-
 function ball(x, y) {
   fill(255, 0, 0);
   noStroke();
   
   ellipse(x, y, 20, 20);
-  // println(x);
 }
-
-
 function keyPressed() {
   x = random(20, width - 20);
   y = 20;
   dx = 5;
   dy = 5;
 }
-
-
 function gotData() {
-  var inData = serial.readLine();
-
   if (inData.length > 0) {
-    print(inData);
-
-
     var values = inData.split(',');
     read1 = int(values[0]);
     read1 = read1/1.5;
     read2 = int(values[1]);
     read2 = map(read2, 0,255,0,width);
   }
-
 }let video;
 let slider;
 let videoScale = 32;
-
 function setup() { 
   createCanvas (640, 480);
   pixelDensity(1);
   video = createCapture(VIDEO);
   video.size (width/videoScale,height/videoScale);
   video.hide();
-  // slider = createSlider(8, 64, 16);
   
 } 
-
-
 function draw() { 
   background(0);
   
@@ -370,8 +285,6 @@ function draw() {
       fill(255,bright,bright,255);
       
       arc(x * videoScale, y * videoScale, videoScale, videoScale, 0, pie, PIE);
-      // fill(bright,bright,0,200);
-      // ellipse(x * videoScale,y * videoScale,videoScale,videoScale)
       
       
         
@@ -382,18 +295,15 @@ function draw() {
     
     }
   
-      // videoScale = slider.value();
     
   }
   
   
  
   
-
 }let video;
 let videoScale = 16;
 let slider
-
 function setup() { 
   createCanvas (640, 480);
   pixelDensity(1);
@@ -401,8 +311,6 @@ function setup() {
   video.size (width/videoScale,height/videoScale);
   slider = createSlider(8,64,16);
 } 
-
-
 function draw() { 
   background(0);
   
@@ -436,11 +344,9 @@ function draw() {
   
  
   
-
 }function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   var p
   background(220);
@@ -450,49 +356,29 @@ function draw() {
   p= map(mouseX, 0,400,0,5);
   
   arc(100, 100, 80, 80, 0, p, PIE);
-}// Input from user
 let input;
-
 function setup() {
   noCanvas();
-
-  // Grab the input and button from HTML
   input = createInput('rainbow');
   button = createButton('search');
-  // Attach a callback to button press
   button.mousePressed(search);
 }
-
-// Run the API call
 function search() {
   let term = input.value();
-
-  // URL for querying the times
-  let url = 'https://content.guardianapis.com/search?'
    
           + 'q=' + term;
           +'&'
           +'b8132257-3655-40df-8df9-0b92b6423e28'
           
-  // Query the URL, set a callback
-  // 'jsonp' is needed for security
   console.log(url);
   loadJSON(url, gotData);
 }
-
-// Request is completed
 function gotData(data) {
   console.log(data);
-  // Go through and show some results
   docs = data.response.docs;
-
-  // Iterate through the articles in "docs"
   for (let i = 0; i < docs.length; i++) {
-
-    // Make each headline a link to the article
     let headline = createElement('h3', '');
     let link = createA(docs[i].web_url, docs[i].headline.main);var portName = '/dev/cu.usbmodem1421';
-var serial;
 var read1;
 var read2; 
 var inData;
@@ -500,30 +386,16 @@ var x = 20;
 var y = 20;
 var dx = 5;
 var dy = 5;
-
-
 function setup() {
   createCanvas(500, 400);
 }
-
-serial = new p5.SerialPort();
-serial.open(portName);
-serial.on('data', gotData);
-
-
-
 function draw() {
   background(220);
   stroke(0, 0, 255)
   line(read2 - read1 - 8, height - 50, read2 + read1 + 8, height - 50);
   x = x + dx;
   y = y + dy;
-  //display the ball  
   ball(x, y);
-
-
-
-  //define the ball position and bounce during its move
   if (x < 20 || x > width - 20) {
     dx = -dx;
   }
@@ -539,42 +411,27 @@ function draw() {
     dy = 0;
     dx = 0;
   }
-
 }
-
-
 function ball(x, y) {
   fill(255, 0, 0);
   noStroke();
   strokeWeight(5);
   ellipse(x, y, 20, 20);
-  // println(x);
 }
-
-
 function keyPressed() {
   x = random(20, width - 20);
   y = 20;
   dx = 5;
   dy = 5;
 }
-
-
 function gotData() {
-  var inData = serial.readLine();
-
   if (inData.length > 0) {
-    print(inData);
-
-
     var values = inData.split(',');
     read1 = int(values[0]);
     read2 = int(values[1]);
     read2 = map(read2, 0,255,0,width);
   }
-
 }var portName = '/dev/cu.usbmodem1421';
-var serial;
 var read1;
 var read2; 
 var inData;
@@ -582,30 +439,16 @@ var x = 20;
 var y = 20;
 var dx = 5;
 var dy = 5;
-
-
 function setup() {
   createCanvas(500, 400);
 }
-
-serial = new p5.SerialPort();
-serial.open(portName);
-serial.on('data', gotData);
-
-
-
 function draw() {
   background(220);
   stroke(0, 0, 255)
   line(read2 - read1 - 8, height - 50, read2 + read1 + 8, height - 50);
   x = x + dx;
   y = y + dy;
-  //display the ball  
   ball(x, y);
-
-
-
-  //define the ball position and bounce during its move
   if (x < 20 || x > width - 20) {
     dx = -dx;
   }
@@ -621,52 +464,34 @@ function draw() {
     dy = 0;
     dx = 0;
   }
-
 }
-
-
 function ball(x, y) {
   fill(255, 0, 0);
   noStroke();
   strokeWeight(5);
   ellipse(x, y, 20, 20);
-  // println(x);
 }
-
-
 function keyPressed() {
   x = random(20, width - 20);
   y = 20;
   dx = 5;
   dy = 5;
 }
-
-
 function gotData() {
-  var inData = serial.readLine();
-
   if (inData.length > 0) {
-    print(inData);
-
-
     var values = inData.split(',');
     read1 = int(values[0]);
     read2 = int(values[1]);
     read2 = map(read2, 0,255,0,width);
   }
-
 }
-
   var x=20;
   var y=20;
   var dx=7;
   var dy=7;
-
-
 function setup() { 
   createCanvas(500, 400);
 } 
-
 function draw() { 
   background(150);
   fill(255,0,0);
@@ -675,12 +500,9 @@ function draw() {
   rect(mouseX-30,height-50,50,20);
   x=x+dx;
   y=y+dy;
-//display the ball  
   ball(x,y);
-  // fill(255);
  
  
-//define the ball position and bounce during its move
   if(x<20||x>width-20){
 	  dx=-dx;
 	}
@@ -697,45 +519,27 @@ function draw() {
 		dx=0;
   } 
 }
-
-
 function ball(x,y){
   fill(255,0,0);
 	noStroke();
   strokeWeight(3);  
   ellipse(x,y,30,30);
-  println(x);
 }
-
-//Reset
 function keyPressed(){
   x=random(20,width-20);
   y=20;
   dx=7;
   dy=7;       
 }
-
-
-
-
-
  
-
 var portName = '/dev/cu.usbmodem1421';
-var serial;
 var ew = 20;
 var read1;
 var read2;
-
-
 function setup() { 
   createCanvas(500, 500);
   
-  serial = new p5.SerialPort();
-  serial.open(portName);
-  serial.on('data', gotData);
 } 
-
 function draw() { 
   background(220);
   
@@ -746,12 +550,8 @@ function draw() {
     fill(255,50,10,50 + read2);
     ellipse(300,300,ew + read2);
 }
-
 function gotData(){
-  var inData = serial.readLine();
-
   if (inData.length > 0){
-    print(inData);
     
    
     var values = inData.split('&');
@@ -764,14 +564,12 @@ function gotData(){
 }function setup() { 
   createCanvas(600, 400);
 } 
-
 function draw() { 
   background(220);
   fill(255,0,0)
   noStroke();
   rectMode(CENTER);
   rect(mouseX,height-50,50,10);
-
   
   
 var x = width/2;
@@ -792,41 +590,31 @@ var r = 5;
 }
 function setup() { 
   createCanvas(600, 500);
-
 } 
-
 function draw() { 
   background(220);
   
   paddle.show();
   
-
   
   
 }var paddle;
 var ball;
 var bricks = [];
-
 var playingGame = false;
 var youWin = false;
 var winText;
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
   paddle = new Paddle();
   ball = new Ball();
-
   for (var i = 0; i < 20; i++) {
     bricks.push(new Brick());
   }
   createText();
 }
-
 function draw() {
   background(220);
-
-  // bricks
   for (var i = 0; i < bricks.length; i++) {
     bricks[i].display();
     if (ball.hits(bricks[i])) {
@@ -838,43 +626,32 @@ function draw() {
       ball.direction.y *= -1;
     }
   }
-
-  // paddle
   paddle.display();
   if (playingGame) paddle.checkEdges();
-  // if (playingGame) paddle.update();
-
-  // ball
   if (ball.meets(paddle)) {
     if (ball.direction.y > 0) ball.direction.y *= -1;
   }
   ball.display();
   if (playingGame) ball.checkEdges();
   if (playingGame) ball.update();
-
-  // game logics //reset game
   if (ball.pos.y > height) {
     ball.pos = createVector(width / 2, height / 2);
     playingGame = false;
   }
-
   if (bricks.length === 0) {
     youWin = true;
     playingGame = false;
   }
-
   if (youWin) {
     winText.style('display', 'block');
   } else {
     winText.style('display', 'none');
   }
 }
-
 function keyReleased() {
   paddle.isMovingRight = false;
   paddle.isMovingLeft = false;
 }
-
 function keyPressed() {
   if (key === 'a' || key === 'A') {
     paddle.isMovingLeft = true;
@@ -890,34 +667,26 @@ function keyPressed() {
     youWin = false;
   }
 }
-
 function createText() {
   winText = createP('YOU WIN!');
   winText.position(width / 2, 80);
 }var paddle;
 var ball;
 var bricks = [];
-
 var playingGame = false;
 var youWin = false;
 var winText;
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
   paddle = new Paddle();
   ball = new Ball();
-
   for (var i = 0; i < 20; i++) {
     bricks.push(new Brick());
   }
   createText();
 }
-
 function draw() {
   background(220);
-
-  // bricks
   for (var i = 0; i < bricks.length; i++) {
     bricks[i].display();
     if (ball.hits(bricks[i])) {
@@ -929,43 +698,33 @@ function draw() {
       ball.direction.y *= -1;
     }
   }
-
-  // paddle
   paddle.display();
   if (playingGame) paddle.checkEdges();
   if (playingGame) paddle.update();
-
-  // ball
   if (ball.meets(paddle)) {
     if (ball.direction.y > 0) ball.direction.y *= -1;
   }
   ball.display();
   if (playingGame) ball.checkEdges();
   if (playingGame) ball.update();
-
-  // game logics //reset game
   if (ball.pos.y > height) {
     ball.pos = createVector(width / 2, height / 2);
     playingGame = false;
   }
-
   if (bricks.length === 0) {
     youWin = true;
     playingGame = false;
   }
-
   if (youWin) {
     winText.style('display', 'block');
   } else {
     winText.style('display', 'none');
   }
 }
-
 function keyReleased() {
   paddle.isMovingRight = false;
   paddle.isMovingLeft = false;
 }
-
 function keyPressed() {
   if (key === 'a' || key === 'A') {
     paddle.isMovingLeft = true;
@@ -981,24 +740,13 @@ function keyPressed() {
     youWin = false;
   }
 }
-
 function createText() {
   winText = createP('YOU WIN!');
   winText.position(width / 2, 80);
 }let rectos = [];
 let circles = [];
-
-
-
 function setup() {
   createCanvas(500, 500);
-  // for (let i = 0; i < 60; i++) {
-  //   rectos[i] = new Recto(250, 250, i * 5 + i);
-  // }
-  // for (let i = 0; i < 50; i++) {
-  //   circles[i] = new Circle(250, 250, i * 5 + i);
-  // }
-
 }
   
  
@@ -1007,42 +755,20 @@ function mousePressed(){
   let index1 = new Circle(250, 250, 5);
    circles.push (index1);
   
-  // let index2 = new Recto(250, 250, 25);
-  //  rectos.push (index2);
 }
-
-
-
-
-
-
-
-
 function draw() {
-
   background(0);
-  // for (let i = 0; i < rectos.length; i++) {
-  //   rectos[i].show();
-  //   rectos[i].expand();
-  // }
-
   for (let i = 0; i < circles.length; i++) {
     circles[i].show();
     circles[i].expand();
-    // circles[i].rollover(mouseX,mouseY);
   }
 }let data;
-
 function preload() {
   data = loadJSON("lovecraft.json");
 }
-
-
-
 function setup() {
   createCanvas(500, 500);
   background(0);
-  print(data.description);
   fill(255, 255, 0,255)
   textSize(10);
   for (let i = 0; i < data.deities.length; i++) {
@@ -1051,30 +777,18 @@ function setup() {
   fill(255, 255, 255,255)
     for (let i = 0; i < data.supernatural_creatures.length; i++) {
     text(data.supernatural_creatures, random(width), random(height));
-    // createP(data.supernatural_creatures[i]);
     
     }
-
-
   }
-
   function draw() {
-
   }let portName = '/dev/cu.usbmodem1421';
-let serial;
-
 let rectos = [];
 let circles = [];
 let read1;
 let read2; 
-
-
 function setup() {
   createCanvas(500, 500);
  
-  serial = new p5.SerialPort();
-  serial.open(portName);
-  serial.on('data', gotData);
   
   for (let i = 0; i < 30; i++) {
     rectos[i] = new Recto(250, 250, i * 15);
@@ -1084,54 +798,25 @@ function setup() {
   }
   
   
-
 }
   
  
-// function mousePressed(){
   
-//   let index1 = new Circle(250, 250, 5);
-//    circles.push (index1);
   
-//   let index2 = new Recto(250, 250, 25);
-//    rectos.push (index2);
-// }
-
-
-
-
-
-
-
-
 function draw() {
-
   background(0);
   for (let i = 0; i < rectos.length; i++) {
     rectos[i].show();
     rectos[i].expand();
   }
-
   for (let i = 0; i < circles.length; i++) {
     circles[i].show();
     circles[i].expand();
-    // circles[i].rollover(mouseX,mouseY);
   }
-
-//TEST  
-  // fill(255);
-  // ellipse(250,250,read1);
-  // ellipse(100,100,read2);
-
   
 }
-
-
 function gotData(){
-  var inData = serial.readLine();
-
   if (inData.length > 0){
-    print(inData);
     
    
    let values = inData.split('&');
@@ -1141,69 +826,32 @@ function gotData(){
     read2 = int(values[1]);
   }
   
-}var serial;          // variable to hold an instance of the serialport library
-var portName = '/dev/cu.usbmodem1421'; // fill in your serial port name here
-var inData;                            // for incoming serial data
-var outByte = 0;                       // for outgoing data
  
 function setup() {
- createCanvas(400, 300);          // make the canvas
- serial = new p5.SerialPort();    // make a new instance of the serialport library
- serial.on('data', serialEvent);  // callback for when new data arrives
- serial.on('error', serialError); // callback for errors
- serial.open(portName);           // open a serial port
 }
-
-
-function serialEvent() {
- // read a byte from the serial port:
- var inByte = serial.read();
- // store it in a global variable:
  inData = inByte;
 }
  
-function serialError(err) {
-  print('Something went wrong with the serial port. ' + err);
 }
-
-
 function draw() {
- // black background, white text:
  background(0);
  fill(255);
- // display the incoming serial data as a string:
  text("incoming value: " + inData, 30, 30);
 }
-
 function mouseDragged() {
- // map the mouseY to a range from 0 to 255:
  outByte = int(map(mouseY, 0, height, 0, 255));
- // send it out the serial port:
- serial.write(outByte);
 }
-
-
 function keyPressed() {
- if (key ==='H' || key ==='L') { // if the user presses H or L
- serial.write(key);              // send it out the serial port
  }
 }
-
 var portName = '/dev/cu.usbmodem1421';
-var serial;
 var ew = 20;
 var read1;
 var read2;
-
-
 function setup() { 
   createCanvas(500, 500);
   
-  serial = new p5.SerialPort();
-  serial.open(portName);
-  serial.on('data', gotData);
 } 
-
 function draw() { 
   background(220,180,150);
   
@@ -1214,12 +862,8 @@ function draw() {
     fill(255,50,10,50 + read2);
     ellipse(300,300,ew + read2);
 }
-
 function gotData(){
-  var inData = serial.readLine();
-
   if (inData.length > 0){
-    print(inData);
     
    
     var values = inData.split('&');
@@ -1229,30 +873,13 @@ function gotData(){
     read2 = int(values[1]);
   }
   
-}var serial; // variable to hold an instance of the serialport library
-var portName = '/dev/cu.usbmodem1421'; // fill in your serial port name here
 var inData;
-
 function setup() {
-  serial = new p5.SerialPort(); // make a new instance of the serialport library
-  serial.on('list', printList); // set a callback function for the serialport list event
-  serial.on('connected', serverConnected); // callback for connecting to the server
-  serial.on('open', portOpen); // callback for the port opening
-  serial.on('data', serialEvent); // callback for when new data arrives
-  serial.on('error', serialError); // callback for errors
-  serial.on('close', portClose); // callback for the port closing
-  serial.list(); // list the serial ports
-  serial.open(portName); // open a serial port
   createCanvas(500, 500);
-
 }
-
-
 function draw() {
-
   let ew = 10;
   let ap = 100;
-
   background(0);
   fill(50 + inData, inData , 0 , ap + inData/2);
   noStroke();
@@ -1261,55 +888,21 @@ function draw() {
   text("Read: " + inData, 50, 50);
   
 }
-
-
-function printList(portList) {
-  // portList is an array of serial port names
   for (var i = 0; i < portList.length; i++) {
-    // Display the list the console:
-    print(i + " " + portList[i]);
   }
 }
-
 function serverConnected() {
-  print('connected to server.');
 }
-
 function portOpen() {
-  print('the serial port opened.')
 }
-
-function serialEvent() {
-  inData = Number(serial.read());
-
 }
-
-function serialError(err) {
-  print('Something went wrong with the serial port. ' + err);
 }
-
 function portClose() {
-  print('The serial port closed.');
-}let serial;          // variable to hold an instance of the serialport library
-let portName = '/dev/cu.usbmodem1421';  // fill in your serial port name here
 let randnum;
-
 function setup() {
-  serial = new p5.SerialPort();       // make a new instance of the serialport library
-  serial.on('list', printList);  // set a callback function for the serialport list event
-  serial.on('connected', serverConnected); // callback for connecting to the server
-  serial.on('open', portOpen);        // callback for the port opening
-  serial.on('data', serialEvent);     // callback for when new data arrives
-  serial.on('error', serialError);    // callback for errors
-  serial.on('close', portClose);      // callback for the port closing
-  serial.list();                      // list the serial ports
-  serial.open(portName);              // open a serial port
 createCanvas(500, 500);
-
 }
-
 let er = 50; 
-
 function draw() {
   background(0);
   fill(255);
@@ -1317,119 +910,56 @@ function draw() {
   
   er = er + randnum; 
  
-
 }
-
-
-function printList(portList) {
- // portList is an array of serial port names
  for (var i = 0; i < portList.length; i++) {
- // Display the list the console:
- print(i + " " + portList[i]);
  }
 }
-
 function serverConnected() {
-  print('connected to server.');
 }
  
 function portOpen() {
-  print('the serial port opened.')
 }
  
-function serialEvent() 
  {
-  randnum = Number(serial.read());
-
 }
  
-function serialError(err) {
-  print('Something went wrong with the serial port. ' + err);
 }
  
 function portClose() {
-  print('The serial port closed.');
-}var serial; // variable to hold an instance of the serialport library
-var portName = '/dev/cu.usbmodem1421'; // fill in your serial port name here
 var inData;
-
 function setup() {
-  serial = new p5.SerialPort(); // make a new instance of the serialport library
-  serial.on('list', printList); // set a callback function for the serialport list event
-  serial.on('connected', serverConnected); // callback for connecting to the server
-  serial.on('open', portOpen); // callback for the port opening
-  serial.on('data', serialEvent); // callback for when new data arrives
-  serial.on('error', serialError); // callback for errors
-  serial.on('close', portClose); // callback for the port closing
-  serial.list(); // list the serial ports
-  serial.open(portName); // open a serial port
   createCanvas(500, 500);
-
 }
-
-
 function draw() {
-
   let ew = 10
   let ap = 50
-
   background(0);
   fill(255,ap + inData);
   noStroke();
   text("Ellipse Size: " + inData, 50, 50);
   ellipse(250, 250, ew + inData);
 }
-
-
-function printList(portList) {
-  // portList is an array of serial port names
   for (var i = 0; i < portList.length; i++) {
-    // Display the list the console:
-    print(i + " " + portList[i]);
   }
 }
-
 function serverConnected() {
-  print('connected to server.');
 }
-
 function portOpen() {
-  print('the serial port opened.')
 }
-
-function serialEvent() {
-  inData = Number(serial.read());
-
 }
-
-function serialError(err) {
-  print('Something went wrong with the serial port. ' + err);
 }
-
 function portClose() {
-  print('The serial port closed.');
-}var serial; // variable to hold an instance of the serialport library
  
 function setup() {
- serial = new p5.SerialPort(); // make a new instance of the serialport library
- serial.on('list', printList); // set a callback function for the serialport list event
  
- serial.list(); // list the serial ports
 }
  
-// get the list of ports:
-function printList(portList) {
- // portList is an array of serial port names
  for (var i = 0; i < portList.length; i++) {
- // Display the list the console:
  console.log(i + " " + portList[i]);
  }
 }
 let rectos = [];
 let circles = [];
-
-
-
 function setup() {
   createCanvas(500, 500);
   for (let i = 0; i < 60; i++) {
@@ -1438,7 +968,6 @@ function setup() {
   for (let i = 0; i < 50; i++) {
     circles[i] = new Circle(250, 250, i * 5 + i);
   }
-
 }
   
  
@@ -1450,39 +979,22 @@ function mousePressed(){
   let index2 = new Recto(250, 250, 25);
    rectos.push (index2);
 }
-
-
-
-
-
-
-
-
 function draw() {
-
   background(0);
   for (let i = 0; i < rectos.length; i++) {
     rectos[i].show();
     rectos[i].expand();
   }
-
   for (let i = 0; i < circles.length; i++) {
     circles[i].show();
     circles[i].expand();
-    // circles[i].rollover(mouseX,mouseY);
   }
 }let rectos = [];
 let circles = [];
 let img; 
-
 function preload(){
-
 img = loadImage("pic.jpg");
-
 }
-
-
-
 function setup() {
   
   createCanvas(500, 500);
@@ -1494,7 +1006,6 @@ function setup() {
   for (let i = 0; i < 50; i++) {
     circles[i] = new Circle(250, 250, i * 5 + i);
   }
-
 }
   
  
@@ -1506,33 +1017,19 @@ function mousePressed(){
   let index2 = new Recto(250, 250, 50);
    rectos.push (index2);
 }
-
-
-
-
-
-
-
-
 function draw() {
    
   image(img,0,0);
-  // background(0);
-
   for (let i = 0; i < rectos.length; i++) {
     rectos[i].show();
     rectos[i].expand();
   }
-
   for (let i = 0; i < circles.length; i++) {
     circles[i].show();
     circles[i].expand();
   }
 }let rectos = [];
 let circles = [];
-
-
-
 function setup() {
   createCanvas(500, 500);
   for (let i = 0; i < 100; i++) {
@@ -1541,20 +1038,13 @@ function setup() {
   for (let i = 0; i < 50; i++) {
     circles[i] = new Circle(250, 250, i * 5 + i);
   }
-
-
 }
-
-
-
 function draw() {
-
   background(0);
   for (let i = 0; i < 100; i++) {
     rectos[i].show();
     rectos[i].expand();
   }
-
   for (let i = 0; i < 50; i++) {
     circles[i].show();
     circles[i].expand();
@@ -1564,224 +1054,101 @@ let recto2;
 let recto3;
 let circle1;
 let circle2;
-
-
 function setup() {
   createCanvas(500, 500);
-  // background(0);
   recto1 = new Recto(250, 250, 10);
   recto2 = new Recto(250, 250, 15);
   recto3 = new Recto(250, 250, 20);
   circle1 = new Circle(250,250,5);
   circle2 = new Circle(250,250,10);
 }
-
-
-
 function draw() {
-
   background(0);
-
   recto1.show();
   recto1.expand();
-
   recto2.show();
   recto2.expand();
-
   recto3.show();
   recto3.expand();
   
   circle1.show();
   circle1.expand();
-
   circle2.show();
   circle2.expand();
 }
-
-
-
-
-
-
-
-
-
-
 y = 1
 speed = 1
-
 function setup() {
   createCanvas(400, 400);
-
 }
-
-
-
 function draw() {
-
   background(0);
-
  
   ballBounce(50, 0.2,0.85);
  
   
-  // ballBounce(100,0.2,0.85);
-  // ballBounce(150,0.2,0.85);
-  // ballBounce(200,0.2,0.85);
-  // ballBounce(250,0.2,0.85);
-  // ballBounce(300,0.2,0.85);
-  // ballBounce(350,0.2,0.85);
 }
-
-
-
 function ballBounce(x1, Acce, Deacc) {
-
   
-
    y = y + speed;
    speed = speed + Acce;
-
   noStroke();
   ellipse(x1, y, 5, 5);
-
-
-
-
-
-
   if (y > 400) {
     speed = -Deacc * speed;
   }
-
-
-
-
 }y = 1
 speed = 1
-
 function setup() {
   createCanvas(400, 400);
-
 }
-
-
-
 function draw() {
-
   background(0);
-
  
   ballBounce(50, 0.2,0.85);
  
   
   ballBounce(100,0.2,0.85);
-  // ballBounce(150,0.2,0.85);
-  // ballBounce(200,0.2,0.85);
-  // ballBounce(250,0.2,0.85);
-  // ballBounce(300,0.2,0.85);
-  // ballBounce(350,0.2,0.85);
 }
-
-
-
 function ballBounce(x1, Acce, Deacc) {
-
   
-
    y = y + speed;
    speed = speed + Acce;
-
   noStroke();
   ellipse(x1, y, 5, 5);
-
-
-
-
-
-
   if (y > 400) {
     speed = -Deacc * speed;
   }
-
-
-
-
 }y = 1
 speed = 1
-
 function setup() {
   createCanvas(400, 400);
-
 }
-
-
-
 function draw() {
-
   background(0);
-
   for(var a = 0; a <width; a=a+50){
   
   ballBounce(a, 0.2,0.85,1,1);
 }
-    // ballBounce(50, 0.2,0.85);
   
-  // ballBounce(100,0.2,0.85);
-  // ballBounce(150,0.2,0.85);
-  // ballBounce(200,0.2,0.85);
-  // ballBounce(250,0.2,0.85);
-  // ballBounce(300,0.2,0.85);
-  // ballBounce(350,0.2,0.85);
 }
-
-
-
 function ballBounce(x1, Acce, Deacc,y,speed) {
-
   
-
    y = y + speed;
    speed = speed + Acce;
-
   noStroke();
   ellipse(x1, y, 5, 5);
-
-
-
-
-
-
   if (y > 400) {
     speed = -Deacc * speed;
   }
-
-
-
-
 }let acce = 0.8;
-
 function setup() {
   createCanvas(400, 400);
 }
-
-
-
 function draw() {
-
   background(0);
-
   ballBounce(50, 0.2,0.85);
-  // ballBounce(100,0.2,0.85);
-  // ballBounce(150,0.2,0.85);
-  // ballBounce(200,0.2,0.85);
-  // ballBounce(250,0.2,0.85);
-  // ballBounce(300,0.2,0.85);
-  // ballBounce(350,0.2,0.85);
 }
-
-
-
 function ball(x, y) {
   
   this.x = x;
@@ -1797,28 +1164,17 @@ function ball(x, y) {
   ellipse(x1, y, 5, 5);
   
   }
-  // let speed = 1;
   
  
-
-
   
   y = y + speed;
   speed = speed + Acce;
-
-
-
   if (y > 400) {
     speed = -Deacc * speed;
   }
-
-
-
-
 }function setup() { 
   createCanvas(800, 500);
 } 
-
 function draw() { 
   background(255,240,220);
 	
@@ -1827,12 +1183,10 @@ function draw() {
   
   function rectBoy(x,y,hands,antena){
   
-//shadow
   noStroke();
   fill(150,50,80,90);
   quad(100,440,300,410,400,410,200,440);
   
-//hands
 	stroke(200,0,100);
   line(240,250,240,350);
 	line(280,250,280,350);
@@ -1841,17 +1195,14 @@ function draw() {
 	ellipse(280,350,10,10);
 	
 	
-//legs
 	line(250,250,250,420);
 	line(270,250,270,420);
 	ellipse(250,420,10,10);
 	ellipse(270,420,10,10);
 	
-//body
   fill(220,100,120);
   ellipse(260,250,100,60);
 	
-//head
   fill(255,150,150);
   rect(100,180,100,100);
   fill(255,190,180);
@@ -1867,7 +1218,6 @@ function draw() {
   arc(270,220,50,50,PI+HALF_PI,HALF_PI,CHORD);
 	
   
-//Signal
   noFill();
   arc(151,110,20,20,1.25*Math.PI,1.75*Math.PI);
   arc(151,100,40,40,1.25*Math.PI,1.75*Math.PI);
@@ -1879,74 +1229,27 @@ function draw() {
   
 	
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
-
 function setup() {
   createCanvas(400, 400);
-
 }
-
-
-
 function draw() {
-
   background(0);
-
   for(var a = 0; a <width; a=a+50){
   
   ballBounce(a, 0.2,0.85,1,1);
 }
-    // ballBounce(50, 0.2,0.85);
   
-  // ballBounce(100,0.2,0.85);
-  // ballBounce(150,0.2,0.85);
-  // ballBounce(200,0.2,0.85);
-  // ballBounce(250,0.2,0.85);
-  // ballBounce(300,0.2,0.85);
-  // ballBounce(350,0.2,0.85);
 }
-
-
-
 function ballBounce(x1, Acce, Deacc,y,speed) {
-
   this.speed = speed;
 	this.y = y;
  this.y +=this.speed;	
-
-  // y = y + speed;
-  // speed = speed + Acce;
-
   noStroke();
   ellipse(x1, y, 5, 5);
-
-
-
-
-
-
   if (y > 400) {
     speed = -Deacc * speed;
   }
-
-
-
-
-}// Quad Drawer
-
 let x = 200
 let y = 200
 let x3 = 250
@@ -1960,61 +1263,40 @@ let left = 60
 let right = 540
 let up = 60
 let bottom = 540
-
 inputa = -4
 inputb = 4
-
 button = false
 rollover = false
 rollover2 = false
 dragging = false
-
-///////// all slider variables
 var sliderx = 100;
 var slidery = 275;
 var sliderw = 50;
 var sliderh = 50;
-// Start and end of slider
 var sliderStart = 100;
 var sliderEnd = 500;
-// Offset for dragging slider
 var offsetX = 0;
-
 quadColor = (0, 0, 255)
-
-
-
 function setup() {
   createCanvas(600, 600);
   background(240, 220, 200);
-
 }
-
 function draw() {
-
   background(200, 60, 50)
   noStroke()
-
   fill(quadColor);
-
 quad_random(inputa, inputb);
  
   
-  //Rollover
-
   let rectx = 250
   let recty = 250
   let recth = 100
-
   if ((mouseX > rectx) && (mouseX < rectx + recth) && (mouseY > recty) &&
     (mouseY < recty + recth)) {
     rollover = true;
   } else {
     rollover = false;
   }
-
-
-
   if (rollover == true) {
     fill(0, 200);
     cursor(HAND);
@@ -2022,38 +1304,17 @@ quad_random(inputa, inputb);
     fill(0, 50, 255, 220);
     cursor(ARROW);
   }
-
-
-
-
-
-
-  //Center Rectangle Button 
-
   rect(rectx, recty, recth, recth);
-
-
-
-  ///////Slider Code Here
-
-  // Is it being dragged?
   if (dragging) {
     sliderx = mouseX + offsetX;
   }
-  // Keep rectangle within limits of slider
   sliderx = constrain(sliderx, sliderStart, sliderEnd - sliderw);
-
-
-
   noStroke();
-  // Fill according to state
   if (dragging) {
     fill(50, 50);
   } else {
     fill(175, 50);
   }
-  // Draw rectangle for slider
-
   if (rollover2 == true) {
     fill(255);
     cursor(HAND);
@@ -2062,18 +1323,8 @@ quad_random(inputa, inputb);
     cursor(ARROW);
   }
   rect(sliderx, slidery, sliderw, sliderh);
-
-  // Map is an amazing function that will map one range to another!
-  // Here we take the slider's range and map it to a value between 0 and 255
   inputa = map(sliderx, sliderStart, sliderEnd - sliderw, -6, -0.5);
   inputb = map(sliderx, sliderStart, sliderEnd - sliderw, 6, 0.5);
-
-
-
-
-
-
-
   if (
     x < left || x > right ||
     y < up || y > bottom ||
@@ -2083,25 +1334,13 @@ quad_random(inputa, inputb);
     y1 < up || y1 > bottom ||
     x2 < left || x2 > right ||
     y2 < up || y2 > bottom
-
   )
-
   {
     speed = -speed
   }
-
-
-
-
 }
-
 function quad_random(rx, ry) {
-
-
-
   quad(x, y, x3, y3, x1, y1, x2, y2);
-
-
   x = x + random(rx, ry) - speed
   y = y + random(rx, ry) - speed
   x3 = x3 + random(rx, ry) + speed
@@ -2110,34 +1349,22 @@ function quad_random(rx, ry) {
   y1 = y1 + random(rx, ry) + speed
   x2 = x2 + random(rx, ry) - speed
   y2 = y2 + random(rx, ry) + speed
-
-
-
-  // Button    
 }
-
 function mousePressed() {
   if (rollover == true) {
     quadColor = color(random(250), random(250), random(250));
   }
-
   if (mouseX > sliderx && mouseX < sliderx + sliderw &&
     mouseY > slidery && mouseY < slidery + sliderh) {
     dragging = true;
     rollover2 = true;
-    // If so, keep track of relative location of click to corner of rectangle
     offsetX = sliderx - mouseX;
   } else {
     rollover2 = false;
   }
-
 }
-
 function mouseReleased() {
-  // Stop dragging
   dragging = false;
-}// Quad Drawer
-
 let x = 200
 let y = 200
 let x3 = 250
@@ -2149,58 +1376,35 @@ let y2 = 300
 let speed = 1
 let limitx = 60
 let limity = 560
-
 button = false
 rollover = false
 dragging = false
-
-///////// all slider variables
 var sliderx = 100;
 var slidery = 25;
 var sliderw = 10;
 var sliderh = 50;
-// Start and end of slider
 var sliderStart = 100;
 var sliderEnd = 400;
-// Offset for dragging slider
 var offsetX = 0;
-
 quadColor = (0, 0, 255)
-
-
-
 function setup() {
   createCanvas(600, 600);
   background(240, 220, 200);
-
 }
-
 function draw() {
-
   background(240, 220, 200)
   noStroke()
-
   fill(quadColor);
-
-
   quad_random(-2, 2);
-
-
-  //Rollover
-
   let rectx = 250
   let recty = 250
   let recth = 100
-
   if ((mouseX > rectx) && (mouseX < rectx + recth) && (mouseY > recty) &&
     (mouseY < recty + recth)) {
     rollover = true;
   } else {
     rollover = false;
   }
-
-
-
   if (rollover == true) {
     fill(200, 200);
     cursor(HAND);
@@ -2210,45 +1414,28 @@ function draw() {
   }
   
   
-  //Center Rectangle Button 
-
   rect(rectx, recty, recth, recth);
   
   
   
-  ///////Slider Code Here
   
-    // Is it being dragged?
   if (dragging) {
     sliderx = mouseX + offsetX;
   }
-  // Keep rectangle within limits of slider
   sliderx = constrain(sliderx, sliderStart, sliderEnd-w);
-
-  // Draw a line for slider
   stroke(0);
   line(sliderStart, slidery+sliderh/2, sliderEnd, slidery+sliderh/2);
-
   stroke(0);
-  // Fill according to state
   if (dragging) {
     fill (50);
   } else {
     fill(175);
   }
-  // Draw rectangle for slider
   rect(sliderx, slidery, sliderw, sliderh);
-
-  // Map is an amazing function that will map one range to another!
-  // Here we take the slider's range and map it to a value between 0 and 255
   var b = map(sliderx,sliderStart,sliderEnd-sliderw,0,255);
   fill(b);
   rect(sliderStart, 100, sliderEnd-sliderStart, 150);
 }
-
-
-
-
   if (
     x < limitx || x > limity ||
     y < limitx || y > limity ||
@@ -2258,25 +1445,13 @@ function draw() {
     y1 < limitx || y1 > limity ||
     x2 < limitx || x2 > limity ||
     y2 < limitx || y2 > limity
-
   )
-
   {
     speed = -speed
   }
-
-
-
-
 }
-
 function quad_random(rx, ry) {
-
-
-
   quad(x, y, x3, y3, x1, y1, x2, y2);
-
-
   x = x + random(rx, ry) - speed
   y = y + random(rx, ry) - speed
   x3 = x3 + random(rx, ry) + speed
@@ -2285,12 +1460,7 @@ function quad_random(rx, ry) {
   y1 = y1 + random(rx, ry) + speed
   x2 = x2 + random(rx, ry) - speed
   y2 = y2 + random(rx, ry) + speed
-
-
-
-  // Button    
 }
-
 function mousePressed() {
   if (rollover == true) {
     quadColor = color(random(250), random(250), random(250));
@@ -2299,12 +1469,9 @@ function mousePressed() {
   if (mouseX > sliderx && mouseX < sliderx + sliderw && 
       mouseY > slidery && mouseY < slidery + sliderh) {
     dragging = true;
-    // If so, keep track of relative location of click to corner of rectangle
     offsetX = x-mouseX;
   }
   
-}// Quad Drawer
-
 let x = 200
 let y = 200
 let x3 = 250
@@ -2314,32 +1481,22 @@ let y1 = 400
 let x2 = 300
 let y2 = 300
 let speed = 1
-
 button = false
 rollover = false
-
 quadColor = (0, 0, 255)
-
-
-
 function setup() {
   createCanvas(600, 600);
   background(240, 220, 200);
-
 }
-
 function draw() {
-
   background(240, 220, 200)
   noStroke()
   
   fill(quadColor);
   
-
   quad_random (-4, 4);
   
   
-  //Rollover
   
   let rectx = 250
   let recty = 250
@@ -2353,7 +1510,6 @@ function draw() {
     rollover = false;
   }
   
-
   
   if(rollover == true)
   {
@@ -2368,7 +1524,6 @@ function draw() {
   
   
   
-
     if (
     x < 0 || x > 600 ||
     y < 0 || y > 600 ||
@@ -2378,25 +1533,16 @@ function draw() {
     y1 < 0 || y1 > 600 ||
     x2 < 0 || x2 > 600 ||
     y2 < 0 || y2 > 600
-
   )
-
   {
     speed = -speed
   }
-
-
-
-
 }
-
   function quad_random (rx, ry) {
     
     
     
   quad(x, y, x3, y3, x1, y1, x2, y2);
-
-
   x = x  - speed
   y = y  - speed
   x3 = x3  + speed
@@ -2407,10 +1553,7 @@ function draw() {
   y2 = y2  + speed
     
     
-
-// Button    
   }
-
 function mousePressed()
 {
   if(rollover == true)
@@ -2418,8 +1561,6 @@ function mousePressed()
     quadColor = color(random(250), random(250), random(250));
   }
 }
-// Quad Drawer
-
 let x = 200
 let y = 200
 let x3 = 250
@@ -2429,32 +1570,22 @@ let y1 = 400
 let x2 = 300
 let y2 = 300
 let speed = 1
-
 button = false
 rollover = false
-
 quadColor = (0, 0, 255)
-
-
-
 function setup() {
   createCanvas(600, 600);
   background(240, 220, 200);
-
 }
-
 function draw() {
-
   background(240, 220, 200)
   noStroke()
   
   fill(quadColor);
   
-
   quad_random (-3, 3);
   
   
-  //Rollover
   
   let rectx = 250
   let recty = 250
@@ -2468,7 +1599,6 @@ function draw() {
     rollover = false;
   }
   
-
   
   if(rollover == true)
   {
@@ -2483,7 +1613,6 @@ function draw() {
   
   
   
-
     if (
     x < 60 || x > 540 ||
     y < 60 || y > 540 ||
@@ -2493,25 +1622,16 @@ function draw() {
     y1 < 60 || y1 > 540 ||
     x2 < 60 || x2 > 540 ||
     y2 < 60 || y2 > 540
-
   )
-
   {
     speed = -speed
   }
-
-
-
-
 }
-
   function quad_random (rx, ry) {
     
     
     
   quad(x, y, x3, y3, x1, y1, x2, y2);
-
-
   x = x + random(rx, ry) - speed
   y = y + random(rx, ry) - speed
   x3 = x3 + random(rx, ry) + speed
@@ -2522,10 +1642,7 @@ function draw() {
   y2 = y2 + random(rx, ry) + speed
     
     
-
-// Button    
   }
-
 function mousePressed()
 {
   if(rollover == true)
@@ -2533,8 +1650,6 @@ function mousePressed()
     quadColor = color(random(250), random(250), random(250));
   }
 }
-// Quad Drawer
-
 let x = 200
 let y = 200
 let x3 = 250
@@ -2544,37 +1659,24 @@ let y1 = 400
 let x2 = 300
 let y2 = 300
 let speed = 1
-
 button = false
 rollover = false
-
 quadColor = (0, 0, 255)
-
-
-
 function setup() {
   createCanvas(600, 600);
   background(240, 220, 200);
-
 }
-
 function draw() {
-
   background(240, 220, 200)
   noStroke()
   
   fill(quadColor);
   
-
   quad_random (-4, 4);
   
-
-
   
   
-// Slider Test
   
-  //Rollover
   
   let rectx = 250
   let recty = 250
@@ -2588,7 +1690,6 @@ function draw() {
     rollover = false;
   }
   
-
   
   if(rollover == true)
   {
@@ -2614,33 +1715,16 @@ function draw() {
     y1 < 60 || y1 > 540 ||
     x2 < 60 || x2 > 540 ||
     y2 < 60 || y2 > 540
-
   )
-
   {
     speed = -speed
   }
-
-
-
-
-
-
-
-
-
-
-
-
 }
-
   function quad_random (rx, ry) {
     
     
     
   quad(x, y, x3, y3, x1, y1, x2, y2);
-
-
   x = x + random(rx, ry) - speed
   y = y + random(rx, ry) - speed
   x3 = x3 + random(rx, ry) + speed
@@ -2651,10 +1735,8 @@ function draw() {
   y2 = y2 + random(rx, ry) + speed
     
     
-
     
   }
-
 function mousePressed()
 {
   if(rollover == true)
@@ -2662,8 +1744,6 @@ function mousePressed()
     quadColor = color(random(255), random(255), random(255));
   }
 }
-// Quad Drawer
-
 let x = 200
 let y = 200
 let x3 = 250
@@ -2673,20 +1753,15 @@ let y1 = 400
 let x2 = 300
 let y2 = 300
 let speed = 1
-
 function setup() {
   createCanvas(600, 600);
   background(240, 220, 200);
-
 }
-
 function draw() {
-
   background(240, 220, 200)
   noStroke()
   fill(0, 0, 255);
   
-
   quad_random (-4, 4);
   
   if (
@@ -2698,18 +1773,13 @@ function draw() {
     y1 < 60 || y1 > 540 ||
     x2 < 60 || x2 > 540 ||
     y2 < 60 || y2 > 540
-
   )
-
   {
     speed = -speed
   }
-
   
   
-// Slider Test
   
-  //Rollover
   
   let a = 250
   let b = 250
@@ -2727,24 +1797,10 @@ function draw() {
   
   
   
-
-
-
-
-
-
-
-
-
-
-
 }
-
   function quad_random (rx, ry) {
     
   quad(x, y, x3, y3, x1, y1, x2, y2);
-
-
   x = x + random(rx, ry) - speed
   y = y + random(rx, ry) - speed
   x3 = x3 + random(rx, ry) + speed
@@ -2753,7 +1809,6 @@ function draw() {
   y1 = y1 + random(rx, ry) + speed
   x2 = x2 + random(rx, ry) - speed
   y2 = y2 + random(rx, ry) + speed
-
     
   }let x = 200
 let y = 200
@@ -2764,21 +1819,15 @@ let y1 = 400
 let x2 = 300
 let y2 = 300
 let speed = 1
-
 function setup() {
   createCanvas(600, 600);
   background(240,220,200);
-
 }
-
 function draw() {
-
   background(240,220,200)
   noStroke()
   fill(0,0,255);
   quad(x, y, x3, y3, x1, y1, x2, y2);
-
-
   x = x + random(-5, 5) + -speed
   y = y + random(-5, 5) + -speed
   x3 = x3 + random(-5, 5) + speed
@@ -2787,7 +1836,6 @@ function draw() {
   y1 = y1 + random(-5, 5) + speed
   x2 = x2 + random(-5, 5) + -speed
   y2 = y2 + random(-5, 5) + speed
-
   if (
     x < 50 || x > 550 ||
     y < 50 || y > 550 ||
@@ -2803,16 +1851,10 @@ function draw() {
   {
     speed = -speed
   }
-
-
 }function setup() {
   createCanvas(600, 400);
   background(255,200,80);
 }
-
-
-
-
 function draw() {
   let r = random(200,255);
   var g = random(50,200);
@@ -2832,24 +1874,17 @@ let x3 = 250
 let y3 = 400
 let x4 = 350
 let y4 = 400
-
 let ex = 400
 let ey = 425
 let ex1 = 50
 let ey1 = 20
 let ex2 = 50
 let ey2 = 10
-
-
-
 function setup() {
   createCanvas(600, 600);
   background(0)
   noCursor();
 }
-
-
-
 function draw() {
   background(0, 2)
   noFill();
@@ -2866,7 +1901,6 @@ function draw() {
   ellipse(mouseX, mouseY, 50, 50);
   fill(col2, 0, col1, 100);
   ellipse(mouseY, mouseX, 50, 50);
-
   x = x + random(-0.5, +0.5);
   y = y + random(-0.5, +0.5);
   x1 = x1 + random(-0.5, +0.5);
@@ -2883,29 +1917,20 @@ function draw() {
   ey1 = ey1 + random(-1, +1);
   ex2 = ex2 + random(-1, +1);
   ey2 = ey2 + random(-1, +1);
-
-
-
-
-
 }let x = 220
 let y = 200
 let x1 = 400
 let y1 = 200
 let x2 = 300
 let y2 = 300
-
-
 function setup() {
   createCanvas(600, 600);
   background(0)
   noCursor();
 }
-
 function mousePressed() {
   background(0);
 }
-
 function draw() {
  
   background(0,5)
@@ -2913,28 +1938,22 @@ function draw() {
   noFill();
   quad(mouseX, mouseY, x, y,x1,y1,x2,y2);
  
-
   x = x + random(-5, +5);
   y = y + random(-5, +5);
   x1 = x1 + random(-5, +5);
   y1 = y1 + random(-5, +5);
   x2 = x2 + random(-5, +5);
   y2 = y2 + random(-5, +5);
-
-
 }function setup() { 
   createCanvas(500, 500);
 } 
-
 function draw() { 
   background(255,240,220);
 	
-//shadow
   noStroke();
   fill(150,50,80,90);
   quad(100,440,300,410,400,410,200,440);
   
-//hands
 	stroke(200,0,100);
   line(240,250,240,350);
 	line(280,250,280,350);
@@ -2943,17 +1962,14 @@ function draw() {
 	ellipse(280,350,10,10);
 	
 	
-//legs
 	line(250,250,250,420);
 	line(270,250,270,420);
 	ellipse(250,420,10,10);
 	ellipse(270,420,10,10);
 	
-//body
   fill(220,100,120);
   ellipse(260,250,100,60);
 	
-//head
   fill(255,150,150);
   rect(100,180,100,100);
   fill(255,190,180);
@@ -2969,7 +1985,6 @@ function draw() {
   arc(270,220,50,50,PI+HALF_PI,HALF_PI,CHORD);
 	
   
-//Signal
   noFill();
   arc(151,110,20,20,1.25*Math.PI,1.75*Math.PI);
   arc(151,100,40,40,1.25*Math.PI,1.75*Math.PI);
@@ -2981,32 +1996,16 @@ function draw() {
   
 	
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
 }function setup() { 
   createCanvas(500, 500);
 } 
-
 function draw() { 
   background(100,200,150);
 	
-//shadow
   noStroke();
   fill(80,150,100,90);
   quad(100,440,300,410,400,410,200,440);
   
-//hands
 	stroke(200,0,100);
   line(240,250,240,350);
 	line(280,250,280,350);
@@ -3015,17 +2014,14 @@ function draw() {
 	ellipse(280,350,10,10);
 	
 	
-//legs
 	line(250,250,250,420);
 	line(270,250,270,420);
 	ellipse(250,420,10,10);
 	ellipse(270,420,10,10);
 	
-//body
   fill(220,100,120);
   ellipse(260,250,100,60);
 	
-//head
   fill(255,150,150);
   rect(100,180,100,100);
   fill(255,190,180);
@@ -3041,7 +2037,6 @@ function draw() {
   arc(270,220,50,50,PI+HALF_PI,HALF_PI,CHORD);
 	
   
-//Signal
   noFill();
   arc(151,110,20,20,1.25*Math.PI,1.75*Math.PI);
   arc(151,100,40,40,1.25*Math.PI,1.75*Math.PI);
@@ -3053,17 +2048,4 @@ function draw() {
   
 	
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

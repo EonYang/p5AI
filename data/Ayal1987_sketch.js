@@ -1,6 +1,4 @@
-/*
  - Turn on Sound
-
  - Run the sketch
  
  - Enter US state initials
@@ -10,9 +8,6 @@
    
  - You can change states
  
-*/
-
-
 let tribes = [];
 let button;
 let a = 0;
@@ -33,9 +28,6 @@ var vol;
 var fft;
 var peakDetect;
 let count = 0;
-
-
-
 function setup() {
   createCanvas(1080,608);
   loadJSON('Tribes.json', stateCount);
@@ -43,30 +35,21 @@ function setup() {
   button = createButton('Enter');
   button.mousePressed(use);
   angleMode(DEGREES);
-
-
   song = loadSound('Shaman.m4a');
   amp = new p5.Amplitude();
   fft = new p5.FFT();
   peakDetect = new p5.PeakDetect(20, 20000, 0.08);
 }
-
 function stateCount(data) {
   tribes = data;
 }
-
-
 function draw() {
   background(0, 10);
   translate(width/2, height/2);
   vol = amp.getLevel();
-  //print(vol);
   fft.analyze();
   peakDetect.update(fft);
-
-
   if (op) {
-
     noFill();
     if (tribes.length > 0) {
       a = 0;
@@ -76,66 +59,47 @@ function draw() {
         }
       }
     }
-
-
     for (let ang = 0; ang < 360; ang += (360 / a) / 2) {
       rotate(ang);
       stroke(0, 10);
       fill(col, 10);
       bezier(a, 0, c1, c2, c3, c4, 0,0);
     }
-
     c1 = c1 + speed1;
     c2 = c2 + speed2;
     c3 = c3 + speed3;
     c4 = c4 + speed4;
-
     if (peakDetect.isDetected) {
       count++;
     }
-
     if (count % 2 == 0 || c1 < 0 || c1 > width) {
       speed1 = -speed1;
-      //speed1 = random([1.1, 0.8]) * speed1;
     }
     if (count % 3 == 0 || c2 < 0 || c2 > height) {
       speed2 = -speed2;
-      //speed2 = 0.95 * speed2
     }
     if (count % 5 == 0 || c3 < 0 || c3 > width) {
       speed3 = -speed3;
-      //speed3 = random([1.1, 0.95]) * speed3;
-
     }
     if (count % 7 == 0 || c4 < 0 || c4 > height) {
       speed4 = -speed4;
-      //speed4 = 1.05 * speed4
     }
-
-
-    //col = col + colSpeed;
     if (peakDetect.isDetected) {
-      //colSpeed = -colSpeed;
       col = [150, 20, 10, 70];
     } else {
       col = 255;
-
     }
   }
 }
-
 function use() {
   op = !op
   song.play();
 }var videos = []
 var vid1;
 var vid2;
-
 var dragging = false;
 var rollover = false;
-
 var offsetX, offsetY;
-
 var x1 = 10;
 var y1 = 10;
 var x2 = 150;
@@ -153,9 +117,7 @@ function setup() {
   vid2.hide().loop();
   rectMode(CENTER);
 	noStroke();
-
 }
-
 function draw(){
 	 background(50);
   fill(255);
@@ -167,47 +129,14 @@ function draw(){
         10 * (vid.pixels[offset+1]/255));
     }
   }
-	// if (mouseX > x1 && mouseX < x1 + w1 && mouseY > y1 && mouseY < y1 + h1) {
-	// rollover = true;
-	// } 
-	// else {
-	// rollover = false;
-	// }
-	// if (dragging) {
-	// x1 = mouseX + offsetX;
-	// y1 = mouseY + offsetY;
-	// }
   
-	// image(vid2,x1,y1,w1,h1);
-  // filter('THRESHOLD',[0.7]);
-  // image(vid2,x2,y2,w2,h2);
 }
-
-
-// function mousePressed() {
-//   // Did I click on the rectangle?
-//   if (mouseX > x1 && mouseX < x1 + w1 && mouseY > y1 && mouseY < y1 + h1) {
-//     dragging = true;
-//     // If so, keep track of relative location of click to corner of rectangle
-//     offsetX = x1-mouseX;
-//     offsetY = y1-mouseY;
-//   }
-// }
-
-// function mouseReleased() {
-//   // Quit dragging
-//   dragging = false;
-// }
-
 var videos = []
 var vid1;
 var vid2;
-
 var dragging = false;
 var rollover = false;
-
 var offsetX, offsetY;
-
 var x1 = 10;
 var y1 = 10;
 var x2 = 150;
@@ -223,12 +152,9 @@ function setup() {
   videos = [vid1,vid2]
   vid1.hide().loop();
   vid2.hide().loop();
-
 }
-
 function draw(){
 	background(255);
-
   if (mouseX > x1 && mouseX < x1 + w1 && mouseY > y1 && mouseY < y1 + h1) {
     rollover = true;
   } 
@@ -240,33 +166,22 @@ function draw(){
     y1 = mouseY + offsetY;
   }
 	image(vid1,x1,y1,w1,h1);
-  // filter('GRAY');
-  // image(vid2,x2,y2,w2,h2);
-  print(x1);
 }
-
-
 function mousePressed() {
-  // Did I click on the rectangle?
   if (mouseX > x1 && mouseX < x1 + w1 && mouseY > y1 && mouseY < y1 + h1) {
     dragging = true;
-    // If so, keep track of relative location of click to corner of rectangle
     offsetX = x1-mouseX;
     offsetY = y1-mouseY;
   }
 }
-
 function mouseReleased() {
-  // Quit dragging
   dragging = false;
 }
-
 var x1 = 0;
 var y1 = 0;
 var x2 = 0;
 var y2 = 0;
 var op = false;
-
 function setup() {
   createCanvas(400, 400);
   loadJSON('word_count_year_nouns.json', stateCount);
@@ -274,13 +189,10 @@ function setup() {
   wordInput2 = createInput('');
   button = createButton('Enter');
   button.mousePressed(use);
-
 }
-
 function stateCount(data) {
   years = data;
 }
-
 function draw() {
   background(220);
   if (op) {
@@ -288,28 +200,17 @@ function draw() {
       for (var i = 0; i < years['2018'].length; i++) {
         if (wordInput1.value() == years['2018'][i][0]) {
           var count18 = years['2018'][i][1];
-          print(count18);
         }
         break;
       }
     }
   }
-
-  // line(x1, y1, x2, y2);
-  // x2++;
-  // y2++;
-
 }
-
-
 function use() {
   op = !op
-}/* export SVG
 DDF 2018
 need to have p5.svg.js in project and in index.html
-see -https://github.com/zenozeng/p5.js-svg
 this will save an SVG file in your download folder
-*/
 let x1 = 0;
 let y1 = 0;
 let y3 = 0;
@@ -324,38 +225,18 @@ let speed3 = 10
 let speed4 = 10
 let a = 0;
 function setup() {
-    createCanvas(500, 200, SVG); // Create SVG Canvas
-    strokeWeight(1);   // do 0.1 for laser
-    background(255);      // red is good for laser
-  // noFill();              // better not to have a fill for laser
 }
-
 function draw() {
   for(let i=0; i<100; i++){
 	 noFill();
   stroke(0);
 	line(x1,y1, x2, y2);
 	line(x3, y3, x4, y4);
-  // line(x2,y1,x1,y2);
-  // line(x4,y3,x3,y4);
 	stroke(0);
-	// bezier(0, 0, x1, y1, x3, y3, width, height);
-	// bezier(0, 0, x3, y4, x4, y3, width, height);
-
 	x1 += speed1;
-	// x2 += speed1;
-	// x3 += speed1;
 	x4 += speed1;
-	// y1 -= speed1;
-	// y2 -= speed1;
-	// y3 -= speed1;
-	// y4 += speed1;
-
   
   }
-  save("mySVG.svg");      // give file name
-  print ("saved svg");
-  noLoop();								// we just want to export once
 }
 let x1 = 0;
 let y1 = 0;
@@ -374,47 +255,21 @@ function setup() {
   createCanvas(400, 200);
     background(255);
   angleMode(DEGREES);
-
 }
-
 function draw() {
  	for(let i=0; i<100; i++){
 	 noFill();
   stroke(0);
 	line(x1,y1, x2, y2);
 	line(x3, y3, x4, y4);
-  // line(x2,y1,x1,y2);
-  // line(x4,y3,x3,y4);
 	stroke(0);
-	// bezier(0, 0, x1, y1, x3, y3, width, height);
-	// bezier(0, 0, x3, y4, x4, y3, width, height);
-
 	x1 += speed1;
-	// x2 += speed1;
-	// x3 += speed1;
 	x4 += speed1;
-	// y1 -= speed1;
-	// y2 -= speed1;
-	// y3 -= speed1;
-	// y4 += speed1;
-
   
   }
   noLoop();
-
-  // if (x1 > 1000){
-  // 	speed1 = -speed1
-  // 	x1=0;
-  //  } 
-  // else if (x4 > 200){
-  // 	speed1 = -speed1
-  // 	x4=0;
-  // }
 }
-
-/*
  - Turn on Sound
-
  - Run the sketch
  
  - Enter US state initials
@@ -424,9 +279,6 @@ function draw() {
    
  - You can change states
  
-*/
-
-
 let tribes = [];
 let button;
 let a = 0;
@@ -447,9 +299,6 @@ var vol;
 var fft;
 var peakDetect;
 let count = 0;
-
-
-
 function setup() {
   createCanvas(1080,608);
   loadJSON('Tribes.json', stateCount);
@@ -457,30 +306,21 @@ function setup() {
   button = createButton('Enter');
   button.mousePressed(use);
   angleMode(DEGREES);
-
-
   song = loadSound('Shaman.m4a');
   amp = new p5.Amplitude();
   fft = new p5.FFT();
   peakDetect = new p5.PeakDetect(20, 20000, 0.08);
 }
-
 function stateCount(data) {
   tribes = data;
 }
-
-
 function draw() {
   background(0, 10);
   translate(width/2, height/2);
   vol = amp.getLevel();
-  //print(vol);
   fft.analyze();
   peakDetect.update(fft);
-
-
   if (op) {
-
     noFill();
     if (tribes.length > 0) {
       a = 0;
@@ -490,54 +330,38 @@ function draw() {
         }
       }
     }
-
-
     for (let ang = 0; ang < 360; ang += (360 / a) / 2) {
       rotate(ang);
       stroke(0, 10);
       fill(col, 10);
       bezier(a, 0, c1, c2, c3, c4, 0,0);
     }
-
     c1 = c1 + speed1;
     c2 = c2 + speed2;
     c3 = c3 + speed3;
     c4 = c4 + speed4;
-
     if (peakDetect.isDetected) {
       count++;
     }
-
     if (count % 2 == 0 || c1 < 0 || c1 > width) {
       speed1 = -speed1;
-      //speed1 = random([1.1, 0.8]) * speed1;
     }
     if (count % 3 == 0 || c2 < 0 || c2 > height) {
       speed2 = -speed2;
-      //speed2 = 0.95 * speed2
     }
     if (count % 5 == 0 || c3 < 0 || c3 > width) {
       speed3 = -speed3;
-      //speed3 = random([1.1, 0.95]) * speed3;
-
     }
     if (count % 7 == 0 || c4 < 0 || c4 > height) {
       speed4 = -speed4;
-      //speed4 = 1.05 * speed4
     }
-
-
-    //col = col + colSpeed;
     if (peakDetect.isDetected) {
-      //colSpeed = -colSpeed;
       col = [150, 20, 10, 70];
     } else {
       col = 255;
-
     }
   }
 }
-
 function use() {
   op = !op
   song.play();
@@ -551,88 +375,47 @@ let startTime = 0;
 let countries = [];
 let col = 0;
 function preload() {
-  // Don't use preload() function for JSON files,
-  // currently a bug in p5 where it doesn't return JSON Arrays only JSON Objects
-  // populations = loadJSON('../data/simpleData_noRegions.json');
 }
 function setup() {
   createCanvas(wid,hei);
-
-  // put setup code here
-  // load static data set here
   loadJSON('simpleData_noRegions.json', callback);
-  // for (let i = 0; i < ; i++) {
-  //   bouncers[i] = new Ball(random(width),random(30, 70));
-  // }
 }
 function callback(data) {
   console.log('done loading data');
   console.log(data);
   populations = data;
-
-  //if the data is loaded, start working with it
   if (populations) {
     for (let i = 0; i < populations.length; i++) {
-      //console.log(populations[i]);
-
       let name = populations[i].country;
       countries.push(name);
       let population = populations[i].estimate;
       let popMap = map(population,0,2000000,0,200)
-      //sampling error of the estimate, estimate could be + or - the margin of error
       let error = populations[i].marginOfError;
-
-      //get magnitude of error compared to population estimate;
       let errorFraction =  populations[i].marginOfError / population;
-      //console.log(errorFraction);
       let r = random(wid);
       bouncers[i] = new Ball(r,popMap);
-      // console.log(name,  population, error)
     }
   }
 }
-
-
 let x = 0;
-
 function draw() {
-  // put drawing code here
   let currentTime = millis()-startTime;
   let currentSeconds = currentTime/1000;
-
   fill(col);
-  // strokeWeight(4);
   textSize(30);
   text(countries[x],wid/4,100);
-  // console.log(currentSeconds);
   background(220,30);
   fill(0);
   if (frameCount % 50 == 0){
-
     if (x < bouncers.length){
       x++;
-
     }
   }
-  // console.log(j);
   for (let i = 0; i < x; i++) {
-
         bouncers[i].move();
         bouncers[i].show();
         bouncers[i].color();
-
       }
-
-
-  // if (populations) {
-    // How might you sort the countries by population estimate?
-
-    // How might you visually represent the population estimates?
-    // Try a few different ways
-    // Think about shape, color, text
-    // Once you feel comfortable with drawing a static representation, think about adding interactivity
-
-  // }
 }
 let populations;
 let objArray = [];
@@ -644,95 +427,51 @@ let startTime = 0;
 let countries = [];
 let col = 0;
 function preload() {
-  // Don't use preload() function for JSON files,
-  // currently a bug in p5 where it doesn't return JSON Arrays only JSON Objects
-  // populations = loadJSON('../data/simpleData_noRegions.json');
 }
 function setup() {
   createCanvas(wid,hei);
-
-  // put setup code here
-  // load static data set here
   loadJSON('../simpleData_noRegions.json', callback);
-  // for (let i = 0; i < ; i++) {
-  //   bouncers[i] = new Ball(random(width),random(30, 70));
-  // }
 }
 function callback(data) {
   console.log('done loading data');
   console.log(data);
   populations = data;
-
-  //if the data is loaded, start working with it
   if (populations) {
     for (let i = 0; i < populations.length; i++) {
-      //console.log(populations[i]);
-
       let name = populations[i].country;
       countries.push(name);
       let population = populations[i].estimate;
       let popMap = map(population,0,2000000,0,200)
-      //sampling error of the estimate, estimate could be + or - the margin of error
       let error = populations[i].marginOfError;
-
-      //get magnitude of error compared to population estimate;
       let errorFraction =  populations[i].marginOfError / population;
-      //console.log(errorFraction);
       let r = random(wid);
       bouncers[i] = new Ball(r,popMap);
-      // console.log(name,  population, error)
     }
   }
 }
-
-
 let x = 0;
-
 function draw() {
-  // put drawing code here
   let currentTime = millis()-startTime;
   let currentSeconds = currentTime/1000;
-
   fill(col);
-  // strokeWeight(4);
   textSize(30);
   text(countries[x],wid/4,100,);
-  // console.log(currentSeconds);
   background(220,30);
   fill(0);
   if (frameCount % 50 == 0){
-
     if (x < bouncers.length){
       x++;
-
     }
   }
-  // console.log(j);
   for (let i = 0; i < x; i++) {
-
         bouncers[i].move();
         bouncers[i].show();
         bouncers[i].color();
-
       }
-
-
-  // if (populations) {
-    // How might you sort the countries by population estimate?
-
-    // How might you visually represent the population estimates?
-    // Try a few different ways
-    // Think about shape, color, text
-    // Once you feel comfortable with drawing a static representation, think about adding interactivity
-
-  // }
 }
-//do a smoke that you can cotrol it's alpha with a slide
-
 let button;
 let word = ["I'm","just","mad","about","Saffron","Saffron's","mad","about","me","I'm","just","mad","about","Saffron","she's","just","mad","about","me","they","call","me","mellow","yellow","they","call","me","mellow","yellow","they","call","me","mellow","yellow","I'm","just","mad","about","fourteen","fourteen's","mad","about","me","I'm","just","mad","about","fourteen","she's","just","mad","about","me","they","call","me","mellow","yellow","they","call","me","mellow","yellow","they","call","me","mellow","yellow"];
 let i=0;
-//let y = 400;
 let counter = 0;
 function setup() { 
   createCanvas(400, 400);
@@ -741,52 +480,30 @@ function setup() {
   button = createButton(word[i]);
 	button.mousePressed(testFunc);
 } 
-
-
 function testFunc() {
 	pattern.changeState();
   i = i+1;
   button.remove();
   button = createButton(word[i]);
   button.mousePressed(testFunc);
-  print("this is")
-  print(i);
 }
-
-
 function draw() { 
   pattern.display();
   if (i>0){
   pattern.move();
   }
-  //button.mousePressed(changeWord);
-
-
-
   
  
-
   
 }
-// let x = 200;
-// let y = 20;
-// let speed = 0;
-
-
-
 let bouncers = [];
 let gravity = 0.1;
-
 function setup() {
   createCanvas(400, 400);
   angleMode(DEGREES);
   for (let i = 0; i < 50; i++) {
     bouncers[i] = new Ball((width-i),100);
   }
-} //bouncer2 = new Ball(40);
-// function mouseDragged(){
-// bouncers.push (new Ball(mouseX,mouseY,100));
-// }
 function draw() {
   background(220,70);
   fill(0);
@@ -808,26 +525,17 @@ var wid = window.innerWidth;
 var hei = window.innerHeight;
 var m = 10;
 var speedm = 0.05
-//var fx,fy;
-
 function setup() {
   createCanvas(wid, hei);
   background(0);
   angleMode(DEGREES);
   x1 = wid/4;	
   y1 = hei/8;
-  // fx = random([0.1,-0.1]);
-  // fy = random([0.1,-0.1]);
-
 }
-
 function draw() {
-
   translate(0, 0, 0, 0); 
-  // noStroke();
   stroke(255);
   fill(0);
-
   if (x1 < mouseX && y1 < mouseY) {
     speed1x += 0.01;
     speed1y += 0.01;
@@ -835,15 +543,12 @@ function draw() {
   } else if (x1 > mouseX && y1 < mouseY) {
     speed1x -= 0.01;
     speed1y += 0.01;
-
   } else if (x1 > mouseX && y1 > mouseY) {
     speed1x -= 0.01;
     speed1y -= 0.01;
-
   } else if (x1 < mouseX && y1 > mouseY) {
     speed1x += 0.01;
     speed1y -= 0.01;
-
 }
   
     
@@ -858,38 +563,23 @@ function draw() {
   }
   
   
-
   
   ellipse(x1, y1, 20);
-
-
   translate(x1, y1, 0, 0);
-    // m+=speedm;
-
   x2 = m* sin(a*15);
   y2 = m * cos(a*15);
-  //noStroke();
   stroke(255);
   fill(0);
   ellipse(x2, y2, 10)
-
   a++;
   wid += 0.001;
   hei += 0.005;
-//   if (frameCount % 200 == 0 ){
-//   	speedm = -speedm
-//   } 
   
-//   m += speedm;
-
     
   
-
-
 }function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
 }
-
 function draw() {
   background(240);
   noStroke();
@@ -905,36 +595,22 @@ function draw() {
   ellipse(600,450,500,20);
   fill(0);
   strokeWeight(1);
-
   ellipse(500,450,10);
   ellipse(540,455,10);
   ellipse(750,445,10);
   ellipse(450,450,10);
   ellipse(800,448,10);
   ellipse(600,445,10);
-
-
-
-}var bugs = []; // array of Jitter objects
 var col = 255;
 function setup() {
   createCanvas(710, 400);
   background(0);
-
-  // Create objects
   for (var i=0; i<100; i++) {
     bugs.push(new Jitter());
   }
 }
-
-
 function draw() {
-  // if (frameCount % 300 ==0){
-  // 	col = 0;
-  // } 
   fill(col);
-
-
   for (var j=0; j<bugs.length; j++) {
     
     bugs[j].move();
@@ -954,20 +630,14 @@ function Jitter() {
     this.y += random(0.2*this.speedy,1.2*this.speedy);
     this.speedx = 0.999*this.speedx;
     this.speedy = 0.999*this.speedy;
-
     
   };
-
   this.display = function() {
     noStroke();
-  //    if (frameCount % 300 ==0){
-  // 	col = 0;
-  // } 
   this.a -= 2;
   fill(col,this.a);
     ellipse(this.x, this.y, this.diameter, this.diameter);
   };
-
   
 }var x1 ;
 var y1 ;
@@ -980,26 +650,17 @@ var wid = window.innerWidth;
 var hei = window.innerHeight;
 var m = 10;
 var speedm = 0.05
-//var fx,fy;
-
 function setup() {
   createCanvas(wid, hei);
   background(0);
   angleMode(DEGREES);
   x1 = wid/16;	
   y1 = hei/8;
-  // fx = random([0.1,-0.1]);
-  // fy = random([0.1,-0.1]);
-
 }
-
 function draw() {
-
   translate(0, 0, 0, 0); 
-  // noStroke();
   stroke(255);
   fill(0);
-
   if (x1 < wid/2 && y1 < hei/2) {
     speed1x += 0.01;
     speed1y += 0.01;
@@ -1007,15 +668,12 @@ function draw() {
   } else if (x1 > wid/2 && y1 < hei/2) {
     speed1x -= 0.01;
     speed1y += 0.01;
-
   } else if (x1 > wid/2 && y1 > hei/2) {
     speed1x -= 0.01;
     speed1y -= 0.01;
-
   } else if (x1 < wid/2 && y1 > hei/2) {
     speed1x += 0.01;
     speed1y -= 0.01;
-
 }
   
     
@@ -1030,34 +688,18 @@ function draw() {
   }
   
   
-
   
   ellipse(x1, y1, 20);
-
-
   translate(x1, y1, 0, 0);
-    // m+=speedm;
-
   x2 = m* sin(a*15);
   y2 = m * cos(a*15);
-  //noStroke();
   stroke(255);
   fill(0);
   ellipse(x2, y2, 10)
-
   a++;
-  // wid += 0.001;
-  // hei += 0.005;
-//   if (frameCount % 200 == 0 ){
-//   	speedm = -speedm
-//   } 
   
-//   m += speedm;
-
     
   
-
-
 }var x1 ;
 var y1 ;
 var x2;
@@ -1069,23 +711,18 @@ var wid = window.innerWidth;
 var hei = window.innerHeight;
 var m = 10;
 var speedm = 0.01
-
 function setup() {
   createCanvas(wid, hei);
   angleMode(DEGREES);
   background(255);
   x1 = wid/16;	
   y1 = hei/8;
-
 }
-
 function draw() {
   
   translate(0, 0, 0, 0); 
-  // noStroke();
   stroke(255);
   fill(0,0,255);
-
   if (x1 < wid/2 && y1 < hei/2) {
     speed1x += speedm;
     speed1y += 0.01;
@@ -1093,15 +730,12 @@ function draw() {
   } else if (x1 > wid/2 && y1 < hei/2) {
     speed1x -= speedm;
     speed1y += speedm;
-
   } else if (x1 > wid/2 && y1 > hei/2) {
     speed1x -= speedm;
     speed1y -= speedm;
-
   } else if (x1 < wid/2 && y1 > hei/2) {
     speed1x += speedm;
     speed1y -= speedm;
-
 }
   
     
@@ -1116,34 +750,17 @@ function draw() {
   }
   
   
-
   
   ellipse(x1, y1, 20);
-
-
   translate(x1, y1, 0, 0);
-    // m+=speedm;
-
   x2 = 10 * sin(a * m);
   y2 = 10 * cos(a * m);
-  //noStroke();
   stroke(0);
   fill(255);
   ellipse(x2, y2, 10)
-
   a++;
-  // if (frameCount % 200 == 0){
-  // 	speedm = -speedm;
-  // }
-  //   if (m > 10) {
-  //     speedm = -0.01;
-  // } if (m < 5) {
-  // 	speedm = 0.01;
-  // }
     
   
-
-
 }var x1 ;
 var y1 ;
 var x2;
@@ -1161,8 +778,6 @@ var b ;
 var rSpeed;
 var gSpeed;
 var bSpeed;
-
-
 function setup() {
   createCanvas(wid, hei);
   angleMode(DEGREES);
@@ -1175,16 +790,12 @@ function setup() {
   rSpeed = random(5);
 	gSpeed = random(5);
 	bSpeed = random(5);
-
 }
-
 function draw() {
   
   translate(0, 0, 0, 0); 
-  // noStroke();
   stroke(255);
   fill(r,g,b);
-
   if (x1 < wid/2 && y1 < hei/2) {
     speed1x += speedm;
     speed1y += 0.01;
@@ -1192,15 +803,12 @@ function draw() {
   } else if (x1 > wid/2 && y1 < hei/2) {
     speed1x -= speedm;
     speed1y += speedm;
-
   } else if (x1 > wid/2 && y1 > hei/2) {
     speed1x -= speedm;
     speed1y -= speedm;
-
   } else if (x1 < wid/2 && y1 > hei/2) {
     speed1x += speedm;
     speed1y -= speedm;
-
 }
   
     
@@ -1215,21 +823,14 @@ function draw() {
   }
   
   
-
   
   ellipse(x1, y1, 20);
-
-
   translate(x1, y1, 0, 0);
-    // m+=speedm;
-
   x2 = 10 * sin(a * m);
   y2 = 10 * cos(a * m);
-  //noStroke();
   stroke(0);
   fill(255);
   ellipse(x2, y2, 10)
-
   a++;
 	
   if (r>255 || r < 0){
@@ -1244,19 +845,8 @@ function draw() {
     r+=rSpeed;
     g+=gSpeed;
     b+=bSpeed;
-
-  // if (frameCount % 200 == 0){
-  // 	speedm = -speedm;
-  // }
-  //   if (m > 10) {
-  //     speedm = -0.01;
-  // } if (m < 5) {
-  // 	speedm = 0.01;
-  // }
     
   
-
-
 }var x1 = 200;
 var y1 = 200;
 var x2;
@@ -1269,86 +859,32 @@ var speedm = 0.001
 var m = 0.01;
 var wid = window.innerWidth;
 var hei = window.innerHeight;
-
 var d;
-
 function setup() {
   createCanvas(400, 400);
-  // x1 = width/2;
-  // y1 = height/2;
-  // x2 = random(600);
-  // y2 = random(400);
-  // speed1x = random([-1, 1]);
-  // speed1y = random([-1, 1]);
   angleMode(DEGREES);
   background(220, 20);
-
 }
-
 function draw() {
-  // background(220, 20);
-  // translate(0, 0, 0, 0);
   
 	if (keyIsDown(LEFT_ARROW)) {
     x1 -= 5;
   }
-
   if (keyIsDown(RIGHT_ARROW)) {
     x1 += 5;
   }
-
   if (keyIsDown(UP_ARROW)) {
     y1 -= 5;
   }
-
   if (keyIsDown(DOWN_ARROW)) {
     y1 += 5;
   }
   
 	clear();
-  //d = dist(mouseX,mouseY,x,y);
   fill(255);
-  // x1 = mouseX;
-  // y1 = mouseY;
   ellipse(x1, y1, 20);
-
-
-
-  // x1 += speed1x;
-  // y1 += speed1y;
-
-//   if (x1 < 0 || x1 > width) {
-//     speed1x = -speed1x;
     
-//   }
-//   if (y1 < 0 || y1 > height) {
-//     speed1y = -speed1y;
-//   }
-
-//   translate(x1, y1, 0, 0);
-
-//   x2 = 10 * sin(a * 10);
-//   y2 = 10 * cos(a * 10);
-//   fill(200);
-//   ellipse(x2, y2, 10)
-
-//   a++;
-  // m += speedm;
-  // if (m<0 || m>2){
-  // 	speedm = -speedm;
-  // }
-  // speed1x = 1.0001*speed1x;
 }
-
-
-// function keyPressed() {
-//   if (keyCode === UP_ARROW) {
-//     speed1y = -1;
-//   } else if (keyCode === DOWN_ARROW) {
-//     speed1y = 1;
-//   }
-//   return false; // prevent default
-// }var x1;
 var y1;
 var x2;
 var y2;
@@ -1360,38 +896,22 @@ var speedm = 0.001
 var m = 0.01;
 var wid = window.innerWidth;
 var hei = window.innerHeight;
-
 var d;
-
 function setup() {
   createCanvas(wid, hei);
   x1 = width/2;
   y1 = height/2;
-  // x2 = random(600);
-  // y2 = random(400);
   speed1x = random([-1, 1]);
   speed1y = random([-1, 1]);
   angleMode(DEGREES);
   background(220, 20);
-
 }
-
 function draw() {
-  // background(220, 20);
   translate(0, 0, 0, 0);
-
-
-  //d = dist(mouseX,mouseY,x,y);
   fill(255);
-  // x1 = mouseX;
-  // y1 = mouseY;
   ellipse(x1, y1, 20)
-
-
-
   x1 +=speed1x - cos(a);
   y1 += speed1y + sin(a);
-
   if (x1 < 0 || x1 > width) {
     speed1x = -speed1x;
     
@@ -1399,87 +919,57 @@ function draw() {
   if (y1 < 0 || y1 > height) {
     speed1y = -speed1y;
   }
-
   translate(x1, y1, 0, 0);
-
   x2 = 10 * sin(a * 10);
   y2 = 10 * cos(a * 10);
   fill(200);
   ellipse(x2, y2, 10)
-
   a++;
   m += speedm;
   if (m<0 || m>2){
   	speedm = -speedm;
   }
-  // speed1x = 1.0001*speed1x;
 }var bg;
 var img;
-var wid = 1024//window.innerWidth;
-var hei =  1024//window.innerHeight;
-
 function preload(){
 	img = loadImage('finalWorld.png');
-
 }
-
-
 function setup() {
 	createCanvas(wid,hei);
   background(img);
-
 }
-
 function draw() {
-  //background(bg);
   noStroke();
   fill(random([0,255]));
   ellipse(random(0,wid),random(0,hei),10);
-
 }var bg;
 var img;
-var wid = 600//window.innerWidth;
-var hei =  400//window.innerHeight;
 function preload() {
   img = loadImage('finalWorld.png');
 }
-
-var bugs = []; // array of Jitter objects
-
 function setup() {
-	//img = loadImage('finalWorld.png');
   background(img);
   createCanvas(wid, hei);
-	//image(img,0,0);
-  // Create objects
   for (var i=0; i<300; i++) {
     bugs.push(new Jitter());
   }
-  //background(0);
     background(img);
 }
-
 function draw() {
-
-
   for (var i=0; i<bugs.length; i++) {
     bugs[i].move();
     bugs[i].display();
   }
 }
-
-// Jitter class
 function Jitter() {
   this.x = random(width);
   this.y = random(height);
   this.diameter = 2;
   this.speed = 1;
-
   this.move = function() {
     this.x += random(-this.speed, this.speed);
     this.y += random(-this.speed, this.speed);
   };
-
   this.display = function() {
     noStroke();
     fill(0);
@@ -1496,8 +986,6 @@ speed = 0.03;
 function setup() {
   createCanvas(wid,hei);
 }
-
-
 function draw() {
   background(0);
   textSize(32);
@@ -1506,7 +994,6 @@ function draw() {
 	noFill();
 	stroke(255);
   strokeWeight(4);
-	//strokeSize(4);
 	rect(100,50,200,300);
 	if (rect_y > 200 && rect_y < 250){
   	r = 255;
@@ -1522,7 +1009,6 @@ function draw() {
 	rect_y += speed;
 	rect_h -= speed;
 }var kinectron;
-
 function setup() {
   myCanvas = createCanvas(400, 400);
   
@@ -1532,10 +1018,8 @@ function setup() {
   
   kinectron.startTrackedBodies(drawBody);
 }
-
 function draw() {
 }
-
 function drawBody(body){
  	background(0);
   for (var i = 0; i < body.joints.length; i++){
@@ -1556,32 +1040,22 @@ function setup() {
   kinectron.makeConnection();
   kinectron.startKey(gotData);
 }
-
 function draw() {
- // background(220);
 }
-
 function gotData(data){
   loadImage(data.src,gotImage);
-  //this is a callback that triggers another callback
 }
-
 function gotImage(img){
   image(img,0,0);
 }
-
-var bugs = []; // array of Jitter objects
 var x = random(width);
 var y = random(height);
 var z = 0;
 var diameter = 30;
 var speed = 10;
-
 function setup() {
   createCanvas(600, 400, WEBGL);
-
 }
-
 function draw() {
   background(50, 89, 100);
   for (var i=0; i<100; i++) {
@@ -1589,8 +1063,6 @@ function draw() {
   display();
   }
 }
-
-// Jitter class
 function move() {
     z += this.speed;
     if (z > 200) {
@@ -1598,19 +1070,15 @@ function move() {
     }
   
   }
-
   function display() {
   translate(x,y,z);
   push();
   fill(255);
   sphere(10);
   pop();
-
-}var bugs = []; // array of Jitter objects
 var length = 100
 function setup() {
   createCanvas(710, 400);
-  // Create objects
   for (var i = 0; i < length; i++) {
     bugs.push(new Jitter());
   } 
@@ -1622,8 +1090,6 @@ function draw() {
     bugs[i].display();
   }
 }
-
-// Jitter class
 function Jitter() {
   this.x = random(width);
   this.y = random(height);
@@ -1634,21 +1100,16 @@ function Jitter() {
   this.speedA = 1;
   this.multi = [0.2,1.8];
   this.alphaMax = 50;
-
   this.move = function() {
     this.x += random(-this.speed*random(this.multi), this.speed);
     this.y += random(-this.speed, this.speed*random(this.multi));
-
     if (this.x > width || this.x < 0) {
       this.x = random(width);
     }
     if (this.y > height || this.y < 0) {
       this.y = random(height);
     }
-
-
     };
-
     this.display = function() {
       if (this.alpha > this.alphaMax || this.alpha < 10) {
         this.speedA = -this.speedA;
@@ -1662,20 +1123,14 @@ function Jitter() {
         this.speedA += 1;
         }
     };
-
-
   }
-
 var x = 30;
 var y = 30;
-
 var r;
 function setup() {
   createCanvas(400, 400);
     background(220);
-
 }
-
 function draw() {
   fill(random([0,'blue']));
   ellipse(x,y,100);
@@ -1695,25 +1150,20 @@ var sound;
 var fft;
 var peakDetect;
 var t = 1;
-
 function preload(){
 	
   video = createVideo('Short.mp4');
 	sound = loadSound('Shaman.m4a')
 }
-
 function setup() { 
   createCanvas(400, 400);
     background(220);
 	image(video,width,height);
     sound.play();
-
   fft = new p5.FFT();
   peakDetect = new p5.PeakDetect(20, 20000, 0.08);
   video.loop();
-  print(video.duration());
 } 
-
 function draw() { 
    fft.analyze();
   peakDetect.update(fft);
@@ -1723,14 +1173,10 @@ function draw() {
 	
 	if (frameCount % 500 == 0){
 		
-		//video.time(random(18));
-		print('jump');
 	
 	}  
   
 video.speed(t);
-print(t);
-
 }var c=[],c1=[],c2=[],c3 = [],c4 = [];
 var kick;
 var shaker;
@@ -1738,48 +1184,23 @@ var snare;
 var tom;
 var button1;
 var button2;
-var serial;
 var x = 75;
 var bpm = 200;
-
 function preload() {
-
   kick = loadSound('Kick.wav');
   shaker = loadSound('shaker.wav');
   snare = loadSound('snare.wav');
   tom = loadSound('Tom.wav');
 }
-
 function setup() {
   createCanvas(600, 300);
   background(255);
-
-	serial = new p5.SerialPort(); // make a new instance of the serialport library
-  serial.on('data', serialEvent); // callback for when new data 
 	
-  //playColumn();
   
-// function run(){
-
-//   playColumn();
-//   // playColumn(c2);
-//   // playColumn(c3);
-//   // playColumn(c4);
-
-
-// }
 }
-
-
-function serialEvent() {
-  var data = serial.readLine();
   if (data.length > 0) {
     var sensors = split(data, ",");
 		c = [int(sensors[0]),int(sensors[1]),int(sensors[2]),int(sensors[3])];
-		// c2 = [int(sensors[2]),int(sensors[3])];
-		// c3 = [int(sensors[4]),int(sensors[5])];
-		// c4 = [int(sensors[6]),int(sensors[7])];
-		// bpm = int(sensors[8]);
     console.log(c);
     
     if(c[0] == 1) {
@@ -1799,19 +1220,13 @@ function serialEvent() {
   }
   }
 }
-
-//function playColumn(){
 	
   
-//}
-
 function setup() {
   createCanvas( windowWidth, windowHeight )
-
   drums = EDrums('o*o*x*o-')
   follow = Follow( drums )
 }
-
 function draw() {
   background( follow.getValue() * 255 )
 }
@@ -1821,44 +1236,28 @@ var shaker;
 var snare;
 var button1;
 var button2;
-var serial;
 var x = 75;
 var bpm = 200;
-
 function preload() {
-
   kick = loadSound('Kick.wav');
   shaker = loadSound('shaker.wav');
   snare = loadSound('snare.wav');
 }
-
 function setup() {
   createCanvas(600, 300);
   background(255);
-
-	serial = new p5.SerialPort(); // make a new instance of the serialport library
-  serial.on('data', serialEvent); // callback for when new data 
   
-  //setTimeout(playColumn(c1),bpm);
-  // setTimeout(playColumn(c2),bpm);
-  // setTimeout(playColumn(c3),bpm);
   run();
 	
 }
-
 function run() {
   setTimeout(playColumn4,0);  
   setTimeout(playColumn3,bpm*1);
   setTimeout(playColumn2,bpm*2);
   setTimeout(playColumn1,bpm*3);
 }
-
-
-function serialEvent() {
-  var data = serial.readLine();
   if (data.length > 0) {
     var sensors = split(data, ",");
-    // console.log(sensors);
 		c1 = [int(sensors[0]),0];
 		c2 = [int(sensors[1]),int(sensors[2])];
 		c3 = [int(sensors[3]),int(sensors[4])];
@@ -1866,9 +1265,6 @@ function serialEvent() {
    
   }
 }
-
-
-
 function playColumn1(){
 	
   if (c1[0] != 0){
@@ -1880,9 +1276,7 @@ function playColumn1(){
   	}
   
 setTimeout(playColumn1,bpm*4);   
-
 }
-
 function playColumn2(){
 	
   if (c2[0] != 0){
@@ -1894,11 +1288,7 @@ function playColumn2(){
   	}
     
   setTimeout(playColumn2,bpm*4);   
-
 }
-
-
-
 function playColumn4(){
 	
   if (c4[0] != 0){
@@ -1910,9 +1300,7 @@ function playColumn4(){
   	}
   
 setTimeout(playColumn4,bpm*4);   
-
 }
-
 function playColumn3(){
   console.log(c3);
 	
@@ -1925,27 +1313,17 @@ function playColumn3(){
   	}
     
   setTimeout(playColumn3,bpm*4);   
-
 }
-
 let a = 0;
 let z = -50;
-
 let zspeed=10;
-
-
 function setup() { 
   createCanvas(400, 400,WEBGL);
 } 
-
 function draw() { 
   background(255,10);
-	//translate(-50,75,z)
   ambientMaterial(5);
-  //fill(255,255,0);
   rotateX(a);
-  //ellipse(100,100,100);
-  //rectMode(CENTER)
   sphere(50);
   a += 0.02;
   z += zspeed;
@@ -1964,9 +1342,7 @@ var shaker;
 var snare;
 var button1;
 var button2;
-var serial;
 var x = 75;
-
 function preload() {
   img1 = loadImage('pattern1.png');
   img2 = loadImage('pattern2.png');
@@ -1974,58 +1350,31 @@ function preload() {
   shaker = loadSound('shaker.wav');
   snare = loadSound('snare.wav');
 }
-
 function setup() {
   createCanvas(600, 300);
   background(255);
-  //image(img1, 0, 0, 600, 300);
   image(img2, 0, 0, 600, 300);
-	serial = new p5.SerialPort(); // make a new instance of the serialport library
-  serial.on('data', serialEvent); // callback for when new data 
   var bpm = 200;
   setTimeout(run,bpm);
   
-  // setInterval(isYellow,1000);
-  // setInterval(isGreen,250);
-  // //setTimeout(snarePlay,500);
-  // setInterval(isBlue,500);
-
-
 }
-
-
-
 function checkColor(c){
   if (c[0] < 100 && c[1] < 100 && c[2] > 220 ){
   snare.play();
-  //console.log("BLUE!");
-
 }else if (c[0] < 50 && c[1] > 220 && c[2] < 50 ){
 shaker.play();
-//console.log("GREEN!");
-
 }else if (c[0] > 220 && c[1] > 220 && c[2] < 50 ){
-  //console.log("YELLOW!");
 kick.play();
 }else{
- // console.log("no color");
 }
-
 }
-
 function runColumn(){
  
-//for (let i = 75; i < 600; i += 150){
   for (let j = 150; j > 0; j -= 100){
     let c = get(x,j);
-    //console.log(c);
     checkColor(c);
-
   }
-//}
-
 }
-
 function run() {
 		
   	runColumn();
@@ -2033,9 +1382,6 @@ function run() {
   if (x>600){ x=75;}
  setTimeout(run,bpm);   
 }
-
-function serialEvent() {
-  var data = serial.readLine();
   if (data.length > 0) {
     var sensors = split(data, ",");
     console.log(sensors);
@@ -2049,29 +1395,22 @@ function draw() {
 function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(220);
 }var kinectron = null;
 var lightImage;
-
 function preload(){
   lightImage = loadImage("light.jpg");
 }
-
 function setup() {
 	createCanvas(500, 500);
   var address = {host: '172.16.219.19', port: 9001, path: '/'};
 	kinectron = new Kinectron('kinectron',address);
 	kinectron.makeConnection();
   kinectron.startTrackedBodies(trackBody);
-  //set the callback function name to be called when stuff comes from kinect
 }
-
 function draw() {
-
 }
-
 function trackBody(body) {
 	background(255);
   var val = body.joints[kinectron.HANDLEFT].depthX;
@@ -2084,9 +1423,7 @@ function trackBody(body) {
   var rightY = map(val,0,1,0,height);
   imageMode(CORNERS);
  	image(lightImage,leftX,leftY,rightX,rightY);
-}/*
  - Turn on Sound
-
  - Run the sketch
  
  - Enter US state initials
@@ -2096,9 +1433,6 @@ function trackBody(body) {
    
  - You can change states
  
-*/
-
-
 let tribes = [];
 let button;
 let a = 0;
@@ -2119,9 +1453,6 @@ var vol;
 var fft;
 var peakDetect;
 let count = 0;
-
-
-
 function setup() {
   createCanvas(1080,608);
   loadJSON('Tribes.json', stateCount);
@@ -2129,30 +1460,21 @@ function setup() {
   button = createButton('Enter');
   button.mousePressed(use);
   angleMode(DEGREES);
-
-
   song = loadSound('Shaman.m4a');
   amp = new p5.Amplitude();
   fft = new p5.FFT();
   peakDetect = new p5.PeakDetect(20, 20000, 0.08);
 }
-
 function stateCount(data) {
   tribes = data;
 }
-
-
 function draw() {
   background(0, 10);
   translate(width/2, height/2);
   vol = amp.getLevel();
-  //print(vol);
   fft.analyze();
   peakDetect.update(fft);
-
-
   if (op) {
-
     noFill();
     if (tribes.length > 0) {
       a = 0;
@@ -2162,54 +1484,38 @@ function draw() {
         }
       }
     }
-
-
     for (let ang = 0; ang < 360; ang += (360 / a) / 2) {
       rotate(ang);
       stroke(0, 10);
       fill(col, 10);
       bezier(a, 0, c1, c2, c3, c4, 0,0);
     }
-
     c1 = c1 + speed1;
     c2 = c2 + speed2;
     c3 = c3 + speed3;
     c4 = c4 + speed4;
-
     if (peakDetect.isDetected) {
       count++;
     }
-
     if (count % 2 == 0 || c1 < 0 || c1 > width) {
       speed1 = -speed1;
-      //speed1 = random([1.1, 0.8]) * speed1;
     }
     if (count % 3 == 0 || c2 < 0 || c2 > height) {
       speed2 = -speed2;
-      //speed2 = 0.95 * speed2
     }
     if (count % 5 == 0 || c3 < 0 || c3 > width) {
       speed3 = -speed3;
-      //speed3 = random([1.1, 0.95]) * speed3;
-
     }
     if (count % 7 == 0 || c4 < 0 || c4 > height) {
       speed4 = -speed4;
-      //speed4 = 1.05 * speed4
     }
-
-
-    //col = col + colSpeed;
     if (peakDetect.isDetected) {
-      //colSpeed = -colSpeed;
       col = [150, 20, 10, 70];
     } else {
       col = 255;
-
     }
   }
 }
-
 function use() {
   op = !op
   song.play();
@@ -2219,29 +1525,22 @@ let weasel;
 let x;
 let y;
 let a;
-
-
-
 function preload(){
   shark = loadImage('shark2.jpg');
   panda = loadImage('panda1.jpg');
   weasel = loadImage('weasel3.jpg');
-
 }
-
 function setup() { 
   createCanvas(600, 400);
   
   
 } 
-
 function draw() { 
   background(220);
   
   image(shark, 20, 300, 100, 70);
   image(panda, 250, 300, 100, 70);
   image(weasel, 480, 300, 100, 70);
-//coffee bean 1
   strokeWeight(5);
   stroke(48, 29, 9, x);
   fill(84, 53, 19, x);
@@ -2249,23 +1548,19 @@ function draw() {
   line(100, 25, 100, 75);
   
   
-  //coffee bean 2
   strokeWeight(5);
   stroke(135, 73, 9, y);
   fill(209, 126, 39, y);
   ellipse(250,50,60,80);
   line(250, 10, 250, 90);
   
-  //coffee bean 3
   strokeWeight(5);
   stroke(48, 29, 9, a);
   fill(35, 21, 7, a);
   ellipse(400,50,40,90);
   line(400, 5, 400, 95);
   
-
  
-
 	if(mouseX>20 && mouseX<120 && mouseY>300 && mouseY< 370){
   fill(220);
   noStroke();
@@ -2284,7 +1579,6 @@ function draw() {
   rect(20, 300, 100, 70);
   rect(250, 300, 100, 70);
   }
-
   
 }
 function mousePressed() {
@@ -2307,16 +1601,11 @@ function mousePressed() {
   }
   
 }
-/*
-
  - Enter state initials
  
  - Each point on the edge represents
  	 a Native American tribe located in the state
  
-*/
-
-
 let tribes = [];
 let button;
 let a = 0;
@@ -2331,15 +1620,6 @@ let speed4 = 2;
 let op = false;
 let col = 0;
 let colSpeed = 1;
-
-
-
-// function preload(){
-//   // data = loadJSON('Tribes.json');
-// }
-
-
-
 function setup() {
   createCanvas(600, 400);
   loadJSON('Tribes.json', stateCount);
@@ -2347,17 +1627,11 @@ function setup() {
   button = createButton('Enter');
   button.mousePressed(use);
   angleMode(DEGREES);
-	// movie = createVideo('Short.mp4'); 
-	// movie.hide();
-	// movie.loop();
   
 }
-
 function draw() {
   background(150, 20, 10,10); 
   if (op){
-  //tint(255,50);
-  //image(movie,0,0,600,400);
   }
   
  
@@ -2368,16 +1642,11 @@ function draw() {
   display();
   }
   
-  //a = random([a+2,a-2]);
-  //y = random([y+2,y-2]);
 }
-
 function stateCount(data) {
   tribes = data;
 }
-
 function inState() {
-
  noFill();
   if (tribes.length > 0) {
     a = 0;
@@ -2389,8 +1658,6 @@ function inState() {
   }
 }
 function display(){
-    //print(a);
-		//col = get(movie.pixel);
     for (let ang = 0; ang < 360; ang +=360/a) {
       rotate(ang);
       stroke(col, 200);
@@ -2412,7 +1679,6 @@ function display(){
     if (c3 < 0 || c3 > width) {
       speed3 = - speed3;
       speed3 = random([1.05, 0.95]) * speed3;
-
     }
     if (c4 < 0 || c4 > height) {
       speed4 = -speed4;
@@ -2426,65 +1692,44 @@ colSpeed=-colSpeed;
 }
   
 }
-
 function use() {
   op = !op
 }let button;
-
 function preload(){
   data = loadJSON('dinosaurs.json');
 }
-
 function setup() { 
   createCanvas(400,400);
   background(220);
   button = createButton('Today I am a'); 
   button.mousePressed(chooseDino);
 }
-
 function chooseDino(){
 background(220);
 textSize(15);
 let i = floor(random(data.dinosaurs.length));
 text(data.dinosaurs[i],150,200);
-
 }
-
-
 function draw() { 
-
 	
 }
 function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(220);
 }
-var serial; // variable to hold an instance of the serialport library
-var portName = '/dev/cu.usbmodem1411'; // fill in your serial port name here
-var circleSize = 10; // size of the circle
 var h = 30;
 var bg = 0;
 var switchState=1;
-
 function setup() {
   createCanvas(400, 400);
-  serial = new p5.SerialPort(); // make a new instance of the serialport library
-  serial.on('data', serialEvent); // callback for when new data arrives
 }
-
 function draw() {
   background(bg);
   fill(40);
   rect(175,0, 50, h);
-  serial.write("led:" + mouseX + ","  + mouseY + "\r\n");
 }
-
-
-function serialEvent() {
-  var data = serial.readLine();
   
   if (data.length > 0) {
     var sensors = split(data, ",");
@@ -2498,13 +1743,9 @@ function serialEvent() {
     }
   }
 }
-
-//do a smoke that you can cotrol it's alpha with a slide
-
 let button;
 let word = ["I'm","just","mad","about","Saffron","Saffron's","mad","about","me","I'm","just","mad","about","Saffron","she's","just","mad","about","me","they","call","me","mellow","yellow","they","call","me","mellow","yellow","they","call","me","mellow","yellow","I'm","just","mad","about","fourteen","fourteen's","mad","about","me","I'm","just","mad","about","fourteen","she's","just","mad","about","me","they","call","me","mellow","yellow","they","call","me","mellow","yellow","they","call","me","mellow","yellow"];
 let i=0;
-//let y = 400;
 let counter = 0;
 function setup() { 
   createCanvas(400, 400);
@@ -2513,36 +1754,23 @@ function setup() {
   button = createButton(word[i]);
 	button.mousePressed(testFunc);
 } 
-
-
 function testFunc() {
 	pattern.changeState();
   i = i+1;
   button.remove();
   button = createButton(word[i]);
   button.mousePressed(testFunc);
-  print("this is")
-  print(i);
 }
-
-
 function draw() { 
   pattern.display();
   if (i>0){
   pattern.move();
   }
-  //button.mousePressed(changeWord);
-
-
-
   
  
-
   
 }
-
 let fliks=[];
-
 function setup() {
   createCanvas(400, 400);
   angleMode(DEGREES);
@@ -2551,60 +1779,29 @@ function setup() {
   }
   
 }
-
 function draw() {
   background(220);
   for (let i = 0; i < fliks.length; i++) {
     fliks[i].color();
     fliks[i].display();
   }
-  // 	flik2.color();
-  // 	flik2.display();
-  // 	flik3.color()
-  // 	flik3.display();
-  // 	flik4.color();
-  // 	flik4.display();
-  // 	flik5.color();
-  // 	flik5.display();
-  // 	flik6.color();
-  // 	flik6.display();
-  // 	flik7.color()
-  // 	flik7.display();
-  // 	flik8.color();
-  // 	flik8.display();
-  // 	flik9.color();
-  // 	flik9.display(); 
-}// let ang = 1;
-// let x = 0;
-// let y = 50;
-// let change = 5;
 function setup() { 
   createCanvas(400, 400);
   flik = new Ant();
-  //frameRate(20);
   angleMode(DEGREES);
 } 
-
 function draw() { 
   background(220);
   flik.display();
   flik.move();
   
-}// let x = 200;
-// let y = 20;
-// let speed = 0;
-
-
-
 let bouncers = [];
 let gravity = 0.1;
-
 function setup() {
   createCanvas(400, 400);
   for (let i = 0; i < 50; i++) {
     bouncers[i] = new Ball(30,random(30, 70));
   }
-} //bouncer2 = new Ball(40);
 function mouseDragged(){
 bouncers.push (new Ball(mouseX,mouseY,random(50,20)));
 }
@@ -2631,39 +1828,27 @@ let ball2x=400;
 let bally = 385;
 let isErased = false;
 let noRect = false;
-
 function setup() { 
   createCanvas(600, 400);
   ball1Speed = ball1Speed*random([1,-1]);
   ball2Speed = ball2Speed*random([1,-1]);
 } 
-
 function draw() { 
 	background(0,200,255);
   stroke(0);
   strokeWeight(4);
-
-  //bottom rect      
   eat();
   rectErase();
   fill(rect1Col);
   rect(rect1x,300,100,100);
   
-  //top rect 
   eat();
   fill(rect2Col);
 	rect(rect2x,rect2y,100,100);
-
-  //ball control
   whenItsDone(); 
   ballsMove(); 
 }
-
-
-//each time a ball hits the rect the color would get darker
-
 function eat() {
-
   if(ball1x>235 || ball2x<365) {
     if(rect2y<300) {
     rect1Col=rect1Col-10; 
@@ -2673,8 +1858,6 @@ function eat() {
   }
 }
   
-// erase once a rect goes black
-
 function rectErase() {
 	if (rect1Col<=0){
     isErased=true;
@@ -2685,9 +1868,6 @@ function rectErase() {
   	rect2x=700;
   }
 }  
-
-//what happens when the rects are gone
-
 function whenItsDone() {
 	
   if (rect1x>600 && rect2x>600){
@@ -2707,13 +1887,9 @@ function whenItsDone() {
   fill(random(255),random(255),random(255));
 	if (mouseIsPressed){
     bally=bally-2;
-
   }
   }
 }
-
-// ball movement
-
 function ballsMove() {
   strokeWeight(1);
   ellipse(ball1x,bally,balld);
@@ -2737,58 +1913,34 @@ if (ball2x<365 || ball2x>585) {
   
     }
 }
-
 }  
-/*Bouncing Chamber: A ball bounces up and down. Player controls
 the height of the chamber by clicking and dragging the floor. 
-the smaller the chamber, faster the ball bounces.*/
-
 let floor;
 let floorHeight =0;
 let y = 0;
 let ballSpeed=5;
-
-
-
 function setup() { 
   createCanvas(400, 400);
-
-  	//floorHeight = mouseY;
-
 	
  
 } 
-
 function draw() { 
   
    background(220);
   
-  	//Floor starting parameters - NO Interaction
- 	//floor = rect(0, height/2 -1, width -1, floorHeight
-   //Floor animation
-  //floorHeight = floorHeight -4
   
-  //fill(floorHeight,floorHeight,floorHeight,floorHeight);
-  //floor= floor *2;
   
    
-//Floor starting parameters - With Mouse Interaction
 	fill(255,200,30);
   floor = rect(0, mouseY, width, 30);
   
-  //Ball
  	fill(random(255),0,random(255));
 	ellipse (width/2,y,20,20);
 	y = y + ballSpeed;
-	//ballSpeed = ballSpeed;
   
 if (y > mouseY-10 || y > mouseY) {
-
   ballSpeed = - ballSpeed;
-
-	print(ballSpeed);
 }
-
   if (y<0) {
 	ballSpeed = - ballSpeed;
   } 
@@ -2797,22 +1949,16 @@ if (y > mouseY-10 || y > mouseY) {
     fill(0);
     text("You are overloading the system, please stop that!",20,20)
   }
-}let button1 = false; //if button is pressed
-let x1 = 0; // the diagonal lines stats
 let	y1 = 0;
 let x2 = 400;
 let	y2 = 400; 
-let speed = 5 // the diagonal lines animation speed
 function setup() { 
   createCanvas(400, 400);
-
 } 
-
 function draw() { 
   background(0);
   
   
-  if (button1 == true) { // button pressed check
     fill(0);
     stroke(255);
   line(x1,y1,x2,y2);
@@ -2824,14 +1970,12 @@ function draw() {
   } else {
     fill(255);
   }
-  if (x1>400 || x1<0) { // the diagonal lines' bounce back
   	x1 = x1-speed;
     x2 = x2 +speed;
     y1 = y1 - speed ;
     y2 = y2 + speed;
   speed = - speed+1;
   } 
-  // the colored triangles
   noStroke()
   if (button1 && frameCount % 10 == 0) {
 		speed = speed + 2
@@ -2854,15 +1998,12 @@ function draw() {
     triangle(400,0,200,200,400,400);
   }
   
-  // the button!!!
   
   fill(255);
   ellipse(200, 200, 50, 50);
   
 }
-
 function mousePressed() { 
-
   
   let d = dist(200, 200, mouseX, mouseY);
   if (d < 25) {
@@ -2871,32 +2012,18 @@ function mousePressed() {
     button1 = false;
   }
 	
-
-}	/* Hi, you need to look for the "worm-hole" 
   and then press to enter...
-  */
-
-
 	let x;
   let y;
   let d = 100;
-	//let h= 100;
-	//let dSpeed = 5;
-	//let hSpeed = 10;
-	let roll = false; //rollover
-
 function setup() {
   createCanvas(600, 400);
   frameRate(40);
   x = 300; 
   y = 200;
 }
-
-
 function draw() {
     background(0);
-
-  // rollover check
 if (dist(mouseX, mouseY, x, y) < d/2) {
   roll = true;
 } else {
@@ -2910,7 +2037,6 @@ if (dist(mouseX, mouseY, x, y) < d/2) {
     fill(0);
   }
     ellipse(x,y,d);
-
 if (mouseIsPressed && roll) {
  for (x=mouseX; x<mouseX-d/10; x=x+5) {
 	ellipse(x,y,d);
@@ -2920,27 +2046,21 @@ d=d+100;
   if (d>600) {
   background(0);
   d=100;
-
   }
-
   
   function mouseReleased() {
   
  	
-  //x = random(600);
-  //y = random(400);
   
   var currX = mouseX; 
   var currY = mouseY;
   
-  print("released" + currX + currY);
   
   currX =+ currX;
   fill(30,255,255);
   rect(currX, currY, 20,20);
   
 	}
-
 }  
 let ballY = 0;
 let speed = 0;
@@ -2949,7 +2069,6 @@ let bouncing=false;
 function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(220);
   ellipse(200,ballY,20,20);
@@ -2964,17 +2083,14 @@ function draw() {
   speed = speed+accel;
   
   if (ballY > 395 || ballY< 0) {
-    //print("ballY hits the ground");
    speed=0.95 * (speed*-1);
   }
   }
-
 }let col=0;
 let ellipseCol=
 function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   col = map(mouseX,0,400,0,255);
   background(col);
@@ -2982,7 +2098,6 @@ function draw() {
 }function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(220);
 }let h=66;
@@ -2999,7 +2114,6 @@ let roof2Y=50;
 let isParty = true;
 let carCounter = 150;
 let speed = 4;
-
 function setup() { 
   createCanvas(600, 400);
   colorMode(HSB,360,100,100)
@@ -3028,8 +2142,6 @@ if (win2b==0) {
   win6b=win6b+20;
 }
 }
-
-
 function draw() { 
   if (carCounter < -600) {
   carCounter = 150;
@@ -3037,19 +2149,13 @@ function draw() {
    else {
      carCounter = carCounter - speed;
    }
-  //sky;
-
   background(234,80,20);
   fill(100);
   textSize(20);
 	text ("02:00 AM",500,20);
-
-  //ground;
   fill(140,45,20);
   noStroke();
   rect(0,200,600,200);
-
-//building;
   
   fill(346,100,39);
   stroke(0);
@@ -3065,7 +2171,6 @@ function draw() {
     else {
       (roof1Y=40)
     }
-
     if ((frameCount % 10) ==0) {
       roof2Y=roof2Y-5
     }
@@ -3074,7 +2179,6 @@ function draw() {
     }
   }
   
-  //windows first floor;
   
   fill(66,100,win1b);
   rect(55,210,30,50);
@@ -3089,7 +2193,6 @@ function draw() {
   line(190,210,190,260);
   line(175,235,205,235);
   
-  //windows second floor;
 	fill(66,100,win4b);
   rect(55,140,30,50);
   fill(66,100,win5b);
@@ -3103,9 +2206,7 @@ function draw() {
   line(190,140,190,190);
   line(175,165,205,165);
   
-  //penthouse;
   if (isParty){
-  fill(h,s,random(100)); //this will be changed
   }
   else {
     fill(20);
@@ -3121,13 +2222,7 @@ function draw() {
   if (h>360) {
     h=0;
   }
-  //party people;
   
-  //fill(0);
-  //ellipse(45,100,10,20);
-  //ellipse(60,105,20,15);
-
-  //road;
 	fill(0,0,40);
   rect(0,320,600,60);
   fill(66,100,100);
@@ -3168,7 +2263,6 @@ function draw() {
     if(!isParty) isParty = true;
   }
   
-  //police car
   push();
   translate(carCounter,0);
   fill(268,100,82);
@@ -3199,7 +2293,6 @@ function draw() {
   frameRate(15);
   fill(sirenH,100,100);
   ellipse(527,301,14,9);
-  //print(frameCount);
   if ((frameCount % 3) == 0) {
    sirenH = 246
   }
@@ -3210,11 +2303,9 @@ else {
 }function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
 background(0,220,240)
   
-  //freaky ellipse 
   
   noStroke()
   fill(250,0,0)
@@ -3228,28 +2319,21 @@ background(0,220,240)
   fill(200,100,0)
     ellipse(200,150,80,30)
   
-  //pole
   
   fill(0)
   rect(195,90,10,60)
-
-  //hole
   
   fill(0)
   ellipse(200,150,20,10)
   
-  //sun
   
   fill(255,204,0)
   arc(200,40,60,60,14,20,OPEN)
   
-  //pole #2 and dish
   
   fill(0)
   rect(195,184,10,57)
   arc(210,65,60,60,120,PI+QUARTER_PI,OPEN)
-
-	//silhouette
   
   stroke(0)
 line(0,240,400,240)

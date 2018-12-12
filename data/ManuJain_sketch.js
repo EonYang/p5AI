@@ -10,28 +10,18 @@
  function setup() {
  
      image(leftTest, 0, 0);
-    //rightTest.loadPixels();
-    //image(rightTest, width/2, 0);
  }
-
-
-
-
 function setup() {
   createCanvas(400, 400);
   loadJSON("classexample.json", getData);
-
 }
-
 function getData(data) {
   for (let i = 0; i < data.length; i++) {
     ellipse(random(width), random(height), data[i].age);
     console.log(data[i].name);
   }
 }
-
 function draw() {
- // background(220);
 }class BigCircle {
  constructor(expand) {
    this.expand = expand;
@@ -53,8 +43,6 @@ function draw() {
  }  
     
 }
-
-
 class MouseCircle {
  constructor() {
    this.x = 0;
@@ -70,21 +58,15 @@ class MouseCircle {
  }
   
 }
-
-
 let big1;
 let big2;
 big1 = new BigCircle(460);
 big2 = new BigCircle(0);
 let mouse1;
 mouse1 = new MouseCircle();
-
-
 function setup() {
   createCanvas(600, 400);
 }
-
-
 function draw() {
   background(0);
   mouse1.circle();
@@ -95,24 +77,18 @@ function draw() {
   big2.size();
 }
   
-
 function setup() {
   createCanvas(800, 600);
 }
-
  let ac;
-  //ac = map (dist(mx, my, cx, cy),0,100,0,100);
   let ac1=30;
   let ac2=60;
   let ac3=90;
   let ac4=120;
   let ac5=150;
   let ac6=180;
-
 function draw() {
   background(0);
-
-  // variables
   
   let cx;
   let cy;
@@ -123,13 +99,11 @@ function draw() {
   let c=(230);
   let a=30;
    
-  //background circles
   
   fill(200);
   for (let cx = 7.5; cx < width; cx += 13) {
     for (let cy = 7.5; cy < height; cy += 13) {
   
-  //mouse position circles
       
     if (dist(mx, my, cx, cy) < 20) {
     fill(c, ac1);
@@ -160,11 +134,7 @@ function draw() {
     }
   }      
 }
-
-	//click inverting colors
-
 function mousePressed() {
-
   if (ac === 255) {
     ac = 0;
     ac1 = 180;
@@ -188,11 +158,9 @@ function mousePressed() {
 }    
 let circlesize;
 circlesize = 0;
-
 function setup() {
   createCanvas(600, 400); 
 }
-
 function draw() {
   background(0);
   MouseCircle();
@@ -241,11 +209,7 @@ function setup() {
   pop();
   
 }
-
-
-
 function draw() {
-
 }function setup() {
   createCanvas(400, 400);
   background(220);
@@ -254,13 +218,11 @@ function draw() {
 	ellipse(200, 200, 300, 300);
   
 }
-
 function draw() {
  
 }function setup() {
   createCanvas(400, 400);
 }
-
 function draw() {
 }
 function setup() {
@@ -307,13 +269,11 @@ function setup() {
   
   
   push(); 
-  //fill(255, 255, 255);
   fill(2, 2, 2);
   arc(200, 70, 74, 67, PI, 0, PIE);
   pop();
   
   push();
-  //fill(255, 255, 255);
 	fill(2, 2, 2);
 	rect(236, 68, 33, 2);
   pop();
@@ -323,14 +283,10 @@ function setup() {
   line(232, 148, 261, 161);
   line(171, 148, 142, 161);
 	
-
   
-
 }
-
 let x = 1
 let y = 1
-
 function draw() {
  
   fill(247, 211, 56);
@@ -375,7 +331,6 @@ function draw() {
 	translate(203, 206);
 	rotate(-PI/4.3);
 	fill(255, 255, 255);
-	// rect(203, 196, 23, 35, 10);
   rect(0, 0, 23, 35, 10);
   pop();
   
@@ -395,11 +350,8 @@ function draw() {
   line(232, 148, 261, 161);
   line(171, 148, 142, 161);
 	
-
   
-
 }
-
 function draw() {
   console.log(mouseX, mouseY);
  

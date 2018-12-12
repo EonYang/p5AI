@@ -1,24 +1,19 @@
 function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(220);
 }function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(220);
 }var currColor = 0;
 var nextColor = 0;
 var limit = true;
-
-
 function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(nextColor);
   
@@ -36,50 +31,32 @@ function draw() {
   
   
 }
-
-
-
 function keyPressed() {
   if (keyCode === UP_ARROW) {
     if (limit=true){
       currColor = currColor + 6;
-    	//console.log(currColor);
     }
   }
   
    if (keyCode === DOWN_ARROW) {
     if (limit=true){
       currColor --;
-    	//console.log(currColor);
     }
   }
 }
-var serial; // variable to hold an instance of the serialport library
-var portName = '/dev/cu.usbmodem1411'; // fill in your serial port name here
-var circleSize = 10; // size of the circle
 var h = 30;
 var bg = 0;
 var switchState=1;
-
 function setup() {
   createCanvas(400, 400);
-  serial = new p5.SerialPort(); // make a new instance of the serialport library
-  serial.on('data', serialEvent); // callback for when new data arrives
 }
-
 function draw() {
   background(bg);
   fill(40);
   rect(175,0, 50, h);
-  serial.write("led:" + mouseX + ","  + mouseY + "\r\n");
 }
-
-
-function serialEvent() {
-  var data = serial.readLine();
   
   if (data.length > 0) {
-    var sensors = split(data, ","); ///convert to aaray
     console.log(sensors);
     h = int(sensors[0]);
 		switchState = int(sensors[1]);
@@ -90,23 +67,17 @@ function serialEvent() {
     }
   }
 }
-
 var rain = [];
 var rainCount = 100;
-
 var raindir = 0;
-
-
 function setup() { 
   createCanvas(600, 400);
-  //noCursor();
   
 	for (var i = 0; i < rainCount; i++) {
 		rain.push(new Rain(random(width), random(height)));	
 	}
   
 } 
-
 function draw() { 
   background(0,0,0,90);
   
@@ -117,7 +88,6 @@ function draw() {
 		rain[i].draw();
 	}
 }
-
 function Rain(x, y) {
   this.x = x;
   this.y = y;
@@ -136,7 +106,6 @@ function Rain(x, y) {
 		
 		if (this.x < -random(this.margin))
 			this.x += width + this.margin;
-
 	};
 	
   this.draw = function() {
@@ -148,16 +117,11 @@ function Rain(x, y) {
 		pop();
   };
 }
-//var containerarray = [];
 var animinstance;
-
-
-
 function setup() { 
   createCanvas(400, 400);
   animinstance = new Animator(0,0,width,1,1.1);
 } 
-
 function draw() { 
   background(255);
   
@@ -169,14 +133,10 @@ function draw() {
   
 }var xsize = 20;
 var ysize = 5;
-
 var animspeed = 1.05;
-
-
 function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(255);
   translate(width/2, height/2);
@@ -202,33 +162,25 @@ function draw() {
 }function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(220);
 }var x = 200;
 var y = 200;
 var currX = 0;
 var currY = 0;
-
 var DimX = 30;
 var DimY = 30;
 var gravity = .08;
 var wind = 0;
 var speedY = 1;
 var speedX = 0;
-
  var particles = [];
-
 function setup() { 
   createCanvas(400, 400);
   background(0);
 } 
-
 function draw() { 
   background(0,0,0,255);
-  //push(800,900);
-  //rect(150,150,100,100);
-  //pop();
   noStroke();
   ellipse(x,y,DimX);
   
@@ -256,54 +208,29 @@ function draw() {
   }
   
 }
-
-
 function keyPressed() {
   if (keyCode === UP_ARROW) {
     gravity = gravity + .05;
-    print("gravity ", gravity);
-    //print("pressed");
     
   } else if (keyCode === DOWN_ARROW) {
     gravity = gravity - .05;
-    //print("gravity ", gravity);
   
   
   } else if (keyCode === LEFT_ARROW) {
     wind = wind - .05;
-    print("gravity ", gravity);
   }
-
 		 else if (keyCode === RIGHT_ARROW) {
       wind = wind + .05;
-    print("gravity ", gravity);
   }
 }
-
-
-// function mousePressed(){
-//   ///print(mouseX + " " + mouseY);
-//   currX = mouseX;
-//   currY = mouseY;
-//   print(currX + " " + currY);
   
-// }
-
-
-
-// // function jumpingBall(){
   
-// //   this.x = mouseX;
-// //   this.y = mouseY;
   
-// // }var gravity = .01;
 var curY = 100;
 var speedY = 0;
-
 function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(220);
   
@@ -317,7 +244,6 @@ function draw() {
 var m, n;
 var spiral;
 var usingColor = true;
-
 function setup() 
 {
   createCanvas(800, 800);
@@ -325,12 +251,8 @@ function setup()
   colorMode(HSB);
   restart();
 }
-
-
-
 function restart()
 {
-  // try to number of elements (m*n) reasonable
   m = 10;    
   n = 10;
   while (m*n > 99 || m*n < 16) {
@@ -339,19 +261,16 @@ function restart()
   }
   spiral = new Spiral();
 }
-
 function draw()
 {
   fill(255);
   noStroke();
   text("new one", 5, 16);
   text("toggle color", 5, 38);
-
   var t1x = map(noise(0.01*frameCount,20), 0, 1, -300, 300);
   var t1y = map(noise(0.01*frameCount,30), 0, 1, -300, 300);
   var t2x = map(noise(0.01*frameCount,40), 0, 1, -300, 300);
   var t2y = map(noise(0.01*frameCount,50), 0, 1, -300, 300);
-
   push();
   fill(0, 125);
   rect(0, 0, width, height);
@@ -374,19 +293,14 @@ function draw()
     pop();
   }  
 }
-
 function keyPressed() { 
   if (key==' ') restart();
   if (key=='c') usingColor = !usingColor;
 }
-
 function mousePressed() {
   if (mouseX < 50 && mouseY < 20) restart();
   if (mouseX < 75 && mouseY > 20 && mouseY < 40) usingColor = !usingColor;
 }
-
-
-// Draws a spiral around a single point
 function Spiral()
 {
   this.h = random(255);
@@ -398,7 +312,6 @@ function Spiral()
     this.angleBoundary1 = random(-24*PI, 24*PI);
     this.angleBoundary2 = random(-24*PI, 24*PI);
   }
-
   this.draw = function()
   {    
     strokeWeight(3);
@@ -429,14 +342,11 @@ function Spiral()
     pop();
   }
 }
-
   function setup(){
   createCanvas(600, 600)
   
   
-
 }
-
 function draw(){
   
 	background(20);
@@ -449,19 +359,10 @@ var tinycircles = [];
 var smallcircles = [];
 var mediumcircles = [];
 var largecircles = [];
-
-
 var diagonal = [];
-
-
-
-
-
 var capture_video;
-var img;  // Declare variable 'img'.
 var w = 0;
 var h = 0;
-
 var absoluteWhite = 255;
 var lightGrey = 213;
 var darkGrey = 170;
@@ -469,179 +370,82 @@ var grey = 127;
 var lightBlack = 86;
 var midBlack = 43
 var absoluteBlack = 10;
-
 var matX = 40;
 var matY = 20;
-
 var echo=0;
-
 var winddirectionX = 0;
 var winddirectionY = 10;
-
 function setup() {
-
-	frameRate(60); //frame rate of sketch
-
 	w = windowHeight*1.3;
 	h = windowHeight;
-
-
   createCanvas(matX, matY);
   capture_video = createCapture(VIDEO);
   capture_video.size(matX, matY);
   capture_video.hide();
-
 	createCanvas(w, h);
 	noStroke();
   background(0);
-
-
 }
-
-
-
 function draw() {
-
-
-
-
   echo ++;
-
   if (echo >= 50){
   echo=50;
   }
   if (mouseIsPressed){
   echo=0;
   }
-
-
-	//background(0,0,0,255-echo);
 	background(0);
-
-
-
-
   var hr = h / capture_video.height
   var wr = w / capture_video.width
-
-
-
 	for (var i = 0; i < tinycircles.length; i++) {
 		tinycircles[i].display();
-
 		if (tinycircles[i].fill <= 0) {
 			tinycircles.splice(i,1);
-			//print("removed: " + i);
 		}
-
-
 	}
-
-
 	for (var i = 0; i < smallcircles.length; i++) {
 		smallcircles[i].display();
-
 		if (smallcircles[i].fill <= 0) {
 			smallcircles.splice(i,1);
-			//print("removed: " + i);
 		}
-
-
 	}
-
 	for (var i = 0; i < mediumcircles.length; i++) {
 		mediumcircles[i].display();
-
 		if (mediumcircles[i].fill <= 0) {
 			mediumcircles.splice(i,1);
-			//print("removed: " + i);
 		}
-
-
 	}
-
 	for (var i = 0; i < largecircles.length; i++) {
 		largecircles[i].display();
-
 		if (largecircles[i].fill <= 0) {
 			largecircles.splice(i,1);
-			//print("removed: " + i);
 		}
-
-
 	}
-
-
-
-
   for (var i = 0; i < capture_video.width; i++) {
     for (var c = 0; c < capture_video.height; c++) {
     	var pixel = capture_video.get(i,c)[0];
-
-
-
-
       if (pixel < midBlack)  {
 				var nc = new smallCircle(i * wr,c * hr,1,random((-pixel/8),(pixel/8)),random(0,pixel/2));
 				smallcircles.push(nc);
       }
-
 			if ((pixel < lightBlack) && (pixel > midBlack )) {
 				var mc = new mediumCircle(i * wr,c * hr,2,random((-pixel/8),(pixel/8)),random(0,pixel/2));
 				mediumcircles.push(mc);
 			}
-			//
-
 			if ((pixel < lightGrey) && (pixel > darkGrey )) {
 				var lc = new largeCircle(i * wr,c * hr,3,random(-1,1),random(0,pixel/2));
 				largecircles.push(lc);
 			}
-
-
 			if ((pixel < absoluteWhite) && (pixel > lightGrey )) {
 				var tc = new tinyCircle(i * wr,c * hr,.5,random((-pixel/8),(pixel/8)),random(0,pixel/2));
 				tinycircles.push(tc);
 			}
-
-
-
-
 		}
 	}
 }
-
-
-
-
-// if((pixel < absoluteWhite) && (pixel > lightGrey )) {
-//   fill(255,255,255);
-//   rect(i * wr, c * hr, wr / 2, hr / 2);
-// }
-// if ((pixel > absoluteBlack) && (pixel < midBlack )) {
-// 	stroke(255);
-// 	line( i * wr + wr / 2  ,  c * hr + hr / 2  ,i * wr  , c * hr);
-// }
-//
-//
-//  if (pixel > absoluteBlack) {
-// 	stroke(255);
-// 		point(i * wr + wr / 2, c * hr + hr / 2);
-// }
-//
-//  if ((pixel > midBlack) && (pixel < lightBlack )) {
-// 	stroke(255);
-// 	line( i * wr - wr / 2  ,  c * hr + hr / 2  ,i * wr  , c * hr);
-// }
-//
-// if ((pixel > 10) && (pixel < 250 )) {
-// 	stroke(255);
-// 	line( i * wr + wr / 2  ,  c * hr + hr / 2  ,i * wr  , c * hr);
-// }
 var capture_video;
-var img;  // Declare variable 'img'.
 var w = 700;
 var h = 500;
-
 var absoluteWhite = 255;
 var lightGrey = 213;
 var darkGrey = 170;
@@ -649,15 +453,10 @@ var grey = 127;
 var lightBlack = 86; 
 var midBlack = 43
 var absoluteBlack = 10;
-
 var matX = 65;
 var matY = 45;
-
 var echo=0;
-
 function setup() {
-
-	frameRate(60); //frame rate of sketch
 	
 	
   createCanvas(matX, matY);
@@ -669,9 +468,6 @@ function setup() {
 	noStroke();
   background(0);
 }
-
-
-
 function draw() { 
   
   echo ++;
@@ -701,8 +497,6 @@ function draw() {
       
       
        if(pixel >= 0) {
-        //fill(0);
-        //rect(i * wr, c * hr, wr, hr);
       }
       
       if((pixel < absoluteWhite) && (pixel > darkGrey )) {
@@ -749,44 +543,28 @@ function draw() {
 }var sqSize = 30;
 var sqX = 0;
 var sqY = 0;
-//var text = string;
-
 var currX = 0;
 var currY = 0;
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(255);
   frameRate(60);
-
-
   sqX = width/2;
   sqY = height/2;
-
   currX = width/2;
   currY = height/2;
 }
-
-
 function draw() {
 background(255);
 noStroke();
 fill(60);
-
-
-
 fill(25);
-text("Xpos - " + currX + ", Ypos - " + currY, (currX-(sqSize)), (currY+sqSize)); // Text wraps within text box
-
-
-
   if  (( mouseX < (currX + sqSize/2)) &&
       ( mouseX > (currX - sqSize/2)) &&
       ( mouseY < (currY + sqSize/2)) &&
       ( mouseY > (currY - sqSize/2)) &&
       (mouseIsPressed)
       ){
-      print("in this");
       fill(20,240,1);
       noStroke();
       ellipse(currX,currY, sqSize);
@@ -795,27 +573,20 @@ text("Xpos - " + currX + ", Ypos - " + currY, (currX-(sqSize)), (currY+sqSize));
       rectMode(CENTER);
       rect(sqX,sqY,sqSize,sqSize);
       }
-
       if ( ( mouseX < (currX + sqSize/2)) &&
            ( mouseX > (currX - sqSize/2)) &&
            ( mouseY < (currY + sqSize/2)) &&
            ( mouseY > (currY - sqSize/2)))
-
            {
              fill(20,240,1);
              noStroke();
            }
-
-
-
-
     if (mouseIsPressed){
       sqX = mouseX;
       sqY = mouseY;
       currY = mouseY;
       currX = mouseX;
     }
-
 }
 var a = 0;
 var r = 2;
@@ -825,97 +596,61 @@ var sqY = 0;
 var currX = 0;
 var currY = 0;
 var doesHover = false;
-
 var spiral = [];
 var spiralcircle = [];
 var spiraltriangle = [];
-
-
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(255);
   frameRate(50);
-
   sqX = 100;
   sqY = 100;
   currX = 100;
   currY = 100;
-
-
 }
-
-
 function draw() {
-
   background(255);
-
-
-
-
       	fill(20);
       	noStroke();
-
         var x = r * cos(a);
         var y = r * sin(a);
-
         a += map(mouseX,0,width,0,.7)  ;
         r += map(mouseY,0,height,0,.4) ;
-
         var trans = 50;
-
         var line = new Line(x,y,r, sqX, sqY);
         spiral.push(line);
-
         var circles = new  Circle(x,y,r, sqX, sqY);
         spiralcircle.push(circles);
-
         var triangles = new Triangle(x,y,r, sqX, sqY);
         spiraltriangle.push(triangles);
-
       	x = round(map(mouseX,0, width, 20 ,40));
-      	//print(map(mouseX,0, width, 5,10));
-
         for (var  i = 0 ; i < spiral.length; i++){
           color(map(mouseX,0,width,5,255));
           spiralcircle[i].draw();
           spiraltriangle[i].draw();
           spiral[i].draw();
-
         }
-
         noStroke();
         fill(60);
-        text("Xpos - " + currX + ", Ypos - " + currY, (currX-(sqSize)), (currY+sqSize)); // Text wraps within text box
-
         fill(100);
         rectMode(CENTER);
         rect(sqX,sqY,sqSize,sqSize);
-
-
-      //// hover state
         if    (( mouseX < (currX + sqSize/2)) &&
               ( mouseX > (currX - sqSize/2)) &&
               ( mouseY < (currY + sqSize/2)) &&
               ( mouseY > (currY - sqSize/2))
-
               ) {
                 fill(200);
                 rectMode(CENTER);
                 rect(sqX,sqY,sqSize,sqSize);
-                //doesHover = true;
               }else{
-                //doesHover = false;
               }
-
-
         if    (( mouseX < (currX + sqSize/2)) &&
               ( mouseX > (currX - sqSize/2)) &&
               ( mouseY < (currY + sqSize/2)) &&
               ( mouseY > (currY - sqSize/2)) &&
               (mouseIsPressed)
               ){
-              //background(255);
               fill(60);
               text("Xpos - " + currX + ", Ypos - " + currY, (currX-(sqSize)), (currY+sqSize));
               fill(255,65,50);
@@ -926,57 +661,29 @@ function draw() {
               sqY = mouseY;
               currY = mouseY;
               currX = mouseX;
-
             }
-
-
-
               if ( ( mouseX < (currX + sqSize/2)) &&
                    ( mouseX > (currX - sqSize/2)) &&
                    ( mouseY < (currY + sqSize/2)) &&
                    ( mouseY > (currY - sqSize/2))
                  )
-
                    {
                      fill(255,255,50);
                      noStroke();
                    }
-
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-///////////
 var colorWhite = 255;
 var colorGrey = 155;
 var sqWidth = 50;
 var xPos = 0;
 var yPos = 0;
 var offsetX = 50;
-
-
 var count = 0;
-
-
-
 function setup() { 
   createCanvas(400, 400);
 } 
-
-
 function draw() { 
   background(0);
- // print(count);
   var counter =0;
   
    if (count <= 1){
@@ -1009,15 +716,11 @@ function draw() {
     
      
         
-      //rect(xPos ,yPos,sqWidth,sqWidth);
-      //rect(xPos-sqWidth, (yPos+sqWidth), sqWidth,sqWidth);
     }
     
-    //print(count);
     }
   
   
-
    
   }
   
@@ -1032,20 +735,12 @@ var sqWidth = 50;
 var xPos = 0;
 var yPos = 0;
 var offsetX = 50;
-
-
 var count = 0;
-
-
-
 function setup() { 
   createCanvas(400, 400);
 } 
-
-
 function draw() { 
   background(0);
- // print(count);
   var counter =0;
   
    if (count <= 1){
@@ -1075,15 +770,11 @@ function draw() {
     
      
         
-      //rect(xPos ,yPos,sqWidth,sqWidth);
-      //rect(xPos-sqWidth, (yPos+sqWidth), sqWidth,sqWidth);
     }
     
-    //print(count);
     }
   
   
-
    
   }
   
@@ -1097,20 +788,12 @@ var colorGrey = 155;
 var sqWidth = 50;
 var xPos = 0;
 var yPos = 0;
-
-
 var count = 0;
-
-
-
 function setup() { 
   createCanvas(400, 400);
 } 
-
-
 function draw() { 
   background(0);
- // print(count);
   var counter =0;
   
    if (count <= 1){
@@ -1137,15 +820,11 @@ function draw() {
     
      
         
-      //rect(xPos ,yPos,sqWidth,sqWidth);
-      //rect(xPos-sqWidth, (yPos+sqWidth), sqWidth,sqWidth);
     }
     
-    //print(count);
     }
   
   
-
    
   }
   
@@ -1159,20 +838,11 @@ var colorGrey = 155;
 var sqWidth = 50;
 var xPos = 0;
 var yPos = 0;
-
-
 var count = 0;
-
-
-
 function setup() { 
   createCanvas(400, 400);
 } 
-
-
 function draw() { 
-  //background(0);
- // print(count);
   var counter =0;
   
    if (count <= 1){
@@ -1185,8 +855,6 @@ function draw() {
       counter++;
     	
       if (counter%2==0){ 
-      //fill(255);
-      //rect(xcanvas, ycanvas,sqWidth,sqWidth);
       }
      
         
@@ -1194,20 +862,15 @@ function draw() {
       white
       fill(0);
       rect(xcanvas, ycanvas,sqWidth,sqWidth);
-      print(
 "      }
     
      
         
-      //rect(xPos ,yPos,sqWidth,sqWidth);
-      //rect(xPos-sqWidth, (yPos+sqWidth), sqWidth,sqWidth);
     }
     
-    //print(count);
     }
   
   
-
    
   }
   
@@ -1217,29 +880,20 @@ function draw() {
   
 	
 var dimm = 100;
-
-
 function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(220);
   
-	rectMode(CENTER);  // Set rectMode to CENTER
-	fill(0);  // Set fill to gray
-	rect(width/2, height/2, dimm, dimm);  // Draw gray rect using CENTER mode
 }var positionX = 0;
-
 function setup() { 
   createCanvas(400, 400);
   
   positionX=0;
 } 
-
 function draw() { 
   var xc = constrain(positionX, 0, 100);
-
   background(0);
   
   positionX ++;
@@ -1254,23 +908,17 @@ function draw() {
   
   
 } var grade = 0;
-
-
 function setup() { 
   createCanvas(400, 400);
    
   	grade = random(0, 100)
-  	print(round(grade));
   	fill(255);
  
 } 
-
  
-
 function draw() { 
   
   background(0);
-
 	if (grade > 90){
   text("Grade: A", width/2, height/2);  
   }
@@ -1296,55 +944,40 @@ function draw() {
   text("Grade: F", width/2, height/2);  
   }
   
-
   
   
 }
-
-
 var colorWhite = 255;
 var colorGrey = 155;
 var sqWidth = 50;
 var count = 0;
-
 var x = 0;	
 var y = 0;
-
 function setup() { 
   createCanvas(400, 400);
   background(0);
 } 
-
 function draw() { 
-  //
   
-   		//rect(0, 0, sqWidth, sqWidth);
-
   
   if (count <= 1){
   
    for (var i = 0; i < 6; i++) {
-  		//rect(x, y, sqWidth, sqWidth);
      	x=x+sqWidth*2;
       
-      //print(i+"count"); 
     }
     
       
    for (var r = 0; r < 6; r++) {
 			
-			//fill(255);
      rect((x+sqWidth), y, sqWidth, sqWidth);	
      	x=x+sqWidth*2;
       count ++;
-      print(r+"count"); 
    }
     count ++;
   }
-
     
      
-
   
       
   
@@ -1353,15 +986,10 @@ function draw() {
 var colorWhite = 255;
 var colorGrey = 155;
 var sqWidth = 50;
-
 var count = 0;
-
-
-
 function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(0);
   
@@ -1373,51 +1001,33 @@ function draw() {
   
     for (var i = 0; i < 6; i++) {
       count ++;
-      print(count);
-      //fill(colorWhite);
   		rect(0, 0, sqWidth, sqWidth);
-			//rect(0, 0, sqWidth, sqWidth);
     }
   }
 var z = 150;
-
 var x1 = z;
 var x2 = z;
 var x3 = z+120;
 var x4 = z+120;
-
 var y1 =z;
 var y2 =z+80;
 var y3 =z;
 var y4 =z-80;
-
 var count = 0;
-
-
-
-
 function setup() { 
   createCanvas(800, 400);
   background(0);
   
 } 
-
-
-
 function draw() { 
-  //background(0);
 	fill(150);  
-  //quad(x1,y1,x2,y2,x3,y3,x4,y4);
   fill(200);  
- 	//quad((x1+240),(y1),(x1+240),y2,x3,y3,x4,y4);
   fill(150);  
-  //quad((x1+240),(y1),(x2+240),(y2),(x3+240),(y3),(x4+240),(y4));
 	
   
   if (count <= 1){
   
     for (var i = 0; i < 6; i++) {
-
         quad(x1,y1,x2,y2,x3,y3,x4,y4);
       	x1 = x1 + 80;
       	x2 = x2 + 80;
@@ -1425,7 +1035,6 @@ function draw() {
       	x4 = x4 + 80;  
      		
       	count ++;
-      	print(count);
      
       
     }
@@ -1433,21 +1042,12 @@ function draw() {
       
       
     }
-
-
-}var ballArray = []; // array of Jitter objects
-
-
-
-
 function setup() {
   createCanvas(710, 400);
-  // Create objects
   for (var i=0; i<50; i++) {
     ballArray.push(new Jitter());
   }
 }
-
 function draw() {
   background(50, 89, 100);
   for (var i=0; i<ballArray.length; i++) {
@@ -1455,34 +1055,26 @@ function draw() {
     ballArray[i].display();
   }
 }
-
-// Jitter class
 function Jitter() {
   this.x = random(width);
   this.y = random(height);
   this.diameter = random(10, 30);
   this.speed = 1;
-
   this.move = function() {
     this.x += random(-this.speed, this.speed);
     this.y += random(-this.speed, this.speed);
   };
-
   this.display = function() {
     ellipse(this.x, this.y, this.diameter, this.diameter);
   };
 }
-var bugs = []; // array of Jitter objects
-
 var wind = 0;
 var gravity = .1;
 var speedY = 0;
 var speedX = 0;
-
 function setup() {
   createCanvas(710, 400);
 }
-
 function draw() {
   background(0);
   for (var i=0; i<bugs.length; i++) {
@@ -1500,8 +1092,6 @@ function draw() {
   
   
 }
-
-// circle class
 function circle() {
   this.x = mouseX;
   this.y = mouseY;
@@ -1509,12 +1099,10 @@ function circle() {
   this.speedY = 1;
   
   ;
-
   this.display = function() {
     fill(255,255,255,100);
     ellipse(this.x, this.y, this.diameter, this.diameter);
     noStroke();
-    //this.speedY;
   };
   
   
@@ -1527,17 +1115,13 @@ function circle() {
     
   }
 }
-var bugs = []; // array of Jitter objects
-
 var wind = 0;
 var gravity = .1;
 var speedY = 0;
 var speedX = 0;
-
 function setup() {
   createCanvas(710, 400);
 }
-
 function draw() {
   background(0);
   for (var i=0; i<bugs.length; i++) {
@@ -1555,8 +1139,6 @@ function draw() {
   
   
 }
-
-// circle class
 function circle() {
   this.x = mouseX;
   this.y = mouseY;
@@ -1564,12 +1146,10 @@ function circle() {
   this.speedY = 1;
   
   ;
-
   this.display = function() {
     fill(255,255,255,100);
     ellipse(this.x, this.y, this.diameter, this.diameter);
     noStroke();
-    //this.speedY;
   };
   
   
@@ -1582,17 +1162,13 @@ function circle() {
     
   }
 }
-var bugs = []; // array of Jitter objects
-
 var wind = 0;
 var gravity = .1;
 var speedY = 0;
 var speedX = 0;
-
 function setup() {
   createCanvas(710, 400);
 }
-
 function draw() {
   background(0);
   for (var i=0; i<bugs.length; i++) {
@@ -1610,8 +1186,6 @@ function draw() {
   
   
 }
-
-// circle class
 function circle() {
   this.x = mouseX;
   this.y = mouseY;
@@ -1619,12 +1193,10 @@ function circle() {
   this.speedY = 1;
   
   ;
-
   this.display = function() {
     fill(255,255,255,100);
     ellipse(this.x, this.y, this.diameter, this.diameter);
     noStroke();
-    //this.speedY;
   };
   
   
@@ -1637,17 +1209,13 @@ function circle() {
     
   }
 }
-var bugs = []; // array of Jitter objects
-
 var wind = 0;
 var gravity = .1;
 var speedY = 0;
 var speedX = 0;
-
 function setup() {
   createCanvas(710, 400);
 }
-
 function draw() {
   background(0);
   for (var i=0; i<bugs.length; i++) {
@@ -1665,8 +1233,6 @@ function draw() {
   
   
 }
-
-// circle class
 function circle() {
   this.x = mouseX;
   this.y = mouseY;
@@ -1674,12 +1240,10 @@ function circle() {
   this.speedY = 1;
   
   ;
-
   this.display = function() {
     fill(255,255,255,100);
     ellipse(this.x, this.y, this.diameter, this.diameter);
     noStroke();
-    //this.speedY;
   };
   
   
@@ -1692,12 +1256,9 @@ function circle() {
     
   }
 }var capture_video;
-var img;  // Declare variable 'img'.
 var w = 700;
 var h = 500;
-
 var timer = 0;
-
 var absoluteWhite = 255;
 var lightGrey = 213;
 var darkGrey = 170;
@@ -1705,17 +1266,11 @@ var grey = 127;
 var lightBlack = 86; 
 var midBlack = 43
 var absoluteBlack = 10;
-
 var matX = 60;
 var matY = 40;
-
 var echo=0;
-
 var count = false;
-
 function setup() {
-
-	frameRate(30); //frame rate of sketch
 	
 	
   createCanvas(matX, matY);
@@ -1727,12 +1282,8 @@ function setup() {
 	noStroke();
   background(0);
 }
-
-
-
 function draw() { 
   
-  //count = false;
   
   if (count == false){
   		timer = timer + 6;
@@ -1784,8 +1335,6 @@ function draw() {
       
       
        if(pixel >= 0) {
-        //fill(0);
-        //rect(i * wr, c * hr, wr, hr);
       }
       
       if((pixel < absoluteWhite) && (pixel > darkGrey )) {
@@ -1831,17 +1380,13 @@ function draw() {
 		}
 	}
 }
-var bugs = []; // array of Jitter objects
-
 var wind = 0;
 var gravity = .1;
 var speedY = 0;
 var speedX = 0;
-
 function setup() {
   createCanvas(710, 400);
 }
-
 function draw() {
   background(0);
   for (var i=0; i<bugs.length; i++) {
@@ -1857,8 +1402,6 @@ function draw() {
   
   
 }
-
-// circle class
 function circle() {
   this.x = mouseX;
   this.y = mouseY;
@@ -1866,12 +1409,10 @@ function circle() {
   this.speedY = 1;
   
   ;
-
   this.display = function() {
     fill(255,255,255,100);
     ellipse(this.x, this.y, this.diameter, this.diameter);
     noStroke();
-    //this.speedY;
   };
   
   
@@ -1884,17 +1425,13 @@ function circle() {
     
   }
 }
-var bugs = []; // array of Jitter objects
-
 var wind = 0;
 var gravity = .1;
 var speedY = 0;
 var speedX = 0;
-
 function setup() {
   createCanvas(710, 400);
 }
-
 function draw() {
   background(0);
   for (var i=0; i<bugs.length; i++) {
@@ -1912,8 +1449,6 @@ function draw() {
   
   
 }
-
-// circle class
 function circle() {
   this.x = mouseX;
   this.y = mouseY;
@@ -1921,12 +1456,10 @@ function circle() {
   this.speedY = 1;
   
   ;
-
   this.display = function() {
     fill(255,255,255,100);
     ellipse(this.x, this.y, this.diameter, this.diameter);
     noStroke();
-    //this.speedY;
   };
   
   
@@ -1938,22 +1471,16 @@ function circle() {
   	this.y = this.y + 1;
     
   }
-}// Where is the circle
 var x, y;
 var particle = [];
-
-
 function setup() {
   createCanvas(720, 400);
-  // Starts in the middle
   x = width / 2;
   y = height;
 }
-
 function draw() {
   background(0);
   
-
   if (mouseIsPressed){
     
   stroke(50);
@@ -1961,41 +1488,30 @@ function draw() {
   ellipse(x, y, 24, 24);
   }
   
-  // Jiggling randomly on the horizontal axis
   x = x + 0;
-  // Moving up at a constant speed
   y = y + 2;
   
-  // Reset to the bottom
   if (y >= height) {
     y = 0;
   }
 }
-
 var x = 200;
 var y = 200;
 var currX = 0;
 var currY = 0;
-
 var DimX = 10;
 var DimY = 10;
 var gravity = .08;
 var wind = 0;
 var speedY = 1;
 var speedX = 0;
-
  var particles = [];
-
 function setup() { 
   createCanvas(400, 400);
   background(0);
 } 
-
 function draw() { 
   background(0,0,0,255);
-  //push(800,900);
-  //rect(150,150,100,100);
-  //pop();
   noStroke();
   ellipse(x,y,DimX,DimY);
   
@@ -2023,53 +1539,32 @@ function draw() {
   }
   
 }
-
-
 function keyPressed() {
   if (keyCode === UP_ARROW) {
     gravity = gravity + .05;
-    print("gravity ", gravity);
-    //print("pressed");
     
   } else if (keyCode === DOWN_ARROW) {
     gravity = gravity - .05;
-    //print("gravity ", gravity);
   
   
   } else if (keyCode === LEFT_ARROW) {
     wind = wind - .05;
-    print("gravity ", gravity);
   }
-
 		 else if (keyCode === RIGHT_ARROW) {
       wind = wind + .05;
-    print("gravity ", gravity);
   }
 }
-
-
 function mousePressed(){
-  ///print(mouseX + " " + mouseY);
   currX = mouseX;
   currY = mouseY;
-  print(currX + " " + currY);
   
 }
-
-
-
-// function jumpingBall(){
   
-//   this.x = mouseX;
-//   this.y = mouseY;
   
-// }var x = 20;
 var y = 20;
-
 function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(220);
   noStroke();
@@ -2079,18 +1574,13 @@ function draw() {
   
   
 }
-
-
-
 function mousePressed(){
  console.log(mouseX '+ mouseY); 
 }var x = 20;
 var y = 20;
-
 function setup() { 
   createCanvas(400, 400);
 } 
-
 function draw() { 
   background(220);
   noStroke();
@@ -2100,18 +1590,12 @@ function draw() {
   
   
 }
-
-
-
 function mousePressed(){
  console.log(mouseX '+ mouseY); 
 }var capture_video;
-var img;  // Declare variable 'img'.
 var w = 700;
 var h = 500;
-
 var timer = 0;
-
 var absoluteWhite = 255;
 var lightGrey = 213;
 var darkGrey = 170;
@@ -2119,17 +1603,11 @@ var grey = 127;
 var lightBlack = 86; 
 var midBlack = 43
 var absoluteBlack = 10;
-
 var matX = 60;
 var matY = 40;
-
 var echo=0;
-
 var count = false;
-
 function setup() {
-
-	frameRate(30); //frame rate of sketch
 	
 	
   createCanvas(matX, matY);
@@ -2141,12 +1619,8 @@ function setup() {
 	noStroke();
   background(0);
 }
-
-
-
 function draw() { 
   
-  //count = false;
   
   if (count == false){
   		timer = timer + 6;
@@ -2198,8 +1672,6 @@ function draw() {
       
       
        if(pixel >= 0) {
-        //fill(0);
-        //rect(i * wr, c * hr, wr, hr);
       }
       
       if((pixel < absoluteWhite) && (pixel > darkGrey )) {
@@ -2245,53 +1717,38 @@ function draw() {
 		}
 	}
 }
-
 var system;
-
-
 var dimX = 2;
 var dimY = 2;
-
 function setup() {
   createCanvas(720, 400);
   system = new ParticleSystem(createVector(width/2, 50));
 }
-
 function draw() {
   background(0);
   system.addParticle();
   system.run();
 }
-
-// A simple Particle class
 var Particle = function(position) {
   this.acceleration = createVector(0, 0.05);
   this.velocity = createVector(random(-1, 1), random(-1, 0));
   this.position = position.copy();
   this.lifespan = 255.0;
 };
-
 Particle.prototype.run = function() {
   this.update();
   this.display();
 };
-
-// Method to update position
 Particle.prototype.update = function(){
   this.velocity.add(this.acceleration);
   this.position.add(this.velocity);
   this.lifespan -= 1;
 };
-
-// Method to display
 Particle.prototype.display = function() {
   noStroke();
   fill(255, this.lifespan);
   ellipse(this.position.x, this.position.y, dimX, dimY);
 };
-
-
-// Is the particle still useful?
 Particle.prototype.isDead = function(){
   if (this.lifespan < 0) {
     return true;
@@ -2299,16 +1756,13 @@ Particle.prototype.isDead = function(){
     return false;
   }
 };
-
 var ParticleSystem = function(position) {
   this.origin = position.copy();
   this.particles = [];
 };
-
 ParticleSystem.prototype.addParticle = function() {
   this.particles.push(new Particle(this.origin));
 };
-
 ParticleSystem.prototype.run = function() {
   for (var i = this.particles.length-1; i >= 0; i--) {
     var p = this.particles[i];
@@ -2318,10 +1772,8 @@ ParticleSystem.prototype.run = function() {
     }
   }
 };var capture_video;
-var img;  // Declare variable 'img'.
 var w = 700;
 var h = 500;
-
 var absoluteWhite = 255;
 var lightGrey = 213;
 var darkGrey = 170;
@@ -2329,15 +1781,10 @@ var grey = 127;
 var lightBlack = 86; 
 var midBlack = 43
 var absoluteBlack = 10;
-
 var matX = 60;
 var matY = 40;
-
 var echo=0;
-
 function setup() {
-
-	frameRate(30); //frame rate of sketch
 	
 	
   createCanvas(matX, matY);
@@ -2349,9 +1796,6 @@ function setup() {
 	noStroke();
   background(0);
 }
-
-
-
 function draw() { 
   
   echo ++;
@@ -2381,8 +1825,6 @@ function draw() {
       
       
        if(pixel >= 0) {
-        //fill(0);
-        //rect(i * wr, c * hr, wr, hr);
       }
       
       if((pixel < absoluteWhite) && (pixel > darkGrey )) {
@@ -2427,10 +1869,8 @@ function draw() {
 		}
 	}
 }var capture_video;
-var img;  // Declare variable 'img'.
 var w = 700;
 var h = 500;
-
 var absoluteWhite = 255;
 var lightGrey = 213;
 var darkGrey = 170;
@@ -2438,17 +1878,12 @@ var grey = 127;
 var lightBlack = 86; 
 var midBlack = 43
 var absoluteBlack = 10;
-
 var currXpos;
 var currYpos;
-
 var matX = 60;
 var matY = 40;
 var echo = 0;
-
 function setup() {
-
-	frameRate(30); //frame rate of sketch
 	
 	
   createCanvas(matX, matY);
@@ -2460,17 +1895,11 @@ function setup() {
 	noStroke();
   background(0);
 }
-
-
-
 function draw() { 
-
   
   currXpos = round(map(mouseX, 0, width, 0, 255));
-  //console.log(currXpos);
   
   currYpos = round(map(mouseY, 0, height, 0, 255));
-  //console.log(currXpos);
   
   echo ++;
   
@@ -2482,7 +1911,6 @@ function draw() {
   echo=0;
   }
   
-  //console.log(255-echo);
   
   
   
@@ -2547,10 +1975,8 @@ function draw() {
 		}
 	}
 }var capture_video;
-var img;  // Declare variable 'img'.
 var w = 700;
 var h = 500;
-
 var absoluteWhite = 255;
 var lightGrey = 213;
 var darkGrey = 170;
@@ -2558,15 +1984,10 @@ var grey = 127;
 var lightBlack = 86; 
 var midBlack = 43
 var absoluteBlack = 10;
-
 var matX = 60;
 var matY = 40;
-
 var echo=0;
-
 function setup() {
-
-	frameRate(30); //frame rate of sketch
 	
 	
   createCanvas(matX, matY);
@@ -2578,9 +1999,6 @@ function setup() {
 	noStroke();
   background(0);
 }
-
-
-
 function draw() { 
   
   echo ++;
@@ -2594,13 +2012,11 @@ function draw() {
   echo=0;
   }
   
-  //console.log(255-echo);
   
   
   
   background(0,0,0,255-echo);
   
-  //background(0);
   var hr = h / capture_video.height
   var wr = w / capture_video.width
   
@@ -2661,30 +2077,19 @@ function draw() {
 		}
 	}
 }
-
-var img;  // Declare variable 'img'.
 var w = 650;
 var h = 650;
-//var mousex = mouseX;
-//var mousey = mouseY;
-
 function preload() {
   img = loadImage("/img/lior.jpg");
   img1 = loadImage("/img/peter.jpg");
   img2 = loadImage("/img/barak.jpg");
   img3 = loadImage("/img/peter1.jpg");
-
 }
-
-
 function setup() {
   createCanvas(w, h);
-  //img = loadImage("/img/barak.jpg");  // Load the image
 	noStroke();
   background(0);
 }
-
-
 function draw() { 
   
   if ((mouseX >= 0) && (mouseX <= width/3){
@@ -2702,8 +2107,6 @@ function draw() {
     
       
       if(pixel >= 0) {
-        //fill(0);
-        //rect(i * wr, c * hr, wr, hr);
       }
       
       if((pixel < 175) && (pixel > 120 )) {
@@ -2712,7 +2115,6 @@ function draw() {
       }
       
        if((pixel < 145) && (pixel > 75 )) {
-        //fill(255,255,255,70);
         rect(i * wr, c * hr, wr / 6, hr / 6);
       }
       
@@ -2744,24 +2146,18 @@ function draw() {
      
       else if ((pixel > 10) && (pixel < 250 )) {
     		stroke(255);
-				//line( i * wr + wr / 2  ,  c * hr + hr / 2  ,i * wr  , c * hr);
     	}
       
       
     }
   }
-}var img;  // Declare variable 'img'.
 var w = 650;
 var h = 650;
-
 function setup() {
   createCanvas(w, h);
-  img = loadImage("/img/itay-big.");  // Load the image
 	noStroke();
   background(0);
 }
-
-
 function draw() { 
   background(0);
   var hr = h / img.height
@@ -2774,8 +2170,6 @@ function draw() {
     
       
       if(pixel >= 0) {
-        //fill(0);
-        //rect(i * wr, c * hr, wr, hr);
       }
       
       if((pixel < 175) && (pixel > 120 )) {
@@ -2784,7 +2178,6 @@ function draw() {
       }
       
        if((pixel < 145) && (pixel > 75 )) {
-        //fill(255,255,255,70);
         rect(i * wr, c * hr, wr / 6, hr / 6);
       }
       
@@ -2816,24 +2209,18 @@ function draw() {
      
       else if ((pixel > 10) && (pixel < 250 )) {
     		stroke(255);
-				//line( i * wr + wr / 2  ,  c * hr + hr / 2  ,i * wr  , c * hr);
     	}
       
       
     }
   }
-}var img;  // Declare variable 'img'.
 var w = 650;
 var h = 650;
-
 function setup() {
   createCanvas(w, h);
-  img = loadImage("/img/itay-big.");  // Load the image
 	noStroke();
   background(0);
 }
-
-
 function draw() { 
   background(0);
   var hr = h / img.height
@@ -2846,8 +2233,6 @@ function draw() {
     
       
       if(pixel >= 0) {
-        //fill(0);
-        //rect(i * wr, c * hr, wr, hr);
       }
       
       if((pixel < 175) && (pixel > 120 )) {
@@ -2856,7 +2241,6 @@ function draw() {
       }
       
        if((pixel < 145) && (pixel > 75 )) {
-        //fill(255,255,255,70);
         rect(i * wr, c * hr, wr / 6, hr / 6);
       }
       
@@ -2888,25 +2272,19 @@ function draw() {
      
       else if ((pixel > 10) && (pixel < 250 )) {
     		stroke(255);
-				//line( i * wr + wr / 2  ,  c * hr + hr / 2  ,i * wr  , c * hr);
     	}
       
       
     }
   }
-}var img;  // Declare variable 'img'.
 var w = 650;
 var h = 650;
-
 function setup() {
   frameRate(1);
   createCanvas(w, h);
-  img = loadImage("/img/peter.jpg");  // Load the image
 	noStroke();
   background(0);
 }
-
-
 function draw() { 
   background(0);
   var hr = h / img.height
@@ -2922,8 +2300,6 @@ function draw() {
       
       
       if(pixel >= 0) {
-        //fill(0);
-        //rect(i * wr, c * hr, wr, hr);
       }
       
       if((pixel < 175) && (pixel > 120 )) {
@@ -2932,7 +2308,6 @@ function draw() {
       }
       
        if((pixel < 145) && (pixel > 75 )) {
-        //fill(255,255,255,70);
         rect(i * wr, c * hr, wr / 6, hr / 6);
       }
       
@@ -2964,24 +2339,18 @@ function draw() {
      
       else if ((pixel > 10) && (pixel < 250 )) {
     		stroke(255);
-				//line( i * wr + wr / 2  ,  c * hr + hr / 2  ,i * wr  , c * hr);
     	}
       
       
     }
   }
-}var img;  // Declare variable 'img'.
 var w = 650;
 var h = 650;
-
 function setup() {
   createCanvas(w, h);
-  img = loadImage("/img/itay-big.");  // Load the image
 	noStroke();
   background(0);
 }
-
-
 function draw() { 
   background(0);
   var hr = h / img.height
@@ -2994,8 +2363,6 @@ function draw() {
     
       
       if(pixel >= 0) {
-        //fill(0);
-        //rect(i * wr, c * hr, wr, hr);
       }
       
       if((pixel < 175) && (pixel > 120 )) {
@@ -3004,7 +2371,6 @@ function draw() {
       }
       
        if((pixel < 145) && (pixel > 75 )) {
-        //fill(255,255,255,70);
         rect(i * wr, c * hr, wr / 6, hr / 6);
       }
       
@@ -3036,24 +2402,18 @@ function draw() {
      
       else if ((pixel > 10) && (pixel < 250 )) {
     		stroke(255);
-				//line( i * wr + wr / 2  ,  c * hr + hr / 2  ,i * wr  , c * hr);
     	}
       
       
     }
   }
-}var img;  // Declare variable 'img'.
 var w = 650;
 var h = 650;
-
 function setup() {
   createCanvas(w, h);
-  img = loadImage("/img/itay-big.");  // Load the image
 	noStroke();
   background(0);
 }
-
-
 function draw() { 
   background(0);
   var hr = h / img.height
@@ -3066,8 +2426,6 @@ function draw() {
     
       
       if(pixel >= 0) {
-        //fill(0);
-        //rect(i * wr, c * hr, wr, hr);
       }
       
       if((pixel < 175) && (pixel > 120 )) {
@@ -3076,7 +2434,6 @@ function draw() {
       }
       
        if((pixel < 145) && (pixel > 75 )) {
-        //fill(255,255,255,70);
         rect(i * wr, c * hr, wr / 6, hr / 6);
       }
       
@@ -3108,40 +2465,27 @@ function draw() {
      
       else if ((pixel > 10) && (pixel < 250 )) {
     		stroke(255);
-				//line( i * wr + wr / 2  ,  c * hr + hr / 2  ,i * wr  , c * hr);
     	}
       
       
     }
   }
 }
-
-var img;  // Declare variable 'img'.
 var w = 650;
 var h = 650;
-//var mousex = mouseX;
-//var mousey = mouseY;
-
 function preload() {
   img = loadImage("/img/barak.jpg");
  
-
 }
-
-
 function setup() {
   createCanvas(w, h);
-  //img = loadImage("/img/barak.jpg");  // Load the image
 	noStroke();
   background(0);
 }
-
-
 function draw() { 
   
  
   if (mouseX > (width/3)){
-    print("
   }
   
   
@@ -3156,8 +2500,6 @@ function draw() {
     
       
       if(pixel >= 0) {
-        //fill(0);
-        //rect(i * wr, c * hr, wr, hr);
       }
       
       if((pixel < 175) && (pixel > 120 )) {
@@ -3166,7 +2508,6 @@ function draw() {
       }
       
        if((pixel < 145) && (pixel > 75 )) {
-        //fill(255,255,255,70);
         rect(i * wr, c * hr, wr / 6, hr / 6);
       }
       
@@ -3198,25 +2539,19 @@ function draw() {
      
       else if ((pixel > 10) && (pixel < 250 )) {
     		stroke(255);
-				//line( i * wr + wr / 2  ,  c * hr + hr / 2  ,i * wr  , c * hr);
     	}
       
       
     }
   }
-}var img;  // Declare variable 'img'.
 var w = 650;
 var h = 650;
-
 function setup() {
   frameRate(1);
   createCanvas(w, h);
-  img = loadImage("https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/21743134_10155787652398000_8108639895580613973_n.jpg?oh=4a9644cd998598b716e2537aa8049607&oe=5A49E171");  // Load the image
 	noStroke();
   background(0);
 }
-
-
 function draw() { 
   background(0);
   var hr = h / img.height
@@ -3229,8 +2564,6 @@ function draw() {
     
       
       if(pixel >= 0) {
-        //fill(0);
-        //rect(i * wr, c * hr, wr, hr);
       }
       
       if((pixel < 175) && (pixel > 160 )) {
@@ -3239,7 +2572,6 @@ function draw() {
       }
       
        if((pixel < 145) && (pixel > 75 )) {
-        //fill(255,255,255,70);
         rect(i * wr, c * hr, wr / 6, hr / 6);
       }
       
@@ -3271,24 +2603,18 @@ function draw() {
      
       else if ((pixel > 10) && (pixel < 250 )) {
     		stroke(255);
-				//line( i * wr + wr / 2  ,  c * hr + hr / 2  ,i * wr  , c * hr);
     	}
       
       
     }
   }
-}var img;  // Declare variable 'img'.
 var w = 650;
 var h = 650;
-
 function setup() {
   createCanvas(w, h);
-  img = loadImage("https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/21761592_10155786588383000_6697296981740608952_n.jpg?oh=5a68eac5a6dcbc0d5e29515845e6d2a0&oe=5A174DF1");  // Load the image
 	noStroke();
   background(0);
 }
-
-
 function draw() { 
   background(0);
   var hr = h / img.height
@@ -3301,8 +2627,6 @@ function draw() {
     
       
       if(pixel >= 0) {
-        //fill(0);
-        //rect(i * wr, c * hr, wr, hr);
       }
       
       if((pixel < 175) && (pixel > 160 )) {
@@ -3311,7 +2635,6 @@ function draw() {
       }
       
        if((pixel < 145) && (pixel > 75 )) {
-        //fill(255,255,255,70);
         rect(i * wr, c * hr, wr / 6, hr / 6);
       }
       
@@ -3343,24 +2666,18 @@ function draw() {
      
       else if ((pixel > 10) && (pixel < 250 )) {
     		stroke(255);
-				//line( i * wr + wr / 2  ,  c * hr + hr / 2  ,i * wr  , c * hr);
     	}
       
       
     }
   }
-}var img;  // Declare variable 'img'.
 var w = 650;
 var h = 650;
-
 function setup() {
   createCanvas(w, h);
-  img = loadImage("https://scontent-iad3-1.xx.fbcdn.net/v/t1.0-9/21743338_10155786488238000_1164971421307161759_n.jpg?oh=769a11a3b638771caa113e1c3df3522a&oe=5A578BA1");  // Load the image
 	noStroke();
   background(0);
 }
-
-
 function draw() { 
   background(0);
   var hr = h / img.height
@@ -3373,8 +2690,6 @@ function draw() {
     
       
       if(pixel >= 0) {
-        //fill(0);
-        //rect(i * wr, c * hr, wr, hr);
       }
       
       if((pixel < 175) && (pixel > 120 )) {
@@ -3383,7 +2698,6 @@ function draw() {
       }
       
        if((pixel < 145) && (pixel > 75 )) {
-        //fill(255,255,255,70);
         rect(i * wr, c * hr, wr / 6, hr / 6);
       }
       
@@ -3415,24 +2729,18 @@ function draw() {
      
       else if ((pixel > 10) && (pixel < 250 )) {
     		stroke(255);
-				//line( i * wr + wr / 2  ,  c * hr + hr / 2  ,i * wr  , c * hr);
     	}
       
       
     }
   }
-}var img;  // Declare variable 'img'.
 var w = 650;
 var h = 650;
-
 function setup() {
   createCanvas(w, h);
-  img = loadImage("https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/21558723_10155783387028000_1913904828957488625_n.jpg?oh=71e0f28016912db6a0d10d8af44ac220&oe=5A497BF9");  // Load the image
 	noStroke();
   background(0);
 }
-
-
 function draw() { 
   background(0);
   var hr = h / img.height
@@ -3445,8 +2753,6 @@ function draw() {
     
       
       if(pixel >= 0) {
-        //fill(0);
-        //rect(i * wr, c * hr, wr, hr);
       }
       
       if((pixel < 175) && (pixel > 120 )) {
@@ -3455,7 +2761,6 @@ function draw() {
       }
       
        if((pixel < 145) && (pixel > 75 )) {
-        //fill(255,255,255,70);
         rect(i * wr, c * hr, wr / 6, hr / 6);
       }
       
@@ -3487,36 +2792,26 @@ function draw() {
      
       else if ((pixel > 10) && (pixel < 250 )) {
     		stroke(255);
-				//line( i * wr + wr / 2  ,  c * hr + hr / 2  ,i * wr  , c * hr);
     	}
       
       
     }
   }
-}var img;  // Declare variable 'img'.
-
 function setup() {
   createCanvas(900, 900);
-  img = loadImage("https://s3-eu-west-1.amazonaws.com/itayniv.com/public_html/images/RGB-pic-mosaic.jpg");  // Load the image
 }
-
 function draw() {
-   //Displays the image at its actual size at point (0,0)
-  //image(img, 0, 0);
-  // Displays the image at point (0, height/2) at half size
   image(img, 0, 0, img.width/2, img.height/2);
   
   
 }
 var squares =[];
-
 function setup() { 
   createCanvas(500, 500);
   
     
 	
 } 
-
 function draw() {
   
   var Black = color(14);
@@ -3566,7 +2861,6 @@ function draw() {
   rect((33*10),0,sqWidth,sqHeight)
   rect((34*10),0,sqWidth,sqHeight)
 	rect((35*10),0,sqWidth,sqHeight)
-
   
   noStroke();
   fill(white);
@@ -3574,7 +2868,6 @@ function draw() {
   
   
   
-  /////////line02////////
   
 	noStroke();
   fill(lightBlack);
@@ -3603,17 +2896,8 @@ function draw() {
   rect((31*10),10,sqWidth,sqHeight)
   rect((36*10),10,sqWidth,sqHeight)
 	rect((38*10),10,sqWidth,sqHeight)
-
   
-   /////////line03////////
   
-  //var Black = color(14);
-  //var lightBlack = color(61);
-  //var darkGrey = color(82);
-  //var midGrey = color(111);
-	//var grey = color(137);
-  //var lightGrey = color(168);
-	//var white = color(253);
   
   
   noStroke();
@@ -3652,8 +2936,6 @@ function draw() {
   rect((33*10),20,sqWidth,sqHeight)
   rect((36*10),20,sqWidth,sqHeight)
   rect((38*10),20,sqWidth,sqHeight)
-
-
   
   noStroke();
   fill(white);
@@ -3678,720 +2960,299 @@ function setup() {
   
   
   
-  //////////line 01
-  
-  //pix1
   
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(0, 0, 10, 10);  // Draw rectangle  
   
-    //pix2
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(10, 0, 10, 10);  // Draw rectangle  
   
-    //pix3
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(20, 0, 10, 10);  // Draw rectangle  
   
-    //pix4
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(30, 0, 10, 10);  // Draw rectangle  
   
-    //pix5
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(40, 0, 10, 10);  // Draw rectangle  
   
-    //pix6
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(50, 0, 10, 10);  // Draw rectangle  
   
-    //pix7
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(60, 0, 10, 10);  // Draw rectangle  
   
-    //pix8
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(70, 0, 10, 10);  // Draw rectangle  
   
-    //pix9
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(80, 0, 10, 10);  // Draw rectangle  
   
-    //pix10
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(90, 0, 10, 10);  // Draw rectangle  
   
-    //pix11
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(100, 0, 10, 10);  // Draw rectangle  
   
-    //pix12
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(110, 0, 10, 10);  // Draw rectangle  
   
-    //pix13
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(120, 0, 10, 10);  // Draw rectangle  
   
-    //pix14
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(130, 0, 10, 10);  // Draw rectangle  
   
-    //pix15
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(140, 0, 10, 10);  // Draw rectangle  
   
-    //pix16
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(150, 0, 10, 10);  // Draw rectangle  
   
-    //pix17
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(160, 0, 10, 10);  // Draw rectangle  
   
-    //pix18
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(170, 0, 10, 10);  // Draw rectangle  
   
-    //pix19
+  
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(180, 0, 10, 10);  // Draw rectangle  
   
-    //pix20
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(190, 0, 10, 10);  // Draw rectangle  
   
-    //pix21
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(200, 0, 10, 10);  // Draw rectangle  
   
-    //pix22
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(210, 0, 10, 10);  // Draw rectangle  
   
-    //pix23
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(220, 0, 10, 10);  // Draw rectangle  
    
-  //pix24
   
 	
-	fill(lightBlack);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(230, 0, 10, 10);  // Draw rectangle  
   
-    //pix25
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(240, 0, 10, 10);  // Draw rectangle  
   
-    //pix26
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(250, 0, 10, 10);  // Draw rectangle  
   
   
-  //pix27
   
   
   	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(260, 0, 10, 10);  // Draw rectangle  
   
-    //pix28
   
-	fill(lightBlack);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(270, 0, 10, 10);  // Draw rectangle  
   
-    //pix29
   
-	fill(midGrey);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(280, 0, 10, 10);  // Draw rectangle  
   
-    //pix30
   
-	fill(midGrey);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(290, 0, 10, 10);  // Draw rectangle  
   
-    //pix31
   
 	fill(grey);  
-	//noStroke();  
 	rect(300, 0, 10, 10);  
   
-    //pix32
   
 	fill(grey);  
-	//noStroke();  
 	rect(310, 0, 10, 10);  
   
-    //pix33
   
-	fill(white);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(320, 0, 10, 10);  // Draw rectangle  
   
-    //pix34
   
 	
 	fill(lightGrey);
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(330, 0, 10, 10);  // Draw rectangle  
   
-    //pix35
   
 	fill(lightGrey);
-  //noStroke();  // Don't draw a stroke around shapes
-	rect(340, 0, 10, 10);  // Draw rectangle  
   
-    //pix36
   
 	
-	fill(lightGrey);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(350, 0, 10, 10);  // Draw rectangle  
   
-    //pix37
   
 	
-	fill(grey);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(360, 0, 10, 10);  // Draw rectangle  
   
-    //pix38
   
 	
-	fill(grey);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(370, 0, 10, 10);  // Draw rectangle  
   
-    //pix39
   
 	
-	fill(lightBlack);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(380, 0, 10, 10);  // Draw rectangle  
   
-    //pix40
   
 	
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(390, 0, 10, 10);  // Draw rectangle  
   
-    //pix41
   
 	
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(400, 0, 10, 10);  // Draw rectangle  
   
-    //pix42
   
 	
-	fill(lightBlack);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(410, 0, 10, 10);  // Draw rectangle  
   
-    //pix43
   
-	fill(darkGrey);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(420, 0, 10, 10);  // Draw rectangle  
   
-    //pix44
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(430, 0, 10, 10);  // Draw rectangle  
   
-    //pix45
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(440, 0, 10, 10);  // Draw rectangle  
     
-  	//pix46
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(450, 0, 10, 10);  // Draw rectangle  
   
-    //pix47
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(460, 0, 10, 10);  // Draw rectangle  
   
-    //pix48
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(470, 0, 10, 10);  // Draw rectangle  
   
-     //pix49
   
   	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(480, 0, 10, 10);  // Draw rectangle  
   
-    //pix50
   
    	
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(490, 0, 10, 10);  // Draw rectangle 
   
   
-  //////////////////////////////////line2///////////////
   
  
   
-
-   //pix1
   
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(0, 10, 10, 10);  // Draw rectangle  
   
-    //pix2
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(10, 10, 10, 10);  // Draw rectangle  
   
-    //pix3
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(20, 10, 10, 10);  // Draw rectangle  
   
-    //pix4
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(30, 10, 10, 10);  // Draw rectangle  
   
-    //pix5
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(40, 10, 10, 10);  // Draw rectangle  
   
-    //pix6
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(50, 10, 10, 10);  // Draw rectangle  
   
-    //pix7
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(60, 10, 10, 10);  // Draw rectangle  
   
-    //pix8
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(70, 10, 10, 10);  // Draw rectangle  
   
-    //pix9
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(80, 10, 10, 10);  // Draw rectangle  
   
-    //pix10
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(90, 10, 10, 10);  // Draw rectangle  
   
-    //pix11
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(100, 10, 10, 10);  // Draw rectangle  
   
-    //pix12
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(110, 10, 10, 10);  // Draw rectangle  
   
-    //pix13
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(120, 10, 10, 10);  // Draw rectangle  
   
-    //pix14
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(130, 10, 10, 10);  // Draw rectangle  
   
-    //pix15
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(140, 10, 10, 10);  // Draw rectangle  
   
-    //pix16
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(150, 10, 10, 10);  // Draw rectangle  
   
-    //pix17
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(160, 0, 10, 10);  // Draw rectangle  
   
-    //pix18
   
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(170, 0, 10, 10);  // Draw rectangle  
   
-    //pix19
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(180, 0, 10, 10);  // Draw rectangle  
   
-    //pix20
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(190, 0, 10, 10);  // Draw rectangle  
   
-    //pix21
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(200, 0, 10, 10);  // Draw rectangle  
   
-    //pix22
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(210, 0, 10, 10);  // Draw rectangle  
   
-    //pix23
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(220, 0, 10, 10);  // Draw rectangle  
    
-  //pix24
   
 	
-	fill(lightBlack);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(230, 0, 10, 10);  // Draw rectangle  
   
-    //pix25
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(240, 0, 10, 10);  // Draw rectangle  
   
-    //pix26
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(250, 0, 10, 10);  // Draw rectangle  
   
   
-  //pix27
   
   
   	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(260, 0, 10, 10);  // Draw rectangle  
   
-    //pix28
   
-	fill(lightBlack);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(270, 0, 10, 10);  // Draw rectangle  
   
-    //pix29
   
-	fill(midGrey);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(280, 0, 10, 10);  // Draw rectangle  
   
-    //pix30
   
-	fill(midGrey);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(290, 0, 10, 10);  // Draw rectangle  
   
-    //pix31
   
 	fill(grey);  
-	//noStroke();  
 	rect(300, 0, 10, 10);  
   
-    //pix32
   
 	fill(grey);  
-	//noStroke();  
 	rect(310, 0, 10, 10);  
   
-    //pix33
   
-	fill(white);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(320, 0, 10, 10);  // Draw rectangle  
   
-    //pix34
   
 	
 	fill(lightGrey);
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(330, 0, 10, 10);  // Draw rectangle  
   
-    //pix35
   
 	fill(lightGrey);
-  //noStroke();  // Don't draw a stroke around shapes
-	rect(340, 0, 10, 10);  // Draw rectangle  
   
-    //pix36
   
 	
-	fill(lightGrey);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(350, 0, 10, 10);  // Draw rectangle  
   
-    //pix37
   
 	
-	fill(grey);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(360, 0, 10, 10);  // Draw rectangle  
   
-    //pix38
   
 	
-	fill(grey);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(370, 0, 10, 10);  // Draw rectangle  
   
-    //pix39
   
 	
-	fill(lightBlack);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(380, 0, 10, 10);  // Draw rectangle  
   
-    //pix40
   
 	
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(390, 0, 10, 10);  // Draw rectangle  
   
-    //pix41
   
 	
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(400, 0, 10, 10);  // Draw rectangle  
   
-    //pix42
   
 	
-	fill(lightBlack);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(410, 0, 10, 10);  // Draw rectangle  
   
-    //pix43
   
-	fill(darkGrey);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(420, 0, 10, 10);  // Draw rectangle  
   
-    //pix44
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(430, 0, 10, 10);  // Draw rectangle  
   
-    //pix45
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(440, 0, 10, 10);  // Draw rectangle  
     
-  	//pix46
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(450, 0, 10, 10);  // Draw rectangle  
   
-    //pix47
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(460, 0, 10, 10);  // Draw rectangle  
   
-    //pix48
   
 	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(470, 0, 10, 10);  // Draw rectangle  
   
-     //pix49
   
   	var Black = color(0,0,0);
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(480, 0, 10, 10);  // Draw rectangle  
   
-    //pix50
   
    	
-	fill(Black);  // Use 'c' as fill color
-	//noStroke();  // Don't draw a stroke around shapes
-	rect(490, 0, 10, 10);  // Draw rectangle 
   
   
   
   
   
 } 
-
-
 function setup() {
   createCanvas(200, 200);
   background(225,0,0);
  
 	var a = color(240,240,240);
-	fill(a);  // Use 'c' as fill color
-	noStroke();  // Don't draw a stroke around shapes
-	rect(0, 0, 50, 200);  // Draw rectangle  
   
-	fill(a);  // Use 'c' as fill color
-	noStroke();  // Don't draw a stroke around shapes
-	rect(50, 135, 200, 200);  // Draw rectangle  
   
   
  	var b = color(0,0,190);
-	fill(b);  // Use 'c' as fill color
-	noStroke();  // Don't draw a stroke around shapes
-	rect(0, 135, 50, 70);  // Draw rectangle  
   
   var c = color(244, 223, 66);
-	fill(c);  // Use 'c' as fill color
-	noStroke();  // Don't draw a stroke around shapes
-	rect(180, 170, 180, 70);  // Draw rectangle  
   
 	var d = color(40, 40, 40);
-	fill(d);  // Use 'c' as fill color
-	noStroke();  // Don't draw a stroke around shapes
-	rect(43, 0, 8, 200);  // Draw rectangle 
   
-  	fill(d);  // Use 'c' as fill color
-	noStroke();  // Don't draw a stroke around shapes
-	rect(0, 135, 200, 8);  // Draw rectangle 
   
-  	fill(d);  // Use 'c' as fill color
-	noStroke();  // Don't draw a stroke around shapes
-	rect(0, 65, 50, 12);  // Draw rectangle
   
-  	fill(d);  // Use 'c' as fill color
-	noStroke();  // Don't draw a stroke around shapes
-	rect(180, 165, 50, 10);  // Draw rectangle 
   
-  	fill(d);  // Use 'c' as fill color
-	noStroke();  // Don't draw a stroke around shapes
-	rect(177, 135, 7, 90);  // Draw rectangle 
-
  
   
   

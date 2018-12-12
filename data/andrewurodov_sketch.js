@@ -1,11 +1,7 @@
-//API and keys
 let input;
-let api = "https://api.mlab.com/api/1/databases/commentemotions/collections/test?";
 let apiKey = "apiKey=Wg1RQ-mRUnADf_JceH9oWbfpxDieEE15";
 let count = 1;
 let x = 0;
-
-//Setting up a search field
 function setup() {
   noCanvas();
   p = createP('Search tones!');
@@ -31,11 +27,9 @@ function setup() {
 		}
 	}
 }
-
 function draw() {
       rect(x,10,10,10);
 }
-
 function search_happy() {
   let url = api + apiKey;
   console.log(url);
@@ -58,14 +52,11 @@ var snapshots = [];
 var x = 120;
 var y = 200;
 var z = 150;
-
 function setup() {
   createCanvas(500, 500);
-
   pixelDensity(1);
   video = createCapture(VIDEO);
   video.size(width/vScale, height/vScale);
-
   button = createButton('ZOOM IN');
   button.mousePressed(zoomin);
   button2 = createButton('ZOOM OUT');
@@ -75,22 +66,17 @@ function setup() {
   
   video.hide();
 }
-
 function zoomin() {
   vScale ++;
 }
-
 function zoomout() {
   vScale --;
 }
-
 function changecolor() {
   x=random(255);
   y=random(255);
   z=random(255);
 }
-
-
 function draw() {
 	background (x,y,z);
   video.loadPixels();
@@ -125,14 +111,12 @@ let spot={
   x:0,
   y:0
 };
-
 function setup() { 
   createCanvas(500, 700);
   for(let i=0;i<150;i++){
     snow[i]=new Snow();
   }
 } 
-
 function draw() {
   backgroundSky();
   
@@ -142,7 +126,6 @@ function draw() {
   
   }  
 }
-
 function backgroundSky(){
   r=map(mouseX,0,500,184,81);
   g=map(mouseX,0,500,208,97);
@@ -150,13 +133,9 @@ function backgroundSky(){
   background(r,g,b);
 }
   let input;
-var api = "https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2017-09-21";
-
 curl -X POST --user "6e805d9e-f62b-4f27-ac9a-83126e127997":"7hNi61Xbddna" \
 --header "Content-Type: application/json" \
 --data-binary @input.value()\
-"https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2017-09-21"
-
 function setup() {
   noCanvas();
   input = createInput('rainbow');
@@ -165,18 +144,13 @@ function setup() {
   let url = api + apiKey + query;
   loadJSON(url, gotData);
 }
-
 function gotData(giphy) {
   for (let i = 0; i < giphy.data.length; i++) {
     let img = createImg(giphy.data[i].images.original.url);
     img.size(200, 200);
   }
-}//API and keys
 let input;
-let api = "http://api.giphy.com/v1/gifs/search?";
 let apiKey = "&api_key=dc6zaTOxFJmzC";
-
-//Setting up a search field
 function setup() {
   noCanvas();
   p = createP('Search gifs!');
@@ -184,18 +158,12 @@ function setup() {
   button = createButton('okaay');
   button.mousePressed(search);
 }
-
-//Calling the API
 function search() {
   let zip = input.value();
   let url = api + apiKey + '&q='+zip;
-
-//Loading data
   console.log(url);
   loadJSON(url, gotData);
 }
-
-//Structuring data on page
 function gotData(giphy) {
   console.log(giphy);
   let p = createP(' ');
@@ -203,42 +171,22 @@ function gotData(giphy) {
     let img = createImg(giphy.data[i].images.original.url);
     img.size(100, 100);
   }
-}// Declare a "SerialPort" object
-var serial;
-var latestData = "waiting for data"; // you'll use this to write incoming data to the canvas
 var sliders = [];
-
 function setup() {
   noCanvas();
-  // Instantiate our SerialPort object
-  serial = new p5.SerialPort();
-  serial.open("/dev/cu.usbmodem1411");
   var button = select('#button');
   button.mousePressed(startDance);
-
   for (var i = 0; i < 50; i++) {
     sliders[i] = createSlider(0, 255, 20);
   }
-
   frameRate(20);
 }
-
-// There is data available to work with from the serial port
 function gotData() {
-  var currentString = serial.readLine(); // read the incoming string
-  trim(currentString); // remove any trailing whitespace
-  if (!currentString) return; // if the string is empty, do no more
-  console.log(currentString); // println the string
-  latestData = currentString; // save it for the draw method
 }
-
 function startDance() {
-  serial.on('data', gotData);
-  img = createImg("https://33.media.tumblr.com/cfd039730669f89c064f69e57e0877af/tumblr_nj6ipiNACJ1t8s6eeo1_500.gif");
   img.position(350, 10);
   img.size(150, 120);
 }
-
 function draw() {
   var offset = 0;
   for (var i = 0; i < sliders.length; i++) {
@@ -247,30 +195,24 @@ function draw() {
     offset += 0.09;
   }
 }var mySlider;
-
 function setup() { 
   createCanvas(400, 400);
   mySlider = createSlider(0,255,50);
   mySlider.position(width/3,height/2);
   mySlider.mouseClicked(yay);
 } 
-
 function draw() { 
 }
-
 function yay() {
   background(random(100,255),255,200);
 }let win = [];
 let w;
-
 function setup() {
   createCanvas(500, 500);
   background(255);
   frameRate(150);
 }
-
 class Space {
-
   constructor() {
     this.x = 250;
     this.y = 250;
@@ -288,15 +230,12 @@ class Space {
   winDone() {
   return this.alpha < 0;
 	}
-
   show() {
     fill(this.x, this.y, 255, this.alpha);
-    //for rainbow color do 255/cos(this.x)
     noStroke();
     ellipse(this.x, this.y, 10);
   }
 }
-
 function draw() {
   let w = new Space();
   win.push(w);
@@ -310,19 +249,15 @@ function draw() {
   }
 }let win = [];
 let w;
-
 function preload() {
 img = loadImage("corgi.png");
 }
-
 function setup() {
   createCanvas(500, 500);
   background(255);
   frameRate(60);
 }
-
 class Space {
-
   constructor() {
     this.x = mouseX;
     this.y = mouseY;
@@ -340,7 +275,6 @@ class Space {
   winDone() {
   return this.alpha < 0;
 	}
-
   show() {
     if (mouseIsPressed) {
     fill(this.x, this.y, 255/cos(this.x), this.alpha);
@@ -349,18 +283,14 @@ class Space {
     }
   }
 }
-
 function draw() {
   background(10);
   cursordog();
   confetti();
 }
-
-
 function cursordog() {
   image(img, mouseX - 95, mouseY - 70, 150,110);
 }
-
 function confetti() {
   let w = new Space();
   win.push(w);
@@ -374,7 +304,6 @@ function confetti() {
    intext();
   } 
 }
-
 function intext() {
   fill(random(255), 100)
   noStroke();
@@ -394,26 +323,20 @@ let r, g, b, o;
 let s;
 let m;
 let txt1,txt2;
-
-//Load images
 function preload() {
   myImage = loadImage("zuckerberg1.jpg");
   myImage2 = loadImage("pictureframe1.png");
 }
-
 function setup() {
   createCanvas(550, 500);
   frameRate(max);
   imageSetup();
   writeText("HELP MARK","escape the pixels");
 }
-
 function draw() {
   drawFrame();
   pixelate(150, 150);
 }
-
-//Turn image into pixels
 function pixelate(imgw, imgh) {
   x = random(imgw);
   y = random(imgh);
@@ -422,19 +345,13 @@ function pixelate(imgw, imgh) {
   noStroke();
   rect(200 + x, 50 + y, a, a);
 }
-
-//Draw the image with the frame
 function drawFrame() {
   image(myImage2, 155, 13, 239, 224);
 }
-
-//Set up a new image on top of the pixelated one
 function imageSetup() {
   image(myImage, 198, 50, 153, 153);
   splash1 = new Splash(450, 100);
 }
-
-//Create text
 function writeText(txt1,txt2) {
   stroke(0);
   textSize(24);
@@ -442,8 +359,6 @@ function writeText(txt1,txt2) {
   textSize(13);
   text(txt2, 310, 293);
 }
-
-//Pixel size declines on mouse click
 function mouseClicked() {
   background(255);
   image(myImage, 198, 50, 153, 153);
@@ -456,25 +371,20 @@ function mouseClicked() {
     fill(255, 190, 233);
     text("NOOOOOO", 259, 367);
   }
-
   if (a <= 10 && a >= 1) {
     splash1.move();
     splash1.show();
   }
 }
-
-//Object for a pixel size (appears on the right)
 class Splash {
   constructor(x, y) {
     this.x = x;
     this.y = y;
   }
-
   move() {
     this.x = this.x + random(-10, 10);
     this.y = this.y + random(25, 35);
   }
-
   show() {
     strokeWeight(0.5);
     stroke(0);
@@ -483,19 +393,11 @@ class Splash {
     fill(0);
     textSize(10);
     text("pixel size", this.x, this.y - 5);
-    //   line(this.x+a,this.y, this.x+20, this.y+20);
-    //   line(this.x,this.y+a, this.x+20, this.y+20);
-    //   fill(p);
-    //   noStroke();
-    //   rect(this.x+20, this.y+20, a*3 ,a*3);
   }
-}//locates tinder app = {
 var tinder = {
   x: 0,
   y: 0,
 }
-
-//initializing color for buttons
 	var r=255;
 	var g=255;
 	var b=255;
@@ -503,8 +405,6 @@ var tinder = {
 	var g1=255;
 	var b1=255;
 	var op=35;
-
-//loading images
 function preload() { 
   heart = loadImage("haert.png");
   cross = loadImage("cross.png");
@@ -513,12 +413,10 @@ function preload() {
   timg2 = loadImage("tinderimg2.jpg");
   outline = loadImage("outline.png");
 } 
-
 function setup() { 
   createCanvas(500, 450);
   pixelDensity(1);
 } 
-
 function draw() { 
   background(220);
   drawBackground();
@@ -526,20 +424,16 @@ function draw() {
   drawTinder();
   drawAvatar(150);
 }
-
 function drawTinder() {
-  //main window
   fill('rgba(255,255,255,1)');
   stroke('rgba(241,241,241,1)');
   strokeWeight(1);
   rect(tinder.x+140,tinder.y+35,210,320);
   
-  //img window
   fill(mouseX,mouseY,200,45);
   stroke('rgba(207,207,207,1)');
   rect(tinder.x+160,tinder.y+70,170,200);
   
-  //buttons
   fill(r,g,b,55);
   stroke('rgba(207,207,207,0.4)');
   strokeWeight(4);
@@ -551,7 +445,6 @@ function drawTinder() {
   image(cross,tinder.x+209,tinder.y+305);
   image(logo,tinder.x+204,tinder.y+42);
 }
-
 function drawBackground() {
   loadPixels();
   for (var x=0; x<width; x++) 
@@ -567,14 +460,12 @@ function drawBackground() {
   }
   updatePixels();
 }
-
 function drawAvatar(op) {
   fill (mouseX,0,76,op);
   noStroke();
   ellipse(tinder.x+244,tinder.y+168,65,65);
   arc(tinder.x+244, tinder.y+270, 110, 130, PI, 2*PI);
   
-  //button color changes - CROSS
       if (mouseIsPressed &&
           mouseX<tinder.x+245 && mouseX>tinder.x+200
      			&& mouseY>tinder.y+280 && mouseY<tinder.y+325) {
@@ -591,7 +482,6 @@ function drawAvatar(op) {
         op=35;
       }
   
-  //button color changes - HEART
   		if (mouseIsPressed &&
           mouseX<tinder.x+295 && mouseX>tinder.x+245
      			&& mouseY>tinder.y+280 && mouseY<tinder.y+325) {
@@ -611,35 +501,25 @@ function drawAvatar(op) {
   img = loadImage("tv.jpg");
   img2 = loadImage("trump.jpg");
 }
-
 function draw() {
-
-  //mapping background-color to mouseX
   x = 200;
   x = map(mouseX, 0, 500, 250, 0);
   background(x, 150, 180);
   translate(250, 250);
-
-  //tv is dead
   textSize(72);
   text("TV IS DEAD", -200, 140);
 	
-  //checks if you click on tv-set or not
   if (mouseIsPressed && mouseY>=150 && mouseY<=250 && mouseX>=250 && mouseX<=400) {
-    //tv-set
     strokeWeight(1);
     stroke(0);
     stroke(44);
     strokeWeight(2);
     rect(0, -100, 150, 100);
     image(img2, 1, -98, 148, 98);
-
-    //creating noise & setting its color
     let a = random(0, 146);
     let mycolor = random(10, 50);
     let mycolor2 = random(10, 100);
     stroke(200, mycolor2, mycolor);
-
     strokeWeight(5);
     beginShape()
     curveVertex(a, -100);
@@ -650,15 +530,11 @@ function draw() {
     curveVertex(a, -100);
     curveVertex(a, -50);
     endShape();
-
-    //tv-body  
     fill(45);
     noStroke();
     quad(149, -100, 180, -130, 180, -30, 150, 1);
     fill(67);
     quad(-1, -100, 32, -130, 180, -130, 150, -100);
-
-    //antenna
     strokeWeight(2);
     fill(30);
     ellipse(86, -114, 10, 10);
@@ -670,29 +546,23 @@ function draw() {
     fill(30);
     ellipse(88, -200, 3, 3);
     ellipse(100, -150, 3, 3);
-
-    //shadow
     fill('rgba(0,0,0,0.2)');
     noStroke()
     quad(-1, 50, 32, 20, 180, 20, 150, 50);
   } 
   
   else {
-    //tv-set
     strokeWeight(1);
     stroke(0);
     stroke(44);
     strokeWeight(2);
     rect(0, -100, 150, 100);
     image(img, 0, -100, 150, 100);
-
     fill(45);
     noStroke();
     quad(149, -100, 180, -130, 180, -30, 150, 1);
     fill(67);
     quad(-1, -100, 32, -130, 180, -130, 150, -100);
-
-    //antenna
     fill(30);
     ellipse(86, -114, 10, 10);
     fill(36);
@@ -703,18 +573,13 @@ function draw() {
     fill(30);
     ellipse(88, -200, 3, 3);
     ellipse(100, -150, 3, 3);
-
-    //shadow
     fill('rgba(0,0,0,0.2)');
     noStroke()
     quad(-1, 50, 32, 20, 180, 20, 150, 50);
-
-    //creating noise & setting its color
     let a = random(-100, 0);
     let mycolor = random(10, 50);
     let mycolor2 = random(180, 255);
     stroke(50, mycolor2, mycolor);
-
     strokeWeight(3);
     beginShape()
     curveVertex(150, a);
@@ -726,19 +591,14 @@ function draw() {
     curveVertex(100, a);
     endShape();
   }
-
-  //for (var i=0; i < 1000; i++) 
-  //ellipse (-i*20+150,i*random(1,5),5,5);  
 }function setup() { 
   createCanvas(600,500);
   ellipseMode(CENTER);
   rectMode(CENTER);
 } 
-
 function draw() { 
   background(255,246,205);
   
-  //Body & Shade
   noStroke()
   fill(249,150,1)
   ellipse(303,450,300,300)
@@ -749,7 +609,6 @@ function draw() {
   fill(249,209,110)
   ellipse(300,450,290,300)
   
-  //Baloon
   fill(244,122,86)
   ellipse(523,120,138,140)
   
@@ -761,7 +620,6 @@ function draw() {
   noFill()
   arc(495,350,50,50,0,PI)
     
-  //Arm
   noStroke()
   fill(249,209,110)
   rect(450, 375, 60, 60, 20)
@@ -769,21 +627,18 @@ function draw() {
   fill(249,209,110)
   rect(170, 375, 60, 60, 20)
   
-  // Ears
 	fill(249,209,126)
   ellipse(390,180,60,60)
   
 	fill(249,209,126)
   ellipse(210,180,60,60)
   
-  // Ears2 
   fill(213,170,71)
   ellipse(390,180,45,45)
   
 	fill(213,170,71)
   ellipse(210,180,45,45)
   
-  // Head
   noStroke()
   fill(249,209,126)
   ellipse(300,250,200,200)
@@ -812,7 +667,6 @@ function draw() {
   fill(252,245,230)
   ellipse(300,196,21,21)
   
-  // Cheeks
   fill(249,209,126)
   ellipse(220,270,30,30)
   
@@ -825,7 +679,6 @@ function draw() {
   fill(252,245,230)
   ellipse(367,286,22,22)
   
-  // Eyes
   fill(255,255,255)
   ellipse(340,230,40,30)
   ellipse(260,230,40,30)
@@ -834,7 +687,6 @@ function draw() {
   ellipse(347,228,10,10)
   ellipse(267,228,10,10)
   
-  //Nose & Mouth
   fill(0,0,0)
   rect(300, 270, 25, 18, 5)
   
@@ -846,5 +698,4 @@ function draw() {
   noStroke()
   fill(245,218,157)
   arc(300, 310, 50, 50, 0, PI);
-
 }
