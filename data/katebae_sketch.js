@@ -1,9 +1,8 @@
 function setup() {
-  createCanvas(400, 400);
+createCanvas(400, 400);
 }
 function draw() {
-  background(182,252,112);
-  
+background(182,252,112);
 noStroke();
 fill(229,211,0);
 ellipse(252,100,170,140);
@@ -28,14 +27,13 @@ let text2 = 150 ;
 let dir = 1 ;
 let r, g, b;
 function setup() {
-  createCanvas(400, 400);
-  r = random(255);
-  g = random(255);
-  b = random(255);
+createCanvas(400, 400);
+r = random(255);
+g = random(255);
+b = random(255);
 }
 function draw() {
-  background(r,g,b);
-  
+background(r,g,b);
 noStroke();
 fill(229,211,0);
 ellipse(252,100,170,140);
@@ -92,32 +90,28 @@ noStroke();
 fill(0);
 ellipse(220,354,60,12);
 ellipse(290,354,60,12);
-  let s = 'Bana nana~';
-  textSize(22+mouseX/26);
-  fill(mouseX, 102, 153);
-  text(s, text1, text2, 500,100);
-  text1 = text1 + (1*dir) ;
-  
-    if (text1 >= 100) {
-      dir = dir * -1;
-    } else if (text1 <= 0) {
-      dir = dir * -1;
-    }
+let s = 'Bana nana~';
+textSize(22+mouseX/26);
+fill(mouseX, 102, 153);
+text(s, text1, text2, 500,100);
+text1 = text1 + (1*dir) ;
+if (text1 >= 100) {
+dir = dir * -1;
+} else if (text1 <= 0) {
+dir = dir * -1;
 }
- function mousePressed() {
- 
-    r = random(255);
-    g = random(255);
-    b = random(255);
-   
-   
- }
+}
+function mousePressed() {
+r = random(255);
+g = random(255);
+b = random(255);
+}
 var spot ={
 x: 100,
 y: 50
 }
 var col = {
- r: 255,
+r: 255,
 g : 0,
 b:0
 };
@@ -135,41 +129,37 @@ noStroke();
 fill(col.r, col.g, col.b, 100);
 ellipse(spot.x, spot.y, 24, 24);
 }function setup() {
-  createCanvas(580, 430);
+createCanvas(580, 430);
 }
 function draw() {
-  background(0, 255, 255);
-  
-  stroke(255, 0, 0);
-  strokeWeight(40);
-  line(0, 0, 580, 430);
-  noStroke();
-  
-  fill(0, 200, 0);
-  ellipse(280, 212, 312, 232);
-  
-  fill(0, 0, 128);
-  rect(395, 175, 40, 40);
+background(0, 255, 255);
+stroke(255, 0, 0);
+strokeWeight(40);
+line(0, 0, 580, 430);
+noStroke();
+fill(0, 200, 0);
+ellipse(280, 212, 312, 232);
+fill(0, 0, 128);
+rect(395, 175, 40, 40);
 }function setup() {
-  createCanvas(400, 400);
-  background (255);
+createCanvas(400, 400);
+background (255);
 }
 function draw() {
-  ellipseMode(CENTER);
-  noStroke();
-  fill(10, 250, 180);
-  ellipse (200,200, 200,200);
+ellipseMode(CENTER);
+noStroke();
+fill(10, 250, 180);
+ellipse (200,200, 200,200);
 }function setup() { 
-  createCanvas(400,400);
+createCanvas(400,400);
 } 
 function draw() { 
-  background(220);
+background(220);
 }function setup() {
-  createCanvas(400, 400);
+createCanvas(400, 400);
 }
 function draw() {
-  background(182,252,112);
-  
+background(182,252,112);
 noStroke();
 fill(229,211,0);
 ellipse(252,100,170,140);
@@ -232,21 +222,17 @@ text("Bana ", 30, 150);
 textSize(32+mouseX/26);
 fill(198,240+mouseX);
 text("nana~ ", 60, 190); 
-  
-  
 }function setup() {
-	  createCanvas(400, 400);
-	background(220);
-	fill(0,0,255);
-		ellipse(300,200,90,90);
-		fill(0,255,255);
-	  ellipse(50,200,90,90);
-	stroke(0);
-	strokeWeight(10);
-	
-	
-		createP("MY Name is Bae");
+createCanvas(400, 400);
+background(220);
+fill(0,0,255);
+ellipse(300,200,90,90);
+fill(0,255,255);
+ellipse(50,200,90,90);
+stroke(0);
+strokeWeight(10);
+createP("MY Name is Bae");
 }
 function draw() {
-	jslkjd
+jslkjd
 }
